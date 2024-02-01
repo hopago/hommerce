@@ -1,9 +1,10 @@
 import { atom, selectorFamily } from "recoil";
 
-const temporaryBook = {
+const temporaryBook: TBook = {
   id: 1,
   img: "https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791198356680.jpg",
-  category: "eBook",
+  category: "인문",
+  parentCategory: "국내도서",
   title: "[뇌건강] 스스로 치유하는 뇌",
   author: "노먼 도이치",
   discount: "17%",
@@ -13,18 +14,18 @@ const temporaryBook = {
   desc: "우리의 뇌는 당신의 생각보다 유연하다",
 };
 
-const books = [...Array.from({ length: 10 })].map((_, i) => {
+const books: TBooks = [...Array.from({ length: 10 })].map((_, i) => {
   const book = { ...temporaryBook };
   book.id = i;
   return book;
 });
 
-export const booksState = atom<typeof books>({
+export const booksState = atom<TBooks>({
   key: "booksState",
   default: books,
 });
 
-export const currentBookState = atom<typeof temporaryBook>({
+export const currentBookState = atom<TBook>({
   key: "currentBookState",
   default: temporaryBook,
 });

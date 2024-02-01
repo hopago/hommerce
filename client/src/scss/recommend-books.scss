@@ -1,3 +1,5 @@
+@import "./variables";
+
 .recommend-books {
     width: 100%;
     max-width: 1200px;
@@ -10,11 +12,120 @@
         display: flex;
         flex-direction: column;
 
+        &__contents {
+            width: 100%;
+            display: flex;
+            align-items: center;
+
+            &__single-book {
+                flex: 7;
+                height: 369px;
+                max-height: 369px;
+
+                &__wrap {
+                    width: 100%;
+                    height: 100%;
+
+                    &__horizontal {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        gap: 3rem;
+
+                        &__img {
+                            flex: 1;
+                            box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.08);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            background-color: transparent;
+
+                            img {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: contain;
+                            }
+                        }
+
+                        &__info {
+                            flex: 3;
+                            font-size: 14px;
+                            line-height: 22px;
+                            letter-spacing: -0.01em;   
+
+                            .title {
+                                margin-top: 1rem;
+                                font-weight: bold;
+                                font-size: 20px;
+                                line-height: 30px;
+                                letter-spacing: -0.01em;
+                            }
+
+                            .author {
+                                color: $font-light-gray;
+                                font-weight: bold;
+                                max-height: 44px;
+                                white-space: normal;
+                                word-break: break-all;
+                                margin-top: 0.5rem;
+                            }
+
+                            &__price-texts {
+                                display: flex;
+                                align-items: center;
+                                margin-top: 1rem;
+
+                                .discount {
+                                    margin-right: 0.5rem;
+                                    color: $font-green;
+                                    font-weight: bold;
+                                    vertical-align: top;
+                                }
+
+                                .price,
+                                .unit {
+                                    font-size: 1rem;
+                                    line-height: 1.5rem;
+                                    letter-spacing: -.01em;
+                                }
+                            }
+
+                            .comment {
+                                margin-top: 1rem;
+                                color: #474C98;
+
+                                span {
+                                    vertical-align: top;
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 2.1px;
+                                    font-weight: bold;
+                                }
+                            }
+
+                            .desc {
+                                margin-top: 1rem;
+                                color: $font-light-gray;                    
+                                white-space: normal;
+                                word-break: break-all;
+                                font-weight: bold;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &__preview {
+                flex: 4;
+            }
+        }
+
         &__info {
             width: 100%;
 
             &__wrapper {
-                padding-bottom: 2rem;
+                padding-bottom: 1rem;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
@@ -80,13 +191,31 @@
         .right {
             position: absolute;
             right: -11%;
-            top: 50%;
+            top: 59%;
         }
 
         .left {
             position: absolute;
             left: -11%;
-            top: 50%;
+            top: 59%;
+        }
+    }
+}
+
+.category-box {
+    width: max-content;
+    height: 20px;
+    max-height: 20px;
+    
+    &__wrapper {
+        padding: 2px 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        span {
+            font-size: 11px;
+            font-weight: bold;
         }
     }
 }

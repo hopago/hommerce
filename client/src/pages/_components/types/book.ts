@@ -1,6 +1,7 @@
 type TBook = {
   id: number;
   img: string;
+  parentCategory?: BookParentCategory;
   category: string;
   title: string;
   author: string;

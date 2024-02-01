@@ -33,8 +33,10 @@ export default function BookInformation() {
     <div className="recommend-books__today-pick">
       <InfoTitle title="이달의 책" category={bookParentCategory} />
       <PrevIcon handlePrev={handlePrev} />
-      <SingleBook currentBook={currentBook} />
-      <NextBooks books={books.slice(currIndex, currIndex + 3)} />
+      <div className="recommend-books__today-pick__contents">
+        <SingleBook currentBook={currentBook} />
+        <NextBooks books={books.slice(currIndex, currIndex + 3)} />
+      </div>
       <NextIcon handleNext={handleNext} />
     </div>
   );
