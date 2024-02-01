@@ -11,10 +11,11 @@ export default function InfoTitle({
 
   if (categoryArr) {
     category = (
-      <ul className="today-pick__book-info__title__wrapper__category-list">
+      <ul className="recommend-books__today-pick__info__wrapper__category-list">
         {categoryArr.map((c) => (
           <li key={c}>
-            {/* icon */}
+            {/* TODO: ACTIVE STATE */}
+            <div />
             <span>{c}</span>
           </li>
         ))}
@@ -23,8 +24,8 @@ export default function InfoTitle({
   }
 
   return (
-    <div className="today-pick__book-info__title">
-      <div className="today-pick__book-info__title__wrapper">
+    <div className="recommend-books__today-pick__info">
+      <div className="recommend-books__today-pick__info__wrapper">
         <h1>{title}</h1>
         {category}
       </div>

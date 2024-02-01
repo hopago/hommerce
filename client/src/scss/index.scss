@@ -1,6 +1,7 @@
 @import 'home';
 @import 'search';
 @import 'recommend-gnb';
+@import 'recommend-books';
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
 .link {
@@ -22,6 +23,7 @@ ol {
     margin: 0;
 }
 
-p {
+p,
+h1 {
     margin: 0;
 }

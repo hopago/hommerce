@@ -8,16 +8,12 @@ import {
 
 export const recommendGNBList: HeadingCategoryItem[] = [
   {
-    text: "할인혜택",
-    Icon: DiscountSvg(),
+    text: "이달의 책",
+    Icon: ThisMonthBooksSvg(),
   },
   {
     text: "Picks",
     Icon: PickSvg(),
-  },
-  {
-    text: "이달의 책",
-    Icon: ThisMonthBooksSvg(),
   },
   {
     text: "추천",
@@ -26,6 +22,10 @@ export const recommendGNBList: HeadingCategoryItem[] = [
   {
     text: "인물&작품",
     Icon: WorksSvg(),
+  },
+  {
+    text: "할인혜택",
+    Icon: DiscountSvg(),
   },
 ];
 

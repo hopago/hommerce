@@ -70,10 +70,11 @@
     width: 100%;
     height: max-content;
     max-width: 130px;
+    background-color: #ffffff;
 
     @keyframes fade-in-dropdown-animation {
         0% {
-            transform: translateY(-25%);
+            transform: translateY(-12.5%);
         }
 
         100% {
@@ -87,7 +88,7 @@
         }
 
         100% {
-            transform: translateY(-25%);
+            transform: translateY(-12.5%);
         }
     }
 
@@ -98,11 +99,11 @@
         box-shadow: 0 3px 12px 0 rgba(0,0,0,.15);
 
         &.fade-in-dropdown {
-            animation: fade-in-dropdown-animation .3s ease;
+            animation: fade-in-dropdown-animation .15s ease;
         }
 
         &.fade-out-dropdown {
-            animation: fade-out-dropdown-animation .3s ease;
+            animation: fade-out-dropdown-animation .15s ease;
         }
 
         li {
