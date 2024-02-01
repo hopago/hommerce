@@ -3,8 +3,8 @@
 .search-section {
     width: 100%;
     max-width: 941px;
-    margin: 0 auto;
-    margin-top: 1rem;
+    margin: 1rem auto;
+    margin-bottom: 1.5rem;
 
     &__container {
         position: relative;
@@ -45,6 +45,7 @@
                     width: 100%;
                     outline: none;
                     border: none;
+                    font-size: 1.1rem;
                 }
             }
 

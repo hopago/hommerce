@@ -1,11 +1,12 @@
 @import 'home';
+@import 'search';
+@import 'recommend-gnb';
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
 .link {
     text-decoration: none;
     color: inherit;
 }
-
 body,
 #root {
     width: 100dvw;
@@ -18,5 +19,9 @@ ul,
 ol {
     list-style: none;
     padding: 0;
+    margin: 0;
+}
+
+p {
     margin: 0;
 }

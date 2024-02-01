@@ -14,6 +14,7 @@ export default function SearchInput({
         type="text"
         onChange={onChange}
         value={searchTerm}
+        autoComplete="off"
       />
     </div>
   );

@@ -1,5 +1,4 @@
 import { useLayoutEffect, useState } from "react";
-import "../../scss/index.scss";
 
 export default function NewsLetter() {
   const infoLetters = [

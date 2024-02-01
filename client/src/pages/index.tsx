@@ -1,4 +1,10 @@
-import { Navbar, NewsLetter, SearchSection } from "./_components";
+import {
+  Navbar,
+  NewsLetter,
+  SearchSection,
+  RecommendGNB,
+  TodayPick,
+} from "./_components";
 
 export default function Index() {
   return (
@@ -6,6 +12,8 @@ export default function Index() {
       <NewsLetter />
       <Navbar />
       <SearchSection />
+      <RecommendGNB />
+      <TodayPick />
     </>
   );
 }
