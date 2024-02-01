@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { MdKeyboardArrowDown } from "react-icons/md";
 import SelectPopOut from "./SelectPopOut";
+
 import { selectedCartState } from "../../recoil/search";
 import { useRecoilValue } from "recoil";
 
@@ -9,32 +10,21 @@ export default function SearchSelect() {
   const select = useRecoilValue<SearchType>(selectedCartState);
 
   const selectRef = useRef<HTMLDivElement>(null);
+  const selectListRef = useRef<HTMLDivElement>(null);
 
   const [show, setShow] = useState(false);
-  const [initialSelect, _] = useState(select);
 
   const handleClick = () => {
     setShow((prev) => !prev);
   };
 
   useEffect(() => {
-    if (select !== initialSelect) {
-      setShow(false);
-    }
-  }, [select, initialSelect]);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        !(event.target as Element).closest(
-          ".search-section__container__wrapper__select"
-        )
-      )
-        return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (!selectRef.current || !selectListRef.current) return;
 
       if (
-        selectRef.current &&
-        !selectRef.current.contains(event.target as Node)
+        !selectRef.current.contains(e.target as Node) &&
+        !selectListRef.current.contains(e.target as Node)
       ) {
         setShow(false);
       }
@@ -45,7 +35,7 @@ export default function SearchSelect() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [select, show]);
 
   return (
     <>
@@ -57,7 +47,9 @@ export default function SearchSelect() {
         <span className="text">{select}</span>
         <MdKeyboardArrowDown className="icon" />
       </div>
-      {show ? <SelectPopOut /> : null}
+      {show ? (
+        <SelectPopOut ref={selectListRef} show={show} setShow={setShow} />
+      ) : null}
     </>
   );
 }
