@@ -15,7 +15,6 @@ export default function NextBookItem({ book }: NextBookItemProps) {
       ) : null}
       <p>
         {book.title}
-        {book.id}
       </p>
     </li>
   );

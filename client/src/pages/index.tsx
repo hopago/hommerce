@@ -4,9 +4,9 @@ import {
   SearchSection,
   RecommendGNB,
   TodayPick,
+  Banner,
+  BestAwards,
 } from "./_components";
-import Banner from "./_components/Banner";
-import BestAwards from "./_components/BestAwards";
 
 export default function Index() {
   return (
@@ -14,9 +14,8 @@ export default function Index() {
       <NewsLetter />
       <Navbar />
       <SearchSection />
-      <RecommendGNB />
+      {/* <RecommendGNB /> */}
       <Banner />
-      <BestAwards />
       <TodayPick />
     </>
   );

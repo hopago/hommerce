@@ -43,6 +43,8 @@ export default function BookInformation() {
     }
   }, [currIndex]);
 
+  {/* TODO: disabled 조건에서 lazy-fetching, setNewBooks or hasNextPage: false일 경우 disabled */}
+
   return (
     <div className="recommend-books__today-pick">
       <InfoTitle title="이달의 책" category={bookParentCategory} />

@@ -1,14 +1,16 @@
 @import "./mixin";
 
 .search-section {
+    box-sizing: border-box;
     width: 100%;
-    max-width: 941px;
-    margin: 1rem auto;
-    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 3rem 0;
 
     &__container {
         position: relative;
         width: 100%;
+        max-width: 941px;
+        margin: 0 auto;
         height: 3rem;
         border: 1px solid #5055B1;
         border-radius: 0.5rem;

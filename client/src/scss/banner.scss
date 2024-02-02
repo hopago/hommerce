@@ -1,0 +1,16 @@
+.domain-banner {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    margin-top: 3rem;
+
+    &__img {
+        width: 100%;
+
+        img {
+            width: 100%;
+            object-fit: contain;
+        }
+    }
+}
