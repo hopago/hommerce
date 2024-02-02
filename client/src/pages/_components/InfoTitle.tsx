@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { cn } from "../../lib/utils";
+
 type InfoTitleProps = {
   title: HeadingCategory;
   category?: BookParentCategoryList;
@@ -9,14 +12,15 @@ export default function InfoTitle({
 }: InfoTitleProps) {
   let category: JSX.Element | null = null;
 
+  const [currCategory, setCurrCategory] = useState<BookParentCategory>("국내도서");
+
   if (categoryArr) {
     category = (
       <ul className="recommend-books__today-pick__info__wrapper__category-list">
         {categoryArr.map((c) => (
           <li key={c}>
-            {/* TODO: ACTIVE STATE */}
-            <div />
-            <span>{c}</span>
+            <div className={cn("", currCategory === c && "active")} />
+            <span className={cn("", currCategory === c && "text-active")}>{c}</span>
           </li>
         ))}
       </ul>

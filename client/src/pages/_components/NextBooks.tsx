@@ -1,12 +1,22 @@
+import { useEffect, useRef } from "react";
 import NextBookItem from "./NextBookItem";
 
 type NextBooksProps = {
   books: TBooks;
+  currIndex: number;
 };
 
-export default function NextBooks({ books }: NextBooksProps) {
+export default function NextBooks({ books, currIndex }: NextBooksProps) {
+  const orderedBooks = [
+    ...books.filter((book, index) => {
+      if (currIndex < index) {
+        return book;
+      }
+    })
+  ];
+
   const filteredBooksInfo = [
-    ...books.map((book) => ({
+    ...orderedBooks.map((book) => ({
       id: book.id,
       title: book.title,
       category: book.category,
@@ -15,11 +25,20 @@ export default function NextBooks({ books }: NextBooksProps) {
     })),
   ];
 
+  const slideRef = useRef<HTMLOListElement>(null);
+
+  useEffect(() => {
+    if (slideRef.current !== null) {
+      slideRef.current.style.transition = "all 0.3s ease-in-out";
+      slideRef.current.style.transform = `translateX(-${currIndex * 190}px)`;
+    }
+  }, [currIndex]);
+
   return (
     <div className="recommend-books__today-pick__contents__preview">
-      <ol>
+      <ol ref={slideRef}>
         {filteredBooksInfo.map((book) => (
-          <NextBookItem key={book.title} book={book} />
+          <NextBookItem key={book.id} book={book} />
         ))}
       </ol>
     </div>

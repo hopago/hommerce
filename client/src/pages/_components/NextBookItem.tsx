@@ -7,13 +7,16 @@ type NextBookItemProps = {
 export default function NextBookItem({ book }: NextBookItemProps) {
   return (
     <li>
-      {/* <div className="img-wrap">
+      <div className="img-wrap">
         <img src={book.img} alt={book.title} />
-      </div> */}
+      </div>
       {book.parentCategory ? (
         <ParentCategoryBadge text={book.parentCategory} />
       ) : null}
-      <p>{book.title}</p>
+      <p>
+        {book.title}
+        {book.id}
+      </p>
     </li>
   );
 }
