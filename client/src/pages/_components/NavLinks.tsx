@@ -4,14 +4,15 @@ import GPT4 from "../../assets/openAi.svg";
 
 import { useNavigate } from "react-router-dom";
 
-import { useState } from "react";
-
 import AllCategories from "../@modal/AllCategories";
+
+import { useRecoilState } from "recoil";
+import { GNBModalState } from "../../recoil/nav-gnb";
 
 export default function NavLinks() {
   const navigate = useNavigate();
 
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useRecoilState(GNBModalState);
 
   const onClick = (href: string) => {
     if (!href || typeof href !== "string" || href.trim() === "") return;

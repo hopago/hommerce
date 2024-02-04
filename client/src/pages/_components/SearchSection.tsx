@@ -1,23 +1,48 @@
-import SearchSelect from "./SearchSelect";
-import SearchInput from "./SearchInput";
-import SearchButton from "./SearchButton";
-import { NavLinks } from ".";
-
 import { useSearchForm } from "../hooks/use-search-form";
+
+import SearchBar from "./SearchBar";
+import FixedSearchBar from "./FixedSearchBar";
+import { useLayoutEffect, useState } from "react";
 
 export default function SearchSection() {
   const { onSubmit, onChange, searchTerm } = useSearchForm();
 
-  return (
-    <section className="search-section">
-      <form onSubmit={onSubmit} className="search-section__container">
-        <div className="search-section__container__wrapper">
-          <SearchSelect />
-          <SearchInput onChange={onChange} searchTerm={searchTerm} />
-          <SearchButton />
-        </div>
-      </form>
-      <NavLinks />
-    </section>
+  const [scrollY, setScrollY] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useLayoutEffect(() => {
+    const setCurrScroll = () => {
+      setTimeout(() => {
+        setScrollY(window.scrollY);
+      }, 300);
+    };
+
+    window.addEventListener("scroll", setCurrScroll);
+
+    return () => {
+      window.removeEventListener("scroll", setCurrScroll);
+    };
+  }, [isScrolled]);
+
+  useLayoutEffect(() => {
+    if (scrollY > 190) {
+      setIsScrolled(true);
+    } else if (scrollY <= 190) {
+      setIsScrolled(false);
+    }
+  }, [scrollY]);
+
+  return !isScrolled ? (
+    <SearchBar
+      onChange={onChange}
+      onSubmit={onSubmit}
+      searchTerm={searchTerm}
+    />
+  ) : (
+    <FixedSearchBar
+      onChange={onChange}
+      onSubmit={onSubmit}
+      searchTerm={searchTerm}
+    />
   );
 }

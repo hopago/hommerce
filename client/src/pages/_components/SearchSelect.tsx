@@ -6,7 +6,7 @@ import SelectPopOut from "./SelectPopOut";
 import { selectedCartState } from "../../recoil/search";
 import { useRecoilValue } from "recoil";
 
-export default function SearchSelect() {
+export default function SearchSelect({ className }: { className?: string }) {
   const select = useRecoilValue<SearchType>(selectedCartState);
 
   const selectRef = useRef<HTMLDivElement>(null);
@@ -48,7 +48,7 @@ export default function SearchSelect() {
         <MdKeyboardArrowDown className="icon" />
       </div>
       {show ? (
-        <SelectPopOut ref={selectListRef} show={show} setShow={setShow} />
+        <SelectPopOut className={className} ref={selectListRef} show={show} setShow={setShow} />
       ) : null}
     </>
   );

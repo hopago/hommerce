@@ -6,10 +6,11 @@ import { forwardRef } from "react";
 type SelectPopOutProps = {
   show: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
+  className?: string;
 };
 
 const SelectPopOut = forwardRef<HTMLDivElement, SelectPopOutProps>(
-  ({ show, setShow }: SelectPopOutProps, ref) => {
+  ({ setShow, className }: SelectPopOutProps, ref) => {
     const setSelect = useSetRecoilState<SearchType>(selectedCartState);
 
     const handleSelectItemClick = (select: SearchType) => {
@@ -33,13 +34,8 @@ const SelectPopOut = forwardRef<HTMLDivElement, SelectPopOutProps>(
     ];
 
     return (
-      <div className="popout" ref={ref}>
-        <ul
-          className={cn(
-            "popout__items",
-            show ? "fade-in-dropdown" : "fade-out-dropdown"
-          )}
-        >
+      <div className={cn("popout", className && className)} ref={ref}>
+        <ul className={cn("popout__items", className && className)}>
           {selectList.map((list) => (
             <li onClick={list.onClick} key={list.text}>
               <div>
