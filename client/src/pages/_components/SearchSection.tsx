@@ -1,6 +1,7 @@
 import SearchSelect from "./SearchSelect";
 import SearchInput from "./SearchInput";
 import SearchButton from "./SearchButton";
+import { NavLinks } from ".";
 
 import { useSearchForm } from "../hooks/use-search-form";
 
@@ -16,6 +17,7 @@ export default function SearchSection() {
           <SearchButton />
         </div>
       </form>
+      <NavLinks />
     </section>
   );
 }

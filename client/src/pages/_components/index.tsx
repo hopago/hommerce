@@ -5,6 +5,7 @@ import RecommendGNB from "./RecommendGNB";
 import TodayPick from "./TodayPick";
 import Banner from "./Banner";
 import BestAwards from "./BestAwards";
+import NavLinks from "./NavLinks";
 
 export {
   Navbar,
@@ -14,4 +15,5 @@ export {
   TodayPick,
   Banner,
   BestAwards,
+  NavLinks
 };

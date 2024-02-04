@@ -34,3 +34,17 @@ export const bookParentCategory: BookParentCategoryList = [
   "외국도서",
   "eBook",
 ];
+
+export const bookSubCategory: BookSubCategoryList = [
+  "경제 경영",
+  "사회 정치",
+  "소설",
+  "시/에세이",
+  "역사",
+  "예술",
+  "유아",
+  "인문",
+  "자기 계발",
+  "자연과학",
+  "종교",
+];

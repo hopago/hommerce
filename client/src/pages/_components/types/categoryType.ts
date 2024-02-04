@@ -8,3 +8,19 @@ type HeadingCategoryItem = {
 type BookParentCategory = "국내도서" | "외국도서" | "eBook";
 
 type BookParentCategoryList = BookParentCategory[];
+
+type BookSubCategory =
+  | "소설"
+  | "시/에세이"
+  | "인문"
+  | "역사"
+  | "예술"
+  | "종교"
+  | "사회 정치"
+  | "자연과학"
+  | "경제 경영"
+  | "자기 계발"
+  | "인물"
+  | "유아";
+
+  type BookSubCategoryList = BookSubCategory[];

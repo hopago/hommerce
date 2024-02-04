@@ -1,5 +1,5 @@
 import RecommendGNBList from "./RecommendGNBList";
-import { recommendGNBList } from "./constants/Category";
+import { recommendGNBList } from "./constants/category";
 
 export default function RecommendGNB() {
   return (

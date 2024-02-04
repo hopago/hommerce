@@ -4,9 +4,9 @@ import BannerImage from "./BannerImage";
 
 export default function Banner() {
   return (
-    <div className="domain-banner" style={{ overflow: "hidden" }}>
+    <div className="domain-banner">
       <BannerHeading />
-      {/* <BannerImage /> */}
+      <BannerImage />
       <BannerControl />
     </div>
   );

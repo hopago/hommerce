@@ -14,8 +14,9 @@ export default function Index() {
       <NewsLetter />
       <Navbar />
       <SearchSection />
-      {/* <RecommendGNB /> */}
       <Banner />
+      <BestAwards />
+      <RecommendGNB />
       <TodayPick />
     </>
   );

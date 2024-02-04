@@ -7,17 +7,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
 
     span {
         font-weight: bold;
         font-size: 15px;
         text-decoration: underline;
         cursor: pointer;
-        margin-right: 1.5rem;
+        padding-right: 1.5rem;
     }
 }
 
 .home-nav {
+    box-sizing: border-box;
+    width: 100%;
     height: 5rem;
     display: flex;
     align-items: center;
@@ -157,12 +160,14 @@
     position: fixed;
     bottom: 0;
     border-top: .5px solid #DDDDDD;
+    z-index: 99999;
     
     &__wrapper {
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 1rem 3rem;
+        background-color: #ffffff;
 
         ol {
             display: flex;

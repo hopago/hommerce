@@ -5,13 +5,9 @@
 @import 'banner.scss';
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
-.link {
-    text-decoration: none;
-    color: inherit;
-}
 body,
 #root {
-    width: 100dvw;
+    width: 100%;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -27,4 +23,9 @@ ol {
 p,
 h1 {
     margin: 0;
+}
+
+.link {
+    text-decoration: none;
+    color: inherit;
 }
