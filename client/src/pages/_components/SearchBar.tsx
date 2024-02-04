@@ -1,3 +1,4 @@
+import { useMediaQuery } from "usehooks-ts";
 import { NavLinks } from ".";
 import SearchButton from "./SearchButton";
 import SearchInput from "./SearchInput";
@@ -14,15 +15,19 @@ export default function SearchBar({
   onChange,
   searchTerm,
 }: SearchBarProps) {
+  const isMedium = useMediaQuery("(max-width:740px)");
+
   return (
     <section className="search-section">
-      <form onSubmit={onSubmit} className="search-section__container">
-        <div className="search-section__container__wrapper">
-          <SearchSelect className="fixed" />
-          <SearchInput onChange={onChange} searchTerm={searchTerm} />
-          <SearchButton />
-        </div>
-      </form>
+      {!isMedium && (
+        <form onSubmit={onSubmit} className="search-section__container">
+          <div className="search-section__container__wrapper">
+            <SearchSelect className="fixed" />
+            <SearchInput onChange={onChange} searchTerm={searchTerm} />
+            <SearchButton />
+          </div>
+        </form>
+      )}
       <NavLinks />
     </section>
   );

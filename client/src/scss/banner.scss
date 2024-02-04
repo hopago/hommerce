@@ -1,3 +1,5 @@
+@import "./mixin";
+
 .domain-banner {
     width: 100%;
     height: 588px;
@@ -113,4 +115,16 @@
             }
         }
     }
+}
+
+@include md {
+
+}
+
+@include lg {
+
+}
+
+@include xl {
+    
 }

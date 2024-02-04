@@ -2,19 +2,26 @@ import { useSearchForm } from "../hooks/use-search-form";
 
 import SearchBar from "./SearchBar";
 import FixedSearchBar from "./FixedSearchBar";
+
 import { useLayoutEffect, useState } from "react";
+
+import { useMediaQuery } from "usehooks-ts";
 
 export default function SearchSection() {
   const { onSubmit, onChange, searchTerm } = useSearchForm();
+
+  const isMedium = useMediaQuery("(max-width:740px)");
 
   const [scrollY, setScrollY] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useLayoutEffect(() => {
+    if (isMedium) return;
+
     const setCurrScroll = () => {
       setTimeout(() => {
         setScrollY(window.scrollY);
-      }, 300);
+      }, 150);
     };
 
     window.addEventListener("scroll", setCurrScroll);
@@ -22,27 +29,34 @@ export default function SearchSection() {
     return () => {
       window.removeEventListener("scroll", setCurrScroll);
     };
-  }, [isScrolled]);
+  }, [isScrolled, isMedium]);
 
   useLayoutEffect(() => {
+    if (isMedium) {
+      return setIsScrolled(true);
+    }
+
     if (scrollY > 190) {
       setIsScrolled(true);
     } else if (scrollY <= 190) {
       setIsScrolled(false);
     }
-  }, [scrollY]);
+  }, [scrollY, isMedium]);
 
-  return !isScrolled ? (
-    <SearchBar
-      onChange={onChange}
-      onSubmit={onSubmit}
-      searchTerm={searchTerm}
-    />
-  ) : (
-    <FixedSearchBar
-      onChange={onChange}
-      onSubmit={onSubmit}
-      searchTerm={searchTerm}
-    />
+  return (
+    <>
+      <SearchBar
+        onChange={onChange}
+        onSubmit={onSubmit}
+        searchTerm={searchTerm}
+      />
+      {isScrolled && (
+        <FixedSearchBar
+          onChange={onChange}
+          onSubmit={onSubmit}
+          searchTerm={searchTerm}
+        />
+      )}
+    </>
   );
 }
