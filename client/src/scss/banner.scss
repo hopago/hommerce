@@ -117,14 +117,99 @@
     }
 }
 
-@include md {
+@include sm {
+    .domain-banner {
+        padding-top: 1.5rem;
+        height: 428px;
 
+        &__heading {
+            
+            h1 {
+                font-size: 2rem;
+                line-height: 44px;
+                letter-spacing: -0.03em;
+            }
+        }
+
+        &__img {
+            height: 308px;
+        }
+
+        &__control {
+            bottom: 5rem;
+            right: 2.5rem;
+
+            &__horizontal {
+                
+                ul {
+                    gap: 0;
+
+                    li {
+
+                        button {
+                            padding: 0.25rem 0.5rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include md {
+    .domain-banner {
+        padding-top: 1.5rem;
+        height: 448px;
+
+        &__heading {
+            
+            h1 {
+                font-size: 2rem;
+                line-height: 44px;
+                letter-spacing: -0.03em;
+            }
+        }
+
+        &__img {
+            height: 308px;
+        }
+
+        &__control {
+            bottom: 4.1rem;
+        }
+    }
 }
 
 @include lg {
+    .domain-banner {
+        padding-top: 1.5rem;
+        height: 448px;
 
+        &__heading {
+            
+            h1 {
+                font-size: 2rem;
+                line-height: 44px;
+                letter-spacing: -0.03em;
+            }
+        }
+
+        &__img {
+            height: 308px;
+        }
+
+        &__control {
+            bottom: 0;
+        }
+    }
 }
 
 @include xl {
-    
+    .domain-banner {
+        height: 548px;
+
+        &__control {
+            bottom: 0;
+        }
+    }
 }
