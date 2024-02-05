@@ -243,6 +243,87 @@
             top: 59%;
         }
     }
+
+    &__best-seller {
+        padding-top: 4.1rem;
+        width: 100%;
+
+        &__grid {
+            width: 100%;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+
+            ul {
+                display: grid;
+                grid-template-columns: repeat(5, auto);
+                grid-template-rows: repeat(2, auto);
+                width: 100%;
+                gap: 1rem;
+
+                li {
+                    width: 100%;
+                    max-width: 200px;
+                    display: flex;
+                    flex-direction: column;
+
+                    .best-prod-wrap {
+                        width: 100%;
+                    }
+
+                    .img-wrap {
+                        width: 100%;
+                        margin-bottom: 0.5rem;
+
+                        img {
+                            width: 100%;
+                            max-height: 440px;
+                            object-fit: contain;
+                        }
+                    }
+
+                    .info {
+
+                        h2 {
+                            margin: 0;
+                            display: block;
+                            display: -webkit-box;
+                            line-height: 23px;
+                            -webkit-box-orient: vertical;
+                            -webkit-line-clamp: 2;
+                            text-overflow: -o-ellipsis-lastline;
+                            white-space: normal;
+                            word-break: break-all;
+                            font-size: 15px;
+                            line-height: 23px;
+                            letter-spacing: -0.01em;
+                            font-weight: bold;
+                            color: $font-dark;
+                        }
+
+                        span {
+                            color: $font-gray;
+                            margin-top: 5px;
+                            font-size: 13px;
+                            line-height: 19px;
+                            letter-spacing: -0.01em;
+                            display: block;
+                            display: -webkit-box;
+                            overflow: hidden;
+                            max-height: 38px;
+                            line-height: 19px;
+                            -webkit-box-orient: vertical;
+                            -webkit-line-clamp: 2;
+                            text-overflow: -o-ellipsis-lastline;
+                            white-space: normal;
+                            word-break: break-all;
+                            font-weight: 500;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 .category-box {

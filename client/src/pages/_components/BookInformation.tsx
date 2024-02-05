@@ -4,7 +4,7 @@ import NextBooks from "./NextBooks";
 import SingleBook from "./SingleBook";
 import InfoTitle from "./InfoTitle";
 
-import { bookParentCategory } from "./constants/Category";
+import { bookParentCategory } from "./constants/category";
 
 import { useRecoilValue } from "recoil";
 import { booksState, selectedCurrentBook } from "../../recoil/books";

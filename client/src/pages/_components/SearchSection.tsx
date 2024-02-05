@@ -49,6 +49,7 @@ export default function SearchSection() {
         onChange={onChange}
         onSubmit={onSubmit}
         searchTerm={searchTerm}
+        isScrolled={isScrolled}
       />
       {isScrolled && (
         <FixedSearchBar

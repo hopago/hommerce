@@ -29,3 +29,25 @@ h1 {
     text-decoration: none;
     color: inherit;
 }
+
+.best-flag-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background-color: #767676;
+    margin-bottom: 0.5rem;
+    border-top-right-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    border-top-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+
+    span {
+        padding: 0;
+        font-size: 12px;
+        line-height: 22px;
+        color: #ffffff;
+        font-weight: 900;
+    }
+}

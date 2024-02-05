@@ -8,12 +8,14 @@ type SearchBarProps = {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   searchTerm: string;
+  isScrolled: boolean;
 };
 
 export default function SearchBar({
   onSubmit,
   onChange,
   searchTerm,
+  isScrolled
 }: SearchBarProps) {
   const isMedium = useMediaQuery("(max-width:740px)");
 
@@ -28,7 +30,7 @@ export default function SearchBar({
           </div>
         </form>
       )}
-      <NavLinks />
+      <NavLinks isScrolled={isScrolled} />
     </section>
   );
 }

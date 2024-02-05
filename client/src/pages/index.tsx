@@ -15,8 +15,8 @@ export default function Index() {
       <Navbar />
       <SearchSection />
       <Banner />
-      <BestAwards />
       <RecommendGNB />
+      <BestAwards />
       <TodayPick />
     </>
   );

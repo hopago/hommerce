@@ -1,6 +1,9 @@
+import BookInformationBestSeller from "./BookInformation-BestSeller";
 
 export default function BestAwards() {
   return (
-    <div>BestAwards</div>
-  )
+    <div className="recommend-books">
+      <BookInformationBestSeller />
+    </div>
+  );
 }

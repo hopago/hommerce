@@ -9,7 +9,7 @@ import AllCategories from "../@modal/AllCategories";
 import { useRecoilState } from "recoil";
 import { GNBModalState } from "../../recoil/nav-gnb";
 
-export default function NavLinks() {
+export default function NavLinks({ isScrolled }: { isScrolled: boolean }) {
   const navigate = useNavigate();
 
   const [show, setShow] = useRecoilState(GNBModalState);
@@ -65,7 +65,7 @@ export default function NavLinks() {
           연계 서비스
         </span>
       </div>
-      {show ? <AllCategories /> : null}
+      {show ? <AllCategories isScrolled={isScrolled} /> : null}
     </div>
   );
 }
