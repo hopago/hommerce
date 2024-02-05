@@ -6,6 +6,7 @@ import {
   TodayPick,
   Banner,
   BestAwards,
+  Picks,
 } from "./_components";
 
 export default function Index() {
@@ -18,6 +19,7 @@ export default function Index() {
       <RecommendGNB />
       <BestAwards />
       <TodayPick />
+      <Picks />
     </>
   );
 }

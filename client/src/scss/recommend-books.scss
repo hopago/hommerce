@@ -274,6 +274,7 @@
                     .img-wrap {
                         width: 100%;
                         margin-bottom: 0.5rem;
+                        cursor: pointer;
 
                         img {
                             width: 100%;
@@ -299,6 +300,11 @@
                             letter-spacing: -0.01em;
                             font-weight: bold;
                             color: $font-dark;
+                            cursor: pointer;
+
+                            &:hover {
+                                text-decoration: underline;
+                            }
                         }
 
                         span {
@@ -314,7 +320,6 @@
                             line-height: 19px;
                             -webkit-box-orient: vertical;
                             -webkit-line-clamp: 2;
-                            text-overflow: -o-ellipsis-lastline;
                             white-space: normal;
                             word-break: break-all;
                             font-weight: 500;
@@ -323,6 +328,169 @@
                 }
             }
         }
+    }
+
+    &__user {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 4.5rem 0px;
+
+        &__heading {
+
+            .text-wrap {
+                width: 100%;
+                padding-bottom: 2rem;
+
+                h1 {
+                    font-size: 1.9rem;
+                    font-weight: bold;
+                    color: $font-dark;
+
+                    span {
+                        color: $font-green;
+                    }
+                }
+            }
+        }
+
+        &__horizontal {
+            width: 100%;
+            display: flex;
+            align-items: center;
+
+            &__marketing {
+                flex: 1;
+
+                &__text-wrap {
+                    width: 100%;
+
+                    .desc {
+                        color: $font-green;
+                        font-size: 15px;
+                        line-height: 23px;
+                        letter-spacing: -.01em;
+                        font-weight: bold;
+                    }
+
+                    .info {
+                        margin-top: 0.5rem;
+
+                        p {
+                            font-size: 24px;
+                            line-height: 35px;
+                            letter-spacing: -0.01em;
+                            font-weight: 700;
+                            text-wrap: balance;
+                        }
+                    }
+                }
+
+                .btn-wrap {
+                    margin-top: 4rem;
+
+                    button {
+                        background-color: $font-green;
+                        border: 1px solid $font-green;
+                        transition: all .15s ease;
+                        cursor: pointer;
+                        color: #FFFFFF;
+                        padding: 0.75rem 1rem;
+                        border-radius: 0.5rem;
+                        font-size: 15px;
+                        font-weight: bold;
+
+                        &:hover {
+                            background: #459b23;
+                            border-color: #459b23;
+                        }
+                    }
+                }
+            }
+
+            &__book-list {
+                flex: 3;
+
+                ul {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 1rem;
+
+                    li {
+                        flex: 1;
+                        background-color: #ffffff;
+                        border: 1px solid rgba(0, 0, 0, .12);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: column;
+                        border-radius: 1rem;
+                        cursor: pointer;
+
+                        .recommend-type {
+                            padding-top: 1rem;
+                            padding-bottom: 0.5rem;
+                            font-size: 14px;
+                            line-height: 22px;
+                            letter-spacing: -.01em;
+                            font-weight: bold;
+                        }
+
+                        .img-wrap {
+                            padding: 0px 0.5rem;
+
+                            img {
+                                width: 120px;
+                                height: 180px;
+                                object-fit: contain;
+                            }
+                        }
+
+                        .book-info {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 0.5rem;
+
+                            .category {
+                                font-size: 12px;
+                                line-height: 18px;
+                                letter-spacing: -0.01em;
+                                font-weight: 600;
+                            }
+
+                            h2 {
+                                margin: 0;
+                                font-size: 14px;
+                                font-weight: bold;
+                                line-height: 19px;
+                                letter-spacing: -0.01em;
+                                display: block;
+                                display: -webkit-box;
+                                max-height: 38px;
+                                line-height: 19px;
+                            }
+
+                            .author {
+                                opacity: 0.6;
+                                font-size: 13px;
+                                line-height: 19px;
+                                letter-spacing: -0.01em;
+                                padding-bottom: 1rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &.picks {
+        width: 100%;
+        max-width: 100%;
+        background-color: #F5FAF2;
     }
 }
 
@@ -345,6 +513,40 @@
 }
 
 @include sm {
+    .recommend-books {
+
+        &__best-seller {
+
+            .recommend-books__today-pick__info.best-seller {
+
+                h1 {
+                    font-size: 21px;
+                }
+
+                ul {
+
+                    span {
+                        font-size: 13px;
+                    }
+                }
+            }
+
+            .recommend-books__today-pick__info__wrapper {
+                gap: 1rem;
+            }
+
+            &__grid {
+                margin-top: 1.5rem;
+
+                ul {
+                    grid-template-columns: repeat(2, auto);
+                    justify-items: center;
+                    align-items: center;
+                }
+            }
+        }
+    }
+
     .recommend-books__today-pick__info__wrapper {
         padding: 0 2.3rem;
     }
@@ -373,5 +575,27 @@
 
     .right {
         display: none;
+    }
+}
+
+@include md {
+    .recommend-books__today-pick__info.best-seller {
+        padding: 0px 2.5rem;
+    }
+
+    .recommend-books {
+
+        &__best-seller {
+
+            &__grid {
+                margin-top: 1rem;
+
+                ul {
+                    grid-template-columns: repeat(3, auto);
+                    justify-items: center;
+                    align-items: center;
+                }
+            }
+        }
     }
 }
