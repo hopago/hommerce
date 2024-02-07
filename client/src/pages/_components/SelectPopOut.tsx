@@ -34,8 +34,16 @@ const SelectPopOut = forwardRef<HTMLDivElement, SelectPopOutProps>(
     ];
 
     return (
-      <div className={cn("popout", className && className)} ref={ref}>
-        <ul className={cn("popout__items", className && className)}>
+      <div
+        className={cn("popout fade-in-dropdown", className && className)}
+        ref={ref}
+      >
+        <ul
+          className={cn(
+            "popout__items fade-in-dropdown",
+            className && className
+          )}
+        >
           {selectList.map((list) => (
             <li onClick={list.onClick} key={list.text}>
               <div>

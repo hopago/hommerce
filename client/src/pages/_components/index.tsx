@@ -7,6 +7,7 @@ import Banner from "./Banner";
 import BestAwards from "./BestAwards";
 import NavLinks from "./NavLinks";
 import Picks from "./Picks";
+import AuthorSection from "./AuthorSection";
 
 export {
   Navbar,
@@ -17,5 +18,6 @@ export {
   Banner,
   BestAwards,
   NavLinks,
-  Picks
+  Picks,
+  AuthorSection
 };

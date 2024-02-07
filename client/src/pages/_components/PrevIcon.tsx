@@ -5,7 +5,7 @@ type PrevIconProps = {
   prevDisabled: boolean;
 };
 
-export default function PrevIcon({ handlePrev, prevDisabled }: PrevIconProps) {
+export default function PrevIcon({ handlePrev, prevDisabled }: PrevIconProps) {  
   return (
     <button
       className="left"

@@ -24,7 +24,7 @@ export default function SearchBar({
       {!isMedium && (
         <form onSubmit={onSubmit} className="search-section__container">
           <div className="search-section__container__wrapper">
-            <SearchSelect className="fixed" />
+            <SearchSelect />
             <SearchInput onChange={onChange} searchTerm={searchTerm} />
             <SearchButton />
           </div>

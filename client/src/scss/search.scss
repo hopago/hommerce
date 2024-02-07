@@ -531,8 +531,9 @@
     background-color: #ffffff;
 
     &.fixed {
-        top: 3.5rem;
-        left: 10.7rem;
+        top: 3.9rem;
+        left: 33.3rem;
+        padding: 0;
     }
 
     @keyframes fade-in-dropdown-animation {
@@ -564,6 +565,7 @@
         &.fixed {
             box-shadow: none;
             border: 1px solid rgba(0,0,0,.24);
+            background-color: #ffffff;
         }
 
         &.fade-in-dropdown {

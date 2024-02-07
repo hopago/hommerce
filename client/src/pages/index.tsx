@@ -7,6 +7,7 @@ import {
   Banner,
   BestAwards,
   Picks,
+  AuthorSection,
 } from "./_components";
 
 export default function Index() {
@@ -20,6 +21,7 @@ export default function Index() {
       <BestAwards />
       <TodayPick />
       <Picks />
+      <AuthorSection />
     </>
   );
 }
