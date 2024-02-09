@@ -1,5 +1,7 @@
-import Index from "./pages";
 import GlobalLayout from "./pages/_layout";
+
+import Index from "./pages";
+import LangIndex from "./pages/[lang]";
 
 export const routes = [
   {
@@ -11,26 +13,22 @@ export const routes = [
         element: <Index />,
         index: true,
       },
-      //   {
-      //     path: '/cart', element: <CartIndex />, index: true
-      //   },
-      //   {
-      //     path: '/payment', element: <PaymentIndex />, index: true
-      //   },
-      //   {
-      //     path: '/products', element: <ProductsIndex />, index: true
-      //   },
-      //   {
-      //     path: '/products/:id', element: <ProductsId />
-      //   },
+      {
+        path: "/:lang",
+        element: <LangIndex />,
+        index: true,
+      },
+      // {
+      //   path: "/category/:lang",
+      //   element: <CategoryIndex />,
+      //   index: true,
+      // }
     ],
   },
 ];
 
 export const pages = [
   { route: "/" },
-  //   { route: '/cart' },
-  //   { route: '/payment' },
-  //   { route: '/products' },
-  //   { route: '/products/:id' }
+  { route: "/:lang" },
+  { route: "/category/:lang" },
 ];
