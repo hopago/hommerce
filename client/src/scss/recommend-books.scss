@@ -427,6 +427,7 @@
                         flex-direction: column;
                         border-radius: 1rem;
                         cursor: pointer;
+                        text-align: center;
 
                         .recommend-type {
                             padding-top: 1rem;
@@ -545,6 +546,39 @@
                 }
             }
         }
+
+        &__user {
+
+            &__heading {
+
+                h1 {
+                    padding-left: 1.5rem;
+                }
+            }
+
+            &__horizontal {
+                display: flex;
+                flex-direction: column;
+                gap: 3rem;
+
+                &__marketing {
+                    padding: 0px 1.5rem;
+                }
+
+                &__book-list {
+                    padding: 0px 1.5rem;
+
+                    ul {
+                        flex-wrap: wrap;
+
+                        li {
+                            flex: 1;
+                            min-width: 200px;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     .recommend-books__today-pick__info__wrapper {
@@ -579,6 +613,45 @@
 }
 
 @include md {
+    .recommend-books {
+
+        &__user {
+
+            &__heading {
+
+                h1 {
+                    padding-left: 1.5rem;
+                }
+            }
+
+            &__horizontal {
+                display: flex;
+                flex-direction: column;
+                gap: 3rem;
+
+                &__marketing {
+                    display: flex;
+                    flex-direction: column;
+                    align-self: flex-start;
+                    padding-left: 1.5rem;
+                }
+
+                &__book-list {
+                    padding: 0px 1.5rem;
+
+                    ul {
+                        flex-wrap: wrap;
+
+                        li {
+                            flex: 1;
+                            min-width: 200px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     .recommend-books__today-pick__info.best-seller {
         padding: 0px 2.5rem;
     }
@@ -594,6 +667,35 @@
                     grid-template-columns: repeat(3, auto);
                     justify-items: center;
                     align-items: center;
+                }
+            }
+        }
+    }
+}
+
+@include xl {
+    .recommend-books {
+
+        &__user {
+
+            &__heading {
+
+                h1 {
+                    padding-left: 1.5rem;
+                }
+            }
+
+            &__horizontal {
+
+                &__marketing {
+                    display: flex;
+                    flex-direction: column;
+                    align-self: flex-start;
+                    padding-left: 1.5rem;
+                }
+
+                &__book-list {
+                    padding-left: 1.5rem;
                 }
             }
         }

@@ -1,3 +1,5 @@
+@import "./mixin";
+
 .author {
     width: 100%;
     max-width: 1200px;
@@ -65,7 +67,7 @@
                     border: .5px solid rgba(0, 0, 0, .24);
                     background-color: transparent;
                     cursor: pointer;
-        
+
                     span {
                         display: flex;
                         align-items: center;
@@ -95,7 +97,7 @@
 
                         .link {
                             position: relative;
-        
+
                             .img-wrap {
                                 width: 100%;
                                 height: 100%;
@@ -108,13 +110,13 @@
                                     height: 100%;
                                     object-fit: cover;
                                 }
-        
+
                                 .bg {
                                     opacity: 0;
                                     transition: all .3s ease;
                                 }
                             }
-        
+
                             .info {
                                 opacity: 0;
                                 transition: all .3s ease;
@@ -132,7 +134,7 @@
                                         width: 270px;
                                         height: 270px;
                                         border-radius: 50%;
-                                        background-color: rgba(0,0,0,.72);
+                                        background-color: rgba(0, 0, 0, .72);
                                     }
                                 }
 
@@ -145,7 +147,7 @@
                                     left: 0;
                                     border-radius: 50%;
                                     color: #ffffff;
-            
+
                                     .text-wrap {
                                         display: flex;
                                         align-items: center;
@@ -153,14 +155,14 @@
                                         text-align: center;
                                         flex-direction: column;
                                         gap: 0.5rem;
-    
+
                                         span {
                                             font-size: 15px;
                                             line-height: 23px;
                                             letter-spacing: -0.01em;
                                             font-weight: bold;
                                         }
-                
+
                                         p {
                                             font-size: 13px;
                                             line-height: 21px;
@@ -171,6 +173,80 @@
                                 }
                             }
                         }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include sm {
+    .author {
+
+        &__wrapper {
+            padding-top: 2.5rem;
+            padding-bottom: 4rem;
+            display: flex;
+            flex-direction: column;
+
+            &__text-wrap {
+                padding: 0px 1.5rem;
+                padding-top: 1.5rem;
+            }
+
+            &__items {
+                width: 100%;
+                padding: 0px 1.5rem;
+
+                &__container {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    ul {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include md {
+    .author {
+
+        .icons {
+            display: none;
+        }
+
+        &__wrapper {
+            padding-top: 2.5rem;
+            padding-bottom: 4rem;
+            display: flex;
+            flex-direction: column;
+
+            &__text-wrap {
+                padding: 0px 1.5rem;
+                padding-top: 1.5rem;
+            }
+
+            &__items {
+                width: 100%;
+                padding: 0px 1.5rem;
+
+                &__container {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    ul {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
                     }
                 }
             }
