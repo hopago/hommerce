@@ -529,11 +529,50 @@
     height: max-content;
     max-width: 130px;
     background-color: #ffffff;
+    border-radius: 0.5rem;
 
     &.fixed {
         top: 3.9rem;
         left: 33.3rem;
         padding: 0;
+    }
+
+    &.footer {
+        top: -7.5rem;
+        left: 0;
+        padding: 0;
+        border-top: none;
+
+        ul {
+            width: 200px;
+            background-color: white;
+            padding: 0;
+            overflow: hidden;
+
+            li {
+                width: 200px;
+            }
+        }
+    }
+
+    @keyframes fade-in-closeUp-animation {
+        0% {
+            transform: translateY(12.5%);
+        }
+
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fade-out-closeUp-animation {
+        0% {
+            transform: translateY(0);
+        }
+
+        100% {
+            transform: translateY(12.5%);
+        }
     }
 
     @keyframes fade-in-dropdown-animation {
@@ -574,6 +613,14 @@
 
         &.fade-out-dropdown {
             animation: fade-out-dropdown-animation .15s ease;
+        }
+
+        &.fade-in-closeUp {
+            animation: fade-in-closeUp-animation .15s ease;
+        }
+
+        &.fade-out-closeUp {
+            animation: fade-out-closeUp-animation .15s ease;
         }
 
         li {

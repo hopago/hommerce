@@ -8,6 +8,7 @@ import BestAwards from "./BestAwards";
 import NavLinks from "./NavLinks";
 import Picks from "./Picks";
 import AuthorSection from "./AuthorSection";
+import Footer from "./Footer";
 
 export {
   Navbar,
@@ -19,5 +20,6 @@ export {
   BestAwards,
   NavLinks,
   Picks,
-  AuthorSection
+  AuthorSection,
+  Footer
 };

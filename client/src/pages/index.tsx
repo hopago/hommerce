@@ -1,6 +1,4 @@
 import {
-  Navbar,
-  NewsLetter,
   SearchSection,
   RecommendGNB,
   TodayPick,
@@ -13,8 +11,6 @@ import {
 export default function Index() {
   return (
     <>
-      <NewsLetter />
-      <Navbar />
       <SearchSection />
       <Banner />
       <RecommendGNB />

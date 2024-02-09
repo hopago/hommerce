@@ -1,0 +1,146 @@
+.footer {
+    width: 100%;
+    margin: 0 auto;
+    padding: 3rem 0;
+    border-top: 1px solid rgba(0,0,0,.24);
+
+    &__incite {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
+
+        &__logo {
+            display: flex;
+            align-items: center;
+            position: relative;
+
+            &__family-site {
+                width: 200px;
+                height: 40px;
+                border-radius: 1rem;
+                border: 1px solid rgba(0,0,0,.24);
+                background-color: transparent;
+                margin-right: 1rem;
+                cursor: pointer;
+
+                .text {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    span {
+                        padding-left: 0.5rem;
+                        font-size: 14px;
+                        line-height: 22px;
+                        letter-spacing: -.01em;
+                    }
+
+                    .icon {
+                        padding-right: 0.5rem;
+                        font-size: 16px;
+                    }
+                }
+            }
+
+            &__icons {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+
+                img {
+                    width: 36px;
+                    height: 36px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    &__body {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        background-color: #F7F7F7;
+        padding: 1.5rem 0;
+        border-top: 1px solid #EAEAEA;
+        border-bottom: 1px solid #EAEAEA;
+
+        &__links {
+            flex: 2;
+            max-width: 800px;
+            margin-left: auto;
+
+            ol {
+                display: flex;
+                align-items: center;
+                margin-bottom: 1.5rem;
+
+                li {
+                    display: flex;
+                    align-items: center;
+
+                    span {
+                        font-size: 14px;
+                        line-height: 22px;
+                        letter-spacing: -0.01em;
+                        font-weight: 500;
+                        color: #595959;
+                        cursor: pointer;
+                    }
+
+                    .ptService {
+                        color: #000;
+                        font-weight: bold;
+                        text-decoration: underline;
+                    }
+
+                    .divider {
+                        display: inline-block;
+                        width: 1px;
+                        height: 12px;
+                        margin: 4px 12px 0;
+                        background-color: #d5d5d5;
+                        vertical-align: top;
+                    }
+                }
+            }
+
+            p {
+                font-size: 12px;
+                line-height: 18px;
+                letter-spacing: -0.01em;
+                color: #767676;
+            }
+        }
+
+        &__more-info {
+            flex: 1;
+            max-width: 400px;
+            margin-right: auto;
+            display: flex;
+            flex-direction: column;
+
+            .img-wrap {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 1.5rem 0;
+
+                img {
+                    width: 60px;
+                    height: 50px;
+                    object-fit: contain;
+                }
+            }
+
+            .service-wrap {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+        }
+    }
+}

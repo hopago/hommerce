@@ -4,6 +4,7 @@
 @import 'recommend-books';
 @import 'banner.scss';
 @import 'author.scss';
+@import 'footer.scss';
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
 body,
@@ -50,5 +51,132 @@ h1 {
         line-height: 22px;
         color: #ffffff;
         font-weight: 900;
+    }
+}
+
+.select-form {
+    border: 1px solid rgba(0, 0, 0, .12);
+    background-color: #ffffff;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    position: relative;
+
+    .text {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1.5rem;
+
+        span {
+            font-size: 14px;
+            line-height: 22px;
+            letter-spacing: -0.01em;
+            font-weight: bold;
+            color: #000000;
+            cursor: pointer;
+        }
+    }
+
+    @keyframes fade-in-closeUp-animation {
+        0% {
+            transform: translateY(12.5%);
+        }
+
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fade-out-closeUp-animation {
+        0% {
+            transform: translateY(0);
+        }
+
+        100% {
+            transform: translateY(12.5%);
+        }
+    }
+
+    @keyframes fade-in-dropdown-animation {
+        0% {
+            transform: translateY(-12.5%);
+        }
+
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fade-out-dropdown-animation {
+        0% {
+            transform: translateY(0);
+        }
+
+        100% {
+            transform: translateY(-12.5%);
+        }
+    }
+
+    .select-items {
+        position: absolute;
+        top: -4.5rem;
+        left: 0;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        background-color: white;
+        z-index: 99999;
+        border: 1px solid rgba(0, 0, 0, .24);
+
+        &.fade-in-dropdown {
+            animation: fade-in-dropdown-animation .15s ease;
+        }
+
+        &.fade-out-dropdown {
+            animation: fade-out-dropdown-animation .15s ease;
+        }
+
+        &.fade-in-closeUp {
+            animation: fade-in-closeUp-animation .15s ease;
+        }
+
+        &.fade-out-closeUp {
+            animation: fade-out-closeUp-animation .15s ease;
+        }
+
+        &__wrap {
+            padding: 0.25rem 0px;
+
+            ol {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+
+                li {
+                    width: 232px;
+                    padding: 0px 1rem;
+                    cursor: pointer;
+                    transition: all .15s ease;
+
+                    span {
+                        display: block;
+                        font-size: 13px;
+                        line-height: 19px;
+                        letter-spacing: -0.01em;
+                        color: #595959;
+                        text-decoration: none;
+                        transition: all .15s ease;
+                    }
+
+                    &:hover {
+                        background-color: rgba(0, 0, 0, .12);
+
+                        span {
+                            color: #000;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

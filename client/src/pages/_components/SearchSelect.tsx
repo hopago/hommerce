@@ -48,7 +48,13 @@ export default function SearchSelect({ className }: { className?: string }) {
         <MdKeyboardArrowDown className="icon" />
       </div>
       {show ? (
-        <SelectPopOut className={className} ref={selectListRef} show={show} setShow={setShow} />
+        <SelectPopOut
+          animationName="fade-in-dropdown"
+          className={className}
+          ref={selectListRef}
+          show={show}
+          setShow={setShow}
+        />
       ) : null}
     </>
   );

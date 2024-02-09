@@ -7,7 +7,11 @@ export default function RecommendBookInformationBookList() {
     <div className="recommend-books__user__horizontal__book-list">
       <ul>
         {temporaryRecommendBooks.map((book, i) => (
-          <RecommendBookInformationBookItem book={book} i={i} />
+          <RecommendBookInformationBookItem
+            key={`${book.id}${book.title}`}
+            book={book}
+            i={i}
+          />
         ))}
       </ul>
     </div>

@@ -21,7 +21,7 @@ export default function Authors({ authors, currIndex }: AuthorsProps) {
       <div className="author__wrapper__items__container">
         <ul ref={slideRef}>
           {authors.map((author) => (
-            <Author author={author} />
+            <Author key={author.authorName} author={author} />
           ))}
         </ul>
       </div>
