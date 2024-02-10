@@ -253,7 +253,6 @@ main {
         .lang-page-picks {
             margin-top: 3rem;
             display: flex;
-            align-items: center;
 
             &__today {
                 flex: 2;
@@ -275,7 +274,7 @@ main {
                     &__single-book {
                         width: 100%;
                         padding-top: 0.5rem;
-                        margin-bottom: 1.5rem;
+                        padding-bottom: 3rem;
 
                         &__horizontal {
                             display: flex;
@@ -358,9 +357,8 @@ main {
                     &__preview {
                         width: 666px;
                         overflow: hidden;
-                        padding-top: 1.5rem;
-                        padding: 1px;
-                        border-top: 1px solid rgba(0, 0, 0, .18);
+                        padding: 1.5rem 1px 1px 1px;
+                        border-top: 1px solid rgba(0, 0, 0, .24);
 
                         ul {
                             width: 666px;
@@ -443,7 +441,81 @@ main {
 
             &__best {
                 flex: 1;
-                min-width: 300px;
+
+                &__container {
+
+                    &__heading {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding-bottom: 1.5rem;
+
+                        .text-wrap {
+    
+                            h1 {
+                                font-size: 20px;
+                                line-height: 30px;
+                                letter-spacing: -0.01em;
+                            }
+                        }
+
+                        .more-vert {
+                            display: flex;
+                            align-items: center;
+                            cursor: pointer;
+
+                            span {
+                                color: #595959;
+                                font-size: 13px;
+                                line-height: 19px;
+                                letter-spacing: -0.01em;
+                                font-weight: 700;
+                                text-align: left;
+                                text-decoration: underline;
+                            }
+
+                            .icon-wrap {
+                                margin-left: 0;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                color: #595959;
+                            }
+                        }
+                    }
+
+                    &__book-list {
+                        display: flex;
+                        flex-direction: column;
+
+                        &__prod {
+                            width: 100%;
+
+                            ul {
+                                display: flex;
+                                flex-direction: column;
+
+                                li {
+                                    display: flex;
+                                    gap: 1rem;
+
+                                    .img-wrap {
+                                        flex: 1;
+
+                                        img {
+                                            width: 100%;
+                                            object-fit: contain;
+                                        }
+                                    }
+
+                                    .book-info {
+                                        flex: 2;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

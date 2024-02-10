@@ -43,7 +43,7 @@ export default function TodayPick() {
 
   return (
     <div className="lang-page-picks__today__vertical">
-      <Heading />
+      <Heading title="오늘의 선택" />
       <CurrentBook book={currentBook} />
       <Preview currIndex={currIndex} books={books} />
       <div className="lang-page-picks__today__vertical__slide-btn">

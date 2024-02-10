@@ -1,8 +1,8 @@
 
-export default function Heading() {
+export default function Heading({ title }: { title: string }) {
   return (
     <div className="text-wrap">
-      <h1>오늘의 선택</h1>
+      <h1>{title}</h1>
     </div>
   )
 }

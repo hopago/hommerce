@@ -12,6 +12,7 @@ const temporaryBook: TBook = {
   unit: "원",
   comment: "뇌의 변화를 통한 놀라운 치유",
   desc: "우리의 뇌는 당신의 생각보다 유연하다",
+  publisher: "동아시아"
 };
 
 export const books: TBooks = [...Array.from({ length: 10 })].map((_, i) => {

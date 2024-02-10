@@ -10,6 +10,7 @@ type TBook = {
   unit: string;
   comment?: string;
   desc?: string;
+  publisher: string;
 };
 
 type TBooks = TBook[];
