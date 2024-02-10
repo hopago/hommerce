@@ -11,7 +11,7 @@ export const useGNBList = () => {
     e: React.MouseEvent<HTMLElement>,
     className: string
   ) => {
-    if ((e.target as HTMLElement).closest(`.${className}`)) return;
+    if (!(e.target as HTMLElement).closest(`.${className}`)) return;
 
     setShow(false);
   };

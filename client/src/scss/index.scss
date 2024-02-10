@@ -1,3 +1,4 @@
+// main
 @import 'home';
 @import 'search';
 @import 'recommend-gnb';
@@ -5,6 +6,11 @@
 @import 'banner.scss';
 @import 'author.scss';
 @import 'footer.scss';
+
+// :lang page
+@import 'lang-page';
+
+// font
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
 body,

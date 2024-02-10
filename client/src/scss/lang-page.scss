@@ -1,0 +1,100 @@
+.kor-gnb {
+    width: 100%;
+    padding-top: 1.5rem;
+
+    &__horizontal {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        &__default {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            img {
+                width: 4px;
+                height: 8px;
+            }
+
+            &__show {
+                position: relative;
+                cursor: pointer;
+                transition: all .3s ease;
+
+                .text-wrap {
+                    padding-bottom: 0.25rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.25rem;
+
+                    .icon-wrap {
+                        margin: 0;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 16px;
+                        height: 16px;
+                        border-radius: 50%;
+                        border: 1px solid rgba(0,0,0,.24);
+                        transition: all .15s ease;
+                    }
+
+                    span {
+                        font-size: 14px;
+                        line-height: 19px;
+                        letter-spacing: -0.01em;
+                        color: #767676;
+                        font-weight: normal;
+                    }
+
+                    &:hover {
+
+                        .icon-wrap {
+                            border-color: rgba(0,0,0,.48);
+                        }
+                    }
+                }
+
+                ol {
+                    opacity: 0;
+                    transition: all .3s ease;
+                    position: absolute;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    z-index: 99999;
+                    background-color: #ffffff;
+                    border: 1px solid rgba(0,0,0,.24);
+                    border-radius: 0.5rem;
+
+                    li {
+                        padding: 0.5rem;
+                        width: 132px;
+                        transition: all .3s ease;
+
+                        span {
+                            font-size: 13px;
+                            line-height: 19px;
+                            letter-spacing: -0.01em;
+                            color: #767676;
+                            transition: all .3s ease;
+                        }
+
+                        &:hover {
+                            background: rgba(0,0,0,.04);
+                            
+                            span {
+                                font-weight: bold;
+                                color: #000;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

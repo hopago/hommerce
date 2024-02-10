@@ -5,9 +5,7 @@ type GNBCategoryProps = {
 export default function GNBCategory({ category }: GNBCategoryProps) {
   return (
     <li>
-      <div className="vertical absolute">
-        <span>{category}</span>
-      </div>
+      <span>{category}</span>
     </li>
   );
 }
