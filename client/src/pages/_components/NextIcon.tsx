@@ -2,7 +2,7 @@ import { RiArrowRightSLine } from "react-icons/ri";
 
 type NextIconProps = {
   handleNext: () => void;
-  nextDisabled: boolean;
+  nextDisabled?: boolean;
 };
 
 export default function NextIcon({ handleNext, nextDisabled }: NextIconProps) {

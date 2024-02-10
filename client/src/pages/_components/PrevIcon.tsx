@@ -2,7 +2,7 @@ import { RiArrowLeftSLine } from "react-icons/ri";
 
 type PrevIconProps = {
   handlePrev: () => void;
-  prevDisabled: boolean;
+  prevDisabled?: boolean;
 };
 
 export default function PrevIcon({ handlePrev, prevDisabled }: PrevIconProps) {  
