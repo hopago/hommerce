@@ -39,7 +39,7 @@
                         width: 16px;
                         height: 16px;
                         border-radius: 50%;
-                        border: 1px solid rgba(0,0,0,.24);
+                        border: 1px solid rgba(0, 0, 0, .24);
                         transition: all .15s ease;
                     }
 
@@ -54,7 +54,7 @@
                     &:hover {
 
                         .icon-wrap {
-                            border-color: rgba(0,0,0,.48);
+                            border-color: rgba(0, 0, 0, .48);
                         }
                     }
                 }
@@ -68,7 +68,7 @@
                     align-items: center;
                     z-index: 99999;
                     background-color: #ffffff;
-                    border: 1px solid rgba(0,0,0,.24);
+                    border: 1px solid rgba(0, 0, 0, .24);
                     border-radius: 0.5rem;
 
                     li {
@@ -85,8 +85,8 @@
                         }
 
                         &:hover {
-                            background: rgba(0,0,0,.04);
-                            
+                            background: rgba(0, 0, 0, .04);
+
                             span {
                                 font-weight: bold;
                                 color: #000;
@@ -152,6 +152,99 @@ main {
         flex: 8;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
+
+        .ad-banner {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 1000px;
+            position: relative;
+
+            &__container {
+                width: 100%;
+                border-radius: 1rem;
+                overflow: hidden;
+
+                &__horizontal {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+
+                    li {
+                        width: 100%;
+
+                        img {
+                            width: 1000px;
+                            object-fit: cover;
+                        }
+                    }
+                }
+            }
+
+            &__tab-info {
+                width: 100%;
+
+                ol {
+                    display: flex;
+                    align-items: center;
+
+                    li {
+                        flex: 1;
+                        text-align: center;
+                        padding: 0.5rem 0.25rem;
+                        border-bottom: 2px solid rgba(0, 0, 0, .18);
+                        cursor: pointer;
+                        transition: all .45s ease;
+
+                        span {
+                            font-size: 14px;
+                            line-height: 22px;
+                            letter-spacing: -0.01em;
+                            font-weight: bold;
+                        }
+
+                        &.active {
+                            border-bottom: 2px solid rgba(0,0,0,.48);
+                        }
+                    }
+                }
+            }
+
+            .left,
+            .right {
+                position: absolute;
+                z-index: 99999;
+                width: 44px;
+                height: 44px;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-color: rgba(0, 0, 0, 0.3);
+                background-size: 44px 44px;
+                transition: opacity 0.23s;
+                border-radius: 100%;
+                z-index: 2;
+                box-sizing: border-box;
+                border: none;
+                color: #ffffff;
+                font-size: 19px;
+                cursor: pointer;
+
+                span {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+
+            .left {
+                left: 11px;
+                top: 44%;
+            }
+
+            .right {
+                right: 11px;
+                top: 44%;
+            }
+        }
     }
 }

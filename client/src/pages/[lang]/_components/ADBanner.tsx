@@ -1,13 +1,14 @@
 import NextIcon from "../../_components/NextIcon";
 import PrevIcon from "../../_components/PrevIcon";
 import ADSlider from "./ADSlider";
+import ADTabInfo from "./ADTabInfo";
 
 import { adBannerImages } from "../constants/showcase-ads";
 
 import { useEffect, useRef, useState } from "react";
 
 export default function ADBanner() {
-  const [currIndex, setCurrIndex] = useState(0);
+  const [currIndex, setCurrIndex] = useState(1);
 
   const slideRef = useRef<HTMLUListElement>(null);
 
@@ -17,7 +18,7 @@ export default function ADBanner() {
       if (slideRef.current !== null) {
         slideRef.current.style.transition = "";
       }
-    }, 300);
+    }, 450);
   };
 
   const moveSlideByNumber = (direction: number) => {
@@ -25,25 +26,32 @@ export default function ADBanner() {
   };
 
   const handleNext = () => {
-    if (currIndex === adBannerImages.length + 1) {
+    if (currIndex + 1 === adBannerImages.length + 1) {
       moveToNthSlide(1);
     }
 
     moveSlideByNumber(1);
+
+    if (slideRef.current !== null) {
+      slideRef.current.style.transition = "all 0.45s ease";
+    }
   };
 
   const handlePrev = () => {
-    if (currIndex === 0) {
+    if (currIndex - 1 === 0) {
       moveToNthSlide(adBannerImages.length);
     }
 
     moveSlideByNumber(-1);
+
+    if (slideRef.current !== null) {
+      slideRef.current.style.transition = "all 0.45s ease";
+    }
   };
 
   useEffect(() => {
     if (slideRef.current !== null) {
-      slideRef.current.style.transition = "all 0.3s ease";
-      slideRef.current.style.transform = `translateX(-${currIndex}00%)`;
+      slideRef.current.style.transform = `translateX(-${currIndex * 1000}px)`;
     }
   }, [currIndex]);
 
@@ -52,6 +60,7 @@ export default function ADBanner() {
       <PrevIcon handlePrev={handlePrev} />
       <ADSlider ref={slideRef} images={adBannerImages} />
       <NextIcon handleNext={handleNext} />
+      <ADTabInfo setCurrIndex={setCurrIndex} currIndex={currIndex} />
     </div>
   );
 }

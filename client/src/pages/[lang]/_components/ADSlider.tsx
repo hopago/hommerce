@@ -22,7 +22,7 @@ const ADSlider = forwardRef<HTMLUListElement, ADSliderProps>(
       <div className="ad-banner__container">
         <ul className="ad-banner__container__horizontal" ref={ref}>
           {currList?.map((image, i) => (
-            <li key={(image += i)}>
+            <li key={`${image}-${i}`}>
               <img src={image} alt="ad-banner" />
             </li>
           ))}
