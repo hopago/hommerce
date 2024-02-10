@@ -103,14 +103,17 @@ main {
     padding-top: 1.5rem;
     padding-bottom: 4.5rem;
     display: flex;
-    align-items: center;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
 
     .side-nav-bar {
         flex: 2;
-        padding-right: 3rem;
+        position: sticky;
+        top: 86px;
+        padding-bottom: 3rem;
+        height: max-content;
 
         .title {
 
@@ -122,7 +125,7 @@ main {
         }
 
         &__col-container {
-            padding-top: 1.5rem;
+            margin-top: 1.5rem;
 
             ol {
                 display: flex;
@@ -204,7 +207,7 @@ main {
                         }
 
                         &.active {
-                            border-bottom: 2px solid rgba(0,0,0,.48);
+                            border-bottom: 2px solid rgba(0, 0, 0, .48);
                         }
                     }
                 }
@@ -238,12 +241,209 @@ main {
 
             .left {
                 left: 11px;
-                top: 44%;
+                top: 35%;
             }
 
             .right {
                 right: 11px;
-                top: 44%;
+                top: 35%;
+            }
+        }
+
+        .lang-page-picks {
+            margin-top: 3rem;
+            display: flex;
+            align-items: center;
+
+            &__today {
+                flex: 2;
+
+                &__vertical {
+                    display: flex;
+                    flex-direction: column;
+
+                    .text-wrap {
+                        padding-bottom: 0.75rem;
+
+                        h1 {
+                            font-size: 20px;
+                            line-height: 30px;
+                            letter-spacing: -0.01em;
+                        }
+                    }
+
+                    &__single-book {
+                        width: 100%;
+                        padding-top: 0.5rem;
+                        margin-bottom: 1.5rem;
+
+                        &__horizontal {
+                            display: flex;
+                            gap: 1rem;
+
+                            .img-wrap {
+                                flex: 1;
+
+                                img {
+                                    width: 100%;
+                                    max-height: 314px;
+                                    object-fit: contain;
+                                }
+                            }
+
+                            &__book-info {
+                                flex: 2;
+
+                                .title {
+                                    margin-top: 1rem;
+                                    font-weight: bold;
+                                    font-size: 20px;
+                                    line-height: 30px;
+                                    letter-spacing: -0.01em;
+                                }
+
+                                .author {
+                                    color: $font-light-gray;
+                                    font-weight: bold;
+                                    max-height: 44px;
+                                    white-space: normal;
+                                    word-break: break-all;
+                                    margin-top: 0.5rem;
+                                }
+
+                                &__price-texts {
+                                    display: flex;
+                                    align-items: center;
+                                    margin-top: 1rem;
+
+                                    .discount {
+                                        margin-right: 0.5rem;
+                                        color: $font-green;
+                                        font-weight: bold;
+                                        vertical-align: top;
+                                    }
+
+                                    .price,
+                                    .unit {
+                                        font-size: 1rem;
+                                        line-height: 1.5rem;
+                                        letter-spacing: -.01em;
+                                    }
+                                }
+
+                                .comment {
+                                    margin-top: 1rem;
+                                    color: #474C98;
+
+                                    span {
+                                        vertical-align: top;
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 2.1px;
+                                        font-weight: bold;
+                                    }
+                                }
+
+                                .desc {
+                                    margin-top: 1rem;
+                                    color: $font-light-gray;
+                                    white-space: normal;
+                                    word-break: break-all;
+                                    font-weight: bold;
+                                }
+                            }
+                        }
+                    }
+
+                    &__preview {
+                        width: 666px;
+                        overflow: hidden;
+                        padding-top: 1.5rem;
+                        padding: 1px;
+                        border-top: 1px solid rgba(0, 0, 0, .18);
+
+                        ul {
+                            width: 666px;
+                            display: flex;
+                            align-items: center;
+                            gap: 1rem;
+
+                            li {
+                                width: 120px;
+                                cursor: pointer;
+                                transition: all .3s ease;
+
+                                .img-wrap {
+                                    width: 120px;
+
+                                    img {
+                                        width: 100%;
+                                    }
+                                }
+
+                                &.active {
+                                    outline: 1px solid rgba(0, 0, 0, .72);
+                                }
+                            }
+                        }
+                    }
+
+                    &__slide-btn {
+                        padding-top: 1.5rem;
+                        display: flex;
+                        align-items: center;
+
+                        .process {
+                            flex: 1;
+                            display: flex;
+                            align-items: center;
+
+                            .fill {
+                                transition: all .15s ease;
+                                width: 10%;
+                                background-color: rgba(0, 0, 0, .72);
+                                height: 2px;
+                                z-index: 99999;
+                            }
+
+                            .bg {
+                                flex: 1;
+                                background-color: rgba(0, 0, 0, .24);
+                                height: 2px;
+                            }
+                        }
+
+                        .left,
+                        .right {
+                            width: 34px;
+                            height: 34px;
+                            border-radius: 50%;
+                            border: .5px solid rgba(0, 0, 0, .24);
+                            background-color: transparent;
+                            cursor: pointer;
+        
+                            span {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-size: 21px;
+                            }
+                        }
+
+                        .left {
+                            margin-left: 1rem;
+                        }
+
+                        .right {
+                            margin-left: 0.5rem;
+                        }
+                    }
+                }
+            }
+
+            &__best {
+                flex: 1;
+                min-width: 300px;
             }
         }
     }

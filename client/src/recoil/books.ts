@@ -14,7 +14,7 @@ const temporaryBook: TBook = {
   desc: "우리의 뇌는 당신의 생각보다 유연하다",
 };
 
-const books: TBooks = [...Array.from({ length: 10 })].map((_, i) => {
+export const books: TBooks = [...Array.from({ length: 10 })].map((_, i) => {
   const book = { ...temporaryBook };
   book.id = i;
   return book;

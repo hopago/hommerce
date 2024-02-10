@@ -1,6 +1,6 @@
 import { SearchSection } from "../_components";
 
-import { ADBanner, GNB, SideNavbar } from "./_components";
+import { ADBanner, GNB, SideNavbar, Picks } from "./_components";
 
 export default function LangIndex() {
   return (
@@ -11,6 +11,7 @@ export default function LangIndex() {
         <SideNavbar />
         <section>
           <ADBanner />
+          <Picks />
         </section>
       </main>
     </>
