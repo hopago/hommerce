@@ -7,8 +7,6 @@ type ADTabInfoProps = {
 };
 
 export default function ADTabInfo({ currIndex, setCurrIndex }: ADTabInfoProps) {
-  console.log("render");
-
   return (
     <div className="ad-banner__tab-info">
       <ol>

@@ -1,7 +1,7 @@
 import { setParentCategoryColor } from "../../lib/utils"
 
 type ParentCategoryProps = {
-  text: BookParentCategory
+  text: BookParentCategory;
 }
 
 export default function ParentCategoryBadge({ text }: ParentCategoryProps) {
