@@ -13,6 +13,8 @@ export default function TodayBest() {
   const prodBooks = books.slice(0, 2);
   const otherBooks = books.slice(2, books.length);
 
+  const otherBooksTitle = otherBooks.map(book => book.title);
+
   return (
     <div className="lang-page-picks__best__container">
       <div className="lang-page-picks__best__container__heading">
@@ -26,7 +28,7 @@ export default function TodayBest() {
       </div>
       <div className="lang-page-picks__best__container__book-list">
         <ProdBooks books={prodBooks} />
-        <OtherBooks books={otherBooks} />
+        <OtherBooks books={otherBooksTitle} />
       </div>
     </div>
   );

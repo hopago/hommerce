@@ -1,5 +1,7 @@
 import { atom, selectorFamily } from "recoil";
 
+/* TEMPORARY BOOK DATA */
+
 const temporaryBook: TBook = {
   id: 1,
   img: "https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791198356680.jpg",
@@ -12,7 +14,7 @@ const temporaryBook: TBook = {
   unit: "원",
   comment: "뇌의 변화를 통한 놀라운 치유",
   desc: "우리의 뇌는 당신의 생각보다 유연하다",
-  publisher: "동아시아"
+  publisher: "동아시아",
 };
 
 export const books: TBooks = [...Array.from({ length: 10 })].map((_, i) => {
@@ -52,6 +54,28 @@ export const temporaryRecommendBooks: TBookShortcut[] = [
   book.id = i;
   return book;
 });
+
+const temporaryNewBook: TBookOptional = {
+  id: 1,
+  title: "데일 카네기 인간관계론",
+  img: "https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791187142560.jpg",
+  author: "데일 카네기",
+  category: "현대지성",
+  publisher: "요즘책방",
+  discount: "10%",
+  price: "10,350",
+  unit: "원",
+};
+
+export const temporaryNewBooks: TBookOptional[] = [
+  ...Array.from({ length: 6 }),
+].map((_, i) => {
+  const book = { ...temporaryNewBook };
+  book.id = i;
+  return book;
+});
+
+/* CLIENT STATE */
 
 export const booksState = atom<TBooks>({
   key: "booksState",

@@ -1,9 +1,14 @@
 import { useEffect, useRef } from "react";
+
 import PreviewBook from "./PreviewBook";
 
-type PreviewProps = { books: TBooks; currIndex: number };
+type PreviewProps = {
+  books: TBooks;
+  currIndex: number;
+  setCurrIndex: React.Dispatch<React.SetStateAction<number>>;
+};
 
-export default function Preview({ books, currIndex }: PreviewProps) {
+export default function Preview({ books, currIndex, setCurrIndex }: PreviewProps) {
   const filteredBooksInfo = books.map((book) => {
     const { img, id } = book;
 
@@ -35,6 +40,7 @@ export default function Preview({ books, currIndex }: PreviewProps) {
         {filteredBooksInfo.map((book, i) => (
           <PreviewBook
             key={`${book.id}-${book.img}`}
+            setCurrIndex={setCurrIndex}
             currIndex={currIndex}
             i={i}
             book={book}

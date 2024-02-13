@@ -1,6 +1,13 @@
 import { SearchSection } from "../_components";
 
-import { ADBanner, GNB, SideNavbar, Picks } from "./_components";
+import {
+  ADBanner,
+  GNB,
+  SideNavbar,
+  Picks,
+  TrendSearchTerm,
+  NewBooks,
+} from "./_components";
 
 export default function LangIndex() {
   return (
@@ -12,6 +19,8 @@ export default function LangIndex() {
         <section>
           <ADBanner />
           <Picks />
+          <TrendSearchTerm />
+          <NewBooks bookSubCategory="경제 경영" />
         </section>
       </main>
     </>

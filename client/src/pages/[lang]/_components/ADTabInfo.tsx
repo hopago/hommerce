@@ -7,7 +7,7 @@ type ADTabInfoProps = {
 };
 
 export default function ADTabInfo({ currIndex, setCurrIndex }: ADTabInfoProps) {
-  console.log(currIndex);
+  console.log("render");
 
   return (
     <div className="ad-banner__tab-info">
@@ -16,7 +16,7 @@ export default function ADTabInfo({ currIndex, setCurrIndex }: ADTabInfoProps) {
           <li
             onClick={() => setCurrIndex(i + 1)}
             className={cn("", currIndex - 1 === i && "active")}
-            key={ad}
+            key={`${ad}-${i}`}
           >
             <span>{ad}</span>
           </li>

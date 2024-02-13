@@ -19,3 +19,5 @@ type TBookShortcut = Pick<
   TBook,
   "author" | "category" | "img" | "title" | "id"
 >;
+
+type TBookOptional = Partial<TBook>;

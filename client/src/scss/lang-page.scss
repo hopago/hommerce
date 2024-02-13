@@ -441,6 +441,7 @@ main {
 
             &__best {
                 flex: 1;
+                padding-left: 2rem;
 
                 &__container {
 
@@ -505,11 +506,89 @@ main {
                                         img {
                                             width: 100%;
                                             object-fit: contain;
+                                            cursor: pointer;
                                         }
                                     }
 
                                     .book-info {
                                         flex: 2;
+
+                                        .best-flag-badge {
+                                            width: 20px;
+                                            height: 20px;
+                                        }
+
+                                        h3 {
+                                            display: block;
+                                            display: -webkit-box;
+                                            overflow: hidden;
+                                            max-height: 46px;
+                                            line-height: 23px;
+                                            -webkit-box-orient: vertical;
+                                            -webkit-line-clamp: 2;
+                                            white-space: normal;
+                                            word-break: break-all;
+                                            font-size: 15px;
+                                            line-height: 23px;
+                                            letter-spacing: -0.01em;
+                                            font-weight: bold;
+                                            margin: 0;
+                                            cursor: pointer;
+
+                                            &:hover {
+                                                text-decoration: underline;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        &__other-books {
+                            margin-top: 2rem;
+                            padding-top: 1rem;
+                            border-top: 1px solid rgba(0, 0, 0, .12);
+                            width: 100%;
+
+                            ul {
+                                width: 100%;
+                                display: flex;
+                                flex-direction: column;
+
+                                li {
+                                    width: 100%;
+                                    display: flex;
+                                    align-items: center;
+                                    cursor: pointer;
+
+                                    .text-wrap {
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 0.5rem;
+
+                                        .best-flag-badge {
+                                            width: 20px;
+                                            height: 20px;
+                                        }
+    
+                                        .span-wrap {
+                                            padding-bottom: 0.75rem;
+
+                                            span {
+                                                display: inline-block;
+                                                max-width: 100%;
+                                                height: auto;
+                                                max-height: none;
+                                                -webkit-box-orient: inherit;
+                                                -webkit-line-clamp: inherit;
+                                                text-overflow: ellipsis;
+                                                white-space: nowrap;
+                                                font-size: 13px;
+                                                line-height: 19px;
+                                                letter-spacing: -0.01em;
+                                                font-weight: bold;
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -518,5 +597,166 @@ main {
                 }
             }
         }
+
+        .trend-search-term {
+            margin-top: 3rem;
+
+            .text-wrap {
+
+                h1 {
+                    font-size: 20px;
+                    line-height: 30px;
+                    letter-spacing: -0.01em;
+                }
+            }
+
+            &__container {
+                width: 100%;
+                padding-top: 1.5rem;
+
+                &__wrapper {
+                    padding: 2rem;
+                    background-color: rgba(0, 0, 0, .04);
+                    border-radius: 1rem;
+
+                    ul {
+                        display: flex;
+                        align-items: center;
+                        flex-wrap: wrap;
+                        gap: 0.5rem;
+
+                        li {
+                            width: max-content;
+                            background-color: #ffffff;
+                            padding: 0.5rem 1rem;
+                            border-radius: 0.5rem;
+                            border: 1px solid rgba(0, 0, 0, .18);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            cursor: pointer;
+
+                            span {
+                                display: inline-block;
+                                font-size: 13px;
+                                line-height: 19px;
+                                letter-spacing: -0.01em;
+                                color: #595959;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .new-books {
+            margin-top: 3rem;
+            width: 100%;
+
+            .text-wrap {
+                margin-bottom: 1rem;
+
+                h1 {
+                    font-size: 20px;
+                    line-height: 30px;
+                    letter-spacing: -0.01em;
+                    margin: 0;
+                }
+            }
+
+            &__book-list {
+                width: 100%;
+
+                ul {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+
+                    li {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+
+                        .img-wrap {
+                            width: 140px;
+                            cursor: pointer;
+
+                            img {
+                                width: 100%;
+                                object-fit: contain;
+                            }
+                        }
+
+                        h3 {
+                            display: block;
+                            display: -webkit-box;
+                            overflow: hidden;
+                            max-height: 46px;
+                            line-height: 23px;
+                            -webkit-box-orient: vertical;
+                            -webkit-line-clamp: 2;
+                            white-space: normal;
+                            word-break: break-all;
+                            font-size: 15px;
+                            line-height: 23px;
+                            letter-spacing: -0.01em;
+                            font-weight: bold;
+                            margin: 0.25rem 0;
+                            cursor: pointer;
+
+                            &:hover {
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
+}
+
+.publish {
+    display: flex;
+    align-items: center;
+
+    span {
+        color: #595959;
+        display: block;
+        margin-top: 5px;
+        font-size: 13px;
+        line-height: 19px;
+        letter-spacing: -0.01em;
+        display: block;
+        display: -webkit-box;
+        overflow: hidden;
+        max-height: 38px;
+        line-height: 19px;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        white-space: normal;
+        word-break: break-all;
+    }
+}
+
+.discount {
+    display: inline-block;
+    margin-right: 3px;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: -0.01em;
+    font-weight: 700;
+    color: #4dac27;
+    vertical-align: top;
+}
+
+.price,
+.unit {
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: -0.01em;
+}
+
+.price {
+    font-weight: bold;
 }

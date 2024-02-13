@@ -45,7 +45,7 @@ export default function TodayPick() {
     <div className="lang-page-picks__today__vertical">
       <Heading title="오늘의 선택" />
       <CurrentBook book={currentBook} />
-      <Preview currIndex={currIndex} books={books} />
+      <Preview setCurrIndex={setCurrIndex} currIndex={currIndex} books={books} />
       <div className="lang-page-picks__today__vertical__slide-btn">
         <div className="process">
           <div className="fill" style={{ width: `${(currIndex + 1) * 10}%` }} />
