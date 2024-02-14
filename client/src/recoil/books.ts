@@ -75,6 +75,21 @@ export const temporaryNewBooks: TBookOptional[] = [
   return book;
 });
 
+export const detailsBook: TBook = {
+  id: 1,
+  img: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791192300818.jpg",
+  parentCategory: "국내도서",
+  category: "인문",
+  title: "마흔에 읽는 쇼펜하우어",
+  author: "강용수",
+  discount: "10%",
+  price: "17000",
+  eBookPrice: "12150",
+  unit: "원",
+  publisher: "유노북스",
+  sellType: ["종이책", "eBook"],
+};
+
 /* CLIENT STATE */
 
 export const booksState = atom<TBooks>({
