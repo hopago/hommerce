@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 
 import { Outlet } from "react-router-dom";
 
@@ -7,7 +7,26 @@ import { Navbar, NewsLetter, Footer } from "./_components";
 
 import FixedSeenBooks from "../_components/FixedSeenBooks";
 
+import { useRecoilValue } from "recoil";
+import { seenModalState } from "../recoil/seen-modal";
+
 export default function GlobalLayout() {
+  const show = useRecoilValue(seenModalState);
+
+  useEffect(() => {
+    console.log(show);
+
+    if (show) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [show]);
+
   return (
     <>
       <Suspense fallback={<HomeLoadingPage />}>

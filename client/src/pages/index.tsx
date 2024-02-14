@@ -9,6 +9,7 @@ import {
 } from "./_components";
 
 export default function Index() {
+
   return (
     <>
       <SearchSection />

@@ -10,10 +10,10 @@ export default function Heading() {
   };
 
   return (
-    <div className="seen-book-list__wrapper__heading">
+    <div className="seen-book-list__wrap__heading">
       <h1>최근 본 컨텐츠</h1>
       <button onClick={onClick}>
-        <MdClose />
+        <MdClose className="close-icon" />
       </button>
     </div>
   );

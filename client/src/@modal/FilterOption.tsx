@@ -1,9 +1,11 @@
 import { cn } from "../lib/utils";
 
+import { FilterOptions } from "./hooks/use-filter-option";
+
 type FilterOptionProps = {
-  category: BookParentCategory;
-  onClick: (option: BookParentCategory) => void;
-  option: BookParentCategory | "전체";
+  category: FilterOptions;
+  onClick: (option: FilterOptions) => void;
+  option: FilterOptions;
 };
 
 export default function FilterOption({

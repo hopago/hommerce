@@ -2,16 +2,20 @@ import { bookParentCategory } from "../pages/_components/constants/category";
 
 import FilterOption from "./FilterOption";
 
+import { FilterOptions as TFilterOptions } from "./hooks/use-filter-option";
+
 type FilterOptionProps = {
-  onClick: (option: BookParentCategory) => void;
-  option: BookParentCategory | "전체";
+  onClick: (option: TFilterOptions) => void;
+  option: TFilterOptions;
 };
 
 export default function FilterOptions({ onClick, option }: FilterOptionProps) {
+  const filterOpts: TFilterOptions[] = ["전체", ...bookParentCategory];
+
   return (
-    <div className="seen-book-list__wrapper__filter-options">
+    <div className="seen-book-list__wrap__filter-options">
       <ul>
-        {bookParentCategory.map((category) => (
+        {filterOpts.map((category) => (
           <FilterOption
             key={category}
             option={option}

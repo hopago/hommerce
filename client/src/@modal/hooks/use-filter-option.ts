@@ -1,9 +1,11 @@
 import { useState } from "react";
 
-export const useFilterOption = () => {
-  const [option, setOption] = useState<BookParentCategory | "전체">("전체");
+export type FilterOptions = BookParentCategory | "전체";
 
-  const onClick = (option: BookParentCategory) => {
+export const useFilterOption = () => {
+  const [option, setOption] = useState<FilterOptions>("전체");
+
+  const onClick = (option: FilterOptions) => {
     setOption(option);
   };
 

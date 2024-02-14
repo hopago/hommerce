@@ -3,14 +3,23 @@ import ParentCategoryBadge from "../pages/_components/ParentCategoryBadge";
 import { MdClose } from "react-icons/md";
 import heart from "../assets/ico_heart.png";
 
+import { useState } from "react";
+
+import { cn } from "../lib/utils";
+
 type SeenBookItemProps = {
   book: TBook;
 };
 
 export default function SeenBookItem({ book }: SeenBookItemProps) {
+  const [active, setActive] = useState(false);
+
   const handleClose = () => {};
 
-  const handleFavorite = () => {};
+  const handleFavorite = () => {
+    // TODO: DB에 찜 상품 추가, 클라이언트에 낙관적 업데이트
+    setActive(true);
+  };
 
   return (
     <li className="seen-book-list__wrap__book-list__wrap__book-item">
@@ -21,8 +30,8 @@ export default function SeenBookItem({ book }: SeenBookItemProps) {
         {book.parentCategory ? (
           <ParentCategoryBadge text={book.parentCategory} />
         ) : null}
-        <h1>{book.title}</h1>
-        <p>{book.author}</p>
+        <h1 className="title">{book.title}</h1>
+        <p className="author">{book.author}</p>
         {book.discount ? (
           <span className="discount">{book.discount}</span>
         ) : null}
@@ -37,8 +46,11 @@ export default function SeenBookItem({ book }: SeenBookItemProps) {
             <MdClose />
           </span>
         </button>
-        <div className="heart-button-wrap">
-          <button onClick={handleFavorite}>
+        <div
+          className={cn("heart-button-wrap", active && "active")}
+          onClick={handleFavorite}
+        >
+          <button>
             <img src={heart} alt="heart-button" />
           </button>
         </div>
