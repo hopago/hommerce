@@ -1,4 +1,5 @@
 import { ProdMDBadge } from "../../../../_components/ProdBadge";
+import ProdPurchaseButton from "../../../../_components/ProdPurchaseButton";
 
 import ProdInfoGuide from "./ProdInfoGuide";
 
@@ -51,6 +52,12 @@ export default function DefaultPriceInfo({
           guideTitle="배송안내"
           type="delivery"
           deliverFee="3600"
+        />
+        <ProdPurchaseButton text="장바구니" size="md" />
+        <ProdPurchaseButton
+          text="바로구매"
+          size="md"
+          style={{ backgroundColor: "#2C307C", color: "#ffffff" }}
         />
       </div>
     </div>

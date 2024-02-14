@@ -7,7 +7,7 @@ export default function SingleBookThumbnail({ img }: SingleBookThumbnailProps) {
     return (
       <div className="details-single-book__horizontal__thumbnail">
         <div className="img-wrap">
-          <img src={img} alt="" />
+          <img src={img} alt="details-single-book" />
         </div>
       </div>
     );

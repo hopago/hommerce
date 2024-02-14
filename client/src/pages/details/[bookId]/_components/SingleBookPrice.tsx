@@ -1,8 +1,6 @@
 import { createProdList } from "../../../../utils/create-prod-list";
 import { calculateDiscount } from "../../../../utils/calculate-price";
 
-import { useState } from "react";
-
 import DefaultPriceInfo from "./DefaultPriceInfo";
 import EBookPriceInfo from "./EBookPriceInfo";
 
