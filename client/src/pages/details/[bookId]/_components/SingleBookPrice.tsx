@@ -1,31 +1,43 @@
+import { createProdList } from "../../../../utils/create-prod-list";
+import { calculateDiscount } from "../../../../utils/calculate-price";
+
+import { useState } from "react";
+
+import DefaultPriceInfo from "./DefaultPriceInfo";
+import EBookPriceInfo from "./EBookPriceInfo";
+
 type SingleBookPriceProps = {
-  info: {
-    price: string;
-    unit: string;
-    discount: string | undefined;
-  };
+  price: string;
+  unit: string;
+  discount: string | undefined;
+
   sellType: SellWay;
 };
 
 export default function SingleBookPrice({
-  info,
+  price,
+  unit,
+  discount,
   sellType,
 }: SingleBookPriceProps) {
-  if (sellType === "종이책") {
-    return (
-      <div className="details-single-book__horizontal__price">
-        종이책
-      </div>
-    )
-  }
+  const prodBadgeList = createProdList([
+    "무료 배송",
+    "소득공제",
+    "이벤트",
+    "오늘의 선택",
+  ]);
 
-  if (sellType === "eBook") {
-    return (
-      <div className="details-single-book__horizontal__price">
-        eBook
-      </div>
-    )
-  }
+  const discountedPrice = discount ? calculateDiscount(price, discount) : price;
 
-  return null;
+  const PriceInfo = sellType === "종이책" ? DefaultPriceInfo : EBookPriceInfo;
+
+  return (
+    <PriceInfo
+      prodBadgeList={prodBadgeList}
+      discountedPrice={discountedPrice}
+      price={price}
+      unit={unit}
+      discount={discount}
+    />
+  );
 }

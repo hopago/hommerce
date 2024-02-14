@@ -18,7 +18,7 @@ export default function SingleBook({ book }: SingleBookProps) {
   적립 포인트 5% - 구매 user에게 부여 
   기본: 종이책 값 or sellType 추가 시 ebookPrice도 추가
   */
- 
+
   const [currSellType, setCurrSellType] = useState<SellWay>("종이책");
 
   return (
@@ -36,16 +36,16 @@ export default function SingleBook({ book }: SingleBookProps) {
       )}
       <div className="details-single-book__horizontal">
         <SingleBookInfo
-          info={{
-            title: book.title,
-            author: book.author,
-            publisher: book.publisher,
-          }}
+          title={book.title}
+          author={book.author}
+          publisher={book.publisher}
         />
-        <SingleBookThumbnail info={{ img: book.img }} />
+        <SingleBookThumbnail img={book.img} />
         <SingleBookPrice
           sellType={currSellType}
-          info={{ price: book.price, unit: book.unit, discount: book.discount }}
+          price={book.price}
+          unit={book.unit}
+          discount={book.discount}
         />
       </div>
     </div>
