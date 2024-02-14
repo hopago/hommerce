@@ -3,6 +3,7 @@ import { AiFillMessage } from "react-icons/ai";
 import ParentCategoryBadge from "./ParentCategoryBadge";
 
 import { AnimatePresence, motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 type SingleBookProps = {
   currentBook: TBook;
@@ -22,14 +23,19 @@ export default function SingleBook({ currentBook }: SingleBookProps) {
         <div className="recommend-books__today-pick__contents__single-book">
           <div className="recommend-books__today-pick__contents__single-book__wrap">
             <div className="recommend-books__today-pick__contents__single-book__wrap__horizontal">
-              <div className="recommend-books__today-pick__contents__single-book__wrap__horizontal__img">
+              <Link
+                to={`/details/${currentBook.id}`}
+                className="recommend-books__today-pick__contents__single-book__wrap__horizontal__img link"
+              >
                 <img src={currentBook.img} alt={currentBook.title} />
-              </div>
+              </Link>
               <div className="recommend-books__today-pick__contents__single-book__wrap__horizontal__info">
                 {currentBook.parentCategory ? (
                   <ParentCategoryBadge text={currentBook.parentCategory} />
                 ) : null}
-                <p className="title">{currentBook.title}</p>
+                <Link to={`/details/${currentBook.id}`} className="link">
+                  <p className="title">{currentBook.title}</p>
+                </Link>
                 <p className="author">{currentBook.author}</p>
                 <div className="recommend-books__today-pick__contents__single-book__wrap__horizontal__info__price-texts">
                   {currentBook.discount ? (

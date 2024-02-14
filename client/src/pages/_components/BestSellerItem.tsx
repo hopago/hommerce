@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import BestFlagBadge from "./utils/BestFlagBadge";
 
 type BestSellerItemProps = {
@@ -11,11 +12,13 @@ export default function BestSellerItem({ book, i }: BestSellerItemProps) {
       <div className="best-prod-wrap">
         <BestFlagBadge i={i} />
       </div>
-      <div className="img-wrap">
+      <Link to={`/details/${book.id}`} className="img-wrap link">
         <img src={book.img} alt={book.title} />
-      </div>
+      </Link>
       <div className="info">
-        <h2>{book.title}</h2>
+        <Link to={`/details/${book.id}`} className="link">
+          <h2>{book.title}</h2>
+        </Link>
         <span>
           {book.author} · {book.category}
         </span>

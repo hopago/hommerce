@@ -2,13 +2,18 @@ import { Link } from "react-router-dom";
 
 import { bookParentCategory } from "../../_components/constants/category";
 import { bookSubCategory } from "../../_components/constants/category";
+import GNBList from "./GNB-List";
+
 import divider from "../../../assets/lang-page-divider.png";
 
 import { MdHome } from "react-icons/md";
 
-import GNBList from "./GNB-List";
+type GNBProps = {
+  parentCategory?: BookParentCategory
+  subCategory?: BookSubCategory
+}
 
-export default function GNB() {
+export default function GNB({ parentCategory, subCategory }: GNBProps) {
   return (
     <div className="kor-gnb">
       <div className="kor-gnb__horizontal">
@@ -18,9 +23,9 @@ export default function GNB() {
           </span>
         </Link>
         <div className="kor-gnb__horizontal__default">
-          <GNBList type="parent" list={bookParentCategory} />
+          <GNBList type="parent" category={parentCategory} list={bookParentCategory} />
           <img src={divider} alt="" />
-          <GNBList type="sub" list={bookSubCategory} />
+          <GNBList type="sub" category={subCategory} list={bookSubCategory} />
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@ type ProdBookItemProps = {
 
 export default function ProdBookItem({ book, i }: ProdBookItemProps) {
   return (
-    <li key={`${book.id}-${book.title}`}>
+    <li>
       <div className="img-wrap">
         <img src={book.img} alt={book.title} />
       </div>

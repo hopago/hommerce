@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import ParentCategoryBadge from "./ParentCategoryBadge";
 
 type NextBookItemProps = {
@@ -7,15 +8,15 @@ type NextBookItemProps = {
 export default function NextBookItem({ book }: NextBookItemProps) {
   return (
     <li>
-      <div className="img-wrap">
+      <Link to={`/details/${book.id}`} className="img-wrap link">
         <img src={book.img} alt={book.title} />
-      </div>
+      </Link>
       {book.parentCategory ? (
         <ParentCategoryBadge text={book.parentCategory} />
       ) : null}
-      <p>
-        {book.title}
-      </p>
+      <Link to={`/details/${book.id}`} className="link">
+        <p>{book.title}</p>
+      </Link>
     </li>
   );
 }

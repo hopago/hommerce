@@ -1,8 +1,8 @@
 type TBook = {
   id: number;
   img: string;
-  parentCategory?: BookParentCategory;
-  category: string;
+  parentCategory: BookParentCategory;
+  category: BookSubCategory;
   title: string;
   author: string;
   discount?: string;

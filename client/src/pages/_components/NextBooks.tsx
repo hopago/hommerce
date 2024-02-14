@@ -12,7 +12,7 @@ export default function NextBooks({ books, currIndex }: NextBooksProps) {
       if (currIndex < index) {
         return book;
       }
-    })
+    }),
   ];
 
   const filteredBooksInfo = [
@@ -28,10 +28,10 @@ export default function NextBooks({ books, currIndex }: NextBooksProps) {
   const slideRef = useRef<HTMLOListElement>(null);
 
   useEffect(() => {
-    if (slideRef.current !== null) {
-      slideRef.current.style.transition = "all 0.3s ease-in-out";
-      slideRef.current.style.transform = `translateX(-${currIndex * 190}px)`;
-    }
+    if (slideRef.current === null) return;
+
+    slideRef.current.style.transition = "all 0.3s ease-in-out";
+    slideRef.current.style.transform = `translateX(-${currIndex * 190}px)`;
   }, [currIndex]);
 
   return (

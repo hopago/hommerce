@@ -19,9 +19,14 @@ type RouteParams = {
 type GNBListProps = {
   list: BookParentCategoryList | BookSubCategoryList;
   type: "parent" | "sub";
+  category: BookParentCategory | BookSubCategory | undefined;
 };
 
-export default function GNBList({ list, type }: GNBListProps) {
+export default function GNBList({
+  list,
+  type,
+  category: propsCategory,
+}: GNBListProps) {
   const olRef = useRef<HTMLOListElement>(null);
 
   const pathname = useParams<RouteParams>();
@@ -55,14 +60,26 @@ export default function GNBList({ list, type }: GNBListProps) {
     >
       {type === "parent" ? (
         <div className="text-wrap">
-          <span>{transformPathname(lang!)}</span>
+          <span>
+            {transformPathname(lang!)
+              ? transformPathname(lang!)
+              : propsCategory
+              ? `${propsCategory}`
+              : "국내도서"}
+          </span>
           <div className="icon-wrap">
             {show ? <MdArrowDropUp /> : <MdArrowDropDown />}
           </div>
         </div>
       ) : (
         <div className="text-wrap">
-          <span>{category ?? "전체"}</span>
+          <span>
+            {category
+              ? `${category}`
+              : propsCategory
+              ? `${propsCategory}`
+              : "전체"}
+          </span>
           <div className="icon-wrap">
             {show ? <MdArrowDropUp /> : <MdArrowDropDown />}
           </div>
