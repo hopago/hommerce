@@ -255,10 +255,6 @@
                             cursor: default;
                             opacity: 0;
 
-                            &.fade-in {
-                                opacity: 1;
-                            }
-
                             &__wrap {
                                 width: 100%;
 
@@ -336,7 +332,38 @@
                             text-align: right;
                         }
 
-                        
+                        .delivery-tooltip {
+                            position: absolute;
+                            top: 38px;
+                            left: -105px;
+                            background-color: #ffffff;
+                            border-radius: 0.5rem;
+                            border: 1px solid rgba(0, 0, 0, 0.18);
+                            color: #000;
+                            width: 374px;
+                            padding: 1rem;
+                            cursor: default;
+                            opacity: 0;
+
+                            &__wrap {
+
+                                .title {
+                                    font-size: 13px;
+                                    line-height: 19px;
+                                    letter-spacing: -0.01em;
+                                    color: #000;
+                                    font-weight: bold;
+                                    text-align: left;
+                                }
+
+                                .desc {
+                                    color: $font-gray;
+                                    font-size: 12px;
+                                    line-height: 18px;
+                                    letter-spacing: -0.01em;
+                                }
+                            }
+                        }
                     }
                 }
             }

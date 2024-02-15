@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 
 import branch from "../assets/ico_branch.png";
 
-export default function PointTooltip({ show }: { show: boolean }) {
+export default function PointTooltip({ show }: { show: "delivery" | "point" }) {
   const tooltipRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -11,7 +11,6 @@ export default function PointTooltip({ show }: { show: boolean }) {
     if (show) {
       tooltipRef.current.style.transition = "all .3s ease";
       setTimeout(() => {
-        tooltipRef.current!.style.opacity = "0";
         tooltipRef.current!.style.opacity = "1";
       }, 1);
     } else {

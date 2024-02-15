@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { ProdMDBadge } from "../../../../_components/ProdBadge";
 import ProdInfoGuide from "./ProdInfoGuide";
 
@@ -16,6 +18,10 @@ export default function DefaultPriceInfo({
   unit,
   price,
 }: DefaultPriceInfoProps) {
+  const [openTooltip, setOpenTooltip] = useState<null | "point" | "delivery">(
+    null
+  );
+
   return (
     <div className="details-single-book__horizontal__price">
       <ul>
@@ -43,11 +49,15 @@ export default function DefaultPriceInfo({
           guideTitle="적립/혜택"
           type="point"
           price={discountedPrice ?? price}
+          openTooltip={openTooltip}
+          setOpenTooltip={setOpenTooltip}
         />
         <ProdInfoGuide
           guideTitle="배송안내"
           type="delivery"
           deliverFee="3600"
+          openTooltip={openTooltip}
+          setOpenTooltip={setOpenTooltip}
         />
       </div>
     </div>

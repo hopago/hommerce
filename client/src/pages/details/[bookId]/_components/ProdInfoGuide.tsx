@@ -3,8 +3,6 @@ import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
 import { calculatePoint } from "../../../../utils/calculate-point";
 import { cn } from "../../../../lib/utils";
 
-import { useState } from "react";
-
 import PointTooltip from "../../../../_components/PointTooltip";
 import DeliveryTooltip from "../../../../_components/DeliveryTooltip";
 
@@ -13,6 +11,10 @@ type ProdInfoGuideProps = {
   type: "point" | "delivery";
   price?: string;
   deliverFee?: DeliveryFee | HommerceFee;
+  openTooltip: "point" | "delivery" | null;
+  setOpenTooltip: React.Dispatch<
+    React.SetStateAction<"point" | "delivery" | null>
+  >;
 };
 
 export default function ProdInfoGuide({
@@ -20,11 +22,15 @@ export default function ProdInfoGuide({
   type,
   price,
   deliverFee,
+  openTooltip,
+  setOpenTooltip,
 }: ProdInfoGuideProps) {
-  const [showToolTip, setShowToolTip] = useState(false);
-
-  const onClick = () => {
-    setShowToolTip((prev) => !prev);
+  const onClick = (type: "point" | "delivery") => {
+    if (openTooltip === type) {
+      setOpenTooltip(null);
+    } else {
+      setOpenTooltip(type);
+    }
   };
 
   if (type === "point") {
@@ -36,12 +42,12 @@ export default function ProdInfoGuide({
         <div className="text-wrap">
           <span className="point-amount">{calculatePoint(price!)}P</span>
           <div
-            className={cn("icon-wrap", showToolTip && "active")}
-            onClick={onClick}
+            className={cn("icon-wrap", openTooltip === type && "active")}
+            onClick={() => onClick(type)}
           >
-            {showToolTip ? <MdArrowDropUp /> : <MdArrowDropDown />}
+            {openTooltip === type ? <MdArrowDropUp /> : <MdArrowDropDown />}
           </div>
-          {showToolTip && <PointTooltip show={showToolTip} />}
+          {openTooltip === "point" ? <PointTooltip show={openTooltip} /> : null}
         </div>
       </div>
     );
@@ -59,12 +65,14 @@ export default function ProdInfoGuide({
             <span className="unit">원</span>
           </span>
           <div
-            className={cn("icon-wrap", showToolTip && "active")}
-            onClick={onClick}
+            className={cn("icon-wrap", openTooltip === type && "active")}
+            onClick={() => onClick(type)}
           >
-            {showToolTip ? <MdArrowDropUp /> : <MdArrowDropDown />}
+            {openTooltip === type ? <MdArrowDropUp /> : <MdArrowDropDown />}
           </div>
-          {showToolTip && <DeliveryTooltip />}
+          {openTooltip === "delivery" ? (
+            <DeliveryTooltip show={openTooltip} setShow={setOpenTooltip} />
+          ) : null}
         </div>
       </div>
     );
