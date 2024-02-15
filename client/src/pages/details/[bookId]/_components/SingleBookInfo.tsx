@@ -11,10 +11,10 @@ export default function SingleBookInfo({
 }: SingleBookInfoProps) {
   return (
     <div className="details-single-book__horizontal__book-info">
-      <span>{title}</span>
+      <span className="title">{title}</span>
       <p>{author}</p>
       <div className="publish">
-        <span>{publisher}</span>&nbsp;·&nbsp;2023년 09월 07일
+        <span>{publisher}</span>&nbsp;·&nbsp;<span>2023년 09월 07일</span>
       </div>
       {/* TODO: REVIEW */}
     </div>

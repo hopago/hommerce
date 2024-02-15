@@ -3,26 +3,19 @@ import { cn } from "../lib/utils";
 type PurchaseButtonText = "장바구니" | "바로구매";
 
 type ProdPurchaseButtonProps = {
-  style?: {
-    color: "#2C307C" | "#ffffff";
-    backgroundColor: "#2C307C" | "#ffffff";
-  };
+  style: "default" | "purple";
   text: PurchaseButtonText;
   size: "md" | "lg";
 };
 
 export default function ProdPurchaseButton({
   text,
-  style = {
-    color: "#2C307C",
-    backgroundColor: "#ffffff",
-  },
+  style,
   size,
 }: ProdPurchaseButtonProps) {
   return (
     <button
-      style={{ ...style }}
-      className={cn("prod-purchase-button", size && size)}
+      className={cn("prod-purchase-button", style && style, size && size)}
     >
       <span>{text}</span>
     </button>

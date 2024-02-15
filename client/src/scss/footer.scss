@@ -145,6 +145,10 @@
             }
         }
     }
+
+    &.details-page {
+        padding-bottom: 71px;
+    }
 }
 
 @include sm {

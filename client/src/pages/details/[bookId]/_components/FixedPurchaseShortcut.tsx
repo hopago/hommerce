@@ -16,22 +16,26 @@ export default function FixedPurchaseShortcut({
 }: FixedPurchaseShortcutProps) {
   const discountedPrice = discount ? calculateDiscount(price, discount) : price;
 
+  // TODO: price should be num & locale string
+
   return (
     <div className="fixed-purchase-shortcut">
       <div className="fixed-purchase-shortcut__wrap">
         <div className="left-area">
           <span className="info-title">총 상품 금액</span>
           <div className="info-price">
-            <span className="price">{discountedPrice}</span>
+            <span className="price">
+              {Number(discountedPrice).toLocaleString()}
+            </span>
             <span className="unit">{unit}</span>
           </div>
         </div>
         <div className="right-area">
           <div className="buttons-wrap">
-            <AmountButton />
+            <AmountButton size="md" />
             <WishButton />
-            <ProdPurchaseButton text="장바구니" size="lg" />
-            <ProdPurchaseButton text="바로구매" size="lg" />
+            <ProdPurchaseButton text="장바구니" size="lg" style="default" />
+            <ProdPurchaseButton text="바로구매" size="lg" style="purple" />
           </div>
         </div>
       </div>

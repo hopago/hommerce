@@ -3,6 +3,8 @@ type SingleBookThumbnailProps = {
 };
 
 export default function SingleBookThumbnail({ img }: SingleBookThumbnailProps) {
+  // TODO: images.length > 1 ? <ImgSlide /> : <Img />
+
   if (typeof img === "string") {
     return (
       <div className="details-single-book__horizontal__thumbnail">

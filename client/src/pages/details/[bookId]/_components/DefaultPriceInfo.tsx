@@ -1,6 +1,4 @@
 import { ProdMDBadge } from "../../../../_components/ProdBadge";
-import ProdPurchaseButton from "../../../../_components/ProdPurchaseButton";
-
 import ProdInfoGuide from "./ProdInfoGuide";
 
 type DefaultPriceInfoProps = {
@@ -29,19 +27,17 @@ export default function DefaultPriceInfo({
       </ul>
       <div className="details-single-book__horizontal__price__prod-info">
         <div className="details-single-book__horizontal__price__prod-info__price-container">
-          <div className="details-single-book__horizontal__price__prod-info__price-conatiner__wrap">
-            {discount && <span className="discount">{discount}</span>}
-            {discountedPrice && (
-              <span className="discounted-price">
-                {discountedPrice}
-                {unit}
-              </span>
-            )}
-            <span className="price">
-              {price}
-              {unit}
+          {discount && <span className="discount">{discount}</span>}
+          {discountedPrice && (
+            <span className="discounted-price">
+              {Number(discountedPrice).toLocaleString()}
+              <span className="unit">{unit}</span>
             </span>
-          </div>
+          )}
+          <span className="price">
+            {Number(price).toLocaleString()}
+            {unit}
+          </span>
         </div>
         <ProdInfoGuide
           guideTitle="적립/혜택"
@@ -52,12 +48,6 @@ export default function DefaultPriceInfo({
           guideTitle="배송안내"
           type="delivery"
           deliverFee="3600"
-        />
-        <ProdPurchaseButton text="장바구니" size="md" />
-        <ProdPurchaseButton
-          text="바로구매"
-          size="md"
-          style={{ backgroundColor: "#2C307C", color: "#ffffff" }}
         />
       </div>
     </div>

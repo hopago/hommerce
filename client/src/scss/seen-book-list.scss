@@ -261,19 +261,24 @@
                                     margin-bottom: 0.5rem;
                                 }
 
-                                .discount {
-                                    margin-right: 0.5rem;
-                                    color: $font-green;
-                                    font-weight: bold;
-                                    vertical-align: top;
-                                    font-size: 13px;
-                                }
+                                .text-wrap {
+                                    display: flex;
+                                    align-items: center;
 
-                                .price,
-                                .unit {
-                                    font-size: 13px;
-                                    line-height: 1.5rem;
-                                    letter-spacing: -.01em;
+                                    .discount {
+                                        margin-right: 0.5rem;
+                                        color: $font-green;
+                                        font-weight: bold;
+                                        vertical-align: top;
+                                        font-size: 13px;
+                                    }
+    
+                                    .price,
+                                    .unit {
+                                        font-size: 13px;
+                                        line-height: 1.5rem;
+                                        letter-spacing: -.01em;
+                                    }
                                 }
                             }
 

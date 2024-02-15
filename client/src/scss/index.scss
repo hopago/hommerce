@@ -71,3 +71,119 @@ h1 {
         font-weight: 900;
     }
 }
+
+.prod-purchase-button {
+    border-radius: 0.25rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s ease;
+
+    &.purple {
+        border: 1px solid transparent;
+        background-color: #5055b1;
+        color: #ffffff;
+
+        &:hover {
+            color: #fff;
+            background: #2c307c;
+            border-color: #2c307c;
+        }
+    }
+
+    &.default {
+        border: 1px solid #5055b1;
+        background-color: #ffffff;
+        color: #5055b1;
+
+        &:hover {
+            background: #efeff8;
+            border-color: #474c98;
+            color: #474c98;
+        }
+    }
+
+    &.lg {
+        padding: 0.75rem 2rem;
+        font-size: 15px;
+        line-height: 24px;
+        letter-spacing: -0.01em;
+    }
+
+    &.md {
+        padding: 0.5rem 1.5rem;
+    }
+}
+
+.amount-btn {
+    border: 1px solid rgba(0,0,0,.18);
+    background-color: transparent;
+    border-radius: 4px;
+    
+    .flex-between {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+
+        .img-wrap {
+            cursor: pointer;
+
+            img {
+                width: 12px;
+                height: 12px;
+            }
+        }
+
+        span {
+            font-size: 14px;
+            line-height: 22px;
+            letter-spacing: -0.01em;
+            margin: 0 4px;
+        }
+    }
+
+    &.sm {
+        padding: 0.5rem;
+    }
+
+    &.md {
+        padding: 0.75rem;
+    }
+}
+
+.wish-btn {
+    padding: 0.5rem;
+    border-radius: 4px;
+    background-color: transparent;
+    border: 1px solid rgba(0,0,0,.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    .img-wrap {
+
+        img {
+            width: 21px;
+            height: 21px;
+        }
+    }
+}
+
+.prod-badge-md {
+    color: #474c98;
+    border: 1px solid #474c98;
+    background: #fff;
+    min-height: 22px;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

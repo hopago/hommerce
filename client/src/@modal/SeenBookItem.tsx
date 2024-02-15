@@ -32,13 +32,15 @@ export default function SeenBookItem({ book }: SeenBookItemProps) {
         ) : null}
         <h1 className="title">{book.title}</h1>
         <p className="author">{book.author}</p>
-        {book.discount ? (
-          <span className="discount">{book.discount}</span>
-        ) : null}
-        <span className="price" style={{ fontWeight: "bold" }}>
-          {book.price}
-        </span>
-        <span className="unit">{book.unit}</span>
+        <div className="text-wrap">
+          {book.discount ? (
+            <span className="discount">{book.discount}</span>
+          ) : null}
+          <span className="price" style={{ fontWeight: "bold" }}>
+            {book.price}
+          </span>
+          <span className="unit">{book.unit}</span>
+        </div>
       </div>
       <div className="seen-book-list__wrap__book-list__wrap__book-item__buttons">
         <button className="close" onClick={handleClose}>

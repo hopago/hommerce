@@ -5,12 +5,15 @@ export const calculatePoint = (price: string) => {
   let totalPoint = defaultPoint;
 
   if (numPrice >= 30000) {
-    const point = numPrice * 0.05;
+    let point = numPrice * 0.04;
+    if (point > 850) {
+      point = 850;
+    }
     totalPoint = totalPoint + point;
   }
 
   if (numPrice >= 50000) {
-    totalPoint = totalPoint + 50000;
+    totalPoint = totalPoint + 2000;
   }
 
   return String(totalPoint);
