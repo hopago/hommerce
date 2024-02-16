@@ -5,24 +5,78 @@ import { detailsBook } from "../../../recoil/books";
 
 import SingleBook from "./_components/SingleBook";
 import FixedPurchaseShortcut from "./_components/FixedPurchaseShortcut";
+import FixedDetailsTabList from "./_components/FixedDetailsTabList";
+import DetailsContents from "./_components/DetailsContents";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+import { useSetRecoilState } from "recoil";
+import { setGNBCategory } from "../../../recoil/use-category";
+import BookReviews from "./_components/BookReviews";
+
+export type DetailsIndexIds = "prod-info" | "prod-review";
 
 export default function DetailsIndex() {
   const [currSellType, setCurrSellType] = useState<SellWay>("종이책");
 
+  const setCategory = useSetRecoilState(setGNBCategory);
+
+  useEffect(() => {
+    setCategory({
+      parentCategory: detailsBook.parentCategory,
+      category: detailsBook.category,
+    });
+  }, [detailsBook]);
+
+  const [isInView, setIsInView] = useState<DetailsIndexIds | null>(null);
+  const prodInfoRef = useRef(null);
+  const reviewRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.intersectionRatio > 0) {
+            console.log(entry.target.id);
+            setIsInView(entry.target.id as DetailsIndexIds);
+          }
+        });
+      },
+      {
+        threshold: 0,
+      }
+    );
+  
+    if (prodInfoRef.current) {
+      observer.observe(prodInfoRef.current);
+    }
+  
+    if (reviewRef.current) {
+      observer.observe(reviewRef.current);
+    }
+  
+    return () => {
+      if (prodInfoRef.current) {
+        observer.unobserve(prodInfoRef.current);
+      }
+      if (reviewRef.current) {
+        observer.unobserve(reviewRef.current);
+      }
+    };
+  }, []);
+
   return (
     <>
       <SearchSection />
-      <GNB
-        parentCategory={detailsBook.parentCategory}
-        subCategory={detailsBook.category}
-      />
+      <FixedDetailsTabList isInView={isInView} />
+      <GNB />
       <SingleBook
         book={detailsBook}
         currSellType={currSellType}
         setCurrSellType={setCurrSellType}
       />
+      <DetailsContents ref={prodInfoRef} />
+      <BookReviews ref={reviewRef} />
       <FixedPurchaseShortcut
         price={
           currSellType === "종이책" ? detailsBook.price : detailsBook.eBookPrice

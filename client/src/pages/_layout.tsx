@@ -14,8 +14,6 @@ export default function GlobalLayout() {
   const show = useRecoilValue(seenModalState);
 
   useEffect(() => {
-    console.log(show);
-
     if (show) {
       document.body.style.overflow = "hidden";
     } else {

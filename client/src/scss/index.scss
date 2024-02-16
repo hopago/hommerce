@@ -173,6 +173,41 @@ h1 {
     }
 }
 
+.show-toggle-btn {
+    border: none;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    padding: 0;
+    cursor: pointer;
+
+    .text {
+        color: $font-gray;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: -0.01em;
+        text-align: left;
+    }
+
+    .icon-wrap {
+        margin-left: 0.25rem;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 1px solid rgba(0,0,0,.18);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &:hover {
+
+        .text {
+            text-decoration: underline;
+        }
+    }
+}
+
 .prod-badge-md {
     color: #474c98;
     border: 1px solid #474c98;

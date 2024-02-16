@@ -16,10 +16,12 @@ export default function SearchSection() {
   const { onSubmit, onChange, searchTerm } = useSearchForm();
 
   const isMedium = useMediaQuery("(max-width:740px)");
+  const DETAILS_VIEW_SCROLL_THRESHOLD = 1146;
+  const FIXED_SEARCH_SCROLL_THRESHOLD = 190;
 
   const [scrollY, setScrollY] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isDetailsPage, _] = useState(Boolean(bookId));
+  const [isDetailsPage] = useState(Boolean(bookId));
 
   useLayoutEffect(() => {
     if (isMedium) return;
@@ -35,19 +37,24 @@ export default function SearchSection() {
     return () => {
       window.removeEventListener("scroll", setCurrScroll);
     };
-  }, [isScrolled, isMedium]);
+  }, [isMedium]);
 
   useLayoutEffect(() => {
-    if (isMedium) {
-      return setIsScrolled(true);
+    if (isDetailsPage) {
+      setIsScrolled(
+        scrollY > FIXED_SEARCH_SCROLL_THRESHOLD &&
+          scrollY <= DETAILS_VIEW_SCROLL_THRESHOLD
+      );
     }
 
-    if (scrollY > 190) {
-      setIsScrolled(true);
-    } else if (scrollY <= 190) {
-      setIsScrolled(false);
+    if (!isDetailsPage) {
+      if (scrollY > FIXED_SEARCH_SCROLL_THRESHOLD) {
+        setIsScrolled(true);
+      } else if (scrollY <= FIXED_SEARCH_SCROLL_THRESHOLD) {
+        setIsScrolled(false);
+      }
     }
-  }, [scrollY, isMedium]);
+  }, [scrollY, isMedium, isDetailsPage]);
 
   return (
     <>
@@ -57,7 +64,7 @@ export default function SearchSection() {
         searchTerm={searchTerm}
         isScrolled={isScrolled}
       />
-      {isScrolled && !isDetailsPage && (
+      {isScrolled && (
         <FixedSearchBar
           onChange={onChange}
           onSubmit={onSubmit}

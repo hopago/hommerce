@@ -11,7 +11,9 @@ export default function AmountButton({ size }: { size: "sm" | "md" }) {
   const setAmountSelector = useSetRecoilState(setAmountState);
 
   const increaseAmount = () => {
-    setAmountSelector(1);
+    if (amount < 10) {
+      setAmountSelector(1);
+    }
   };
 
   const decreaseAmount = () => {

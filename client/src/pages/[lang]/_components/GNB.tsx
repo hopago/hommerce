@@ -8,12 +8,13 @@ import divider from "../../../assets/lang-page-divider.png";
 
 import { MdHome } from "react-icons/md";
 
-type GNBProps = {
-  parentCategory?: BookParentCategory
-  subCategory?: BookSubCategory
-}
+import { useRecoilValue } from "recoil";
+import { gnbCategoryState } from "../../../recoil/use-category";
 
-export default function GNB({ parentCategory, subCategory }: GNBProps) {
+export default function GNB() {
+  const { parentCategory, category: subCategory } =
+    useRecoilValue(gnbCategoryState);
+
   return (
     <div className="kor-gnb">
       <div className="kor-gnb__horizontal">
@@ -23,9 +24,13 @@ export default function GNB({ parentCategory, subCategory }: GNBProps) {
           </span>
         </Link>
         <div className="kor-gnb__horizontal__default">
-          <GNBList type="parent" category={parentCategory} list={bookParentCategory} />
+          <GNBList
+            type="parent"
+            category={parentCategory!}
+            list={bookParentCategory}
+          />
           <img src={divider} alt="" />
-          <GNBList type="sub" category={subCategory} list={bookSubCategory} />
+          <GNBList type="sub" category={subCategory!} list={bookSubCategory} />
         </div>
       </div>
     </div>
