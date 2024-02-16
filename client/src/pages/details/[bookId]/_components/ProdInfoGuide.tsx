@@ -9,7 +9,7 @@ import DeliveryTooltip from "../../../../_components/DeliveryTooltip";
 type ProdInfoGuideProps = {
   guideTitle: "적립/혜택" | "배송안내";
   type: "point" | "delivery";
-  price?: string;
+  price?: number;
   deliverFee?: DeliveryFee | HommerceFee;
   openTooltip: "point" | "delivery" | null;
   setOpenTooltip: React.Dispatch<

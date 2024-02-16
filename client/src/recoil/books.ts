@@ -4,13 +4,14 @@ import { atom, selectorFamily } from "recoil";
 
 const temporaryBook: TBook = {
   id: 1,
-  img: "https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791198356680.jpg",
+  representImg:
+    "https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791198356680.jpg",
   category: "인문",
   parentCategory: "국내도서",
   title: "[뇌건강] 스스로 치유하는 뇌",
   author: "노먼 도이치",
   discount: "17%",
-  price: "19,600",
+  price: 19600,
   unit: "원",
   comment: "뇌의 변화를 통한 놀라운 치유",
   desc: "우리의 뇌는 당신의 생각보다 유연하다",
@@ -26,7 +27,8 @@ export const books: TBooks = [...Array.from({ length: 10 })].map((_, i) => {
 export const temporaryBestSeller: TBookShortcut = {
   id: 1,
   title: "데일 카네기 인간관계론",
-  img: "https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791187142560.jpg",
+  representImg:
+    "https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791187142560.jpg",
   author: "데일 카네기",
   category: "현대지성",
 };
@@ -42,7 +44,8 @@ export const temporaryBestSellers: TBookShortcut[] = [
 export const temporaryRecommendBook: TBookShortcut = {
   id: 1,
   title: "돈의 속성",
-  img: "https://contents.kyobobook.co.kr/sih/fit-in/200x0/pdt/9791188331796.jpg",
+  representImg:
+    "https://contents.kyobobook.co.kr/sih/fit-in/200x0/pdt/9791188331796.jpg",
   author: "김승호",
   category: "경제/경영",
 };
@@ -58,12 +61,13 @@ export const temporaryRecommendBooks: TBookShortcut[] = [
 const temporaryNewBook: TBookOptional = {
   id: 1,
   title: "데일 카네기 인간관계론",
-  img: "https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791187142560.jpg",
+  representImg:
+    "https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791187142560.jpg",
   author: "데일 카네기",
   category: "현대지성",
   publisher: "요즘책방",
   discount: "10%",
-  price: "10,350",
+  price: 10350,
   unit: "원",
 };
 
@@ -77,14 +81,15 @@ export const temporaryNewBooks: TBookOptional[] = [
 
 export const detailsBook: TBook = {
   id: 1,
-  img: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791192300818.jpg",
+  representImg:
+    "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791192300818.jpg",
   parentCategory: "국내도서",
   category: "인문",
   title: "마흔에 읽는 쇼펜하우어",
   author: "강용수",
   discount: "10%",
-  price: "17000",
-  eBookPrice: "12150",
+  price: 17000,
+  eBookPrice: 13500,
   unit: "원",
   publisher: "유노북스",
   sellType: ["종이책", "eBook"],

@@ -27,7 +27,7 @@ export default function SingleBook({ currentBook }: SingleBookProps) {
                 to={`/details/${currentBook.id}`}
                 className="recommend-books__today-pick__contents__single-book__wrap__horizontal__img link"
               >
-                <img src={currentBook.img} alt={currentBook.title} />
+                <img src={currentBook.representImg} alt={currentBook.title} />
               </Link>
               <div className="recommend-books__today-pick__contents__single-book__wrap__horizontal__info">
                 {currentBook.parentCategory ? (
@@ -42,7 +42,7 @@ export default function SingleBook({ currentBook }: SingleBookProps) {
                     <span className="discount">{currentBook.discount}</span>
                   ) : null}
                   <span className="price" style={{ fontWeight: "bold" }}>
-                    {currentBook.price}
+                    {currentBook.price.toLocaleString()}
                   </span>
                   <span className="unit">{currentBook.unit}</span>
                 </div>

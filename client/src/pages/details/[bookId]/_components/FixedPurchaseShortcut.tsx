@@ -4,7 +4,7 @@ import WishButton from "../../../../_components/WishButton";
 import { calculateDiscount } from "../../../../utils/calculate-price";
 
 type FixedPurchaseShortcutProps = {
-  price: string;
+  price: number | undefined;
   unit: string;
   discount: string | undefined;
 };
@@ -14,9 +14,9 @@ export default function FixedPurchaseShortcut({
   unit,
   discount,
 }: FixedPurchaseShortcutProps) {
-  const discountedPrice = discount ? calculateDiscount(price, discount) : price;
-
-  // TODO: price should be num & locale string
+  const discountedPrice = discount
+    ? calculateDiscount(price!, discount)
+    : price;
 
   return (
     <div className="fixed-purchase-shortcut">
@@ -24,9 +24,7 @@ export default function FixedPurchaseShortcut({
         <div className="left-area">
           <span className="info-title">총 상품 금액</span>
           <div className="info-price">
-            <span className="price">
-              {Number(discountedPrice).toLocaleString()}
-            </span>
+            <span className="price">{discountedPrice?.toLocaleString()}</span>
             <span className="unit">{unit}</span>
           </div>
         </div>

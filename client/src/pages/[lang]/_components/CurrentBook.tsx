@@ -17,7 +17,7 @@ export default function book({ book }: { book: TBook }) {
       >
         <div className="lang-page-picks__today__vertical__single-book__horizontal">
           <div className="img-wrap">
-            <img src={book.img} alt={book.title} />
+            <img src={book.representImg} alt={book.title} />
           </div>
           <div className="lang-page-picks__today__vertical__single-book__horizontal__book-info">
             {book.parentCategory ? (
@@ -30,7 +30,7 @@ export default function book({ book }: { book: TBook }) {
                 <span className="discount">{book.discount}</span>
               ) : null}
               <span className="price" style={{ fontWeight: "bold" }}>
-                {book.price}
+                {book.price.toLocaleString()}
               </span>
               <span className="unit">{book.unit}</span>
             </div>

@@ -10,10 +10,10 @@ type PreviewProps = {
 
 export default function Preview({ books, currIndex, setCurrIndex }: PreviewProps) {
   const filteredBooksInfo = books.map((book) => {
-    const { img, id } = book;
+    const { representImg, id } = book;
 
     const filterBookInfo = {
-      img,
+      representImg,
       id,
     };
 
@@ -39,7 +39,7 @@ export default function Preview({ books, currIndex, setCurrIndex }: PreviewProps
       <ul ref={slideRef}>
         {filteredBooksInfo.map((book, i) => (
           <PreviewBook
-            key={`${book.id}-${book.img}`}
+            key={`${book.id}-${book.representImg}`}
             setCurrIndex={setCurrIndex}
             currIndex={currIndex}
             i={i}

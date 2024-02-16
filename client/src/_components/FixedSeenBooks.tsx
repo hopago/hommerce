@@ -9,7 +9,7 @@ export default function FixedSeenBooks() {
   /* Book ID Local 저장 후 가져온 뒤 lest-seen-item img, seen-items length 띄우기 */
 
   const length = seenBooks.length;
-  const lastItemImg = seenBooks[seenBooks.length - 1].img; // TODO: 이미지 배열 형태로 관리, 대표 이미지 [0]
+  const lastItemImg = seenBooks[seenBooks.length - 1].representImg;
 
   const [show, setShow] = useRecoilState(seenModalState);
 

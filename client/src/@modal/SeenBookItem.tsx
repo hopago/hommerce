@@ -24,7 +24,7 @@ export default function SeenBookItem({ book }: SeenBookItemProps) {
   return (
     <li className="seen-book-list__wrap__book-list__wrap__book-item">
       <div className="img-wrap">
-        <img src={book.img} alt={book.title} />
+        <img src={book.representImg} alt={book.title} />
       </div>
       <div className="seen-book-list__wrap__book-list__wrap__book-item__book-info">
         {book.parentCategory ? (
@@ -37,7 +37,7 @@ export default function SeenBookItem({ book }: SeenBookItemProps) {
             <span className="discount">{book.discount}</span>
           ) : null}
           <span className="price" style={{ fontWeight: "bold" }}>
-            {book.price}
+            {book.price.toLocaleString()}
           </span>
           <span className="unit">{book.unit}</span>
         </div>

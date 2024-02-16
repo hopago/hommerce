@@ -1,4 +1,4 @@
-export const calculateDiscount = (price: string, discount: string | undefined) => {
+export const calculateDiscount = (price: number, discount: string | undefined) => {
   if (!discount) return;
 
   const numberPrice = Number(price);
@@ -6,5 +6,5 @@ export const calculateDiscount = (price: string, discount: string | undefined) =
 
   const discountedPrice = numberPrice * (1 - discountRate);
 
-  return String(Math.floor(discountedPrice));
+  return Math.floor(discountedPrice);
 };

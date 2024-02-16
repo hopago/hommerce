@@ -15,7 +15,7 @@ export default function RecommendBookInformationBookItem({
       <Link to={`/details/${book.id}`} className="link">
         <p className="recommend-type">{recommendTypes[i]}</p>
         <div className="img-wrap">
-          <img src={book.img} alt={book.title} />
+          <img src={book.representImg} alt={book.title} />
         </div>
         <div className="book-info">
           <span className="category">{`[${book.category}]`}</span>

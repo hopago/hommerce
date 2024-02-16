@@ -35,9 +35,6 @@ export default function DeliveryTooltip({
       <div className="delivery-tooltip__wrap">
         <div className="heading">
           <h1>배송비 안내</h1>
-          <button onClick={onClick}>
-            <MdClose />
-          </button>
         </div>
         <div className="delivery-tooltip__wrap__body">
           <div className="col-item">
@@ -61,6 +58,9 @@ export default function DeliveryTooltip({
           </div>
         </div>
       </div>
+      <button className="close-btn" onClick={onClick}>
+        <MdClose className="close-btn-icon" />
+      </button>
     </div>
   );
 }

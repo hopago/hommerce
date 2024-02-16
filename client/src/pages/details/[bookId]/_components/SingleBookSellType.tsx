@@ -2,8 +2,8 @@ import { cn } from "../../../../lib/utils";
 
 type SellTypeProps = {
   sellType: SellType;
-  price: string;
-  eBookPrice: string | undefined;
+  price: number;
+  eBookPrice: number | undefined;
   currSellType: SellWay;
   setCurrSellType: React.Dispatch<React.SetStateAction<SellWay>>;
 };
@@ -31,7 +31,10 @@ export default function SingleBookSellType({
             <button>
               <span className="prod-type">{type}</span>
               <span className="prod-price">
-                {type === "종이책" ? price : eBookPrice}
+                {type === "종이책"
+                  ? price.toLocaleString()
+                  : eBookPrice?.toLocaleString()}
+                원
               </span>
             </button>
           </li>

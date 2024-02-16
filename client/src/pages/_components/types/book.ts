@@ -6,14 +6,15 @@ type UnitType = "원";
 
 type TBook = {
   id: number;
-  img: string | string[];
+  images?: string[];
+  representImg: string;
   parentCategory: BookParentCategory;
   category: BookSubCategory;
   title: string;
   author: string;
   discount?: string;
-  price: string;
-  eBookPrice?: string;
+  price: number;
+  eBookPrice?: number;
   unit: UnitType;
   comment?: string;
   desc?: string;
@@ -25,7 +26,7 @@ type TBooks = TBook[];
 
 type TBookShortcut = Pick<
   TBook,
-  "author" | "category" | "img" | "title" | "id"
+  "author" | "category" | "representImg" | "title" | "id"
 >;
 
 type TBookOptional = Partial<TBook>;

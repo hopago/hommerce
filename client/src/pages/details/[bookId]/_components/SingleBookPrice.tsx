@@ -5,11 +5,11 @@ import DefaultPriceInfo from "./DefaultPriceInfo";
 import EBookPriceInfo from "./EBookPriceInfo";
 
 type SingleBookPriceProps = {
-  price: string;
+  price: number;
   unit: string;
   discount: string | undefined;
-
   sellType: SellWay;
+  eBookPrice: number | undefined;
 };
 
 export default function SingleBookPrice({
@@ -17,6 +17,7 @@ export default function SingleBookPrice({
   unit,
   discount,
   sellType,
+  eBookPrice,
 }: SingleBookPriceProps) {
   const prodBadgeList = createProdList([
     "무료 배송",
@@ -34,6 +35,7 @@ export default function SingleBookPrice({
       prodBadgeList={prodBadgeList}
       discountedPrice={discountedPrice}
       price={price}
+      eBookPrice={eBookPrice}
       unit={unit}
       discount={discount}
     />

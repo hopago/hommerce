@@ -5,21 +5,23 @@ import SingleBookThumbnail from "./SingleBookThumbnail";
 import SingleBookSellType from "./SingleBookSellType";
 import SingleBookComment from "./SingleBookComment";
 
-import { useState } from "react";
-
 type SingleBookProps = {
   book: TBook;
+  currSellType: SellWay;
+  setCurrSellType: React.Dispatch<React.SetStateAction<SellWay>>;
 };
 
-export default function SingleBook({ book }: SingleBookProps) {
+export default function SingleBook({
+  book,
+  currSellType,
+  setCurrSellType,
+}: SingleBookProps) {
   /* 
   TODO: 
   책 ID - ref, review 데이터 
   적립 포인트 5% - 구매 user에게 부여 
   기본: 종이책 값 or sellType 추가 시 ebookPrice도 추가
   */
-
-  const [currSellType, setCurrSellType] = useState<SellWay>("종이책");
 
   return (
     <div className="details-single-book">
@@ -40,10 +42,11 @@ export default function SingleBook({ book }: SingleBookProps) {
           author={book.author}
           publisher={book.publisher}
         />
-        <SingleBookThumbnail img={book.img} />
+        <SingleBookThumbnail img={book.representImg} />
         <SingleBookPrice
           sellType={currSellType}
           price={book.price}
+          eBookPrice={book.eBookPrice}
           unit={book.unit}
           discount={book.discount}
         />

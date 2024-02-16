@@ -346,6 +346,20 @@
                             opacity: 0;
 
                             &__wrap {
+                                width: 100%;
+
+                                .heading {
+                                    padding-bottom: 1rem;
+
+                                    h1 {
+                                        text-align: center;
+                                        font-size: 16px;
+                                        line-height: 24px;
+                                        letter-spacing: -0.01em;
+                                        font-weight: bold;
+                                        color: #000;
+                                    }
+                                }
 
                                 .title {
                                     font-size: 13px;
@@ -362,9 +376,119 @@
                                     line-height: 18px;
                                     letter-spacing: -0.01em;
                                 }
+
+                                &__body {
+
+                                    .col-item {
+                                        display: flex;
+                                        flex-direction: column;
+                                        margin-bottom: 0.5rem;
+
+                                        .desc {
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: space-between;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .close-btn {
+                                position: absolute;
+                                top: 8px;
+                                right: 8px;
+                                border: none;
+                                background-color: transparent;
+                                cursor: pointer;
+
+                                .close-btn-icon {
+                                    width: 20px;
+                                    height: 20px;
+                                }
                             }
                         }
                     }
+                }
+            }
+
+            &__box {
+                width: 100%;
+                display: flex;
+                border: 1px solid rgba(0, 0, 0, 0.18);
+                margin-bottom: 1.5rem;
+
+                .info-text {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 50px;
+                    font-size: 13px;
+                    color: #000;
+                    background-color: #f7f7f7;
+                    font-weight: bold;
+                }
+
+                .info-col {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: start;
+                    justify-content: center;
+                    padding: 1rem;
+
+                    i {
+                        font-size: 14px;
+                        font-style: normal;
+                        color: #767676;
+                        text-decoration: line-through;
+                    }
+
+                    p {
+                        font-weight: 600;
+                        font-size: 13px;
+                        color: #000;
+                        letter-spacing: -0.01em;
+                        padding-right: 8px;
+                        margin-bottom: 1rem;
+
+                        strong,
+                        em {
+                            font-weight: 600;
+                            font-size: 21px;
+                            color: #000;
+                            line-height: 30px;
+                            letter-spacing: -0.01em;
+                        }
+
+                         em {
+                            font-weight: 500;
+                         }
+                    }
+
+                    em {
+                        font-size: 13px;
+                        letter-spacing: -0.13px;
+                        font-style: inherit;
+
+                        .gap {
+                            margin: 0px 0.25rem;
+                        }
+                    }
+                }
+            }
+
+            &__info-text {
+                display: flex;
+                width: 100%;
+                text-wrap: balance;
+                background-color: #F5F5FA;
+                border-radius: 0.5rem;
+
+                p {
+                    font-size: 14px;
+                    padding: 1rem;
+                    font-weight: 500;
+                    color: #474c98;
                 }
             }
         }

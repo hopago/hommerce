@@ -7,13 +7,19 @@ import { useLayoutEffect, useState } from "react";
 
 import { useMediaQuery } from "usehooks-ts";
 
+import { useParams } from "react-router-dom";
+
 export default function SearchSection() {
+  const params = useParams();
+  const { bookId } = params;
+
   const { onSubmit, onChange, searchTerm } = useSearchForm();
 
   const isMedium = useMediaQuery("(max-width:740px)");
 
   const [scrollY, setScrollY] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isDetailsPage, _] = useState(Boolean(bookId));
 
   useLayoutEffect(() => {
     if (isMedium) return;
@@ -51,7 +57,7 @@ export default function SearchSection() {
         searchTerm={searchTerm}
         isScrolled={isScrolled}
       />
-      {isScrolled && (
+      {isScrolled && !isDetailsPage && (
         <FixedSearchBar
           onChange={onChange}
           onSubmit={onSubmit}

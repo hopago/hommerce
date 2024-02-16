@@ -6,9 +6,9 @@ import ProdInfoGuide from "./ProdInfoGuide";
 type DefaultPriceInfoProps = {
   prodBadgeList: ProdBadgeText[];
   discount: string | undefined;
-  discountedPrice: string | undefined;
+  discountedPrice: number | undefined;
   unit: string;
-  price: string;
+  price: number;
 };
 
 export default function DefaultPriceInfo({

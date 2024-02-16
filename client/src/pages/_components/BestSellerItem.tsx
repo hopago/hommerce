@@ -13,7 +13,7 @@ export default function BestSellerItem({ book, i }: BestSellerItemProps) {
         <BestFlagBadge i={i} />
       </div>
       <Link to={`/details/${book.id}`} className="img-wrap link">
-        <img src={book.img} alt={book.title} />
+        <img src={book.representImg} alt={book.title} />
       </Link>
       <div className="info">
         <Link to={`/details/${book.id}`} className="link">

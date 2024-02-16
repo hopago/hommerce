@@ -20,7 +20,7 @@ export default function NextBooks({ books, currIndex }: NextBooksProps) {
       id: book.id,
       title: book.title,
       category: book.category,
-      img: book.img,
+      img: book.representImg,
       parentCategory: book.parentCategory,
     })),
   ];
