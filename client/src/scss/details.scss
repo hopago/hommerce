@@ -30,7 +30,7 @@
             li {
                 width: 120px;
                 height: 50px;
-                background-color: rgba(0,0,0,.06);
+                background-color: rgba(0, 0, 0, .06);
                 border-radius: 0.5rem;
 
                 &.active {
@@ -461,9 +461,9 @@
                             letter-spacing: -0.01em;
                         }
 
-                         em {
+                        em {
                             font-weight: 500;
-                         }
+                        }
                     }
 
                     em {
@@ -508,7 +508,7 @@
         display: flex;
 
         &__inner {
-            flex: 1;
+            flex: 3;
 
             &__tab-list {
                 display: flex;
@@ -569,9 +569,14 @@
                         p {
                             font-size: 15px;
                             line-height: 23px;
-                            letter-spacing: -0.01em;  
-                            font-weight: bold;                          
+                            letter-spacing: -0.01em;
+                            font-weight: bold;
                         }
+                    }
+
+                    hr {
+                        border: 1px solid rgba(0, 0, 0, .06);
+                        margin: 1rem 0px;
                     }
 
                     .intro_sub-text {
@@ -582,8 +587,7 @@
                         &.category {
                             display: flex;
                             align-items: center;
-                            margin-bottom: 0.5rem;
-                            
+
                             .divider {
                                 margin: 0.25rem;
                             }
@@ -591,9 +595,7 @@
 
                         &.awards {
 
-                            p {
-                                margin-bottom: 1.5rem;
-                            }
+                            p {}
                         }
 
                         &.info {
@@ -606,6 +608,106 @@
 
         &__recommend-books {
             flex: 1;
+            margin-left: 3rem;
+
+            &__heading {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding-bottom: 1.5rem;
+
+                h1 {
+                    font-size: 20px;
+                    line-height: 30px;
+                    letter-spacing: -0.01em;
+                    font-weight: bold;
+                }
+
+                button {
+                    border: none;
+                    background-color: transparent;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    color: $font-gray;
+
+                    span {
+                        font-size: 13px;
+                        line-height: 19px;
+                        letter-spacing: -0.01em;
+                        font-weight: 500;
+                        text-align: left;
+                    }
+
+                    .icon-wrap {
+                        margin: 0;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 19px;
+                    }
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            &__this-best {
+                width: 100%;
+
+                ul {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+
+                    li {
+                        display: flex;
+                        gap: 1rem;
+
+                        .img-wrap {
+                            flex: 1;
+
+                            img {
+                                width: 100%;
+                                object-fit: contain;
+                                cursor: pointer;
+                            }
+                        }
+
+                        .book-info {
+                            flex: 2;
+
+                            .best-flag-badge {
+                                width: 20px;
+                                height: 20px;
+                            }
+
+                            h3 {
+                                display: block;
+                                display: -webkit-box;
+                                overflow: hidden;
+                                max-height: 46px;
+                                line-height: 23px;
+                                -webkit-box-orient: vertical;
+                                -webkit-line-clamp: 2;
+                                white-space: normal;
+                                word-break: break-all;
+                                font-size: 15px;
+                                line-height: 23px;
+                                letter-spacing: -0.01em;
+                                font-weight: bold;
+                                margin: 0;
+                                cursor: pointer;
+
+                                &:hover {
+                                    text-decoration: underline;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -618,7 +720,7 @@
     width: 100%;
     display: flex;
     align-items: center;
-    border-top: 1px solid rgba(0,0,0,.24);
+    border-top: 1px solid rgba(0, 0, 0, .24);
     background-color: #ffffff;
 
     &__wrap {
@@ -662,7 +764,7 @@
 
         .right-area {
             flex: 1;
-            
+
             .buttons-wrap {
                 width: max-content;
                 margin-left: auto;
@@ -680,7 +782,7 @@
     z-index: 99999;
     width: 100%;
     height: 70px;
-    border-bottom: 1px solid rgba(0,0,0,.24);
+    border-bottom: 1px solid rgba(0, 0, 0, .24);
     background-color: #ffffff;
 
     ul {

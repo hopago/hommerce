@@ -26,7 +26,7 @@ type TBooks = TBook[];
 
 type TBookShortcut = Pick<
   TBook,
-  "author" | "category" | "representImg" | "title" | "id"
+  "author" | "category" | "representImg" | "title" | "id" | "price" | "discount"
 >;
 
 type TBookOptional = Partial<TBook>;

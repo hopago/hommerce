@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import Author from "./Author";
 
 type AuthorsProps = {
-  authors: AuthorsInfo;
+  authors: AuthorInfoShortcut[];
   currIndex: number;
 };
 
@@ -21,7 +21,7 @@ export default function Authors({ authors, currIndex }: AuthorsProps) {
       <div className="author__wrapper__items__container">
         <ul ref={slideRef}>
           {authors.map((author) => (
-            <Author key={author.authorName} author={author} />
+            <Author key={author.name} author={author} />
           ))}
         </ul>
       </div>

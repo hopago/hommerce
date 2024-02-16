@@ -7,12 +7,13 @@ import SingleBook from "./_components/SingleBook";
 import FixedPurchaseShortcut from "./_components/FixedPurchaseShortcut";
 import FixedDetailsTabList from "./_components/FixedDetailsTabList";
 import DetailsContents from "./_components/DetailsContents";
+import BookReviews from "./_components/BookReviews";
+import AuthorInfo from "./_components/AuthorInfo";
 
 import { useEffect, useRef, useState } from "react";
 
 import { useSetRecoilState } from "recoil";
 import { setGNBCategory } from "../../../recoil/use-category";
-import BookReviews from "./_components/BookReviews";
 
 export type DetailsIndexIds = "prod-info" | "prod-review";
 
@@ -46,15 +47,15 @@ export default function DetailsIndex() {
         threshold: 0,
       }
     );
-  
+
     if (prodInfoRef.current) {
       observer.observe(prodInfoRef.current);
     }
-  
+
     if (reviewRef.current) {
       observer.observe(reviewRef.current);
     }
-  
+
     return () => {
       if (prodInfoRef.current) {
         observer.unobserve(prodInfoRef.current);
@@ -76,6 +77,7 @@ export default function DetailsIndex() {
         setCurrSellType={setCurrSellType}
       />
       <DetailsContents ref={prodInfoRef} />
+      <AuthorInfo author={detailsBook.author} />
       <BookReviews ref={reviewRef} />
       <FixedPurchaseShortcut
         price={

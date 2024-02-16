@@ -23,6 +23,7 @@ export default function BookIntro({ intro, awards }: BookIntroProps) {
           <span className="divider">&#62;</span>
           <span>{subCategory}</span>
         </div>
+        <hr />
         <div className="title-wrap">
           <p>수상내역</p>
         </div>
@@ -31,6 +32,7 @@ export default function BookIntro({ intro, awards }: BookIntroProps) {
             <p key={award}>{award}</p>
           ))}
         </div>
+        <hr />
         <div className="intro_sub-text info">{intro}</div>
       </div>
     </div>

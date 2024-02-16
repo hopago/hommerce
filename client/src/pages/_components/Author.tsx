@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 type AuthorProps = {
-  author: AuthorInfo;
+  author: AuthorInfoShortcut;
 };
 
 export default function Author({ author }: AuthorProps) {
@@ -15,7 +15,7 @@ export default function Author({ author }: AuthorProps) {
         <div className="info">
           <div className="text-wrap">
             <span>{author.representBook}</span>
-            <p>{author.authorName}</p>
+            <p>{author.name}</p>
           </div>
         </div>
       </Link>

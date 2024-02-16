@@ -31,6 +31,7 @@ export const temporaryBestSeller: TBookShortcut = {
     "https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791187142560.jpg",
   author: "데일 카네기",
   category: "현대지성",
+  price: 10350,
 };
 
 export const temporaryBestSellers: TBookShortcut[] = [
@@ -48,6 +49,7 @@ export const temporaryRecommendBook: TBookShortcut = {
     "https://contents.kyobobook.co.kr/sih/fit-in/200x0/pdt/9791188331796.jpg",
   author: "김승호",
   category: "경제/경영",
+  price: 19600,
 };
 
 export const temporaryRecommendBooks: TBookShortcut[] = [
