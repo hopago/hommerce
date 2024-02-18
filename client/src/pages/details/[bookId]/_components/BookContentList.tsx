@@ -18,7 +18,7 @@ export default function BookContentList({
           className="intro_sub-text"
           style={{ fontSize: "14px", lineHeight: "1.4" }}
         >
-          {!show ? preview : contentList}
+          {!show ? preview + "..." : contentList}
         </div>
         <div className="divider" style={{ marginBottom: "16px" }} />
         <ShowDataToggle show={show} setShow={setShow} />

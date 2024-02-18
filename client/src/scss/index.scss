@@ -208,6 +208,26 @@ h1 {
     }
 }
 
+.tag-btn {
+    background-color: #fff;
+    border: 1px solid #fff;
+    display: inline-block;
+    font-size: 13px;
+    line-height: 19px;
+    letter-spacing: -0.01em;
+    color: #595959;
+    padding: 7px 16px 8px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: all .15s ease;
+
+    &:hover {
+        background-color: #f7f7f7;
+        border: 1px solid #f7f7f7;
+    }
+}
+
 .prod-badge-md {
     color: #474c98;
     border: 1px solid #474c98;

@@ -38,7 +38,6 @@ export default function DetailsIndex() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.intersectionRatio > 0) {
-            console.log(entry.target.id);
             setIsInView(entry.target.id as DetailsIndexIds);
           }
         });
@@ -77,7 +76,7 @@ export default function DetailsIndex() {
         setCurrSellType={setCurrSellType}
       />
       <DetailsContents ref={prodInfoRef} />
-      <AuthorInfo author={detailsBook.author} />
+      <AuthorInfo authorName={detailsBook.author} />
       <BookReviews ref={reviewRef} />
       <FixedPurchaseShortcut
         price={

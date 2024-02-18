@@ -18,7 +18,7 @@ export default function ThisCategoryBestItem({
         <BestFlagBadge i={i} />
         <h3>{book.title}</h3>
         <div className="publish">
-          <span>{book.author}&nbsp;·&nbsp;</span>
+          <span>{book.author}</span>
         </div>
         <span className="price" style={{ fontWeight: "bold" }}>
           {book.price?.toLocaleString()}
