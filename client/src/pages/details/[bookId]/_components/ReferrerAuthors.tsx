@@ -1,12 +1,13 @@
+import { MdArrowRight } from "react-icons/md";
+
+import { authorsInfo } from "../../../_components/constants/author";
+import RefAuthor from "./RefAuthor";
+
+import { useNavigate } from "react-router-dom";
+
 type ReferrerAuthorsProps = {
   authorJob: AuthorType;
 };
-
-import { MdArrowRight } from "react-icons/md";
-import { authorsInfo } from "../../../_components/constants/author";
-
-import RefAuthor from "./RefAuthor";
-import { useNavigate } from "react-router-dom";
 
 export default function ReferrerAuthors({ authorJob }: ReferrerAuthorsProps) {
   // TODO: findAuthorsByAuthorJob

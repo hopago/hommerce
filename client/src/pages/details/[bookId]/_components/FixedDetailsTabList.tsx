@@ -47,7 +47,7 @@ export default function FixedDetailsTabList({
       linkedId: "prod-review",
     },
     {
-      innerText: "홈페이지",
+      innerText: "홈페이지로 이동",
       action: () => navigate("/"),
       linkedId: null,
     },
