@@ -785,7 +785,7 @@
                         }
 
                         &:hover {
-                            background-color: rgba(0,0,0,.02);
+                            background-color: rgba(0, 0, 0, .02);
                         }
                     }
                 }
@@ -843,7 +843,7 @@
         &__ref-authors {
             flex: 1;
             margin-left: 3rem;
-            
+
             &__col {
                 display: flex;
                 flex-direction: column;
@@ -853,14 +853,14 @@
                     align-items: center;
                     justify-content: space-between;
                     padding-bottom: 1.5rem;
-    
+
                     h1 {
                         font-size: 20px;
                         line-height: 30px;
                         letter-spacing: -0.01em;
                         font-weight: bold;
                     }
-    
+
                     button {
                         border: none;
                         background-color: transparent;
@@ -868,7 +868,7 @@
                         display: flex;
                         align-items: center;
                         color: $font-gray;
-    
+
                         span {
                             font-size: 13px;
                             line-height: 19px;
@@ -876,7 +876,7 @@
                             font-weight: 500;
                             text-align: left;
                         }
-    
+
                         .icon-wrap {
                             margin: 0;
                             display: flex;
@@ -884,7 +884,7 @@
                             justify-content: center;
                             font-size: 19px;
                         }
-    
+
                         &:hover {
                             text-decoration: underline;
                         }
@@ -909,9 +909,9 @@
                         .link {
                             display: flex;
                             gap: .5rem;
-    
+
                             .img-wrap {
-    
+
                                 img {
                                     width: 84px;
                                     height: 84px;
@@ -919,25 +919,308 @@
                                     object-fit: cover;
                                 }
                             }
-    
+
                             .info-col {
                                 flex: 1;
-    
+
                                 span,
                                 p {
                                     line-height: 23px;
                                     letter-spacing: -0.01em;
                                 }
-    
+
                                 span {
                                     font-size: 15px;
                                     font-weight: 700;
                                 }
-    
+
                                 p {
                                     font-size: 13px;
                                     color: $font-gray;
                                     font-weight: 500;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.details-prod-reviews {
+    padding: 3rem 0px;
+    border-top: 1px solid rgba(0, 0, 0, 0.18);
+    width: 100%;
+
+    &__wrap {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+
+        &__heading {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+
+            .title-wrap {
+                display: flex;
+                align-items: center;
+                position: relative;
+
+                h1 {
+                    font-size: 20px;
+                    line-height: 30px;
+                    letter-spacing: -0.01em;
+                }
+
+                .icon-wrap {
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    margin: 0;
+                    margin-left: 0.5rem;
+                    padding-top: 0.25rem;
+
+                    .icon {
+                        font-size: 24px;
+                        color: rgba(0, 0, 0, .51);
+                    }
+                }
+            }
+
+            button {
+                padding: 0.5rem 1rem;
+
+                img {
+                    width: 13px;
+                    height: 19px;
+                }
+
+                span {
+                    font-size: 13px;
+                    line-height: 19px;
+                    letter-spacing: -0.01em;
+                }
+            }
+        }
+
+        &__reviews-total {
+            width: 100%;
+
+            &__inner {
+                display: flex;
+                padding: 1rem 0.5rem;
+                border: 1px solid rgba(0, 0, 0, .18);
+                border-radius: 0.5rem;
+                background-color: rgba(0, 0, 0, .03);
+
+                .review-box {
+                    flex: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+
+                    &.total-rating {
+                        border-right: 1px solid rgba(0, 0, 0, .12);
+                    }
+
+                    .score-icon,
+                    .score-half-icon,
+                    .score-outline-icon {
+                        color: $font-green;
+                        font-size: 21px;
+                    }
+
+                    &__user-score {
+                        display: flex;
+                        align-items: center;
+                        flex-direction: column;
+
+                        &__title {
+                            margin-bottom: 0.25rem;
+                            font-size: 15px;
+                            line-height: 23px;
+                            letter-spacing: -0.01em;
+                            font-weight: bold;
+                        }
+
+                        .user-score__total {
+                            margin-top: 0.25rem;
+                            margin-bottom: 1.25rem;
+                            display: flex;
+                            align-items: center;
+                            gap: 0.25rem;
+
+                            .score-icons {
+                                display: flex;
+                                align-items: center;
+                            }
+
+                            .score-texts {
+
+                                span {
+                                    color: $font-gray;
+                                    line-height: 1;
+                                    letter-spacing: -.01em;
+
+                                    strong {
+                                        color: $font-green;
+                                        font-size: 20px;
+                                        line-height: 1;
+                                        letter-spacing: -.01em;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    &__score-bar {
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        &__vertical {
+                            width: 50%;
+
+                            &__item {
+                                width: 100%;
+                                display: flex;
+                                align-items: center;
+                                gap: 0.25rem;
+                                margin-bottom: .5rem;
+
+                                .icons {
+                                    display: flex;
+                                    align-items: center;
+
+                                    .score-icon,
+                                    .score-half-icon,
+                                    .score-outline-icon {
+                                        font-size: 18px;
+                                    }
+                                }
+
+                                .fill-bar {
+                                    flex: 1;
+                                    height: 4px;
+                                    position: relative;
+
+                                    .bg {
+                                        width: 100%;
+                                        height: 100%;
+                                        background-color: rgba(0, 0, 0, .12);
+                                    }
+
+                                    .fill {
+                                        position: absolute;
+                                        top: 0;
+                                        left: 0;
+                                        height: 100%;
+                                        z-index: 999;
+                                        background: $font-green;
+                                    }
+                                }
+
+                                .text {
+                                    width: 27px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: flex-end;
+
+                                    span {
+                                        font-size: 13px;
+                                        line-height: 19px;
+                                        letter-spacing: -0.01em;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    &__review-keywords {
+                        text-align: center;
+                        font-size: 16px;
+                        line-height: 24px;
+                        letter-spacing: -0.01em;
+                        margin-bottom: 1.5rem;
+
+                        span {
+                            color: $font-light-gray;
+                            font-weight: 500;
+
+                            strong {
+                                color: $font-purple;
+                            }
+                        }
+                    }
+
+                    &__review-keywords-bar {
+                        width: 100%;
+                        height: 100%;
+
+                        &__keyword-list {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            height: 100%;
+
+                            .keyword-item {
+                                margin-left: 1rem;
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                height: 100%;
+                                gap: 0.5rem;
+
+                                &__pert {
+                                    padding-top: 0;
+                                    background-color: rgba(80, 85, 177, 0.8);
+                                    color: #fff;
+                                    font-weight: 500;
+                                    height: 19px;
+                                    padding: 0 7px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    border-radius: 0.25rem;
+
+                                    span {
+                                        font-size: 13px;
+                                        line-height: 19px;
+                                        letter-spacing: -0.01em;
+                                    }
+                                }
+
+                                &__score-bar {
+                                    flex: 1;
+                                    width: 6px;
+                                    position: relative;
+
+                                    .bg {
+                                        height: 100%;
+                                        background-color: rgba(0, 0, 0, .18);
+                                        width: 100%;
+                                    }
+
+                                    .fill {
+                                        position: absolute;
+                                        bottom: 0;
+                                        left: 0;
+                                        z-index: 999;
+                                        width: 100%;
+                                        background-color: #7175BF;
+                                    }
+                                }
+
+                                &__keyword {
+                                    font-size: 12px;
+                                    line-height: 18px;
+                                    letter-spacing: -0.01em;
                                 }
                             }
                         }

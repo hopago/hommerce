@@ -1,11 +1,16 @@
 import { useEffect } from "react";
 
+import { generateKey } from "../../../../utils/generate-key";
+
+import { reviewsTotalRating } from "../../../_components/constants/reviews-rating";
+import { ReviewRatingType } from "../../../_components/types/review";
+
+import TotalRating from "./TotalRating";
+import ScoreBar from "./ScoreBar";
+
 type ReviewsTotalRatingProps = {
   bookId: string;
 };
-
-import { reviewsTotalRating } from "../../../_components/constants/reviews-rating";
-import TotalRating from "./TotalRating";
 
 export default function ReviewsTotalRating({
   bookId,
@@ -14,22 +19,24 @@ export default function ReviewsTotalRating({
     // TODO: findReviewsTotalRatingByBookId
   }, [bookId]);
 
-  const keys = Object.keys(reviewsTotalRating.ratingEachPert);
-  const values = Object.values(reviewsTotalRating.ratingEachPert);
-
-  const reviewsTotalRatingList = keys.map((key, index) => ({
-    keyword: key,
-    pert: values[index],
-  }));
+  const scoreReverse: ReviewRatingType[] = ["5", "4", "3", "2", "1"];
 
   return (
     <div className="review-box total-rating">
-      <div className="user-score">
-        <span>사용자 총점</span>
+      <div className="review-box__user-score">
+        <span className="review-box__user-score__title">사용자 총점</span>
         <TotalRating rating={reviewsTotalRating.totalAvgRating} />
       </div>
-      <div className="score-bar score-4">
-        <img src="" alt="score-4" />
+      <div className="review-box__score-bar score-4">
+        <div className="review-box__score-bar__vertical">
+          {scoreReverse.map((score) => (
+            <ScoreBar
+              key={generateKey(score)}
+              reviewsTotalRating={reviewsTotalRating}
+              score={score}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -3,9 +3,10 @@ import { ReviewsKeywords, ReviewsTotalRating } from "../types/review-total";
 export const reviewsTotalRating: ReviewsTotalRating = {
   id: "1",
   bookId: "1",
-  totalAvgRating: 9.5,
+  totalAvgRating: 3.87,
   ratingEachPert: {
-    "4": 85,
+    "5": 12,
+    "4": 73,
     "3": 9,
     "2": 3,
     "1": 2,

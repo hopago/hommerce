@@ -39,12 +39,11 @@ export default function CommonTooltip({
   }, [show]);
 
   return (
-    <div
-      className="common-tooltip"
-      ref={tooltipRef}
-      style={{ position: "absolute", top: "50%", left: "0" }}
-    >
+    <div className="common-tooltip" ref={tooltipRef}>
       <div className="common-tooltip__wrap">
+        <button className="close-btn" onClick={onClick}>
+          <MdClose className="close-btn-icon" />
+        </button>
         <div className="heading">
           <h1>배송비 안내</h1>
         </div>
@@ -59,9 +58,6 @@ export default function CommonTooltip({
           ))}
         </div>
       </div>
-      <button className="close-btn" onClick={onClick}>
-        <MdClose className="close-btn-icon" />
-      </button>
     </div>
   );
 }

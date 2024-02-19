@@ -48,15 +48,13 @@ const BookReviews = forwardRef<HTMLDivElement, Props>((_, ref) => {
 
   return (
     <div id="prod-review" ref={ref} className="details-prod-reviews">
-      <div className="details-prod-reviews__heading">
-        <div className="title-wrap">
-          <h1>리뷰 ({length})</h1>
-          <div
-            className="icon-wrap"
-            style={{ position: "relative" }}
-            onClick={handleTooltip}
-          >
-            <MdInfoOutline className="icon" />
+      <div className="details-prod-reviews__wrap">
+        <div className="details-prod-reviews__wrap__heading">
+          <div className="title-wrap" style={{ position: "relative" }}>
+            <h1>리뷰({length})</h1>
+            <div className="icon-wrap" onClick={handleTooltip}>
+              <MdInfoOutline className="icon" />
+            </div>
             {show && (
               <CommonTooltip
                 items={tooltipItems}
@@ -65,18 +63,25 @@ const BookReviews = forwardRef<HTMLDivElement, Props>((_, ref) => {
               />
             )}
           </div>
+          {isBuyer && (
+            <button
+              onClick={handlePostReview}
+              className="prod-purchase-button sm purple"
+            >
+              <img
+                src={pencil}
+                style={{ marginRight: "4px" }}
+                alt="write-review-icon"
+              />
+              <span>리뷰 작성</span>
+            </button>
+          )}
         </div>
-        {isBuyer && (
-          <button onClick={handlePostReview}>
-            <img src={pencil} alt="write-review-icon" />
-            <span>리뷰 작성</span>
-          </button>
-        )}
-      </div>
-      <div className="details-prod-reviews__reviews-total">
-        <div className="details-prod-reviews__reviews-total__inner">
-          <ReviewsTotalRating bookId={bookId!} />
-          <ReviewsKeywords bookId={bookId!} />
+        <div className="details-prod-reviews__wrap__reviews-total">
+          <div className="details-prod-reviews__wrap__reviews-total__inner">
+            <ReviewsTotalRating bookId={bookId!} />
+            <ReviewsKeywords bookId={bookId!} />
+          </div>
         </div>
       </div>
     </div>
