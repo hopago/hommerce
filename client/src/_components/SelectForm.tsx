@@ -4,16 +4,22 @@ import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
 
 import SelectItems from "./SelectItems";
 
+import { ReviewSortOptions } from "../recoil/review-select";
+
 type SelectFromProps = {
   direction: "top" | "bottom";
   text: string;
   items: string[];
+  className?: string;
+  onReviewSortOptionClick?: (text: ReviewSortOptions) => void;
 };
 
 export default function SelectForm({
   direction,
   text,
   items,
+  className,
+  onReviewSortOptionClick,
 }: SelectFromProps) {
   const selectRef = useRef<HTMLButtonElement>(null);
   const selectListRef = useRef<HTMLDivElement>(null);
@@ -44,13 +50,24 @@ export default function SelectForm({
   }, [show]);
 
   return (
-    <button className="select-form" ref={selectRef} onClick={handleClick}>
+    <button
+      className="select-form"
+      ref={selectRef}
+      onClick={handleClick}
+    >
       <div className="text">
         <span>{text}</span>
         {direction === "top" ? <MdArrowDropUp /> : <MdArrowDropDown />}
       </div>
       {show ? (
-        <SelectItems ref={selectListRef} items={items} direction={direction} />
+        <SelectItems
+          ref={selectListRef}
+          items={items}
+          direction={direction}
+          className={className}
+          setShow={setShow}
+          onReviewSortOptionClick={onReviewSortOptionClick}
+        />
       ) : null}
     </button>
   );

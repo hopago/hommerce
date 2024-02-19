@@ -12,6 +12,7 @@ import ReviewsKeywords from "./ReviewsKeywords";
 
 import { MdInfoOutline } from "react-icons/md";
 import pencil from "../../../../assets/ico_pencil.png";
+import ReviewsDetails from "./ReviewsDetails";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {}
 
@@ -83,6 +84,7 @@ const BookReviews = forwardRef<HTMLDivElement, Props>((_, ref) => {
             <ReviewsKeywords bookId={bookId!} />
           </div>
         </div>
+        <ReviewsDetails />
       </div>
     </div>
   );
