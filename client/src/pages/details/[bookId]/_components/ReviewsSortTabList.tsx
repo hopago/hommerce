@@ -37,7 +37,11 @@ export default function ReviewsSortTabList() {
     <div className="reviews-sort-tab-list">
       <div className="tab-list-buttons">
         {tabList.map((list) => (
-          <button onClick={() => list.onClick(list.text)}>
+          <button
+            type="button"
+            key={list.text}
+            onClick={() => list.onClick(list.text)}
+          >
             <span>{list.text}</span>
           </button>
         ))}

@@ -1,8 +1,13 @@
 export type ReviewRatingType = "1" | "2" | "3" | "4" | "5";
 
-export type ReviewKeywords = "쉬웠어요" | "집중돼요" | "도움돼요" | "최고에요" | "추천해요";
+export type ReviewKeywords =
+  | "쉬웠어요"
+  | "집중돼요"
+  | "도움돼요"
+  | "최고에요"
+  | "추천해요";
 
-type TReview = {
+export type TReview = {
   id: string;
   buyWay: SellWay;
   bookId: string;
@@ -13,11 +18,12 @@ type TReview = {
   desc: string;
   createdAt: Date | string;
   updatedAt: Date | string | null;
+  liked: number;
 };
 
-type TReviews = TReview[];
+export type TReviews = TReview[];
 
-type TReviewReply = {
+export type TReviewReply = {
   id: string;
   userId: string;
   reviewId: string;
