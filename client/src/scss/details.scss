@@ -1283,7 +1283,8 @@
             }
 
             .reviews-list {
-                
+                scroll-behavior: smooth;
+
                 ul {
                     padding: 1rem 0.5rem;
 
@@ -1312,7 +1313,7 @@
                                     &.report {
                                         cursor: pointer;
 
-                                        &:hover{
+                                        &:hover {
                                             text-decoration: underline;
                                         }
                                     }
@@ -1385,7 +1386,7 @@
                                 font-size: 13px;
                                 line-height: 19px;
                                 letter-spacing: -0.01em;
-                                color: rgba(0,0,0,.72);
+                                color: rgba(0, 0, 0, .72);
                             }
 
                             .like-section {
@@ -1436,7 +1437,7 @@
                                         font-size: 14px;
                                         line-height: 22px;
                                         letter-spacing: -0.01em;
-                                        vertical-align: top; 
+                                        vertical-align: top;
                                         font-weight: bold;
                                     }
 
@@ -1462,7 +1463,7 @@
 
                                 &__reply-info {
                                     display: flex;
-                                    align-items: center;                                   
+                                    align-items: center;
 
                                     .icon-wrap {
                                         width: 8px;
@@ -1503,7 +1504,75 @@
                             }
                         }
                     }
-                }          
+                }
+            }
+
+            .reviews-pagination {
+                width: 100%;
+                max-width: max-content;
+                margin: 0 auto;
+                display: flex;
+                align-items: center;
+
+                &__arrow-btn {
+                    background-color: transparent;
+                    border: 1px solid rgba(0, 0, 0, .24);
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    padding: 0.25rem;
+
+                    &.disabled {
+                        cursor: default;
+                    }
+
+                    .icon {
+                        font-size: 19px;
+                    }
+
+                    &.left {
+                        margin-right: 0.5rem;
+                    }
+
+                    &.right {
+                        margin-left: 0.5rem;
+                    }
+                }
+
+                &__page-num {
+                    border: none;
+                    background-color: transparent;
+                    font-size: 13px;
+                    line-height: 1;
+                    letter-spacing: -0.01em;
+                    color: #767676;
+                    border-radius: 12px;
+                    width: max-content;
+                    height: 24px;
+                    cursor: pointer;
+
+                    &.gap {
+                        margin-right: 0.25rem;
+                    }
+
+                    &.active {
+                        font-weight: bold;
+                        background-color: #767676;
+                        color: #fff;
+                    }
+                }
+
+                .text-ellipsis {
+                    display: inline-block;
+                    text-align: center;
+                    vertical-align: top;
+                    box-sizing: border-box;
+                    width: 10px;
+                    height: 2px;
+                    margin: -3px 8px;
+                }
             }
         }
     }

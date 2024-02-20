@@ -7,7 +7,7 @@ import PaginateControl from "./PaginateControl";
 import ReviewList from "./ReviewList";
 import ReviewsSortTabList from "./ReviewsSortTabList";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import { reviews, reviews2 } from "../../../_components/constants/review";
 import { TReviews } from "../../../_components/types/review";
@@ -16,10 +16,21 @@ export default function ReviewsDetails() {
   const currTab = useRecoilValue(reviewTabState);
   const currSort = useRecoilValue(reviewSortOptionsState);
   const currPage = useRecoilValue(currentPageState);
+
   /* temporary data */
   const temporaryReviews: TReviews = [...reviews, ...reviews2];
   const pageTotal = 23; // TODO: getPageTotal(reviewsLength);
 
+  /* paginate-scroll-behavior */
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [currPage]);
+
+  /* API */
   useEffect(() => {
     // TODO: service-logic && default paginate, 기본 페이징 로직을 수행
     // TODO: currTab && getReviewsByTabList, 현재 선택된 탭에 따라 리뷰 데이터를 필터링
@@ -34,7 +45,7 @@ export default function ReviewsDetails() {
   return (
     <div className="details-prod-reviews__wrap__reviews-details">
       <ReviewsSortTabList />
-      <ReviewList reviews={temporaryReviews} />
+      <ReviewList ref={scrollRef} reviews={temporaryReviews} />
       {pageTotal > 1 && <PaginateControl pageTotal={pageTotal} />}
     </div>
   );

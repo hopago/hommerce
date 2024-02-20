@@ -1,3 +1,5 @@
+import { cn } from "../../../../lib/utils";
+
 type SetPageProps = {
   onSetPage: (pageNumber: number) => void;
   total: number;
@@ -22,16 +24,20 @@ export default function SetPage({ onSetPage, total, currPage }: SetPageProps) {
 
   return (
     <div>
-      {pages.map((page) => (
+      {pages.map((page, i) => (
         <button
           key={page}
+          className={cn(
+            "reviews-pagination__page-num",
+            page === currPage && "active",
+            i + 1 !== endPage && "gap"
+          )}
           onClick={() => onSetPage(page)}
-          style={currPage === page ? { fontWeight: "bold" } : undefined}
         >
           {page}
         </button>
       ))}
-      {endPage < total && <>...</>}
+      {endPage < total && <span className="text-ellipsis">...</span>}
     </div>
   );
 }
