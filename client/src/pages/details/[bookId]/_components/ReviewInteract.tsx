@@ -19,16 +19,14 @@ export default function ReviewInteract({
   };
 
   return (
-    <div className="review-list__item__wrapper__review-interact">
-      <div className="flex-end">
-        <div className="like-section" onClick={handleLikeReview}>
-          <MdThumbUp className="icon" />
-          <span>{liked}</span>
-        </div>
-        <div className="reply-section" onClick={handleShowReply}>
-          <img src={reply} alt="reply-icon" />
-          <span>답글&nbsp;{repliesLength}</span>
-        </div>
+    <div className="review-list__item__review-interact">
+      <div className="like-section" onClick={handleLikeReview}>
+        <MdThumbUp className="icon" />
+        <span>{liked}</span>
+      </div>
+      <div className="reply-section" onClick={handleShowReply}>
+        <img src={reply} alt="reply-icon" />
+        <span>답글&nbsp;{repliesLength}</span>
       </div>
     </div>
   );

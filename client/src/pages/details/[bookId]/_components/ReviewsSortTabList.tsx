@@ -1,4 +1,4 @@
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { ReviewTabList, setReviewTabList } from "../../../../recoil/review-tab";
 import {
   ReviewSortOptions,
@@ -6,6 +6,7 @@ import {
 } from "../../../../recoil/review-select";
 
 import SelectForm from "../../../../_components/SelectForm";
+import { cn } from "../../../../lib/utils";
 
 type TabList = {
   text: ReviewTabList;
@@ -13,7 +14,7 @@ type TabList = {
 }[];
 
 export default function ReviewsSortTabList() {
-  const setTab = useSetRecoilState(setReviewTabList);
+  const [tab, setTab] = useRecoilState(setReviewTabList);
   const setSortOpt = useSetRecoilState(setReviewSortOptionsState);
 
   const tabList: TabList = [
@@ -41,6 +42,7 @@ export default function ReviewsSortTabList() {
             type="button"
             key={list.text}
             onClick={() => list.onClick(list.text)}
+            className={cn("", list.text === tab && "active")}
           >
             <span>{list.text}</span>
           </button>

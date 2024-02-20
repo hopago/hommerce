@@ -24,9 +24,11 @@ export default function ReviewInfo({
   rating,
   keyword,
 }: ReviewInfoProps) {
+  const onClick = () => {};
+
   return (
-    <div className="review-list__item__wrapper__review-info">
-      <div className="review-list__item__wrapper__review-info__left">
+    <div className="review-list__item__review-info">
+      <div className="review-list__item__review-info__left">
         <div className="info-badge">
           <span>{buyWay}</span>
         </div>
@@ -34,9 +36,11 @@ export default function ReviewInfo({
         <div className="divider" />
         <span>{formatDate(createdAt)}</span>
         <div className="divider" />
-        <span>신고/차단</span>
+        <span className="report" onClick={onClick}>
+          신고/차단
+        </span>
       </div>
-      <div className="review-list__item__wrapper__review-info__right">
+      <div className="review-list__item__review-info__right">
         <div className="score-icons">{createScoreIcons(Number(rating))}</div>
         <div className="divider" />
         <span>{keyword}</span>

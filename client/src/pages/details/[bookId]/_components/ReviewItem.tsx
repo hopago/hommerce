@@ -41,23 +41,21 @@ export default function ReviewItem({ review }: ReviewItemProps) {
   const [show, setShow] = useState(false);
 
   return (
-    <div className="review-list__item">
-      <div className="review-list__item__wrapper">
-        <ReviewInfo
-          user={user}
-          buyWay={review.buyWay}
-          createdAt={review.createdAt}
-          rating={review.rating}
-          keyword={review.keyword}
-        />
-        <ReviewDesc desc={review.desc} />
-        <ReviewInteract
-          repliesLength={reviewReplies.length}
-          liked={review.liked}
-          setShow={setShow}
-        />
-        {show && <ReviewRepliesContainer replies={reviewReplies} />}
-      </div>
-    </div>
+    <li className="review-list__item">
+      <ReviewInfo
+        user={user}
+        buyWay={review.buyWay}
+        createdAt={review.createdAt}
+        rating={review.rating}
+        keyword={review.keyword}
+      />
+      <ReviewDesc desc={review.desc} />
+      <ReviewInteract
+        repliesLength={reviewReplies.length}
+        liked={review.liked}
+        setShow={setShow}
+      />
+      {show && <ReviewRepliesContainer replies={reviewReplies} />}
+    </li>
   );
 }

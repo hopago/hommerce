@@ -16,6 +16,7 @@ export default function ReviewsDetails() {
   const currSort = useRecoilValue(reviewSortOptionsState);
   /* temporary data */
   const temporaryReviews: TReviews = [...reviews, ...reviews2];
+  const temporaryReviewsAmount = 23;
 
   useEffect(() => {
     // TODO: service-logic && default paginate, 기본 페이징 로직을 수행
@@ -24,11 +25,15 @@ export default function ReviewsDetails() {
     // TODO: currTab, sortOpt && getReviewsByFilteredOpts, 현재 선택된 탭과 정렬 옵션에 따라 리뷰 데이터를 필터링하고 정렬
   }, [currTab, currSort]);
 
+  useEffect(() => {
+    // TODO: getReviewsAmount
+  }, []);
+
   return (
     <div className="details-prod-reviews__wrap__reviews-details">
       <ReviewsSortTabList />
       <ReviewList reviews={temporaryReviews} />
-      <PaginateControl />
+      <PaginateControl pageTotal={temporaryReviewsAmount} />
     </div>
   );
 }

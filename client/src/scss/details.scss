@@ -1,5 +1,12 @@
 @import './variables';
 
+.score-icon,
+.score-half-icon,
+.score-outline-icon {
+    color: $font-green;
+    font-size: 21px;
+}
+
 .details-single-book {
     width: 100%;
     max-width: 1200px;
@@ -1028,13 +1035,6 @@
                         border-right: 1px solid rgba(0, 0, 0, .12);
                     }
 
-                    .score-icon,
-                    .score-half-icon,
-                    .score-outline-icon {
-                        color: $font-green;
-                        font-size: 21px;
-                    }
-
                     &__user-score {
                         display: flex;
                         align-items: center;
@@ -1230,7 +1230,281 @@
         }
 
         &__reviews-details {
-            
+            width: 100%;
+            padding: 3rem 0px;
+
+            .divider {
+                display: inline-block;
+                font-size: 0;
+                width: 1px;
+                height: 9px;
+                background-color: #d5d5d5;
+                margin: 6px 6px 0 8px;
+                vertical-align: top;
+                box-sizing: border-box;
+            }
+
+            .reviews-sort-tab-list {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                border-bottom: 1px solid rgba(0, 0, 0, .12);
+
+                .tab-list-buttons {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+
+                    button {
+                        border: none;
+                        background-color: transparent;
+                        cursor: pointer;
+                        border-bottom: 2px solid transparent;
+                        transition: all .3s ease;
+                        padding: 0.5rem;
+
+                        span {
+                            font-size: 14px;
+                            line-height: 22px;
+                            letter-spacing: -0.01em;
+                            color: $font-gray;
+                        }
+
+                        &.active {
+                            border-bottom: 2px solid #000;
+
+                            span {
+                                font-weight: bold;
+                                color: #000;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .reviews-list {
+                
+                ul {
+                    padding: 1rem 0.5rem;
+
+                    .review-list__item {
+                        width: 100%;
+                        margin-bottom: 1rem;
+                        padding-bottom: 1rem;
+                        border-bottom: 1px solid rgba(0, 0, 0, .12);
+
+                        &__review-info {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            margin-bottom: 1rem;
+
+                            &__left {
+                                display: flex;
+                                align-items: center;
+
+                                span {
+                                    font-size: 12px;
+                                    line-height: 18px;
+                                    letter-spacing: -0.01em;
+                                    vertical-align: top;
+
+                                    &.report {
+                                        cursor: pointer;
+
+                                        &:hover{
+                                            text-decoration: underline;
+                                        }
+                                    }
+                                }
+
+                                .info-badge {
+                                    padding: 3px 7px;
+                                    border-radius: 1rem;
+                                    background-color: #E7E7FD;
+                                    color: $font-gray;
+                                    margin-right: 0.5rem;
+
+                                    span {
+                                        font-weight: 500;
+                                        font-size: 12px;
+                                    }
+                                }
+                            }
+
+                            &__right {
+                                display: flex;
+                                align-items: center;
+
+                                .score-icons {
+                                    display: flex;
+                                    align-items: center;
+
+                                    .score-icon,
+                                    .score-half-icon,
+                                    .score-outline-icon {
+                                        font-size: 16px;
+                                    }
+                                }
+
+                                span {
+                                    color: #474c98;
+                                    font-size: 14px;
+                                    line-height: 22px;
+                                    letter-spacing: -0.01em;
+                                    font-weight: bold;
+                                    vertical-align: top;
+                                }
+                            }
+                        }
+
+                        &__review-desc {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 0.5rem;
+                            width: 100%;
+                            margin-bottom: 0.5rem;
+
+                            span {
+                                color: #000;
+                                font-size: 14px;
+                                letter-spacing: -.01em;
+                                text-wrap: balance;
+                                white-space: normal;
+                                word-break: break-all;
+                            }
+                        }
+
+                        &__review-interact {
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: flex-end;
+
+                            span {
+                                font-size: 13px;
+                                line-height: 19px;
+                                letter-spacing: -0.01em;
+                                color: rgba(0,0,0,.72);
+                            }
+
+                            .like-section {
+                                display: flex;
+                                align-items: center;
+                                cursor: pointer;
+                                margin-right: 0.5rem;
+
+                                .icon {
+                                    color: rgba(0, 0, 0, .24);
+                                }
+                            }
+
+                            .reply-section {
+                                display: flex;
+                                align-items: center;
+                                cursor: pointer;
+
+                                img {
+                                    width: 20px;
+                                }
+                            }
+                        }
+
+                        &__review-replies {
+                            margin-top: 1rem;
+                            padding-top: 0.75rem;
+                            border-top: 1px solid rgba(0, 0, 0, .12);
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            gap: 0.5rem;
+
+                            &__bg {
+                                width: 100%;
+                                padding: 1rem;
+                                border-radius: 1rem;
+                                background-color: rgba(0, 0, 0, .04);
+
+                                .reply-form-no-auth {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    gap: 0.5rem;
+
+                                    span {
+                                        color: $font-gray;
+                                        font-size: 14px;
+                                        line-height: 22px;
+                                        letter-spacing: -0.01em;
+                                        vertical-align: top; 
+                                        font-weight: bold;
+                                    }
+
+                                    button {
+                                        display: flex;
+                                        align-items: center;
+                                        background-color: #fff;
+                                        border: 1px solid #d5d5d5;
+                                        cursor: pointer;
+
+                                        .icon {
+                                            color: $font-gray;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .reply-item {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 0.5rem;
+                                margin-top: 0.5rem;
+
+                                &__reply-info {
+                                    display: flex;
+                                    align-items: center;                                   
+
+                                    .icon-wrap {
+                                        width: 8px;
+                                        height: 9px;
+                                        margin-right: 0.25rem;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+
+                                        img {
+                                            width: 100%;
+                                            height: 100%;
+                                        }
+                                    }
+
+                                    span {
+                                        font-size: 12px;
+                                        line-height: 18px;
+                                        letter-spacing: -0.01em;
+                                        vertical-align: top;
+                                        color: $font-gray;
+                                    }
+                                }
+
+                                &__desc {
+                                    padding: 0.5rem;
+                                    background-color: rgba(0, 0, 0, .04);
+                                    width: max-content;
+                                    border-radius: 0.25rem;
+
+                                    span {
+                                        color: #000;
+                                        font-size: 14px;
+                                        line-height: 22px;
+                                        letter-spacing: -0.01em;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }          
+            }
         }
     }
 }
