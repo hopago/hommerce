@@ -1,19 +1,29 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.tsx";
 
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router } from "react-router-dom";
 
-import { RecoilRoot } from 'recoil';
+import { RecoilRoot } from "recoil";
 
 import "./scss/index.scss";
 
+import { ClerkProvider } from "@clerk/clerk-react";
+
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
+if (!PUBLISHABLE_KEY) {
+  throw new Error("Missing AUTH-KEY...");
+}
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RecoilRoot>
-      <Router>
-        <App />
-      </Router>
-    </RecoilRoot>
+    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+      <RecoilRoot>
+        <Router>
+          <App />
+        </Router>
+      </RecoilRoot>
+    </ClerkProvider>
   </React.StrictMode>
 );

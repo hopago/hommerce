@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "src/_components/ReuseButton.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

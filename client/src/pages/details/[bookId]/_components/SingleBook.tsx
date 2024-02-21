@@ -11,11 +11,11 @@ type SingleBookProps = {
   setCurrSellType: React.Dispatch<React.SetStateAction<SellWay>>;
 };
 
-export default function SingleBook({
+const SingleBook = ({
   book,
   currSellType,
   setCurrSellType,
-}: SingleBookProps) {
+}: SingleBookProps) => {
   /* 
   TODO: 
   책 ID - ref, review 데이터 
@@ -53,4 +53,6 @@ export default function SingleBook({
       </div>
     </div>
   );
-}
+};
+
+export default SingleBook;

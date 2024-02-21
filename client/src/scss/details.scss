@@ -1231,7 +1231,7 @@
 
         &__reviews-details {
             width: 100%;
-            padding: 3rem 0px;
+            padding-top: 3rem;
 
             .divider {
                 display: inline-block;
@@ -1572,6 +1572,68 @@
                     width: 10px;
                     height: 2px;
                     margin: -3px 8px;
+                }
+            }
+        }
+    }
+}
+
+.details-faq {
+    width: 100%;
+    padding-bottom: 5rem;
+
+    &__heading {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, .86);
+
+        .title-wrap {
+
+            h1 {
+                font-size: 20px;
+                line-height: 30px;
+                letter-spacing: -0.01em;
+            }
+        }
+
+        .btns-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    }
+
+    &__list {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+
+        ul {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+
+            li {
+                width: 66%;
+                padding-bottom: 1rem;
+                border-bottom: 1px solid rgba(0, 0, 0, .12);
+
+                h3 {
+                    font-size: 15px;
+                    line-height: 23px;
+                    letter-spacing: -0.01em;
+                    margin: 1rem 0px;
+                }
+
+                p {
+                    font-size: 15px;
+                    line-height: 23px;
+                    letter-spacing: -0.01em;
                 }
             }
         }

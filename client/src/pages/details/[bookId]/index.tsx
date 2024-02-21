@@ -9,8 +9,11 @@ import FixedDetailsTabList from "./_components/FixedDetailsTabList";
 import DetailsContents from "./_components/DetailsContents";
 import BookReviews from "./_components/BookReviews";
 import AuthorInfo from "./_components/AuthorInfo";
+import FAQ from "./_components/FAQ";
 
 import { useEffect, useRef, useState } from "react";
+
+import { useParams } from "react-router-dom";
 
 import { useSetRecoilState } from "recoil";
 import { setGNBCategory } from "../../../recoil/use-category";
@@ -21,6 +24,13 @@ export default function DetailsIndex() {
   const [currSellType, setCurrSellType] = useState<SellWay>("종이책");
 
   const setCategory = useSetRecoilState(setGNBCategory);
+
+  const params = useParams();
+  const { bookId } = params;
+
+  useEffect(() => {
+    // TODO: getSingleBook
+  }, [bookId]);
 
   useEffect(() => {
     setCategory({
@@ -59,6 +69,7 @@ export default function DetailsIndex() {
       if (prodInfoRef.current) {
         observer.unobserve(prodInfoRef.current);
       }
+
       if (reviewRef.current) {
         observer.unobserve(reviewRef.current);
       }
@@ -78,6 +89,7 @@ export default function DetailsIndex() {
       <DetailsContents ref={prodInfoRef} />
       <AuthorInfo authorName={detailsBook.author} />
       <BookReviews ref={reviewRef} />
+      <FAQ />
       <FixedPurchaseShortcut
         price={
           currSellType === "종이책" ? detailsBook.price : detailsBook.eBookPrice

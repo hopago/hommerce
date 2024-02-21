@@ -1,6 +1,6 @@
 import AmountButton from "../../../../_components/AmountButton";
-import ProdPurchaseButton from "../../../../_components/ProdPurchaseButton";
 import WishButton from "../../../../_components/WishButton";
+import ReuseButton from "../../../../_components/ReuseButton";
 
 import { calculateDiscount } from "../../../../utils/calculate-price";
 
@@ -48,8 +48,8 @@ export default function FixedPurchaseShortcut({
           <div className="buttons-wrap">
             <AmountButton size="md" />
             <WishButton />
-            <ProdPurchaseButton text="장바구니" size="lg" style="default" />
-            <ProdPurchaseButton text="바로구매" size="lg" style="purple" />
+            <ReuseButton text="장바구니" size="lg" style="default" />
+            <ReuseButton text="바로구매" size="lg" style="purple" />
           </div>
         </div>
       </div>

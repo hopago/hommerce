@@ -3,6 +3,8 @@ import GlobalLayout from "./pages/_layout";
 import Index from "./pages";
 import LangIndex from "./pages/[lang]";
 import DetailsIndex from "./pages/details/[bookId]";
+import LoginIndex from "./pages/login";
+import SigninIndex from "./pages/join";
 
 export const routes = [
   {
@@ -24,12 +26,17 @@ export const routes = [
         element: <DetailsIndex />,
         index: true,
       },
-      // {
-      //   path: "/category/:lang",
-      //   element: <CategoryIndex />,
-      //   index: true,
-      // }
     ],
+  },
+  {
+    path: "/login",
+    element: <LoginIndex />,
+    index: true,
+  },
+  {
+    path: "signin",
+    element: <SigninIndex />,
+    index: true,
   },
 ];
 
@@ -38,4 +45,6 @@ export const pages = [
   { route: "/:lang" },
   { route: "/details/:bookId" },
   { route: "/category/:lang" },
+  { route: "/login" },
+  { route: "/signin" },
 ];

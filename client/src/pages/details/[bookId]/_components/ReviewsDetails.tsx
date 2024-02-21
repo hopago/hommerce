@@ -7,7 +7,7 @@ import PaginateControl from "./PaginateControl";
 import ReviewList from "./ReviewList";
 import ReviewsSortTabList from "./ReviewsSortTabList";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { reviews, reviews2 } from "../../../_components/constants/review";
 import { TReviews } from "../../../_components/types/review";
@@ -22,10 +22,14 @@ export default function ReviewsDetails() {
   const pageTotal = 23; // TODO: getPageTotal(reviewsLength);
 
   /* paginate-scroll-behavior */
+  const [firstRender, setFirstRender] = useState(true);
+
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (scrollRef.current) {
+    if (firstRender) {
+      setFirstRender(false);
+    } else if (scrollRef.current) {
       scrollRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [currPage]);
