@@ -34,7 +34,7 @@ export const routes = [
     index: true,
   },
   {
-    path: "signin",
+    path: "/join",
     element: <SigninIndex />,
     index: true,
   },
