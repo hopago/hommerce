@@ -1,4 +1,4 @@
-// main
+// home
 @import 'home';
 @import 'search';
 @import 'recommend-gnb';
@@ -7,16 +7,19 @@
 @import 'author.scss';
 @import 'footer.scss';
 
-// components & modal
-@import './select-form.scss';
-@import './fixed-seen-books.scss';
-@import './seen-book-list.scss';
-
 // :lang page
 @import 'lang-page';
 
 // details page
 @import 'details';
+
+// login page
+@import 'login';
+
+// components & modal
+@import './select-form.scss';
+@import './fixed-seen-books.scss';
+@import './seen-book-list.scss';
 
 // font
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
@@ -50,6 +53,7 @@ h1 {
     color: inherit;
 }
 
+// reuse badge & btn
 .best-flag-badge {
     display: flex;
     align-items: center;

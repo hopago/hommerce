@@ -1,28 +1,26 @@
-import { SignInButton } from "@clerk/clerk-react";
-
 import Logo from "../_components/Logo";
+import Form from "./_components/Form";
+import PersistID from "./_components/PersistID";
+import SNSLogin from "./_components/SNSLogin";
+import Register from "./_components/Register";
 
-import { useState } from "react";
+import { usePersistId } from "./hooks/use-persist-id";
 
 export default function LoginIndex() {
-  const [userId, setUserId] = useState("");
-  const [password, setPassword] = useState("");
+  const { isPersist, onClick } = usePersistId();
 
   return (
-    <div className="login-page">
+    <div id="login-page">
+      <header>
+        <Logo />
+      </header>
       <main>
-        <div className="logo-wrap">
-          <Logo />
-        </div>
-        <div className="input-wrap">
-
-        </div>
-        <div className="login-btn-wrap">
-
-        </div>
-        <SignInButton>
-          ClerkSignIn
-        </SignInButton>
+        <section>
+          <Form isPersist={isPersist} />
+          <PersistID isPersist={isPersist} onClick={onClick} />
+          <SNSLogin />
+          <Register />
+        </section>
       </main>
     </div>
   );
