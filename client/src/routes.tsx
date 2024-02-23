@@ -5,6 +5,7 @@ import LangIndex from "./pages/[lang]";
 import DetailsIndex from "./pages/details/[bookId]";
 import LoginIndex from "./pages/login";
 import SigninIndex from "./pages/join";
+import SigninSuccessIndex from "./pages/join/success";
 
 export const routes = [
   {
@@ -36,6 +37,11 @@ export const routes = [
   {
     path: "/join",
     element: <SigninIndex />,
+    index: true,
+  },
+  {
+    path: "/join/success",
+    element: <SigninSuccessIndex />,
     index: true,
   },
 ];

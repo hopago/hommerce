@@ -3,6 +3,7 @@ import Form from "./_components/Form";
 import PersistID from "./_components/PersistID";
 import SNSLogin from "./_components/SNSLogin";
 import Register from "./_components/Register";
+import ShortcutFooter from "../../_components/ShortcutFooter";
 
 import { usePersistId } from "./hooks/use-persist-id";
 
@@ -22,6 +23,7 @@ export default function LoginIndex() {
           <Register />
         </section>
       </main>
+      <ShortcutFooter />
     </div>
   );
 }

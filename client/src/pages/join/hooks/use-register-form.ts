@@ -1,6 +1,6 @@
 import { useClerk } from "@clerk/clerk-react";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -64,9 +64,14 @@ export const useRegisterForm = () => {
     }
   };
 
+  useEffect(() => {
+    isMatchedPassword();
+  }, [matchPassword]);
+
   // email-input
   const [emailAddress, setEmailAddress] = useState("");
   const [emailVerificationCode, setEmailVerificationCode] = useState("");
+  const [isValidEmail, setIsValidEmail] = useState(false);
 
   const onChangeEmailAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmailAddress(e.target.value);
@@ -79,20 +84,35 @@ export const useRegisterForm = () => {
 
   const checkValidEmailAddress = (email: string) => {
     if (!validateEmail(email)) {
-      setIsError(true);
-      setErrMsg("유효하지 않은 이메일 주소입니다.");
+      setIsValidEmail(false);
     } else {
-      setEmailAddress(email);
+      setIsValidEmail(true);
     }
   };
 
+  useEffect(() => {
+    if (emailAddress === "") return setIsValidEmail(true);
+
+    const checkEmail = setTimeout(() => {
+      checkValidEmailAddress(emailAddress);
+    }, 300);
+
+    return () => {
+      clearTimeout(checkEmail);
+    };
+  }, [emailAddress]);
+
   // result-state
   const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errMsg, setErrMsg] = useState("");
 
-  const { startEmailVerification, completeEmailVerification, isSuccess } =
+  const { startEmailVerification, completeEmailVerification, isVerified } =
     useEmailVerification({
+      onSuccess: () => {
+        setIsSuccess(true);
+      },
       onError: (msg: string) => {
         setIsError(true);
         setErrMsg(msg);
@@ -101,7 +121,7 @@ export const useRegisterForm = () => {
 
   // function
   const handleStartEmailVerification = async () => {
-    await startEmailVerification();
+    return await startEmailVerification();
   };
   const handleCompleteEmailVerification = async () => {
     await completeEmailVerification(emailVerificationCode);
@@ -119,7 +139,7 @@ export const useRegisterForm = () => {
     event.preventDefault();
 
     // Failed Email Verification
-    if (!isSuccess) return;
+    if (!validMatch || !isValidEmail || !isSuccess || !isVerified) return;
 
     setIsLoading(true);
     try {
@@ -132,7 +152,7 @@ export const useRegisterForm = () => {
       });
       await handleRegisterMongoDB();
 
-      navigate("/login");
+      navigate("/join/success");
     } catch (err: unknown) {
       setIsError(true);
       setErrMsg("회원가입 실패입니다. 다시 시도해주세요.");
@@ -153,10 +173,13 @@ export const useRegisterForm = () => {
     handleRegister,
     emailAddress,
     onChangeEmailAddress,
+    checkValidEmailAddress,
+    isValidEmail,
+    isVerified,
     emailVerificationCode,
     onChangeEmailVerificationCode,
-    checkValidEmailAddress,
     isLoading,
+    isSuccess,
     isError,
     errMsg,
   };

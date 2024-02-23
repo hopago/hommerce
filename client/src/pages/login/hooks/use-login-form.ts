@@ -7,6 +7,8 @@ export const useLoginForm = ({ isPersist }: { isPersist: boolean }) => {
 
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
+
+  const [isError, setIsError] = useState(false);
   const [errMsg, setErrMsg] = useState("");
 
   // const [data, setData] = useState(null);
@@ -18,6 +20,7 @@ export const useLoginForm = ({ isPersist }: { isPersist: boolean }) => {
   }, []);
 
   useEffect(() => {
+    setIsError(false);
     setErrMsg("");
   }, [id, password]);
 
@@ -42,13 +45,11 @@ export const useLoginForm = ({ isPersist }: { isPersist: boolean }) => {
 
   return {
     id,
-    setId,
-    password,
-    setPassword,
-    errMsg,
-    setErrMsg,
     handleIdChange,
+    password,
     handlePasswordChange,
+    isError,
+    errMsg,
     onSubmit,
   };
 };

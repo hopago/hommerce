@@ -15,9 +15,9 @@ export default function PhoneVerification({
   };
 
   return (
-    <div className="register-phone-verification">
+    <div className="register-page__phone-verification">
       <h2>본인인증</h2>
-      <div className="register-phone-verification__btns">
+      <div className="register-page__phone-verification__btns">
         <PhoneButton
           type="button"
           text="휴대폰 본인인증"
