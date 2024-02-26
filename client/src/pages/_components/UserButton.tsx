@@ -1,24 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "@clerk/clerk-react";
 
-import { MoreVertSvg, ProfileSvg } from "./constants/Icons";
+import UserBeforeLoginButton from "./UserBeforeLoginButton";
+import UserAfterLoginButton from "./UserAfterLoginButton";
 
 export default function UserButton() {
-  const navigate = useNavigate();
+  const { isSignedIn } = useAuth();
 
-  const onClick = () => {
-    navigate("/login");
-  };
-
-  return (
-    <button className="home-nav__user__session__button" onClick={onClick}>
-      <div className="home-nav__user__session__button__wrapper">
-        <div className="home-nav__user__session__button__wrapper__icon">
-          <MoreVertSvg />
-        </div>
-        <div className="home-nav__user__session__button__wrapper__icon">
-          <ProfileSvg />
-        </div>
-      </div>
-    </button>
-  );
+  return isSignedIn ? <UserAfterLoginButton /> : <UserBeforeLoginButton />;
 }

@@ -15,6 +15,8 @@ interface IBook extends Document {
   desc: string;
   publisher: string;
   sellType?: SellType;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 const bookSchema = new Schema(

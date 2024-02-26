@@ -131,6 +131,12 @@
                     display: flex;
                     align-items: center;
 
+                    img {
+                        width: 24px;
+                        height: 24px;
+                        object-fit: cover;
+                        border-radius: 50%;
+                    }
 
                     &__icon {
                         display: flex;

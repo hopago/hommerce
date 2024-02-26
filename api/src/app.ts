@@ -8,6 +8,7 @@ import { whiteList } from "./config/cors";
 import { errorHandler } from "./middleware/error/errorHandler";
 
 import userRouter from "./(user)/routes/user";
+import bookRouter from "./(book)/routes/book";
 
 const app = express();
 const port = 8000;
@@ -24,6 +25,7 @@ app.use(
 app.use(cookieParser());
 
 app.use("/user", userRouter);
+app.use("/book", bookRouter);
 
 app.use(errorHandler);
 

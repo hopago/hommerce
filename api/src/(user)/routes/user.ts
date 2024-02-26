@@ -1,10 +1,19 @@
 import express from "express";
 
-import { register } from "../controller/user";
+import {
+  deleteUser,
+  getCurrUser,
+  register,
+  updateUser,
+} from "../controller/user";
 
 const router = express.Router();
 
-router.route("/").get().put().delete();
+router
+  .route("/")
+  .get(getCurrUser)
+  .put(updateUser)
+  .delete(deleteUser);
 
 router.route("/session").post(register);
 

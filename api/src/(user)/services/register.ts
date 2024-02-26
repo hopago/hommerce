@@ -10,9 +10,9 @@ export const handleRegister = async (
   next: NextFunction
 ) => {
   try {
-    const { username, imageUrl } = req.body;
-    if (!username || !imageUrl)
-      throw new HttpException(400, "Username & ImageUrl are required.");
+    const { username, imageUrl, id } = req.body;
+    if (!username || !imageUrl || !id)
+      throw new HttpException(400, "Username & ImageUrl & ID are required.");
 
     const duplicate = await User.findOne({
       username,
@@ -20,6 +20,7 @@ export const handleRegister = async (
     if (duplicate) throw new HttpException(409, "Username should be unique.");
 
     const newUser = new User({
+      id,
       username,
       imageUrl,
     });
