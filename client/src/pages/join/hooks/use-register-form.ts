@@ -3,14 +3,7 @@ import { useClerk } from "@clerk/clerk-react";
 import { FormEvent, useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
-
-import { useEmailVerification } from "./use-email-verification";
-
-const validateEmail = (email: string) => {
-  const re =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(String(email).toLowerCase());
-};
+import { useEmailForm } from "./use-email-form";
 
 // 최소 8자리, 대소문자, 숫자, 특수문자 포함
 const validatePassword = (password: string) => {
@@ -24,6 +17,12 @@ export const useRegisterForm = () => {
 
   const navigate = useNavigate();
 
+  // result-state
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
+  const [isSignup, setIsSignup] = useState(false);
+
   // user-input
   const [user, setUser] = useState({
     username: "",
@@ -32,25 +31,44 @@ export const useRegisterForm = () => {
     lastName: "",
   });
 
+  // email-state
+  const {
+    emailAddress,
+    isValidEmail,
+    isVerified,
+    onChangeEmailAddress,
+    emailVerificationCode,
+    onChangeEmailVerificationCode,
+    handleCompleteEmailVerification,
+    startEmailVerification,
+    handleRegisterMongoDB,
+    isError: isVerifyError,
+    isSuccess: isVerifySuccess,
+    errMsg: verifyErrMsg,
+  } = useEmailForm();
+
+  // match-pwd
+  const [matchPassword, setMatchPassword] = useState("");
+  const [validMatch, setValidMatch] = useState(false);
+
   const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+
+    setErrMsg("");
+    setIsError(false);
 
     if (name === "password" && !validatePassword(value)) {
       setErrMsg(
         "비밀번호는 최소 8자리, 대소문자, 숫자, 특수문자를 포함해야 합니다."
       );
       setIsError(true);
-    } else {
-      setUser((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
     }
-  };
 
-  // match-pwd
-  const [matchPassword, setMatchPassword] = useState("");
-  const [validMatch, setValidMatch] = useState(false);
+    setUser((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const onChangeMatchPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMatchPassword(e.target.value);
@@ -66,99 +84,51 @@ export const useRegisterForm = () => {
 
   useEffect(() => {
     isMatchedPassword();
-  }, [matchPassword]);
 
-  // email-input
-  const [emailAddress, setEmailAddress] = useState("");
-  const [emailVerificationCode, setEmailVerificationCode] = useState("");
-  const [isValidEmail, setIsValidEmail] = useState(false);
-
-  const onChangeEmailAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmailAddress(e.target.value);
-  };
-  const onChangeEmailVerificationCode = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setEmailVerificationCode(e.target.value);
-  };
-
-  const checkValidEmailAddress = (email: string) => {
-    if (!validateEmail(email)) {
-      setIsValidEmail(false);
+    if (validMatch) {
+      setIsError(false);
+      setErrMsg("");
     } else {
-      setIsValidEmail(true);
+      setIsError(true);
+      setErrMsg("비밀번호가 일치하지 않습니다.");
     }
-  };
-
-  useEffect(() => {
-    if (emailAddress === "") return setIsValidEmail(true);
-
-    const checkEmail = setTimeout(() => {
-      checkValidEmailAddress(emailAddress);
-    }, 300);
-
-    return () => {
-      clearTimeout(checkEmail);
-    };
-  }, [emailAddress]);
-
-  // result-state
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [errMsg, setErrMsg] = useState("");
-
-  const { startEmailVerification, completeEmailVerification, isVerified } =
-    useEmailVerification({
-      onSuccess: () => {
-        setIsSuccess(true);
-      },
-      onError: (msg: string) => {
-        setIsError(true);
-        setErrMsg(msg);
-      },
-    });
-
-  // function
-  const handleStartEmailVerification = async () => {
-    return await startEmailVerification();
-  };
-  const handleCompleteEmailVerification = async () => {
-    await completeEmailVerification(emailVerificationCode);
-  };
-
-  const handleRegisterMongoDB = async () => {
-    try {
-      // TODO: MongoDB 저장
-    } catch (err) {
-      // TODO: 에러 메시지 + clerk-sign-up undo
-    }
-  };
+  }, [matchPassword, validMatch]);
 
   const handleRegister = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setIsError(false);
+    setErrMsg("");
 
-    // Failed Email Verification
-    if (!validMatch || !isValidEmail || !isSuccess || !isVerified) return;
+    if (!validMatch) return;
+
+    console.log(user.username);
+    console.log(user.password);
 
     setIsLoading(true);
     try {
-      await client.signUp.create({
+      const { status } = await client.signUp.create({
+        username: user.username,
         firstName: user.firstName,
         lastName: user.lastName,
-        username: user.username,
         password: user.password,
         emailAddress,
       });
-      await handleRegisterMongoDB();
 
-      navigate("/join/success");
+      console.log(status);
+
+      setIsSignup(true);
     } catch (err: unknown) {
       setIsError(true);
       setErrMsg("회원가입 실패입니다. 다시 시도해주세요.");
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleVerify = async () => {
+    await handleCompleteEmailVerification();
+    await handleRegisterMongoDB();
+    navigate("/join/success");
   };
 
   return {
@@ -168,19 +138,21 @@ export const useRegisterForm = () => {
     onChangeMatchPassword,
     isMatchedPassword,
     validMatch,
-    handleStartEmailVerification,
-    handleCompleteEmailVerification,
-    handleRegister,
     emailAddress,
     onChangeEmailAddress,
-    checkValidEmailAddress,
     isValidEmail,
+    handleRegister,
+    isSignup,
     isVerified,
-    emailVerificationCode,
-    onChangeEmailVerificationCode,
     isLoading,
-    isSuccess,
     isError,
     errMsg,
+    emailVerificationCode,
+    onChangeEmailVerificationCode,
+    startEmailVerification,
+    isVerifyError,
+    isVerifySuccess,
+    verifyErrMsg,
+    handleVerify,
   };
 };

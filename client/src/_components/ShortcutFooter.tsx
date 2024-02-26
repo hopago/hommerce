@@ -1,7 +1,7 @@
 export default function ShortcutFooter() {
   return (
-    <div className="shortcut-footer">
+    <footer className="shortcut-footer">
       <p>© HOMMERCE BOOK CENTER</p>
-    </div>
+    </footer>
   );
 }

@@ -3,5 +3,5 @@ type ErrorMsg = {
 };
 
 export default function Error({ msg }: ErrorMsg) {
-  return <p className="warn">{msg}</p>;
+  return <p style={{ marginTop: "1rem" }} className="warn">{msg}</p>;
 }

@@ -6,9 +6,10 @@ type FAQText = "반품/교환 신청" | "1:1문의";
 
 type ProdPurchaseButtonProps = {
   style: "default" | "purple";
-  text: PurchaseButtonText | FAQText;
+  text: PurchaseButtonText | FAQText | string;
   size: "md" | "lg";
   icon?: JSX.Element | string;
+  onClick?: () => void;
 };
 
 export default function ReuseButton({
@@ -16,6 +17,7 @@ export default function ReuseButton({
   style,
   size,
   icon,
+  onClick,
 }: ProdPurchaseButtonProps) {
   let iconContent: JSX.Element | string | null = null;
 
@@ -32,6 +34,7 @@ export default function ReuseButton({
   return (
     <button
       className={cn("prod-purchase-button", style && style, size && size)}
+      onClick={onClick}
     >
       {iconContent && iconContent}
       <span>{text}</span>
