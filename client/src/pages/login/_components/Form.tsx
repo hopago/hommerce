@@ -16,9 +16,11 @@ export default function Form({ isPersist }: FormProps) {
     onSubmit,
     handleIdChange,
     handlePasswordChange,
-    errMsg,
     id,
     password,
+    isPending,
+    isError,
+    errMsg,
   } = useLoginForm({ isPersist });
 
   const idRef = useRef<HTMLInputElement>(null);
@@ -29,6 +31,12 @@ export default function Form({ isPersist }: FormProps) {
       idRef.current.focus();
     }
   }, []);
+
+  useEffect(() => {
+    if (isError && idRef.current !== null) {
+      errRef.current?.focus();
+    }
+  }, [isError]);
 
   return (
     <form onSubmit={onSubmit}>
@@ -45,13 +53,18 @@ export default function Form({ isPersist }: FormProps) {
         onChange={handlePasswordChange}
         value={password}
       />
-      {errMsg && (
+      {isError && (
         <p ref={errRef} className="login-err-message">
           <MdInfoOutline />
           <span>{errMsg}</span>
         </p>
       )}
-      <Button className="login" text="로그인" type="submit" />
+      <Button
+        className="login"
+        text="로그인"
+        type="submit"
+        disabled={isPending}
+      />
     </form>
   );
 }

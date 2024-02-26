@@ -12,7 +12,7 @@ export default function SigninSuccessIndex() {
   const navigate = useNavigate();
 
   const onClick = () => {
-    navigate("/login");
+    navigate("/");
   };
 
   return (
@@ -37,7 +37,7 @@ export default function SigninSuccessIndex() {
             <div className="right">
               <span>회원 가입에 성공했습니다.</span>
               <ReuseButton
-                text="로그인"
+                text="홈으로 이동"
                 style="default"
                 size="md"
                 onClick={onClick}

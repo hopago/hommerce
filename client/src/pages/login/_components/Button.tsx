@@ -5,6 +5,7 @@ type ButtonProps = {
   text: string;
   type: "button" | "submit";
   onClick?: () => void;
+  disabled?: boolean;
 };
 
 export default function Button({
@@ -12,12 +13,14 @@ export default function Button({
   text,
   type,
   onClick,
+  disabled,
 }: ButtonProps) {
   return (
     <button
       type={type}
       className={cn("login-button", className && className)}
       onClick={onClick}
+      disabled={disabled}
     >
       {text}
     </button>
