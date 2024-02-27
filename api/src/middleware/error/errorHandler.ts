@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-
 import { HttpException } from "./utils";
 import { logger } from "../../logs/logger";
 

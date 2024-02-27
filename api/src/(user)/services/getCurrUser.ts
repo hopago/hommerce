@@ -4,7 +4,7 @@ import { HttpException } from "../../middleware/error/utils";
 
 export const handleGetCurrUser = async (req: Request, next: NextFunction) => {
   const { id } = req.body;
-  if (!id) throw new HttpException(400, "Id is required.");
+  if (!id) throw new HttpException(400, "Book id required.");
 
   try {
     const user = User.findOne({

@@ -13,10 +13,15 @@ export const handleUpdateUser = async (req: Request, next: NextFunction) => {
   const newUsername = username ?? currUser.username;
 
   try {
-    const newUser = await currUser.updateOne({
-      imageUrl: newImageUrl,
-      username: newUsername,
-    });
+    const newUser = await currUser.updateOne(
+      {
+        imageUrl: newImageUrl,
+        username: newUsername,
+      },
+      {
+        new: true,
+      }
+    );
 
     return newUser;
   } catch (err) {

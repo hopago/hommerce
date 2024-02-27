@@ -1,6 +1,6 @@
 import { NextFunction, Request } from "express";
-import { HttpException } from "../../middleware/error/utils";
 import Book from "../models/book";
+import { isFieldsFullFilled } from "../../utils/isFieldsFullFilled";
 
 export const handlePostBook = async (req: Request, next: NextFunction) => {
   const requiredFields = [
@@ -15,16 +15,12 @@ export const handlePostBook = async (req: Request, next: NextFunction) => {
     "publisher",
   ];
 
-  for (const field of requiredFields) {
-    if (!req.body[field]) {
-      throw new HttpException(400, `Field ${field} not fulfilled.`);
-    }
-  }
+  isFieldsFullFilled(requiredFields, req);
 
   const newBook = new Book({
     ...req.body,
   });
   const savedBook = await newBook.save();
-  
+
   return savedBook;
 };

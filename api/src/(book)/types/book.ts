@@ -30,11 +30,3 @@ type TBookShortcut = Pick<
 >;
 
 type TBookOptional = Partial<TBook>;
-
-type BookDetails = {
-  awards: string[];
-  intro: string;
-  contentsList: string;
-  bookInside: string;
-  bookPublisherReview: string;
-};

@@ -1,10 +1,9 @@
 import { NextFunction, Request } from "express";
-import { HttpException } from "../../middleware/error/utils";
 import Book from "../models/book";
+import { validateFields } from "../../utils/validateFields";
 
 export const handleUpdateBook = async (req: Request, next: NextFunction) => {
-  const validateFields = [
-    "id",
+  const fields = [
     "title",
     "desc",
     "representImg",
@@ -21,19 +20,13 @@ export const handleUpdateBook = async (req: Request, next: NextFunction) => {
     "sellType",
   ];
 
-  const validFieldsSet = new Set(validateFields);
+  validateFields(fields, req);
 
-  for (const field in req.body) {
-    if (!validFieldsSet.has(field)) {
-      throw new HttpException(400, `Field ${field} is not valid.`);
-    }
-  }
-
-  const { id } = req.body;
+  const { bookId } = req.params;
 
   try {
     const updatedBook = await Book.findByIdAndUpdate(
-      id,
+      bookId,
       {
         ...req.body,
       },

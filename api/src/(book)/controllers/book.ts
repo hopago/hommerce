@@ -10,9 +10,13 @@ export const getBooks = async (
   res: Response,
   next: NextFunction
 ) => {
-  const books = await handleGetBooks(next);
+  try {
+    const books = await handleGetBooks(next);
 
-  return res.status(200).json(books);
+    return res.status(200).json(books);
+  } catch (err) {
+    next(err);
+  }
 };
 
 export const postBook = async (
@@ -20,9 +24,13 @@ export const postBook = async (
   res: Response,
   next: NextFunction
 ) => {
-  const newBook = await handlePostBook(req, next);
+  try {
+    const newBook = await handlePostBook(req, next);
 
-  return res.status(201).json(newBook);
+    return res.status(201).json(newBook);
+  } catch (err) {
+    next(err);
+  }
 };
 
 export const getBook = async (
@@ -30,9 +38,13 @@ export const getBook = async (
   res: Response,
   next: NextFunction
 ) => {
-  const book = await handleGetBook(req, next);
+  try {
+    const book = await handleGetBook(req, next);
 
-  return res.status(200).json(book);
+    return res.status(200).json(book);
+  } catch (err) {
+    next(err);
+  }
 };
 
 export const updateBook = async (
@@ -40,9 +52,13 @@ export const updateBook = async (
   res: Response,
   next: NextFunction
 ) => {
-  const updatedBook = await handleUpdateBook(req, next);
+  try {
+    const updatedBook = await handleUpdateBook(req, next);
 
-  return res.status(201).json(updatedBook);
+    return res.status(201).json(updatedBook);
+  } catch (err) {
+    next(err);
+  }
 };
 
 export const deleteBook = async (
@@ -50,7 +66,11 @@ export const deleteBook = async (
   res: Response,
   next: NextFunction
 ) => {
-  await handleDeleteBook(req, next);
+  try {
+    await handleDeleteBook(req, next);
 
-  return res.sendStatus(204);
+    return res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
 };

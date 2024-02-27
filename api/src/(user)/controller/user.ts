@@ -10,10 +10,12 @@ export const register = async (
   res: Response,
   next: NextFunction
 ) => {
-  const newUser = await handleRegister(req, res, next);
+  try {
+    const newUser = await handleRegister(req, res, next);
 
-  if (newUser) {
-    return res.status(204);
+    return res.status(201).json(newUser);
+  } catch (err) {
+    next(err);
   }
 };
 
@@ -22,10 +24,12 @@ export const getCurrUser = async (
   res: Response,
   next: NextFunction
 ) => {
-  const currUser = await handleGetCurrUser(req, next);
+  try {
+    const currUser = await handleGetCurrUser(req, next);
 
-  if (currUser) {
     return res.status(200).json(currUser);
+  } catch (err) {
+    next(err);
   }
 };
 
@@ -34,10 +38,12 @@ export const updateUser = async (
   res: Response,
   next: NextFunction
 ) => {
-  const updatedUser = await handleUpdateUser(req, next);
+  try {
+    const updatedUser = await handleUpdateUser(req, next);
 
-  if (updatedUser) {
     return res.status(200).json(updatedUser);
+  } catch (err) {
+    next(err);
   }
 };
 
@@ -46,7 +52,11 @@ export const deleteUser = async (
   res: Response,
   next: NextFunction
 ) => {
-  await handleDeleteUser(req, next);
+  try {
+    await handleDeleteUser(req, next);
 
-  return res.sendStatus(204);
+    return res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
 };
