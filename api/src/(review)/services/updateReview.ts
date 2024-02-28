@@ -1,6 +1,7 @@
 import { NextFunction, Request } from "express";
 import { validateFields } from "../../utils/validateFields";
 import Review from "../models/review";
+import { handleUpdateTotal } from "../(total)/services/updateTotal";
 
 export const handleUpdateReview = async (req: Request, next: NextFunction) => {
   const fields = ["rating", "keyword", "desc"];
@@ -20,6 +21,12 @@ export const handleUpdateReview = async (req: Request, next: NextFunction) => {
         new: true,
       }
     );
+
+    try {
+      await handleUpdateTotal(req, next);
+    } catch (err) {
+      next(err);
+    }
 
     return updatedReview;
   } catch (err) {

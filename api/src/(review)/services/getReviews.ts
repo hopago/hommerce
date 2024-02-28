@@ -15,5 +15,6 @@ export const handleGetReviews = async (bookId: string, pageNum: number) => {
   return {
     reviews,
     hasNextPage,
+    totalReviews,
   };
 };

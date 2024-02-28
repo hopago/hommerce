@@ -16,6 +16,10 @@ import bookDetailsRouter from "./(book)/(details)/routes/detail";
 import authorRouter from "./(author)/routes/author";
 import cartRouter from "./(user)/(cart)/routes/cart";
 import reviewRouter from "./(review)/routes/review";
+import reviewReplyRouter from "./(review)/(reply)/routes/review-reply";
+import reviewTotalRouter from "./(review)/(total)/routes/review-total";
+import favorRouter from "./(user)/(favor)/routes/favor";
+import pointRouter from "./(user)/(point)/routes/point";
 
 const app = express();
 
@@ -36,9 +40,11 @@ app.use("/author", authorRouter);
 app.use("/book", bookRouter);
 app.use("/book/:bookId/details", bookDetailsRouter);
 app.use("/cart", cartRouter);
-// app.use("/list", listRouter);
-// app.use("/point", pointRouter);
+app.use("/favor", favorRouter);
+app.use("/point", pointRouter);
 app.use("/review", reviewRouter);
+app.use("/review/reply", reviewReplyRouter);
+app.use("/review/total", reviewTotalRouter);
 app.use("/user", userRouter);
 
 app.use(errorHandler);

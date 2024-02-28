@@ -17,9 +17,12 @@ export const getReviews = async (
   if (!pageNum) throw new HttpException(400, "Page number required.");
 
   try {
-    const { reviews, hasNextPage } = await handleGetReviews(bookId, pageNum);
+    const { reviews, hasNextPage, totalReviews } = await handleGetReviews(
+      bookId,
+      pageNum
+    );
 
-    return res.status(200).json({ reviews, hasNextPage });
+    return res.status(200).json({ reviews, hasNextPage, totalReviews });
   } catch (err) {
     next(err);
   }

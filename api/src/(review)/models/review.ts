@@ -9,9 +9,9 @@ export interface IReview extends Document {
   rating: ReviewRatingType;
   keyword: ReviewKeywords;
   desc: string;
+  liked: number;
   createdAt: Date;
   updatedAt: Date;
-  liked: number;
 }
 
 const reviewSchema = new Schema(
