@@ -6,6 +6,7 @@ import DetailsIndex from "./pages/details/[bookId]";
 import LoginIndex from "./pages/login";
 import SigninIndex from "./pages/join";
 import SigninSuccessIndex from "./pages/join/success";
+import SearchIndex from "./pages/search";
 
 export const routes = [
   {
@@ -30,6 +31,11 @@ export const routes = [
     ],
   },
   {
+    path: "/search",
+    element: <SearchIndex />,
+    index: true,
+  },
+  {
     path: "/login",
     element: <LoginIndex />,
     index: true,
@@ -48,6 +54,7 @@ export const routes = [
 
 export const pages = [
   { route: "/" },
+  { route: "/search" },
   { route: "/:lang" },
   { route: "/details/:bookId" },
   { route: "/category/:lang" },

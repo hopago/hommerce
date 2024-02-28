@@ -3,11 +3,11 @@ import { useEffect, useRef, useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import SelectPopOut from "./SelectPopOut";
 
-import { selectedCartState } from "../../recoil/search";
+import { searchState } from "../../recoil/search";
 import { useRecoilValue } from "recoil";
 
 export default function SearchSelect({ className }: { className?: string }) {
-  const select = useRecoilValue<SearchType>(selectedCartState);
+  const select = useRecoilValue<SearchType>(searchState);
 
   const selectRef = useRef<HTMLDivElement>(null);
   const selectListRef = useRef<HTMLDivElement>(null);

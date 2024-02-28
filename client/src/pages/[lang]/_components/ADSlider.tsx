@@ -1,11 +1,13 @@
 import { forwardRef, useEffect, useState } from "react";
+import { cn } from "../../../lib/utils";
 
 type ADSliderProps = {
   images: string[];
+  className: "search-ad__container__slider";
 };
 
 const ADSlider = forwardRef<HTMLUListElement, ADSliderProps>(
-  ({ images }, ref) => {
+  ({ images, className }, ref) => {
     const [currList, setCurrList] = useState<string[]>();
 
     useEffect(() => {
@@ -19,8 +21,14 @@ const ADSlider = forwardRef<HTMLUListElement, ADSliderProps>(
     }, [images]);
 
     return (
-      <div className="ad-banner__container">
-        <ul className="ad-banner__container__horizontal" ref={ref}>
+      <div className={cn("ad-banner__container", className && className)}>
+        <ul
+          className={cn(
+            "ad-banner__container__horizontal",
+            className && className
+          )}
+          ref={ref}
+        >
           {currList?.map((image, i) => (
             <li key={`${image}-${i}`}>
               <img src={image} alt="ad-banner" />

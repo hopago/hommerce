@@ -16,6 +16,8 @@ if (!PUBLISHABLE_KEY) {
   throw new Error("Missing AUTH-KEY...");
 }
 
+// TODO: 토스트 창 상태 변경
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>

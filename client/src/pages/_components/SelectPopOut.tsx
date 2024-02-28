@@ -1,5 +1,5 @@
 import { useSetRecoilState } from "recoil";
-import { selectedCartState } from "../../recoil/search";
+import { searchState } from "../../recoil/search";
 import { cn } from "../../lib/utils";
 import { forwardRef } from "react";
 
@@ -12,7 +12,7 @@ type SelectPopOutProps = {
 
 const SelectPopOut = forwardRef<HTMLDivElement, SelectPopOutProps>(
   ({ setShow, className, animationName }: SelectPopOutProps, ref) => {
-    const setSelect = useSetRecoilState<SearchType>(selectedCartState);
+    const setSelect = useSetRecoilState<SearchType>(searchState);
 
     const selectList: SearchCategory = [
       {
