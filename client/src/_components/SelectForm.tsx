@@ -50,17 +50,14 @@ export default function SelectForm({
   }, [show]);
 
   return (
-    <button
-      className="select-form"
-      ref={selectRef}
-      onClick={handleClick}
-    >
+    <button className="select-form" ref={selectRef} onClick={handleClick}>
       <div className="text">
         <span>{text}</span>
         {direction === "top" ? <MdArrowDropUp /> : <MdArrowDropDown />}
       </div>
       {show ? (
         <SelectItems
+          type="review"
           ref={selectListRef}
           items={items}
           direction={direction}

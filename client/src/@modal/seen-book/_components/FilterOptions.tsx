@@ -1,8 +1,8 @@
-import { bookParentCategory } from "../pages/_components/constants/category";
+import { bookParentCategory } from "../../../pages/_components/constants/category";
+
+import { FilterOptions as TFilterOptions } from "../hooks/use-filter-option";
 
 import FilterOption from "./FilterOption";
-
-import { FilterOptions as TFilterOptions } from "./hooks/use-filter-option";
 
 type FilterOptionProps = {
   onClick: (option: TFilterOptions) => void;

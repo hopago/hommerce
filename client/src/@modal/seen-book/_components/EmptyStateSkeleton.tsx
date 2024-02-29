@@ -1,8 +1,8 @@
-import alert from "../assets/ico_alert.png";
+import { FilterOptions } from "../hooks/use-filter-option";
 
-import { FilterOptions } from "./hooks/use-filter-option";
+import alert from "../../../assets/ico_alert.png";
 
-import handleNoDataMessage from "./utils/handle-no-data-message";
+import handleNoDataMessage from "../utils/handle-no-data-message";
 
 type EmptySkeletonProps = {
   option: FilterOptions;

@@ -1,9 +1,8 @@
 import { books as seenBooks } from "../recoil/books";
-
-import SeenBookList from "../@modal/SeenBookList";
-
-import { seenModalState } from "../recoil/seen-modal";
 import { useRecoilState } from "recoil";
+import { seenModalState } from "../recoil/seen-modal";
+
+import { SeenBookModal } from "../@modal";
 
 export default function FixedSeenBooks() {
   /* Book ID Local 저장 후 가져온 뒤 lest-seen-item img, seen-items length 띄우기 */
@@ -27,7 +26,7 @@ export default function FixedSeenBooks() {
           <span className="text-wrap">{length}</span>
         </div>
       </div>
-      {show && <SeenBookList show={show} books={seenBooks} />}
+      {show && <SeenBookModal show={show} books={seenBooks} />}
     </>
   );
 }

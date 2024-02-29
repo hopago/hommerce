@@ -1,5 +1,6 @@
 import { useSetRecoilState } from "recoil";
-import { seenModalState } from "../recoil/seen-modal";
+import { seenModalState } from "../../../recoil/seen-modal";
+
 import { MdClose } from "react-icons/md";
 
 export default function Heading() {

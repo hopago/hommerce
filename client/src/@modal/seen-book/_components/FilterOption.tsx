@@ -1,6 +1,6 @@
-import { cn } from "../lib/utils";
+import { cn } from "../../../lib/utils";
 
-import { FilterOptions } from "./hooks/use-filter-option";
+import { FilterOptions } from "../hooks/use-filter-option";
 
 type FilterOptionProps = {
   category: FilterOptions;

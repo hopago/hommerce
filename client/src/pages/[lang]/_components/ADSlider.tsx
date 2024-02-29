@@ -3,7 +3,7 @@ import { cn } from "../../../lib/utils";
 
 type ADSliderProps = {
   images: string[];
-  className: "search-ad__container__slider";
+  className?: "search-ad__container__slider";
 };
 
 const ADSlider = forwardRef<HTMLUListElement, ADSliderProps>(

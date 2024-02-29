@@ -1,5 +1,8 @@
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
+
 import { searchFilterState } from "../../../recoil/search-filter";
+
+import { cn } from "../../../lib/utils";
 
 export default function FilterOptions() {
   const filterOptions: FilterOptions = [
@@ -9,18 +12,23 @@ export default function FilterOptions() {
     "출판사",
   ];
 
-  const setFilter = useSetRecoilState(searchFilterState);
+  const [filter, setFilter] = useRecoilState(searchFilterState);
 
   const onClick = (option: SearchFilter) => {
     setFilter(option);
   };
 
   return (
-    <div className="search-contents__filter__wrapper__options">
+    <div className="search-contents__filter__options">
       <ul>
         {filterOptions.map((opt) => (
           <li key={opt}>
-            <button onClick={() => onClick(opt)}>{opt}</button>
+            <button
+              className={cn("", opt === filter && "active")}
+              onClick={() => onClick(opt)}
+            >
+              {opt}
+            </button>
           </li>
         ))}
       </ul>

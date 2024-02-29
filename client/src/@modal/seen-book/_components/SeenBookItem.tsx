@@ -1,11 +1,11 @@
-import ParentCategoryBadge from "../pages/_components/ParentCategoryBadge";
-
 import { MdClose } from "react-icons/md";
-import heart from "../assets/ico_heart.png";
+import heart from "../../../assets/ico_heart.png";
 
 import { useState } from "react";
 
-import { cn } from "../lib/utils";
+import ParentCategoryBadge from "../../../pages/_components/ParentCategoryBadge";
+
+import { cn } from "../../../lib/utils";
 
 type SeenBookItemProps = {
   book: TBook;

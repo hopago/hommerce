@@ -13,6 +13,9 @@
 // details page
 @import 'details';
 
+// search page
+@import 'search-page';
+
 // login page
 @import 'login';
 
@@ -33,7 +36,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-top: 1px solid rgba(0,0,0,.18);
+    border-top: 1px solid rgba(0, 0, 0, .18);
 
     p {
         font-size: 13px;
@@ -76,7 +79,7 @@ h1 {
     color: inherit;
 }
 
-// reuse badge & btn
+// badge
 .best-flag-badge {
     display: flex;
     align-items: center;
@@ -98,6 +101,9 @@ h1 {
         font-weight: 900;
     }
 }
+
+// btn
+
 
 .prod-purchase-button {
     border-radius: 0.25rem;
@@ -157,10 +163,10 @@ h1 {
 }
 
 .amount-btn {
-    border: 1px solid rgba(0,0,0,.18);
+    border: 1px solid rgba(0, 0, 0, .18);
     background-color: transparent;
     border-radius: 4px;
-    
+
     .flex-between {
         display: flex;
         align-items: center;
@@ -197,7 +203,7 @@ h1 {
     padding: 0.5rem;
     border-radius: 4px;
     background-color: transparent;
-    border: 1px solid rgba(0,0,0,.18);
+    border: 1px solid rgba(0, 0, 0, .18);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -233,7 +239,7 @@ h1 {
         width: 20px;
         height: 20px;
         border-radius: 50%;
-        border: 1px solid rgba(0,0,0,.18);
+        border: 1px solid rgba(0, 0, 0, .18);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -282,6 +288,7 @@ h1 {
     justify-content: center;
 }
 
+// tool-tip
 .common-tooltip {
     position: absolute;
     top: 125%;

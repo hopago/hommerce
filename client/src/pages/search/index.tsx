@@ -9,6 +9,7 @@ import SearchHeading from "./_components/SearchHeading";
 import SearchAD from "./_components/SearchAD";
 import SearchFilter from "./_components/SearchFilter";
 import SearchContents from "./_components/SearchContents";
+import FixedSeenBooks from "../../_components/FixedSeenBooks";
 
 export default function SearchIndex() {
   const location = useLocation();
@@ -44,6 +45,7 @@ export default function SearchIndex() {
           </aside>
         </section>
       </main>
+      <FixedSeenBooks />
     </div>
   );
 }

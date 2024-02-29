@@ -1,4 +1,4 @@
-import trash from "../assets/ico_delete@2x.png";
+import trash from "../../../assets/ico_delete@2x.png";
 
 type SortHeaderProps = {
   length: number;

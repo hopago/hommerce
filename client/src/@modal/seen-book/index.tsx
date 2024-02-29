@@ -1,17 +1,17 @@
 import { useEffect, useRef } from "react";
 
-import FilterOptions from "./FilterOptions";
-import Heading from "./Heading";
-import SeenBooks from "./SeenBooks";
-
 import { useFilterOption } from "./hooks/use-filter-option";
+
+import Heading from "./_components/Heading";
+import FilterOptions from "./_components/FilterOptions";
+import SeenBooks from "./_components/SeenBooks";
 
 type SeenBookListProps = {
   books: TBooks;
   show: boolean;
 };
 
-export default function SeenBookList({ books, show }: SeenBookListProps) {
+export default function SeenBookModal({ books, show }: SeenBookListProps) {
   const { option, onClick } = useFilterOption();
 
   const modalRef = useRef<HTMLDivElement>(null);

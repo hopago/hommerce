@@ -4,7 +4,7 @@ import SeenBookItem from "./SeenBookItem";
 import SortHeader from "./SortHeader";
 import EmptyStateSkeleton from "./EmptyStateSkeleton";
 
-import { cn } from "../lib/utils";
+import { cn } from "../../../lib/utils";
 
 type SeenBooksProps = {
   books: TBooks;
