@@ -10,6 +10,7 @@ type ButtonProps = {
   icon?: string | JSX.Element;
   onClick: any;
   disabled?: boolean;
+  className?: string;
 };
 
 export default function Button({
@@ -19,10 +20,12 @@ export default function Button({
   text,
   icon,
   onClick,
+  className,
+  disabled,
 }: ButtonProps) {
   const { isSignedIn } = useAuth();
 
-  if (!text || !icon) return null;
+  if (!text && !icon) throw new Error("Text or Icon required.");
 
   const handleClick = () => {
     onClick();
@@ -35,8 +38,9 @@ export default function Button({
   return (
     <button
       type={type}
-      className={cn("", size && `btn-${size}`)}
+      className={cn(className ? className : "", size && `btn ${size}`)}
       onClick={handleClick}
+      disabled={disabled}
     >
       <div className="horizontal">
         {icon && (

@@ -1,8 +1,11 @@
-export const calculateDiscount = (price: number, discount: string | undefined) => {
+export const calculateDiscount = (
+  price: number,
+  discount: number | undefined
+) => {
   if (!discount) return;
 
   const numberPrice = Number(price);
-  const discountRate = Number(discount.replace("%", "")) / 100;
+  const discountRate = discount / 100;
 
   const discountedPrice = numberPrice * (1 - discountRate);
 

@@ -5,7 +5,7 @@ import ProdInfoGuide from "./ProdInfoGuide";
 
 type DefaultPriceInfoProps = {
   prodBadgeList: ProdBadgeText[];
-  discount: string | undefined;
+  discount: number | undefined;
   discountedPrice: number | undefined;
   unit: string;
   price: number;
@@ -33,7 +33,7 @@ export default function DefaultPriceInfo({
       </ul>
       <div className="details-single-book__horizontal__price__prod-info">
         <div className="details-single-book__horizontal__price__prod-info__price-container">
-          {discount && <span className="discount">{discount}</span>}
+          {discount && <span className="discount">{discount}%</span>}
           {discountedPrice && (
             <span className="discounted-price">
               {Number(discountedPrice).toLocaleString()}

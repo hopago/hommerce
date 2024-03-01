@@ -4,6 +4,7 @@ import SelectItems from "../../../_components/SelectItems";
 
 import { useRecoilState } from "recoil";
 import { searchSortState } from "../../../recoil/search-sort";
+import { MdArrowDropDown } from "react-icons/md";
 
 export default function SortButton() {
   const items: SearchSortList = [
@@ -57,7 +58,10 @@ export default function SortButton() {
       ref={selectRef}
       onClick={(e) => handleClick(e)}
     >
-      {sort}
+      <div className="horizontal">
+        <span>{sort}</span>
+        <MdArrowDropDown className="icon" />
+      </div>
       {show ? (
         <SelectItems
           type="search"

@@ -1,13 +1,28 @@
-import Books from "./Books";
+import PaginateControl from "../../details/[bookId]/_components/PaginateControl";
+
+import { getPageTotal } from "../../details/[bookId]/hooks/getPageTotal";
+
+import { useSelectUI } from "../hooks/use-select-ui";
+import BookList from "./BookList";
+
 import FilterInfo from "./FilterInfo";
 import SortBox from "./SortBox";
 
-export default function SearchContents() {
+type SearchContentsProps = {
+  docsLength: number;
+};
+
+export default function SearchContents({ docsLength }: SearchContentsProps) {
+  const { onClick, display } = useSelectUI();
+
+  const pageTotal = getPageTotal(docsLength);
+
   return (
     <div className="search-contents__container">
-      <SortBox />
+      <SortBox onClick={onClick} display={display} docsLength={docsLength} />
       <FilterInfo />
-      <Books />
+      <BookList display={display} />
+      <PaginateControl pageTotal={pageTotal} />
     </div>
   );
 }

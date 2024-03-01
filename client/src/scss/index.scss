@@ -103,7 +103,44 @@ h1 {
 }
 
 // btn
+.btn {
+    background-color: transparent;
+    border: 1px solid rgba(0, 0, 0, .18);
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .3s ease;
 
+    &.sm {
+        width: 38px;
+        height: 38px;
+
+        .img-wrap {
+
+            img {
+                width: 18px;
+                height: 18px;
+            }
+        }
+    }
+
+    &.cart {
+
+        .img-wrap {
+
+            img {
+                width: 14px;
+                height: 19px;
+            }
+        }
+    }
+
+    &:hover {
+        background-color: rgba(0,0,0,0.06);
+    }
+}
 
 .prod-purchase-button {
     border-radius: 0.25rem;

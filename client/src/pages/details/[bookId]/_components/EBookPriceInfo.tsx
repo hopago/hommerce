@@ -4,7 +4,7 @@ import { calculateDiscount } from "../../../../utils/calculate-price";
 
 type EBookPriceInfoProps = {
   prodBadgeList: ProdBadgeText[];
-  discount: string | undefined;
+  discount: number | undefined;
   discountedPrice: number | undefined;
   unit: string;
   eBookPrice: number | undefined;

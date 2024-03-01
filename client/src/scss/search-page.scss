@@ -169,6 +169,66 @@
                 flex: 5;
                 display: flex;
                 flex-direction: column;
+
+                .search-contents__container {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+
+                    &__sort-box {
+                        width: 100%;
+                        padding-bottom: 1rem;
+                        border-bottom: 1px solid rgba(0,0,0,.18);
+
+                        &__wrapper {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+
+                            .title-wrap {
+                                font-size: 16px;
+                                line-height: 24px;
+                                letter-spacing: -0.01em;
+                                font-weight: 700;
+
+                                span {
+                                    color: $font-green;
+                                }
+                            }
+
+                            &__buttons {
+                                display: flex;
+                                align-items: center;
+                                gap: 0.5rem;
+
+                                .switch-buttons {
+                                    display: flex;
+                                    align-items: center;
+                                }
+
+                                .select-form {
+
+                                    .select-items.bottom.fade-in-dropdown.sort-box-buttons {
+
+                                        li {
+                                            width: 80px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .filter-info {
+                        padding: 1rem 0;
+                        border-bottom: 1px solid rgba(0,0,0,.18);
+                        margin-bottom: 1rem;
+
+                        .prod-badge-md {
+                            width: max-content;
+                        }
+                    }
+                }
             }
         }
     }

@@ -27,7 +27,7 @@ export default function book({ book }: { book: TBook }) {
             <p className="author">{book.author}</p>
             <div className="lang-page-picks__today__vertical__single-book__horizontal__book-info__price-texts">
               {book.discount ? (
-                <span className="discount">{book.discount}</span>
+                <span className="discount">{book.discount}%</span>
               ) : null}
               <span className="price" style={{ fontWeight: "bold" }}>
                 {book.price.toLocaleString()}

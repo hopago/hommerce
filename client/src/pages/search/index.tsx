@@ -16,6 +16,8 @@ export default function SearchIndex() {
   const queryParams = new URLSearchParams(location.search);
   const keyword = queryParams.get("keyword");
 
+  const temporaryDocsLength = 104903;
+
   const { onSubmit, onChange, searchTerm, setSearchTerm } = useSearchForm();
 
   if (!keyword) return null;
@@ -32,7 +34,10 @@ export default function SearchIndex() {
         searchTerm={searchTerm}
       />
       <header>
-        <SearchHeading searchTerm={searchTerm} />
+        <SearchHeading
+          searchTerm={searchTerm}
+          docsLength={temporaryDocsLength}
+        />
       </header>
       <main>
         <section className="search-ad">
@@ -41,7 +46,7 @@ export default function SearchIndex() {
         <section className="search-contents">
           <SearchFilter />
           <aside>
-            <SearchContents />
+            <SearchContents docsLength={temporaryDocsLength} />
           </aside>
         </section>
       </main>

@@ -7,6 +7,7 @@ import SetPage from "./SetPage";
 import MoveToLastPage from "./MoveToLastPage";
 import NextPage from "./NextPage";
 import MoveToFirstPage from "./MoveToFirstPage";
+import { useEffect } from "react";
 
 type PaginateControlProps = {
   pageTotal: number;
@@ -38,6 +39,10 @@ export default function PaginateControl({ pageTotal }: PaginateControlProps) {
     setCurrentPage(pageTotal);
   };
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, []);
+
   return (
     <div className="reviews-pagination">
       <PrevPage onPrevPage={handlePrevPage} disabled={prevPageDisabled} />
@@ -49,7 +54,7 @@ export default function PaginateControl({ pageTotal }: PaginateControlProps) {
         total={pageTotal}
         onSetPage={handleSetPage}
       />
-      {pageTotal - 8 < currentPage && (
+      {pageTotal - 8 > currentPage && (
         <MoveToLastPage
           pageTotal={pageTotal}
           handleMoveToLastPage={handleMoveToLastPage}

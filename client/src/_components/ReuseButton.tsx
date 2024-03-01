@@ -7,9 +7,9 @@ type FAQText = "반품/교환 신청" | "1:1문의";
 type ProdPurchaseButtonProps = {
   style: "default" | "purple";
   text: PurchaseButtonText | FAQText | string;
-  size: "md" | "lg";
+  size: "sm" | "md" | "lg";
   icon?: JSX.Element | string;
-  onClick?: () => void;
+  onClick?: () => void | (() => Promise<void>);
 };
 
 export default function ReuseButton({

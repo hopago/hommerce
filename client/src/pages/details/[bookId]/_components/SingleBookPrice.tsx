@@ -7,7 +7,7 @@ import EBookPriceInfo from "./EBookPriceInfo";
 type SingleBookPriceProps = {
   price: number;
   unit: string;
-  discount: string | undefined;
+  discount: number | undefined;
   sellType: SellWay;
   eBookPrice: number | undefined;
 };

@@ -18,7 +18,7 @@ export default function NewBookItem({ book }: NewBookItemProps) {
             <span>{book.publisher}</span>
           </div>
           {book.discount ? (
-            <span className="discount">{book.discount}</span>
+            <span className="discount">{book.discount}%</span>
           ) : null}
           <span className="price" style={{ fontWeight: "bold" }}>
             {book.price?.toLocaleString()}

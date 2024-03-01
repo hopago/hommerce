@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 type FixedPurchaseShortcutProps = {
   price: number | undefined;
   unit: string;
-  discount: string | undefined;
+  discount: number | undefined;
 };
 
 export default function FixedPurchaseShortcut({
