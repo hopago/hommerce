@@ -16,7 +16,7 @@ export default function DashboardLayout({
       <div className={styles.wrapper}>
         <Navbar />
         <section className={styles.contents}>
-          <aside>{children}</aside>
+          <main>{children}</main>
         </section>
       </div>
     </div>

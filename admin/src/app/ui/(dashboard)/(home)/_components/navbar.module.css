@@ -46,7 +46,7 @@
 .icons {
     display: flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 1rem;
     cursor: pointer;
     color: var(--text);
 }

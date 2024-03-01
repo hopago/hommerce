@@ -1,10 +1,10 @@
 import {
-  MdAttachMoney,
   MdDashboard,
+  MdDesignServices,
   MdHelpCenter,
   MdOutlineSettings,
+  MdOutlineSupervisorAccount,
   MdShoppingBag,
-  MdSupervisedUserCircle,
 } from "react-icons/md";
 
 import { MenuList } from "../types/menu-list";
@@ -21,7 +21,7 @@ export const menuList: MenuList = [
       {
         title: "유저",
         path: "/users",
-        icon: <MdSupervisedUserCircle />,
+        icon: <MdOutlineSupervisorAccount />,
       },
       {
         title: "상품",
@@ -29,9 +29,9 @@ export const menuList: MenuList = [
         icon: <MdShoppingBag />,
       },
       {
-        title: "배송",
-        path: "/ship",
-        icon: <MdAttachMoney />,
+        title: "서비스",
+        path: "/service",
+        icon: <MdDesignServices />,
       },
     ],
   },
