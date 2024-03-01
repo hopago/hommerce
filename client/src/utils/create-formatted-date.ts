@@ -5,3 +5,9 @@ export const formatDate = (date: Date | string) => {
 
   return formattedDate.replace(/-/g, ".");
 };
+
+export const getFullDate = (date: Date | string) => {
+  const formattedDate = format(new Date(date), "yy년 M월 d일");
+
+  return formattedDate;
+};

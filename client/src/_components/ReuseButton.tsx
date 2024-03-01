@@ -4,7 +4,7 @@ type PurchaseButtonText = "장바구니" | "바로구매";
 
 type FAQText = "반품/교환 신청" | "1:1문의";
 
-type ProdPurchaseButtonProps = {
+type ReuseButtonProps = {
   style: "default" | "purple";
   text: PurchaseButtonText | FAQText | string;
   size: "sm" | "md" | "lg";
@@ -18,7 +18,7 @@ export default function ReuseButton({
   size,
   icon,
   onClick,
-}: ProdPurchaseButtonProps) {
+}: ReuseButtonProps) {
   let iconContent: JSX.Element | string | null = null;
 
   if (typeof icon === "string") {

@@ -27,9 +27,9 @@ export default function BookList({ display }: BookListProps) {
 
   return (
     <div className="search-contents__container__book-list">
-      <ul className={cn("", display === "flex" ? "flex" : "gird")}>
+      <ul className={cn("", display === "flex" ? "flex" : "grid")}>
         {temporaryBooks.map((book, i) => (
-          <BookItem key={`${book.id}-${i}`} book={book} />
+          <BookItem key={`${book.id}-${i}`} book={book} display={display} />
         ))}
       </ul>
     </div>

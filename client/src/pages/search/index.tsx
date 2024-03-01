@@ -11,10 +11,16 @@ import SearchFilter from "./_components/SearchFilter";
 import SearchContents from "./_components/SearchContents";
 import FixedSeenBooks from "../../_components/FixedSeenBooks";
 
+import { useRecoilValue } from "recoil";
+import { seenModalState } from "../../recoil/seen-modal";
+import { Footer } from "../_components";
+
 export default function SearchIndex() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const keyword = queryParams.get("keyword");
+
+  const show = useRecoilValue(seenModalState);
 
   const temporaryDocsLength = 104903;
 
@@ -25,6 +31,18 @@ export default function SearchIndex() {
   useEffect(() => {
     setSearchTerm(keyword);
   }, [keyword]);
+
+  useEffect(() => {
+    if (show) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [show]);
 
   return (
     <div id="search-page">
@@ -50,6 +68,7 @@ export default function SearchIndex() {
           </aside>
         </section>
       </main>
+      <Footer />
       <FixedSeenBooks />
     </div>
   );

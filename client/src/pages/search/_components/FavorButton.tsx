@@ -1,4 +1,4 @@
-import { MdStar } from "react-icons/md";
+import heart from "../../../assets/ico_heart.png";
 
 type FavorButtonProps = {
   favorLength: number;
@@ -10,13 +10,9 @@ export default function FavorButton({ favorLength }: FavorButtonProps) {
   return (
     <button className="favor-btn" onClick={onClick}>
       <div className="img-wrap">
-        <div className="vertical">
-          <div className="icon-wrap">
-            <MdStar className="icon" />
-          </div>
-          <span>{favorLength}</span>
-        </div>
+        <img src={heart} alt="heart-icon" />
       </div>
+      <span>{favorLength}</span>
     </button>
   );
 }

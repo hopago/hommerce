@@ -1,32 +1,40 @@
-import { useSetRecoilState } from "recoil";
+import { useEffect, useState } from "react";
+
+import { useRecoilState } from "recoil";
 import { selectedBookState } from "../../../recoil/selected-book";
 
 import { MdCheck } from "react-icons/md";
+
+import { cn } from "../../../lib/utils";
 
 type SelectBookProps = {
   book: TBook;
 };
 
 export default function SelectBook({ book }: SelectBookProps) {
-  const setSelectedBook = useSetRecoilState(selectedBookState);
+  const [selectedBooks, setSelectedBooks] = useRecoilState(selectedBookState);
+
+  const [isSelected, setIsSelected] = useState(false);
 
   const handleSelectBook = () => {
-    setSelectedBook((selectedBook) => {
-      const currSelected = selectedBook;
+    const filteredSelectedBook = selectedBooks.filter((b) => b.id !== book.id);
 
-      const findIndex = currSelected.findIndex((b) => b.id === book.id);
-
-      if (findIndex) {
-        const updatedList = currSelected.filter((b) => b.id !== book.id);
-        return updatedList;
-      } else {
-        return [...currSelected, book];
-      }
-    });
+    isSelected
+      ? setSelectedBooks(filteredSelectedBook)
+      : setSelectedBooks([...selectedBooks, book]);
   };
 
+  useEffect(() => {
+    const checkExist = selectedBooks.some((b) => b.id === book.id);
+
+    setIsSelected(checkExist);
+  }, [selectedBooks.length, book.id]);
+
   return (
-    <button onClick={handleSelectBook}>
+    <button
+      className={cn("select-button", isSelected && "active")}
+      onClick={handleSelectBook}
+    >
       <span className="ico-wrap">
         <MdCheck className="icon" />
       </span>
