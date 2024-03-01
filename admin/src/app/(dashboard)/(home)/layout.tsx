@@ -1,5 +1,7 @@
-import Navbar from "@/app/ui/(dashboard)/_components/Navbar";
-import Sidebar from "@/app/ui/(dashboard)/_components/Sidebar";
+import Navbar from "@/app/ui/(dashboard)/(home)/_components/Navbar";
+import Sidebar from "@/app/ui/(dashboard)/(home)/_components/Sidebar";
+
+import styles from "@/app/ui/(dashboard)/(home)/dashboard.module.css";
 
 export default function DashboardLayout({
   children,
@@ -7,14 +9,16 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div id="dashboard">
-      <section className="dashboard-sidebar">
+    <div className={styles.container}>
+      <section className={styles.sidebar}>
         <Sidebar />
       </section>
-      <Navbar />
-      <section className="dashboard-contents">
-        <aside>{children}</aside>
-      </section>
+      <div className={styles.wrapper}>
+        <Navbar />
+        <section className={styles.contents}>
+          <aside>{children}</aside>
+        </section>
+      </div>
     </div>
   );
 }

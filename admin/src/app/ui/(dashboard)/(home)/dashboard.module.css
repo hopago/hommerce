@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+}
+
+.sidebar {
+    height: 100dvh;
+    flex: 1;
+    padding: 1rem;
+}
+
+.wrapper {
+    flex: 4;
+    display: flex;
+    flex-direction: column;
+}
