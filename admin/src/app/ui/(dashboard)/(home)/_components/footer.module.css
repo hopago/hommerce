@@ -1,0 +1,35 @@
+.container {
+    padding: 1rem;
+    margin-top: 2rem;
+}
+
+.wrapper {
+    padding-top: 1rem;
+    width: 100%;
+    border-top: 1px solid var(--divider);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logoText {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.logoImg {
+    object-fit: contain;
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+.text {
+    color: var(--textSoft);
+    font-size: 14px;
+}

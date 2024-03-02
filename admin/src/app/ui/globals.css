@@ -3,6 +3,9 @@
   --bgSoft: #182237;
   --text: #f7f7f7;
   --textSoft: #b7bac1;
+  --textPurple: #5d57c9;
+  --divider: rgba(255,255,255,.18);
+  --hover: #2e374a;
 }
 
 * {

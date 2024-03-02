@@ -1,3 +1,4 @@
+import Footer from "@/app/ui/(dashboard)/(home)/_components/Footer";
 import Navbar from "@/app/ui/(dashboard)/(home)/_components/Navbar";
 import Sidebar from "@/app/ui/(dashboard)/(home)/_components/Sidebar";
 
@@ -15,9 +16,10 @@ export default function DashboardLayout({
       </section>
       <div className={styles.wrapper}>
         <Navbar />
-        <section className={styles.contents}>
-          <main>{children}</main>
-        </section>
+        <div className={styles.contents}>
+          <section>{children}</section>
+          <Footer />
+        </div>
       </div>
     </div>
   );

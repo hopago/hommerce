@@ -1,0 +1,63 @@
+.container {
+    width: 100%;
+    position: sticky;
+    top: 1rem;
+}
+
+.wrapper {
+    position: relative;
+    background: linear-gradient(to top, #182237, #253352);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.bgContainer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 27%;
+    height: 54%;
+}
+
+.bg {
+    opacity: 0.3;
+}
+
+.texts {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.notification {
+    font-weight: bold;
+}
+
+.title,
+.navigate,
+.subtitle {
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--textSoft);
+}
+
+.navigate {
+    cursor: pointer;
+}
+
+.navigate:hover {
+    text-decoration: underline;
+}
+
+.button {
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--textPurple);
+    color: var(--text);
+    border-radius: 0.25rem;
+    cursor: pointer;
+    width: max-content;
+}

@@ -8,12 +8,12 @@ import styles from "@/app/ui/(dashboard)/(home)/dashboard.module.css";
 export default function DashBoard() {
   return (
     <div className={styles.dashboardContainer}>
-      <div className={styles.main}>
+      <main className={styles.main}>
         <TotalCardList />
         <LatestReport />
         <DataChart />
         {/* API Docs & Routes */}
-      </div>
+      </main>
       <aside className={styles.aside}>
         <RightBar />
       </aside>
