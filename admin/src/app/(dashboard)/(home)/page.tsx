@@ -12,6 +12,7 @@ export default function DashBoard() {
         <TotalCardList />
         <LatestReport />
         <DataChart />
+        {/* API Docs & Routes */}
       </div>
       <aside className={styles.aside}>
         <RightBar />

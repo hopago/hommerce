@@ -72,16 +72,18 @@ export default function TotalCardItem({
   }
 }
 
-const CardTitle = ({ title }: CardTitleProps) => <p>{title}</p>;
+const CardTitle = ({ title }: CardTitleProps) => (
+  <p className={styles.title}>{title}</p>
+);
 
-const CardValue = ({ value }: CardValueProps) => <p>{value}</p>;
+const CardValue = ({ value }: CardValueProps) => <p className={styles.pert}>{value}</p>;
 
 const CardCompare = ({ isPositive, value }: CardCompareProps) => (
-  <p>
-    <span>전월 대비</span>
+  <p className={styles.details}>
+    <span>전월 대비 </span>
     <span className={isPositive ? styles.positive : styles.negative}>
       {value}%
     </span>
-    {isPositive ? <span>증가했습니다.</span> : <span>감소했습니다.</span>}
+    {isPositive ? <span> 증가했습니다.</span> : <span> 감소했습니다.</span>}
   </p>
 );

@@ -1,0 +1,38 @@
+.container {
+    background-color: var(--bgSoft);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    gap: 1rem;
+    cursor: pointer;
+    width: 100%;
+}
+
+.container:hover {
+    background-color: #2e374a;
+}
+
+.texts {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.pert {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.details {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.positive {
+    color: lime;
+}
+
+.negative {
+    color: red;
+}
+
