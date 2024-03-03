@@ -4,6 +4,9 @@ import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import morgan from "morgan";
 
+import swaggerUI from "swagger-ui-express";
+import swaggerDocument from "../openapi.json";
+
 import { connectDB } from "./config/dbConn";
 import { whiteList } from "./config/cors";
 import { PORT } from "./config/port";
@@ -46,6 +49,8 @@ app.use("/review", reviewRouter);
 app.use("/review/reply", reviewReplyRouter);
 app.use("/review/total", reviewTotalRouter);
 app.use("/user", userRouter);
+
+app.use("/api/specs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.use(errorHandler);
 
