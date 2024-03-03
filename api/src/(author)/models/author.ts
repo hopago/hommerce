@@ -1,6 +1,7 @@
-import { Schema, model, Document } from "mongoose";
+import { Schema, model, Document, Types } from "mongoose";
 
-interface IAuthor extends Document {
+export interface IAuthor extends Document {
+  _id: Types.ObjectId;
   name: string;
   job: AuthorType;
   intro: string;

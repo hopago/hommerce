@@ -68,7 +68,10 @@ export const deleteTotal = async (
   const { bookId } = req.params;
   if (!bookId) throw new HttpException(400, "Book Id required.");
 
-  const { rating, keyword } = req.body;
+  const { rating, keyword } = req.query as {
+    rating: ReviewRatingType;
+    keyword: ReviewKeywords;
+  };
   isFieldsFullFilled(["rating, keyword"], req);
 
   try {

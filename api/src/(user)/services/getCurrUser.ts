@@ -3,12 +3,12 @@ import User from "../model/user";
 import { HttpException } from "../../middleware/error/utils";
 
 export const handleGetCurrUser = async (req: Request, next: NextFunction) => {
-  const { id } = req.body;
-  if (!id) throw new HttpException(400, "Book id required.");
+  const userId = req.query.userId as string | undefined;
+  if (!userId) throw new HttpException(400, "User Id required.");
 
   try {
-    const user = User.findOne({
-      id,
+    const user = await User.findOne({
+      id: userId,
     });
     if (!user) throw new HttpException(404, "User not found.");
 

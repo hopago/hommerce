@@ -1,33 +1,34 @@
 import { NextFunction } from "express";
 import Review, { IReview } from "../models/review";
 import { handleDeleteTotal } from "../(total)/services/deleteTotal";
+import { handleDatabaseOperation } from "../../utils/db-operation";
+import { HttpException } from "../../middleware/error/utils";
 
 export const handleDeleteReview = async (
   { bookId, userId }: { bookId: string; userId: string },
   next: NextFunction
 ) => {
   try {
-    const foundReview = (await Review.findOne({
+    const foundReview = await Review.findOne({
       bookId,
       userId,
-    })) as IReview;
+    });
+    if (!foundReview) throw new HttpException(404, "Review not found.");
 
-    try {
-      await handleDeleteTotal(
+    await handleDatabaseOperation(
+      handleDeleteTotal(
         { bookId, rating: foundReview.rating, keyword: foundReview.keyword },
         next
-      );
-    } catch (err) {
-      next(err);
-    }
+      ),
+      next
+    );
 
-    try {
-      await foundReview.deleteOne();
+    const deletedReview = (await handleDatabaseOperation(
+      foundReview.deleteOne(),
+      next
+    )) as IReview;
 
-      return foundReview._id;
-    } catch (err) {
-      next(err);
-    }
+    return deletedReview._id;
   } catch (err) {
     next(err);
   }

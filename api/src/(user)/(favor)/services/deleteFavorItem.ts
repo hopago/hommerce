@@ -3,7 +3,13 @@ import Favor from "../models/favor";
 import { HttpException } from "../../../middleware/error/utils";
 
 export const handleDeleteFavorItem = async (
-  { bookId, userId }: { bookId: string; userId: string },
+  {
+    bookId,
+    userId,
+  }: {
+    bookId: string;
+    userId: string;
+  },
   next: NextFunction
 ) => {
   try {

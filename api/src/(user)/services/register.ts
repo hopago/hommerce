@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-
 import { HttpException } from "../../middleware/error/utils";
-
-import User from "../model/user";
+import User, { IUser } from "../model/user";
+import { handleDatabaseOperation } from "../../utils/db-operation";
+import { handlePostPoint } from "../(point)/services/postPoint";
 
 export const handleRegister = async (
   req: Request,
@@ -24,9 +24,15 @@ export const handleRegister = async (
       username,
       imageUrl,
     });
-    await newUser.save();
 
-    return newUser;
+    const user = (await handleDatabaseOperation(newUser.save(), next)) as IUser;
+
+    await handleDatabaseOperation(
+      handlePostPoint({ userId: user._id.toString() }, next),
+      next
+    );
+
+    return user;
   } catch (err) {
     next(err);
   }

@@ -4,7 +4,7 @@ import {
   getPoint,
   postPoint,
   updatePoint,
-} from "../controllers/post";
+} from "../controllers/point";
 
 const router = express.Router();
 

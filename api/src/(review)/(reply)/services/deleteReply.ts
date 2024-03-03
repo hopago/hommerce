@@ -1,14 +1,19 @@
 import { NextFunction, Request } from "express";
 import ReviewReply, { IReviewReply } from "../models/review-reply";
+import { HttpException } from "../../../middleware/error/utils";
 
-export const handleDeleteReply = async (req: Request, next: NextFunction) => {
+export const handleDeleteReply = async (
+  { userId, reviewId }: { userId: string; reviewId: string },
+  next: NextFunction
+) => {
   try {
-    const { _id } = (await ReviewReply.findOneAndDelete({
-      userId: req.body.userId,
-      reviewId: req.params.reviewId,
+    const deletedReply = (await ReviewReply.findOneAndDelete({
+      userId,
+      reviewId,
     })) as IReviewReply;
+    if (!deletedReply) throw new HttpException(404, "Reply not found.");
 
-    return _id;
+    return deletedReply._id;
   } catch (err) {
     next(err);
   }

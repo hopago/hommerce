@@ -67,15 +67,15 @@ export const deleteReply = async (
   next: NextFunction
 ) => {
   const { reviewId } = req.params;
-  const { userId } = req.body;
+  const userId = req.query.userId as string;
 
   if (!reviewId) throw new HttpException(400, "Review Id required.");
   if (!userId) throw new HttpException(400, "User Id required.");
 
   try {
-    const _id = await handleDeleteReply(req, next);
+    const _id = await handleDeleteReply({ userId, reviewId }, next);
 
-    return res.status(201).json(_id);
+    return res.status(201).json({ reviewId: _id });
   } catch (err) {
     next(err);
   }

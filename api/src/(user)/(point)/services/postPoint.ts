@@ -1,9 +1,12 @@
-import { NextFunction, Request } from "express";
+import { NextFunction } from "express";
 import Point from "../models/point";
 
-export const handlePostPoint = async (req: Request, next: NextFunction) => {
+export const handlePostPoint = async (
+  { userId }: { userId: string },
+  next: NextFunction
+) => {
   const newPoint = new Point({
-    userId: req.params.userId,
+    userId,
   });
 
   try {

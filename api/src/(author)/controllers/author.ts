@@ -67,9 +67,9 @@ export const deleteAuthor = async (
   next: NextFunction
 ) => {
   try {
-    await handleDeleteAuthor(req, next);
+    const _id = await handleDeleteAuthor(req, next);
 
-    return res.sendStatus(204);
+    return res.status(204).json({ authorId: _id });
   } catch (err) {
     next(err);
   }

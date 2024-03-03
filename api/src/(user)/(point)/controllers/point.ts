@@ -31,7 +31,7 @@ export const postPoint = async (
   if (!userId) throw new HttpException(400, "User Id required.");
 
   try {
-    const newPoint = await handlePostPoint(req, next);
+    const newPoint = await handlePostPoint({ userId }, next);
 
     return res.status(201).json(newPoint);
   } catch (err) {
@@ -65,7 +65,7 @@ export const deletePoint = async (
   if (!userId) throw new HttpException(400, "User Id required.");
 
   try {
-    await handleDeletePoint(req, next);
+    await handleDeletePoint({ userId }, next);
 
     return res.sendStatus(204);
   } catch (err) {

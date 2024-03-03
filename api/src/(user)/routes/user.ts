@@ -9,11 +9,7 @@ import {
 
 const router = express.Router();
 
-router
-  .route("/")
-  .get(getCurrUser)
-  .put(updateUser)
-  .delete(deleteUser);
+router.route("/").get(getCurrUser).patch(updateUser).delete(deleteUser);
 
 router.route("/session").post(register);
 

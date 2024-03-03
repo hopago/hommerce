@@ -13,6 +13,7 @@ export const handleGetBookDetails = async (
     const details = await BookDetails.findOne({
       bookId,
     });
+    if (!details) throw new HttpException(404, "Details not found.");
 
     return details;
   } catch (err) {

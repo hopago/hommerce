@@ -1,10 +1,13 @@
-import { NextFunction, Request } from "express";
+import { NextFunction } from "express";
 import Point from "../models/point";
 
-export const handleDeletePoint = async (req: Request, next: NextFunction) => {
+export const handleDeletePoint = async (
+  { userId }: { userId: string },
+  next: NextFunction
+) => {
   try {
     await Point.findOneAndDelete({
-      userId: req.params.userId,
+      userId,
     });
   } catch (err) {
     next(err);

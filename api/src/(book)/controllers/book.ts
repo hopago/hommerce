@@ -4,6 +4,7 @@ import { handlePostBook } from "../services/postBook";
 import { handleGetBook } from "../services/getBook";
 import { handleUpdateBook } from "../services/updateBook";
 import { handleDeleteBook } from "../services/deleteBook";
+import { HttpException } from "../../middleware/error/utils";
 
 export const getBooks = async (
   req: Request,
@@ -67,9 +68,10 @@ export const deleteBook = async (
   next: NextFunction
 ) => {
   try {
-    await handleDeleteBook(req, next);
+    const _id = await handleDeleteBook(req, next);
+    if (!_id) throw new HttpException(500, `Internal Error: _id not found.`);
 
-    return res.sendStatus(204);
+    return res.status(204).json({ deletedBookId: _id });
   } catch (err) {
     next(err);
   }

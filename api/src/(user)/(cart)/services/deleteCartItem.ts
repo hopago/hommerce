@@ -7,7 +7,7 @@ export const handleDeleteCartItem = async (
   next: NextFunction
 ) => {
   const { userId } = req.params;
-  const { bookId } = req.body;
+  const { bookId } = req.query;
 
   if (!userId) throw new HttpException(400, "User Id required.");
   if (!bookId) throw new HttpException(400, "Book Id required.");

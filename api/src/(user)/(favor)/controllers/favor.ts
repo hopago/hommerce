@@ -61,7 +61,7 @@ export const deleteFavorItem = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { bookId } = req.body;
+  const bookId = req.query.bookId as string | undefined;
   const { userId } = req.params;
 
   if (!bookId) throw new HttpException(400, "Book Id required.");
