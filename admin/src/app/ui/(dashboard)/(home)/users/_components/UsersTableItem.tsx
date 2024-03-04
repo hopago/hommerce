@@ -5,11 +5,11 @@ import Button from "../../_components/Button";
 
 import { getFullDate } from "@/app/ui/lib/utils";
 
-type UserListProps = {
+type UsersTableItemProps = {
   user: UserInfo;
 };
 
-export default function UserList({ user }: UserListProps) {
+export default function UsersTableItem({ user }: UsersTableItemProps) {
   return (
     <tr>
       <td>

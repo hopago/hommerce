@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import styles from "./users-table.module.css";
 
 import Pagination from "../../_components/Pagination";
-import UserList from "./UserInfo";
+import UsersTableItem from "./UsersTableItem";
 
 import { useCreatorPagination } from "@/app/store/use-pagination";
 
@@ -43,7 +43,7 @@ export default function UsersTable() {
         </thead>
         <tbody>
           {users.map((user, i) => (
-            <UserList key={`${user._id}-${i}`} user={user} />
+            <UsersTableItem key={`${user._id}-${i}`} user={user} />
           ))}
         </tbody>
       </table>

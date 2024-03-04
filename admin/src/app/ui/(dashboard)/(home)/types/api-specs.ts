@@ -27,20 +27,21 @@ type ResponseType = {
   desc: string;
 };
 
+type RequestInfo = {
+  value: {
+    name: string;
+    type: string;
+    desc: string;
+  }
+  required: boolean;
+};
+
 export type ApiInfo = {
-  params?: {
-    value: string;
-    required: boolean;
-  };
-  query?: {
-    value: string;
-    required: boolean;
-  };
+  params?: RequestInfo;
+  query?: RequestInfo;
   body?: {
     value: unknown;
     required: boolean;
   };
   responses: ResponseType[];
 };
-
-type ApiInfos = ApiInfo[];

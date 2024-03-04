@@ -16,10 +16,11 @@ type ApiSpecProps = {
 };
 
 export default function ApiSpec({ spec }: ApiSpecProps) {
-  const { setShow, setOperationId } = useApiModal();
+  const { setShow, setApiSpecs, setApiEndpoint } = useApiModal();
 
   const onClick = () => {
-    setOperationId(spec.operationId);
+    setApiSpecs(spec.operationId);
+    setApiEndpoint(spec);
     setShow(true);
   };
 
