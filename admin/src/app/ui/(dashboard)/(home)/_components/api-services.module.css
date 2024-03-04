@@ -1,0 +1,74 @@
+.container {
+    margin-top: 3rem;
+    width: calc(100% - 16px);
+    padding: 1rem;
+    background-color: var(--bgSoft);
+    border-radius: 0.5rem;
+}
+
+.title {
+    margin-bottom: 1rem;
+    font-weight: 200;
+    color: var(--textSoft);
+}
+
+.apiSpecsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    border: 1px solid var(--hover);
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    background-color: var(--bg);
+    transition: all .15s ease;
+}
+
+.apiSpecsContainer:hover {
+    background-color: var(--bgSoft);
+    border: 1px solid var(--textSoft);
+}
+
+.apiSpecsInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.methodBadge {
+    border-radius: 3px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    min-width: 80px;
+    padding: 6px 0;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(0,0,0,.1);
+}
+
+.methodBadge.get {
+    background-color: #61affe;
+}
+
+.methodBadge.post {
+    background-color: #49cc90;
+}
+
+.methodBadge.patch {
+    background-color: #50e3c2;
+}
+
+.methodBadge.delete {
+    background-color: #f93e3e;
+}
+
+.pathname {
+    font-weight: bold;
+}
+
+.serviceDesc {
+    font-size: 13px;
+    word-break: break-word;
+    font-weight: 400;
+    color: var(--textSoft);
+}

@@ -4,7 +4,7 @@ import {
   MdShoppingBag,
 } from "react-icons/md";
 
-import styles from "./total-card-item.module.css";
+import styles from "./total-card.module.css";
 
 type TotalCardItemProps = {
   type: "users" | "products" | "service";
@@ -34,7 +34,7 @@ export default function TotalCardItem({
 
   if (type === "users") {
     return (
-      <div className={styles.container}>
+      <div className={styles.totalCardContainer}>
         <MdOutlineSupervisorAccount size={24} />
         <div className={styles.texts}>
           <CardTitle title="총 회원수" />
@@ -47,7 +47,7 @@ export default function TotalCardItem({
 
   if (type === "products") {
     return (
-      <div className={styles.container}>
+      <div className={styles.totalCardContainer}>
         <MdShoppingBag size={24} />
         <div className={styles.texts}>
           <CardTitle title="총 상품수" />
@@ -60,7 +60,7 @@ export default function TotalCardItem({
 
   if (type === "service") {
     return (
-      <div className={styles.container}>
+      <div className={styles.totalCardContainer}>
         <MdDesignServices size={24} />
         <div className={styles.texts}>
           <CardTitle title="총 문의량" />
@@ -76,7 +76,9 @@ const CardTitle = ({ title }: CardTitleProps) => (
   <p className={styles.title}>{title}</p>
 );
 
-const CardValue = ({ value }: CardValueProps) => <p className={styles.pert}>{value}</p>;
+const CardValue = ({ value }: CardValueProps) => (
+  <p className={styles.pert}>{value}</p>
+);
 
 const CardCompare = ({ isPositive, value }: CardCompareProps) => (
   <p className={styles.details}>

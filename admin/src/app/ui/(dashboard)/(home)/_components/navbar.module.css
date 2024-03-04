@@ -23,26 +23,6 @@
     gap: 1rem;
 }
 
-.search {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background-color: #2e374a;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-}
-
-.search:focus-within {
-    outline: 1px solid var(--textSoft);
-}
-
-.input {
-    background-color: transparent;
-    border: none;
-    color: var(--text);
-    outline: none;
-}
-
 .icons {
     display: flex;
     align-items: center;

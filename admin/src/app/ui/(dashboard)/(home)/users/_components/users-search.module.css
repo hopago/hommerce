@@ -1,0 +1,14 @@
+.container {
+    width: 100%;
+    padding: 0 1rem 1rem 0;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: var(--bgSoft);
+    border-radius: 0.5rem;
+}
+

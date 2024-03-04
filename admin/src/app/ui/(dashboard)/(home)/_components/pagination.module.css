@@ -1,0 +1,71 @@
+.container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.prevPageButton,
+.nextPageButton {
+    border: 1px solid var(--hover);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bgSoft);
+    color: var(--textSoft);
+    cursor: pointer;
+}
+
+.prevPageButton.disabled {
+    cursor: default;
+}
+
+.setPageButtonContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.setPageButton,
+.lastPageButton,
+.firstPageButton {
+    box-sizing: content-box;
+    min-width: 24px;
+    height: 24px;
+    padding: 5px 4px 6px 4px;
+    font-size: 13px;
+    line-height: 1;
+    letter-spacing: -.01em;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: var(--text);
+    border-radius: 50%;
+    border: 1px solid var(--hover);
+    cursor: pointer;
+}
+
+.setPageButton:hover,
+.lastPageButton:hover,
+.firstPageButton:hover {
+    background-color: var(--bgSoft);
+}
+
+.setPageButton.active {
+    background-color: var(--bgSoft);
+}
+
+.setPageButton:disabled {
+    cursor: default;
+}
+
+.textEclipse {
+    padding-bottom: 0.5rem;
+}

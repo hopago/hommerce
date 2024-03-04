@@ -1,0 +1,21 @@
+.table {
+    width: calc(100% - 16px);
+    padding: 1rem;
+    background-color: var(--bgSoft);
+    border-radius: 0.5rem;
+}
+
+.table td {
+    padding: 0.5rem;
+}
+
+.user {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.userImg {
+    border-radius: 50%;
+    object-fit: cover;
+}

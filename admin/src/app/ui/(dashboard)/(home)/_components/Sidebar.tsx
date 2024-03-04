@@ -7,6 +7,8 @@ import styles from "./sidebar.module.css";
 import SidebarMenuLink from "./SidebarMenuLink";
 import LogoutButton from "./LogoutButton";
 
+// TODO: GET Initial User Info
+
 export default function Sidebar() {
   const temporaryUsername = "최호준";
   const temporaryUserRole = "관리자";

@@ -34,3 +34,125 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+```
+admin
+├─ .eslintrc.json
+├─ .gitignore
+├─ next.config.mjs
+├─ package-lock.json
+├─ package.json
+├─ public
+│  ├─ img_astronaut.png
+│  ├─ img_default-profile.png
+│  └─ logo.png
+├─ README.md
+├─ src
+│  └─ app
+│     ├─ (auth)
+│     │  └─ sign-in
+│     │     ├─ layout.tsx
+│     │     └─ page.tsx
+│     ├─ (dashboard)
+│     │  └─ (home)
+│     │     ├─ layout.tsx
+│     │     ├─ page.tsx
+│     │     ├─ products
+│     │     │  └─ page.tsx
+│     │     ├─ users
+│     │     │  └─ page.tsx
+│     │     └─ [username]
+│     │        └─ setting
+│     │           └─ page.tsx
+│     ├─ @modal
+│     ├─ api
+│     ├─ error.tsx
+│     ├─ favicon.ico
+│     ├─ layout.tsx
+│     ├─ not-found.tsx
+│     ├─ store
+│     │  ├─ use-api-modal.ts
+│     │  └─ use-pagination.ts
+│     └─ ui
+│        ├─ (auth)
+│        ├─ (dashboard)
+│        │  └─ (home)
+│        │     ├─ @modal
+│        │     │  ├─ api-modal.module.css
+│        │     │  └─ ApiModal.tsx
+│        │     ├─ constants
+│        │     │  ├─ api-specs.ts
+│        │     │  └─ menu-list.tsx
+│        │     ├─ dashboard.module.css
+│        │     ├─ hooks
+│        │     │  └─ use-search-form.ts
+│        │     ├─ types
+│        │     │  ├─ api-specs.ts
+│        │     │  ├─ chart-data.ts
+│        │     │  └─ menu-list.ts
+│        │     ├─ users
+│        │     │  ├─ types
+│        │     │  │  └─ user.ts
+│        │     │  ├─ users.module.css
+│        │     │  └─ _components
+│        │     │     ├─ UserInfo.tsx
+│        │     │     ├─ UserProfile.tsx
+│        │     │     ├─ users-search.module.css
+│        │     │     ├─ users-table.module.css
+│        │     │     ├─ UsersSearch.tsx
+│        │     │     └─ UsersTable.tsx
+│        │     ├─ utils
+│        │     │  ├─ getApiSpecsByTag.ts
+│        │     │  ├─ getCurrPathname.ts
+│        │     │  ├─ getPageTotal.ts
+│        │     │  └─ getPaginationWindow.ts
+│        │     └─ _components
+│        │        ├─ api-services.module.css
+│        │        ├─ ApiServices.tsx
+│        │        ├─ ApiSpec.tsx
+│        │        ├─ ApiSpecInfo.tsx
+│        │        ├─ button.module.css
+│        │        ├─ Button.tsx
+│        │        ├─ data-chart.module.css
+│        │        ├─ DataChart.tsx
+│        │        ├─ footer.module.css
+│        │        ├─ Footer.tsx
+│        │        ├─ input.module.css
+│        │        ├─ Input.tsx
+│        │        ├─ latest-report.module.css
+│        │        ├─ LatestReport.tsx
+│        │        ├─ LogoutButton.tsx
+│        │        ├─ MethodBadge.tsx
+│        │        ├─ MoveToFirstPage.tsx
+│        │        ├─ MoveToLastPage.tsx
+│        │        ├─ navbar.module.css
+│        │        ├─ Navbar.tsx
+│        │        ├─ NextPage.tsx
+│        │        ├─ PaginateControl.tsx
+│        │        ├─ pagination.module.css
+│        │        ├─ Pagination.tsx
+│        │        ├─ Pathname.tsx
+│        │        ├─ PrevPage.tsx
+│        │        ├─ rightbar.module.css
+│        │        ├─ RightBar.tsx
+│        │        ├─ RightBarButton.tsx
+│        │        ├─ search.module.css
+│        │        ├─ Search.tsx
+│        │        ├─ ServiceDesc.tsx
+│        │        ├─ SetPage.tsx
+│        │        ├─ sidebar.module.css
+│        │        ├─ Sidebar.tsx
+│        │        ├─ SidebarMenuLink.tsx
+│        │        ├─ total-card.module.css
+│        │        ├─ TotalCardItem.tsx
+│        │        └─ TotalCardList.tsx
+│        ├─ globals.css
+│        ├─ lib
+│        │  └─ utils.ts
+│        ├─ types
+│        │  └─ date.ts
+│        └─ _components
+│           └─ ExecuteButton.tsx
+└─ tsconfig.json
+
+```

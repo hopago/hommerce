@@ -40,7 +40,7 @@ export const menuList: MenuList = [
     list: [
       {
         title: "설정",
-        path: `/:username/setting`,
+        path: `/setting/:username`,
         icon: <MdOutlineSettings />,
       },
       {

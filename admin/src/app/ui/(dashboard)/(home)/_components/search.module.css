@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #2e374a;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.container:focus-within {
+    outline: 1px solid var(--textSoft);
+}

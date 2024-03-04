@@ -1,0 +1,12 @@
+.input {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    color: var(--text);
+    outline: none;
+    transition: width .3s ease;
+}
+
+.input:focus {
+    width: 420px;
+}
