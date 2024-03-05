@@ -1,4 +1,4 @@
-type ApiTag = "users" | "products" | "services";
+export type ApiTag = "users" | "products" | "services";
 
 export type ApiMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
@@ -22,12 +22,12 @@ export type ApiSpecs = {
   endpoints: Endpoints;
 }[];
 
-type ResponseType = {
+export type ResponseType = {
   code: number;
   desc: string;
 };
 
-type RequestInfo = {
+export type RequestInfo = {
   value: {
     name: string;
     type: string;

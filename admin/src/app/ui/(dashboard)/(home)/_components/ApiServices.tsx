@@ -1,3 +1,5 @@
+import { ApiTag } from "../types/api-specs";
+
 import { getApiSpecsByTag } from "../utils/getApiSpecsByTag";
 
 import ApiSpec from "./ApiSpec";

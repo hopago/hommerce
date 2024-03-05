@@ -11,13 +11,13 @@ import { cn } from "@/app/ui/lib/utils";
 type ButtonProps = {
   type: "button" | "submit";
   text?: string;
-  onClick?: () => void | (() => Promise<void>);
+  onClick?: () => void | (() => Promise<void>) | ((params: unknown) => void);
   icon?: string | ReactElement<any, any>;
   width?: number;
   height?: number;
   disabled?: boolean;
   display?: "none" | "flex" | "block" | "inline-block";
-  className?: "manage" | string;
+  className?: "manage" | "close" | string;
 };
 
 export default function Button({
@@ -33,6 +33,8 @@ export default function Button({
 }: ButtonProps) {
   let btnIcon = icon;
 
+  console.log(className === "close");
+
   if ((icon || text) && display === "none") {
     console.log("Something went wrong in props.");
     return null;
@@ -46,7 +48,11 @@ export default function Button({
 
   return (
     <button
-      className={cn(styles.button, className === "manage" && styles.manage)}
+      className={cn(
+        styles.button,
+        className === "manage" && styles.manage,
+        className === "close" && styles.close
+      )}
       type={type}
       onClick={onClick}
       disabled={disabled}

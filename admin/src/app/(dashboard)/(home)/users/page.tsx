@@ -1,7 +1,7 @@
-import ApiModal from "@/app/ui/(dashboard)/(home)/@modal/ApiModal";
 import ApiServices from "@/app/ui/(dashboard)/(home)/_components/ApiServices";
 import UsersSearch from "@/app/ui/(dashboard)/(home)/users/_components/UsersSearch";
 import UsersTable from "@/app/ui/(dashboard)/(home)/users/_components/UsersTable";
+import { ApiModal } from "@/app/ui/(dashboard)/(home)/@modal";
 
 import styles from "@/app/ui/(dashboard)/(home)/users/users.module.css";
 

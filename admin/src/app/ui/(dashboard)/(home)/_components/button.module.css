@@ -8,6 +8,12 @@
     align-items: center;
 }
 
+.iconWrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .button.manage {
     padding: 0.5rem;
     background-color: var(--textPurple);
@@ -17,8 +23,22 @@
     cursor: pointer;
 }
 
-.iconWrap {
-    display: flex;
+.button.close {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    font-weight: bold;
+    color: var(--text);
+    border-radius: 50%;
+    border: 1px solid var(--textSoft);
+    transition: all .3s ease;
     align-items: center;
     justify-content: center;
+}
+
+.button.close:hover {
+    background-color: var(--hover);
+    border: 1px solid var(--textSoft);
 }

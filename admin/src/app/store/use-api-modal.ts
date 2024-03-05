@@ -129,6 +129,7 @@ interface CreatorApiModal {
   setShow: (param: boolean) => void;
   setApiEndpoint: (spec: Endpoint) => void;
   setApiSpecs: (operationId: ApiOperationIds) => void;
+  resetState: () => void;
 }
 
 export const useApiModal = create<CreatorApiModal>((set) => ({
@@ -147,4 +148,6 @@ export const useApiModal = create<CreatorApiModal>((set) => ({
     set({ apiSpecs: apiConstants });
   },
   setApiEndpoint: (endpoint: Endpoint) => set({ apiEndpoint: endpoint }),
+  resetState: () =>
+    set({ show: false, operationId: null, apiEndpoint: null, apiSpecs: null }),
 }));

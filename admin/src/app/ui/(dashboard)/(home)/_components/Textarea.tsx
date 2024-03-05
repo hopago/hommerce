@@ -2,31 +2,28 @@
 
 import { cn } from "@/app/ui/lib/utils";
 
-import styles from "./input.module.css";
+import styles from "./textarea.module.css";
 
-type InputProps = {
-  type: "text";
+type TextareaProps = {
   value: string;
   placeholder: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   className?: "prepare" | string;
   required?: boolean;
 };
 
-export default function Input({
-  type,
+export default function Textarea({
   placeholder,
   onChange,
   value,
   className,
   required,
-}: InputProps) {
+}: TextareaProps) {
   return (
-    <input
-      type={type}
+    <textarea
       value={value}
       placeholder={placeholder}
-      className={cn(styles.input, className === "prepare" && styles.prepare)}
+      className={cn(styles.textarea, className === "prepare" && styles.prepare)}
       onChange={onChange}
       required={required}
     />

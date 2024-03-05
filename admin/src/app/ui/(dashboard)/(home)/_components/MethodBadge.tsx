@@ -2,6 +2,8 @@ import { cn } from "@/app/ui/lib/utils";
 
 import styles from "./api-services.module.css";
 
+import { ApiMethod } from "../types/api-specs";
+
 type MethodBadgeProps = {
   method: ApiMethod;
 };

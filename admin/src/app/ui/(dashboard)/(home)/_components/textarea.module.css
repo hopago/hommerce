@@ -1,0 +1,9 @@
+textarea.textarea {
+    resize: none;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+}
+
+textarea.textarea::-webkit-scrollbar {
+    display: none;
+}

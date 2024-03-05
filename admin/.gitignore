@@ -37,3 +37,6 @@ next-env.d.ts
 
 # api-spec
 openapi.json
+
+# env
+.env
