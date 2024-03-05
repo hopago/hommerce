@@ -12,10 +12,13 @@ type BodyInputProps = {
 export default function BodyInput({ body, required }: BodyInputProps) {
   const formattedBody = JSON.stringify(body, null, 2);
 
-  const { field, handleInputChange } = useBodyInput({ body });
+  const { inputValue, handleInputChange, error } = useBodyInput();
+
+  console.log(inputValue);
+  console.log(error);
 
   return (
-    <div>
+    <div className={styles.contents}>
       <div className={styles.prepareInfo}>
         <div className={styles.jsonContents}>
           <pre className={styles.jsonContentsDetails}>{formattedBody}</pre>
@@ -23,7 +26,7 @@ export default function BodyInput({ body, required }: BodyInputProps) {
       </div>
       <div className={styles.inputWrap}>
         <Textarea
-          value={field.body}
+          value={inputValue}
           placeholder="JSON 형식으로 입력해주세요."
           onChange={handleInputChange}
           className="prepare"

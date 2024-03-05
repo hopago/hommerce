@@ -50,6 +50,9 @@ export default function ApiModal() {
             <ApiDocs specs={apiSpecs} />
           </div>
           {/* TODO: <ApiResponse /> */}
+          <div className={styles.response}>
+            응답필드
+          </div>
           <Button
             type="button"
             onClick={handleClose}

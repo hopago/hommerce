@@ -12,15 +12,13 @@ export default function useRequestForm({ path, method }: UseRequestFormParams) {
   const {
     field: { query: queryField, path: pathField },
   } = useParamsInput();
-  const {
-    field: { body },
-  } = useBodyInput();
+  const { parsedValue } = useBodyInput();
 
   console.log({ path });
   console.log({ method });
   console.log({ queryField });
   console.log({ pathField });
-  console.log({ body });
+  console.log({ parsedValue });
 
   const handleSubmit = () => {};
 

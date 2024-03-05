@@ -1,7 +1,7 @@
 import { useBodyInput as useBodyInputStore } from "@/app/store/use-body-input";
 
-export default function useBodyInput({ body }: { body: unknown }) {
-  const { field, handleInputChange, errMsg, error } = useBodyInputStore();
+export default function useBodyInput() {
+  const { handleInputChange, errMsg, error, inputValue } = useBodyInputStore();
 
-  return { field, handleInputChange, errMsg, error };
+  return { handleInputChange, errMsg, error, inputValue };
 }

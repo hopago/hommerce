@@ -15,7 +15,11 @@ export default function BodyPrepare({ body }: BodyPrepareProps) {
       <div className={styles.title}>
         <h1>요청 본문</h1>
       </div>
-      {body && <BodyInput body={body.value} required={body.required} />}
+      {body ? <BodyInput body={body.value} required={body.required} /> : (
+        <span className={styles.empty}>
+          요청 본문이 필요하지 않습니다.
+        </span>
+      )}
     </div>
   );
 }

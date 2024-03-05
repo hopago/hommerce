@@ -11,12 +11,12 @@ const ParamsInfo = ({ params, title }: ApiDocsProps) => (
   <div className={styles.params}>
     <div className={styles.titleWrap}>
       <span className={styles.title}>{title}</span>
+      {params.required && <span className={styles.required}>*필수</span>}
     </div>
     <div className={styles.contents}>
       <div className={styles.contentsHeader}>
         <span className={styles.contentsHeaderName}>값</span>
         <span className={styles.contentsHeaderDesc}>설명</span>
-        {params.required && <span className={styles.required}>필수</span>}
       </div>
       <div className={styles.contents}>
         <div className={styles.contentsDetails}>
@@ -24,11 +24,8 @@ const ParamsInfo = ({ params, title }: ApiDocsProps) => (
             {params.value.name}
           </span>
           <span className={styles.contentsDetailsType}>
-            {params.value.type}
+            {params.value.desc}
           </span>
-        </div>
-        <div className={styles.contentsDetailsDesc}>
-          <span>{params.value.desc}</span>
         </div>
       </div>
     </div>

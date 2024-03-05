@@ -1,31 +1,33 @@
-import create from "zustand";
+import { create } from "zustand";
 
 type CreatorUseBodyInput = {
-  field: { body: string };
+  inputValue: string;
+  parsedValue: any;
   error: boolean;
   errMsg: string | null;
-  setField: (body: string) => void;
-  setError: (error: boolean) => void;
-  setErrMsg: (errMsg: string | null) => void;
-  resetErrState: () => void;
+  setInputValue: (value: string) => void;
+  parseInputValue: () => void;
+  resetErrorState: () => void;
   handleInputChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
 export const useBodyInput = create<CreatorUseBodyInput>((set) => ({
-  field: { body: "" },
+  inputValue: "",
+  parsedValue: null,
   error: false,
   errMsg: null,
-  setField: (body) => set((state) => ({ ...state, field: { body } })),
-  setError: (error) => set((state) => ({ ...state, error })),
-  setErrMsg: (errMsg) => set((state) => ({ ...state, errMsg })),
-  resetErrState: () =>
-    set((state) => ({ ...state, error: false, errMsg: null })),
   handleInputChange: (e) => {
+    const value = e.target.value;
     set((state) => {
-      state.resetErrState();
+      state.setInputValue(value);
+      return state;
+    });
+  },
+  parseInputValue: () =>
+    set((state) => {
       try {
-        const parsedValue = JSON.parse(e.target.value);
-        return { ...state, field: { body: parsedValue } };
+        const parsedValue = JSON.parse(state.inputValue);
+        return { ...state, parsedValue, error: false, errMsg: null };
       } catch (error) {
         return {
           ...state,
@@ -33,6 +35,21 @@ export const useBodyInput = create<CreatorUseBodyInput>((set) => ({
           errMsg: "적합하지 않은 JSON 형식입니다.",
         };
       }
-    });
-  },
+    }),
+  setInputValue: (value) =>
+    set((state) => {
+      state.inputValue = value;
+      try {
+        const parsedValue = JSON.parse(value);
+        return { ...state, parsedValue, error: false, errMsg: null };
+      } catch (error) {
+        return {
+          ...state,
+          error: true,
+          errMsg: "적합하지 않은 JSON 형식입니다.",
+        };
+      }
+    }),
+  resetErrorState: () =>
+    set((state) => ({ ...state, error: false, errMsg: null })),
 }));

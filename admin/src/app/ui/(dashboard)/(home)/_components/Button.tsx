@@ -17,7 +17,7 @@ type ButtonProps = {
   height?: number;
   disabled?: boolean;
   display?: "none" | "flex" | "block" | "inline-block";
-  className?: "manage" | "close" | string;
+  className?: "manage" | "close" | "api-submit" | string;
 };
 
 export default function Button({
@@ -32,8 +32,6 @@ export default function Button({
   className,
 }: ButtonProps) {
   let btnIcon = icon;
-
-  console.log(className === "close");
 
   if ((icon || text) && display === "none") {
     console.log("Something went wrong in props.");
@@ -51,7 +49,8 @@ export default function Button({
       className={cn(
         styles.button,
         className === "manage" && styles.manage,
-        className === "close" && styles.close
+        className === "close" && styles.close,
+        className === "api-submit" && styles.apiSubmit
       )}
       type={type}
       onClick={onClick}

@@ -14,16 +14,12 @@ export default function Responses({ responses }: ResponsesProps) {
       <div className={styles.titleWrap}>
         <span className={styles.title}>응답값</span>
       </div>
-      <div className={styles.contents}>
-        <div className={styles.contentsHeader}>
-          <div className={styles.contentsHeaderWrap}>
-            <span className={styles.contentsHeaderName}>값</span>
-            <span className={styles.contentsHeaderDesc}>설명</span>
-          </div>
-        </div>
-        {responses.map((res) => (
-          <ResponseItem key={res.code} code={res.code} desc={res.desc} />
-        ))}
+      <div className={styles.responseContents}>
+        <ul className={styles.scrollInner}>
+          {responses.map((res) => (
+            <ResponseItem key={res.code} code={res.code} desc={res.desc} />
+          ))}
+        </ul>
       </div>
     </div>
   );

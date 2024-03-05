@@ -13,7 +13,9 @@ type ApiDocsProps = {
 export default function ApiDocs({ specs }: ApiDocsProps) {
   return (
     <div className={styles.apiDocs}>
-      <Params params={specs.params} />
+      {(specs.params || specs.query) && (
+        <Params params={specs.params} query={specs.query} />
+      )}
       {specs.body && <Body body={specs.body} />}
       <Responses responses={specs.responses} />
     </div>

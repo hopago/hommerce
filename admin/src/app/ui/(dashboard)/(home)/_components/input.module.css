@@ -10,3 +10,15 @@
 .input:focus {
     width: 420px;
 }
+
+.input.prepare {
+    width: 100%;
+    border: 1px solid rgba(255,255,255,.15);
+    padding: 0.5rem;
+    background-color: #323436;
+    border-radius: 0.5rem;
+}
+
+.input.prepare:focus {
+    outline: 1px solid #47494A;
+}

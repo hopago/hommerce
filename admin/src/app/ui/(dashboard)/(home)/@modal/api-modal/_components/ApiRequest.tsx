@@ -33,9 +33,9 @@ export default function ApiRequest({
     <form className={styles.apiRequest}>
       <PathInfo path={path} />
       <MethodInfo method={method} />
-      {(params || query) && <ParamsPrepare params={params} query={query} />}
+      <ParamsPrepare params={params} query={query} />
       <BodyPrepare body={body} />
-      <Button type="submit" text="제출" />
+      <Button type="submit" text="제출" className="api-submit" />
     </form>
   );
 }

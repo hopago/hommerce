@@ -17,6 +17,9 @@ export default function ParamsPrepare({ params, query }: ParamsPrepareProps) {
       </div>
       {params && <ParamsInput info={params} requestInputType="path" />}
       {query && <ParamsInput info={query} requestInputType="query" />}
+      {(!params && !query) && (
+        <span className={styles.empty}>파라미터가 필요하지 않습니다.</span>
+      )}
     </div>
   );
 }

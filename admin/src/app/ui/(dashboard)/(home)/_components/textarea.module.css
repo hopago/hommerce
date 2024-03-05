@@ -7,3 +7,22 @@ textarea.textarea {
 textarea.textarea::-webkit-scrollbar {
     display: none;
 }
+
+textarea.textarea::placeholder {
+    font-style: inherit;
+    font-family: inherit;
+}
+
+.textarea.prepare {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, .15);
+    padding: 0.5rem;
+    background-color: #323436;
+    border-radius: 0.5rem;
+    color: var(--text);
+    min-height: 120px;
+}
+
+.textarea.prepare:focus {
+    outline: 1px solid #47494A;
+}

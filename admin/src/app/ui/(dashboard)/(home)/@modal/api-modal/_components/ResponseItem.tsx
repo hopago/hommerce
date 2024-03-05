@@ -1,5 +1,9 @@
 import styles from "../api-modal.module.css";
 
+import cn from "classnames";
+
+import { getResponseStyle } from "../utils/getResponseStyle";
+
 type ResponseItemProps = {
   desc: string;
   code: number;
@@ -7,13 +11,15 @@ type ResponseItemProps = {
 
 export default function ResponseItem({ code, desc }: ResponseItemProps) {
   return (
-    <div className={styles.contents}>
-      <div className={styles.contentsDetails}>
-        <span className={styles.contentsDetailsValue}>{code}</span>
+    <li className={styles.responseList}>
+      <div className={styles.responseListDetails}>
+        <span className={cn(styles.responseListCode, getResponseStyle(code))}>
+          {code}
+        </span>
       </div>
-      <div className={styles.contentsDetailsDesc}>
+      <div className={styles.responseListDesc}>
         <span>{desc}</span>
       </div>
-    </div>
+    </li>
   );
 }

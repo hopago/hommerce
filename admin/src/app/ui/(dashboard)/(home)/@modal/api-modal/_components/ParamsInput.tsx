@@ -29,14 +29,14 @@ export default function ParamsInput({
   return (
     <div className={styles.requestInfo}>
       <div className={styles.prepareInfo}>
-        <span>{name}</span>
-        <span>{type}</span>
-        <span>{desc}</span>
+        <span className={styles.name}>{name}</span>
+        <span className={styles.query}>({requestInputType})</span>
+        <span className={styles.desc}>{desc}</span>
       </div>
       <div className={styles.inputWrap}>
         <Input
           type="text"
-          value={field[type].value}
+          value={field[requestInputType]?.value!}
           placeholder={desc}
           onChange={handleInputChange}
           className="prepare"
