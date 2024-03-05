@@ -1,29 +1,7 @@
-import { useState } from "react";
+import { useBodyInput as useBodyInputStore } from "@/app/store/use-body-input";
 
 export default function useBodyInput({ body }: { body: unknown }) {
-  const [error, setError] = useState(false);
-  const [errMsg, setErrMsg] = useState<string | null>(null);
-
-  const [field, setField] = useState({
-    body: body ? JSON.stringify(body, null, 2) : "",
-  });
-
-  const resetErrState = () => {
-    setError(false);
-    setErrMsg("");
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    resetErrState();
-
-    try {
-      const parsedValue = JSON.parse(e.target.value);
-      setField({ body: parsedValue });
-    } catch (error) {
-      setError(true);
-      setErrMsg("적합하지 않은 JSON 형식입니다.");
-    }
-  };
+  const { field, handleInputChange, errMsg, error } = useBodyInputStore();
 
   return { field, handleInputChange, errMsg, error };
 }

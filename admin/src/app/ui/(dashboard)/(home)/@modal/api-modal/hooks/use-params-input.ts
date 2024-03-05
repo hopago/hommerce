@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useParamsInput as useParamsInputStore } from "@/app/store/use-params-input";
 
 type useParamsInput = {
   requestType: "query" | "path";
@@ -6,27 +6,15 @@ type useParamsInput = {
   valueType: string;
 };
 
-export default function useRequestInput({
+export default function useParamsInput({
   requestType,
   name,
   valueType,
 }: useParamsInput) {
-  const [field, setField] = useState({
-    [requestType]: {
-      name,
-      valueType,
-      value: "",
-    },
-  });
+  const { field, setField } = useParamsInputStore();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setField((prevState) => ({
-      ...prevState,
-      [requestType]: {
-        ...prevState[requestType],
-        value: e.target.value || "",
-      },
-    }));
+    setField({ requestType, name, valueType, value: e.target.value || "" });
   };
 
   return { field, handleInputChange };

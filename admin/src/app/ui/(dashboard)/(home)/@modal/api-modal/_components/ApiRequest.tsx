@@ -2,6 +2,7 @@ import Button from "../../../_components/Button";
 import { ApiMethod, RequestInfo } from "../../../types/api-specs";
 
 import styles from "../api-modal.module.css";
+import useRequestForm from "../hooks/use-request-form";
 import BodyPrepare from "./BodyPrepare";
 
 import MethodInfo from "./MethodInfo";
@@ -26,6 +27,8 @@ export default function ApiRequest({
   query,
   body,
 }: ApiRequestProps) {
+  const { handleSubmit } = useRequestForm({ path, method });
+
   return (
     <form className={styles.apiRequest}>
       <PathInfo path={path} />
