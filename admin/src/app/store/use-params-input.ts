@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 
 type Field = {
   name: string;
@@ -11,19 +11,24 @@ interface CreatorUseParamsInput {
     query?: Field;
     path?: Field;
   };
-  setField: (params: Field & { requestType: "query" | "path" }) => void;
+  setField: (params: Field & { paramsType: "query" | "path" }) => void;
 }
 
 export const useParamsInput = create<CreatorUseParamsInput>((set) => ({
-  field: {},
-  setField: ({ requestType, name, valueType, value }) =>
+  field: {
+    query: { name: "", valueType: "", value: "" },
+    path: { name: "", valueType: "", value: "" },
+  },
+  setField: ({ paramsType, name, valueType, value }) =>
     set((state) => ({
       ...state,
-      [requestType]: {
-        ...state.field[requestType],
-        name,
-        valueType,
-        value,
+      field: {
+        ...state.field,
+        [paramsType]: {
+          name,
+          valueType,
+          value,
+        },
       },
     })),
 }));

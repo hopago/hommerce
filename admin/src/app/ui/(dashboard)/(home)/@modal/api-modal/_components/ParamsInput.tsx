@@ -1,5 +1,7 @@
 import { RequestInfo } from "../../../types/api-specs";
 
+import { useMemo } from "react";
+
 import styles from "../api-modal.module.css";
 
 import Input from "../../../_components/Input";
@@ -8,20 +10,19 @@ import useParamsInput from "../hooks/use-params-input";
 
 type RequestInfoProps = {
   info: RequestInfo;
-  requestInputType: "query" | "path";
+  paramsType: "query" | "path";
 };
 
-export default function ParamsInput({
-  info,
-  requestInputType,
-}: RequestInfoProps) {
+export default function ParamsInput({ info, paramsType }: RequestInfoProps) {
+  const memoInfo = useMemo(() => info, [info]);
+  
   const {
     value: { name, type, desc },
     required,
-  } = info;
+  } = memoInfo;
 
   const { field, handleInputChange } = useParamsInput({
-    requestType: requestInputType,
+    paramsType,
     name,
     valueType: type,
   });
@@ -30,13 +31,13 @@ export default function ParamsInput({
     <div className={styles.requestInfo}>
       <div className={styles.prepareInfo}>
         <span className={styles.name}>{name}</span>
-        <span className={styles.query}>({requestInputType})</span>
+        <span className={styles.query}>({paramsType})</span>
         <span className={styles.desc}>{desc}</span>
       </div>
       <div className={styles.inputWrap}>
         <Input
           type="text"
-          value={field[requestInputType]?.value!}
+          value={field[paramsType]?.value!}
           placeholder={desc}
           onChange={handleInputChange}
           className="prepare"

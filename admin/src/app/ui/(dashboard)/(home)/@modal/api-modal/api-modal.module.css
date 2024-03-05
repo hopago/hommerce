@@ -102,10 +102,16 @@
 }
 
 .jsonContents {
+    max-height: 120px;
     padding: 1rem;
     width: 100%;
     background-color: #000;
+    -ms-overflow-style: none;
     margin-bottom: 1rem;
+    overflow-y: scroll;
+}
+.jsonContents::-webkit-scrollbar {
+    display: none;
 }
 
 .name {
@@ -212,6 +218,7 @@
 }
 
 .responseContents {
+    margin-top: 0.5rem;
     display: flex;
     flex-direction: column;
     flex: 1;

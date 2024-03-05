@@ -14,9 +14,6 @@ export default function BodyInput({ body, required }: BodyInputProps) {
 
   const { inputValue, handleInputChange, error } = useBodyInput();
 
-  console.log(inputValue);
-  console.log(error);
-
   return (
     <div className={styles.contents}>
       <div className={styles.prepareInfo}>

@@ -15,9 +15,9 @@ export default function ParamsPrepare({ params, query }: ParamsPrepareProps) {
       <div className={styles.title}>
         <h1>파라미터</h1>
       </div>
-      {params && <ParamsInput info={params} requestInputType="path" />}
-      {query && <ParamsInput info={query} requestInputType="query" />}
-      {(!params && !query) && (
+      {params && <ParamsInput info={params} paramsType="path" />}
+      {query && <ParamsInput info={query} paramsType="query" />}
+      {!params && !query && (
         <span className={styles.empty}>파라미터가 필요하지 않습니다.</span>
       )}
     </div>

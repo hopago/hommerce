@@ -10,8 +10,6 @@ type ParamsProps = {
 };
 
 export default function Params({ params, query }: ParamsProps) {
-  console.log(query);
-
   return (
     <div className={styles.params}>
       {params && <ParamsInfo params={params} title="파라미터" />}
