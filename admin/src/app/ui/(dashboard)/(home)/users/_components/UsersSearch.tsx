@@ -17,7 +17,6 @@ export default function UsersSearch() {
   const router = useRouter();
 
   const pathname = getCurrPathname();
-
   if (!pathname) return null;
 
   const onClick = (userId: string) => {
@@ -34,6 +33,7 @@ export default function UsersSearch() {
           searchTerm={searchTerm}
           handleChange={handleChange}
           handleSubmit={handleSubmit}
+          searchResults={[]}
         />
         <Button
           type="button"

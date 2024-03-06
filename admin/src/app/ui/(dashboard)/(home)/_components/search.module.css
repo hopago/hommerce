@@ -5,8 +5,36 @@
     background-color: #2e374a;
     padding: 0.5rem;
     border-radius: 0.5rem;
+    position: relative;
+    border: 1px solid transparent;
 }
 
 .container:focus-within {
     outline: 1px solid var(--textSoft);
+}
+
+.searchResults {
+    position: absolute;
+    left: 0;
+    bottom: -48px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: var(--bgSoft);
+    box-shadow: 0 1px 3px 0 var(--textSoft);
+    transition: all .15s ease;
+}
+
+.searchItem {
+    padding: 0.5rem;
+    font-weight: bold;
+    font-size: 15px;
+    letter-spacing: -.01em;
+    cursor: pointer;
+
+}
+
+.searchItem:hover {
+    background-color: var(--hover);
 }

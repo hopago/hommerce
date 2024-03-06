@@ -14,9 +14,10 @@ export default function Navbar() {
   const currPathname = getCurrPathname();
   if (!currPathname) return null;
 
-  const { searchTerm, handleChange, handleSubmit } = useNavigateForm({
-    type: currPathname,
-  });
+  const { searchTerm, handleChange, handleSubmit, searchResults } =
+    useNavigateForm({
+      type: currPathname,
+    });
 
   return (
     <nav className={styles.container}>
@@ -28,6 +29,7 @@ export default function Navbar() {
             searchTerm={searchTerm}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
+            searchResults={searchResults}
           />
           <div className={styles.icons}>
             <MdOutlineChat className={styles.icon} size={20} />
