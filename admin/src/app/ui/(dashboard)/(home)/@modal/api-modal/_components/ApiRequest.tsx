@@ -17,7 +17,7 @@ type ApiRequestProps = {
     value: unknown;
     required: boolean;
   };
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
 export default function ApiRequest({

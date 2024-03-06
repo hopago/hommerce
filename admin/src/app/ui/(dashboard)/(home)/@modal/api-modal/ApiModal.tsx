@@ -22,7 +22,7 @@ export default function ApiModal() {
   const memoApiSpecs = useMemo(() => apiSpecs, [apiSpecs]);
   const memoApiEndpoint = useMemo(() => apiEndpoint, [apiEndpoint]);
 
-  const { handleSubmit, data, isPending } = useRequestForm({
+  const { execute, data, isPending } = useRequestForm({
     path: apiEndpoint?.path,
     method: apiEndpoint?.method,
     onSuccess: (message?: string) => {
@@ -64,7 +64,7 @@ export default function ApiModal() {
               params={memoApiSpecs.params}
               query={memoApiSpecs.query}
               body={memoApiSpecs.body}
-              onSubmit={handleSubmit}
+              onSubmit={execute}
             />
             <ApiDocs specs={memoApiSpecs} />
           </div>

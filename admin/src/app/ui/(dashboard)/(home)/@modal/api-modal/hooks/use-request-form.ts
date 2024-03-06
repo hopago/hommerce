@@ -57,28 +57,27 @@ export default function useRequestForm({
     if (url === path && (pathField?.value || queryField?.value)) {
       setErr(true);
       setErrMsg("URL 설정 오류입니다. 다시 시도해주세요.");
+      onError(errMsg);
     }
 
     try {
-      startTransition(async () => {
-        const data = await restFetcher({
-          url,
-          method: method!,
-          parsedValue,
-        });
-
-        if (data instanceof HttpError) {
-          setData({
-            status: data.status,
-            message: data.message,
-          });
-          onSuccess("요청은 성공적으로 처리됐으나 서버 에러가 반환됐어요.");
-          return;
-        }
-
-        setData(data);
-        onSuccess();
+      const data = await restFetcher({
+        url,
+        method: method!,
+        parsedValue,
       });
+
+      if (data instanceof HttpError) {
+        setData({
+          status: data.status,
+          message: data.message,
+        });
+        onSuccess("요청은 성공적으로 처리됐으나 서버 에러가 반환됐어요.");
+        return;
+      }
+
+      setData(data);
+      onSuccess();
     } catch (error) {
       setErr(true);
 
@@ -104,8 +103,15 @@ export default function useRequestForm({
     }
   };
 
+  const execute = (e: React.FormEvent<HTMLFormElement>) => {
+    startTransition(() => {
+      handleSubmit(e);
+    });
+  };
+
   return {
     handleSubmit,
+    execute,
     data,
     isPending,
     err,
