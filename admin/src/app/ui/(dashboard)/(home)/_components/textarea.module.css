@@ -26,3 +26,7 @@ textarea.textarea::placeholder {
 .textarea.prepare:focus {
     outline: 1px solid #47494A;
 }
+
+.textarea.prepare.error {
+    outline: 1px solid #F23E5C;
+}

@@ -29,6 +29,8 @@ export default function Input({
       className={cn(styles.input, className === "prepare" && styles.prepare)}
       onChange={onChange}
       required={required}
+      spellCheck={false}
+      autoComplete="off"
     />
   );
 }

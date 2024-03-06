@@ -24,23 +24,27 @@
 }
 
 .button.close {
-    background-color: transparent;
+    position: absolute;
+    top: 0;
+    right: -3.5%;
+    background-color: #E4E6EB;
     border: none;
     cursor: pointer;
     width: 36px;
     height: 36px;
     font-weight: bold;
-    color: var(--text);
+    color: #000;
     border-radius: 50%;
-    border: 1px solid var(--textSoft);
+    border: 1px solid #000;
     transition: all .3s ease;
     align-items: center;
     justify-content: center;
 }
 
 .button.close:hover {
-    background-color: var(--hover);
-    border: 1px solid var(--textSoft);
+    background-color: #242526;
+    border: 1px solid transparent;
+    color: var(--text);
 }
 
 .button.apiSubmit {

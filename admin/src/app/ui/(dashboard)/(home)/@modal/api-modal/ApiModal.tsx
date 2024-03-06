@@ -14,15 +14,23 @@ import ApiResponse from "./_components/ApiResponse";
 
 import { MdClose } from "react-icons/md";
 
+import { toast } from "sonner";
+
 export default function ApiModal() {
   const { show, setShow, apiSpecs, apiEndpoint, resetState } = useApiModal();
 
   const memoApiSpecs = useMemo(() => apiSpecs, [apiSpecs]);
   const memoApiEndpoint = useMemo(() => apiEndpoint, [apiEndpoint]);
 
-  const { handleSubmit, data, err, errMsg } = useRequestForm({
+  const { handleSubmit, data, isPending } = useRequestForm({
     path: apiEndpoint?.path,
     method: apiEndpoint?.method,
+    onSuccess: (message?: string) => {
+      toast.success(message ?? "요청이 성공적으로 처리 됐습니다.");
+    },
+    onError: (message: string) => {
+      toast.error(`${message}`);
+    },
   });
 
   const handleClose = () => {
@@ -56,6 +64,7 @@ export default function ApiModal() {
               params={memoApiSpecs.params}
               query={memoApiSpecs.query}
               body={memoApiSpecs.body}
+              onSubmit={handleSubmit}
             />
             <ApiDocs specs={memoApiSpecs} />
           </div>
@@ -65,6 +74,7 @@ export default function ApiModal() {
             onClick={handleClose}
             icon={<MdClose />}
             className="close"
+            disabled={isPending}
           />
         </div>
       </main>

@@ -40,3 +40,4 @@ openapi.json
 
 # env
 .env
+.env.*

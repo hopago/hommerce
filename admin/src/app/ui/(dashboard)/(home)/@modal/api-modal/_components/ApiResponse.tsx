@@ -1,6 +1,6 @@
-import { AxiosResponse } from "axios";
-
 import styles from "../api-modal.module.css";
+
+import { cn } from "@/app/ui/lib/utils";
 
 type ApiResponseProps = {
   data: unknown;
@@ -11,10 +11,10 @@ export default function ApiResponse({ data }: ApiResponseProps) {
 
   return (
     <div className={styles.response}>
-      <div className={styles.titleWrap}>
+      <div className={styles.responseTitle}>
         <h1>응답</h1>
       </div>
-      <div className={styles.jsonContents}>
+      <div className={cn(styles.jsonContents, styles.response)}>
         {data ? (
           <pre className={styles.jsonContentsDetails}>{formattedBody}</pre>
         ) : (

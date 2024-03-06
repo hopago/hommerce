@@ -17,6 +17,7 @@ type ApiRequestProps = {
     value: unknown;
     required: boolean;
   };
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>
 };
 
 export default function ApiRequest({
@@ -25,9 +26,10 @@ export default function ApiRequest({
   params,
   query,
   body,
+  onSubmit,
 }: ApiRequestProps) {
   return (
-    <form className={styles.apiRequest}>
+    <form className={styles.apiRequest} onSubmit={onSubmit}>
       <PathInfo path={path} />
       <MethodInfo method={method} />
       <ParamsPrepare params={params} query={query} />

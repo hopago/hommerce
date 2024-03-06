@@ -10,6 +10,7 @@ type TextareaProps = {
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   className?: "prepare" | string;
   required?: boolean;
+  error?: boolean;
 };
 
 export default function Textarea({
@@ -18,14 +19,21 @@ export default function Textarea({
   value,
   className,
   required,
+  error,
 }: TextareaProps) {
   return (
     <textarea
       value={value}
       placeholder={placeholder}
-      className={cn(styles.textarea, className === "prepare" && styles.prepare)}
+      className={cn(
+        styles.textarea,
+        className === "prepare" && styles.prepare,
+        error && "error"
+      )}
       onChange={onChange}
       required={required}
+      spellCheck={false}
+      autoComplete="off"
     />
   );
 }

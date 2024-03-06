@@ -38,7 +38,7 @@ const API_CONSTANTS: Record<ApiOperationIds, ApiInfo> = {
   updateUser: {
     body: {
       value: {
-        _id: "mongo_id",
+        _id: "clerk_id",
         imageUrl: "https://example.com",
         username: "new_user_name",
       },
@@ -94,7 +94,7 @@ const API_CONSTANTS: Record<ApiOperationIds, ApiInfo> = {
   register: {
     body: {
       value: {
-        _id: "mongo_id",
+        id: "clerk_id",
         username: "user_name",
         imageUrl: "https://example.com",
       },

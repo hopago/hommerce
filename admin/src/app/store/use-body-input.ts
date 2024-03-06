@@ -18,6 +18,8 @@ export const useBodyInput = create<CreatorUseBodyInput>((set) => ({
   handleInputChange: (e) => {
     const value = e.target.value;
     set((state) => {
+      state.error = false;
+      state.errMsg = null;
       state.setInputValue(value);
       return state;
     });
