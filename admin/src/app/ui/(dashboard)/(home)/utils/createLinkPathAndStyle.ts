@@ -1,0 +1,33 @@
+import { usePathname } from "next/navigation";
+
+import { MenuLink } from "../types/menu-list";
+
+import styles from "../_components/sidebar.module.css";
+
+type CreateLinkPathAndStyleParams = {
+  link: MenuLink;
+  userId?: string;
+};
+
+export const createLinkPathAndStyle = ({
+  link,
+  userId,
+}: CreateLinkPathAndStyleParams) => {
+  const pathname = usePathname();
+
+  const isUserSettingLink = link.path === "/setting/:userId";
+  const userSettingPath = `/setting/${userId}`;
+  const isActive = isUserSettingLink
+    ? pathname.includes("setting")
+    : pathname === link.path;
+
+  const linkPath = isUserSettingLink ? userSettingPath : link.path;
+  const linkStyle = `${styles.sidebarMenuContainer} ${
+    isActive ? styles.active : ""
+  }`;
+
+  return {
+    linkPath,
+    linkStyle,
+  };
+};

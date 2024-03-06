@@ -4,8 +4,15 @@ import {
   MdHelpCenter,
   MdOutlineSettings,
   MdOutlineSupervisorAccount,
+  MdBook,
+  MdPerson,
+  MdDetails,
+  MdReviews,
   MdShoppingBag,
+  MdPointOfSale,
 } from "react-icons/md";
+
+import { IoMdHeart } from "react-icons/io";
 
 import { MenuList } from "../types/menu-list";
 
@@ -24,14 +31,50 @@ export const menuList: MenuList = [
         icon: <MdOutlineSupervisorAccount />,
       },
       {
-        title: "상품",
-        path: "/products",
-        icon: <MdShoppingBag />,
+        title: "도서 정보 및 리뷰",
+        path: "/books",
+        hasChildren: true,
+        icon: <MdBook />,
+        list: [
+          {
+            title: "저자",
+            path: "/authors",
+            icon: <MdPerson />,
+          },
+          {
+            title: "세부정보",
+            path: "/books/details",
+            icon: <MdDetails />,
+          },
+          {
+            title: "리뷰",
+            path: "/reviews",
+            icon: <MdReviews />,
+          },
+        ],
       },
       {
         title: "서비스",
-        path: "/service",
+        path: "/services",
         icon: <MdDesignServices />,
+        hasChildren: true,
+        list: [
+          {
+            title: "장바구니",
+            path: "/carts",
+            icon: <MdShoppingBag />,
+          },
+          {
+            title: "위시리스트",
+            path: "/favor",
+            icon: <IoMdHeart />,
+          },
+          {
+            title: "포인트",
+            path: "/point",
+            icon: <MdPointOfSale />,
+          },
+        ],
       },
     ],
   },
@@ -40,7 +83,7 @@ export const menuList: MenuList = [
     list: [
       {
         title: "설정",
-        path: `/setting/:username`,
+        path: `/setting/:userId`,
         icon: <MdOutlineSettings />,
       },
       {

@@ -80,3 +80,38 @@
 .sidebarMenuContainer.active {
     background-color: #2e374a;
 }
+
+.hoverMenuList {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.hoverList {
+    position: absolute;
+    top: 0;
+    right: -144px;
+    background-color: var(--bgSoft);
+    border: 1px solid var(--hover);
+    min-width: 146px;
+}
+
+.hoverList > a {
+    margin: 0;
+    border-radius: 0;
+}
+
+.hoverMenuItem {
+    padding: 1rem 0.5rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.menuTitle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}

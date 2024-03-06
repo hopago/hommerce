@@ -1,6 +1,7 @@
 import { useBodyInput } from "@/app/store/use-body-input";
 
 import styles from "../api-modal.module.css";
+import { useEffect, useMemo } from "react";
 
 type BodyProps = {
   body: {
@@ -10,10 +11,15 @@ type BodyProps = {
 };
 
 export default function Body({ body }: BodyProps) {
-  // TODO: body value 그대로가 아닌 input field의 값을 보여줘야함
-  const { parsedValue } = useBodyInput();
+  const { parsedValue, inputValue, setInputValue } = useBodyInput();
 
-  const formattedBody = JSON.stringify(parsedValue ?? body?.value, null, 2);
+  useEffect(() => {
+    setInputValue(inputValue);
+  }, [inputValue]);
+
+  const memoBody = useMemo(() => body, [body]);
+
+  const formattedBody = JSON.stringify(parsedValue ?? memoBody?.value, null, 2);
 
   return (
     <div className={styles.body}>

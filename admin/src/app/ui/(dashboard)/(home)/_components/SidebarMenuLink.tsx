@@ -1,32 +1,21 @@
 "use client";
 
-import styles from "./sidebar.module.css";
-
 import Link from "next/link";
-
-import { usePathname } from "next/navigation";
 
 import { MenuLink } from "../types/menu-list";
 
+import { createLinkPathAndStyle } from "../utils/createLinkPathAndStyle";
+
 type SidebarMenuLinkProps = {
   link: MenuLink;
+  userId: string;
 };
 
-export default function SidebarMenuLink({ link }: SidebarMenuLinkProps) {
-  const username = "hopago";
-
-  const pathname = usePathname();
-
-  const isUserSettingLink = link.path === "/setting/:username";
-  const userSettingPath = `/setting/${username}`;
-  const isActive = isUserSettingLink
-    ? pathname.includes("setting")
-    : pathname === link.path;
-
-  const linkPath = isUserSettingLink ? userSettingPath : link.path;
-  const linkStyle = `${styles.sidebarMenuContainer} ${
-    isActive ? styles.active : ""
-  }`;
+export default function SidebarMenuLink({
+  link,
+  userId,
+}: SidebarMenuLinkProps) {
+  const { linkPath, linkStyle } = createLinkPathAndStyle({ link, userId });
 
   return (
     <Link href={linkPath} className={linkStyle}>

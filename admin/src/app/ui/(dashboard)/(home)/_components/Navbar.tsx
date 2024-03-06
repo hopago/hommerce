@@ -8,13 +8,13 @@ import { MdNotifications, MdOutlineChat, MdPublic } from "react-icons/md";
 
 import Search from "./Search";
 
-import useSearchForm from "../hooks/use-search-form";
+import { useNavigateForm } from "../hooks/use-search-form";
 
 export default function Navbar() {
   const currPathname = getCurrPathname();
   if (!currPathname) return null;
 
-  const { searchTerm, handleChange, handleSubmit } = useSearchForm({
+  const { searchTerm, handleChange, handleSubmit } = useNavigateForm({
     type: currPathname,
   });
 

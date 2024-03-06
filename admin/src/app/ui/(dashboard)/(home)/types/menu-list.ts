@@ -5,23 +5,35 @@ type MenuTitle = "페이지" | "유저";
 export type MenuListTitle =
   | "대시보드"
   | "유저"
-  | "상품"
+  | "도서 정보 및 리뷰"
+  | "저자"
+  | "세부정보"
+  | "리뷰"
   | "서비스"
+  | "장바구니"
+  | "위시리스트"
+  | "포인트"
   | "설정"
   | "도움말";
 
 type MenuListPath =
   | "/"
   | "/users"
-  | "/products"
-  | "/service"
-  | "/setting/:username"
+  | "/books"
+  | "/authors"
+  | "/books/details"
+  | "/reviews"
+  | "/services"
+  | "/carts"
+  | "/favor"
+  | "/point"
+  | "/setting/:userId"
   | "/help";
 
 export type MenuPathname =
   | ""
   | "users"
-  | "products"
+  | "books"
   | "service"
   | "setting"
   | "help";
@@ -32,6 +44,8 @@ export type MenuLink = {
   title: MenuListTitle;
   path: MenuListPath;
   icon: MenuListIcon;
+  hasChildren?: boolean;
+  list?: MenuLink[];
 };
 
 type MenuItem = {

@@ -7,24 +7,24 @@ import Search from "../../_components/Search";
 
 import styles from "./users-search.module.css";
 
-import useSearchForm from "../../hooks/use-search-form";
-
 import { getCurrPathname } from "../../utils/getCurrPathname";
 
+import { useSearchUserForm } from "../../hooks/use-search-form";
+
 export default function UsersSearch() {
+  const userId = "clerk_id";
+
   const router = useRouter();
 
   const pathname = getCurrPathname();
 
   if (!pathname) return null;
 
-  const onClick = () => {
-    router.push("/users/management");
+  const onClick = (userId: string) => {
+    router.push(`/users/${userId}`);
   };
 
-  const { searchTerm, handleChange, handleSubmit } = useSearchForm({
-    type: pathname,
-  });
+  const { searchTerm, handleChange, handleSubmit } = useSearchUserForm();
 
   return (
     <div className={styles.container}>
@@ -38,7 +38,7 @@ export default function UsersSearch() {
         <Button
           type="button"
           text="관리하기"
-          onClick={onClick}
+          onClick={() => onClick(userId)}
           className="manage"
         />
       </div>

@@ -1,28 +1,24 @@
 import { usePathname } from "next/navigation";
 
-export function getCurrPathname() {
+import { MenuListTitle } from "../types/menu-list";
+
+const pathnameToMenuListTitle: Record<string, MenuListTitle | null> = {
+  "/": "대시보드",
+  "/users": "유저",
+  "/books": "도서 정보 및 리뷰",
+  "/books/details": "세부정보",
+  "/authors": "저자",
+  "/reviews": "리뷰",
+  "/services": "서비스",
+  "/carts": "장바구니",
+  "/favor": "위시리스트",
+  "/point": "포인트",
+  "/setting": "설정",
+  "/help": "도움말",
+};
+
+export function getCurrPathname(): MenuListTitle | null {
   const pathname = usePathname();
-  const currPathname = pathname.split("/")[1] as string | null;
 
-  if (currPathname === "") {
-    return "대시보드";
-  }
-
-  if (currPathname === "users") {
-    return "유저";
-  }
-
-  if (currPathname === "products") {
-    return "상품";
-  }
-
-  if (currPathname === "setting") {
-    return "설정";
-  }
-
-  if (currPathname === "help") {
-    return "도움말";
-  }
-
-  return null;
+  return pathnameToMenuListTitle[pathname] || null;
 }
