@@ -1,27 +1,26 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request } from "express";
 import { HttpException } from "../../middleware/error/utils";
 import User, { IUser } from "../model/user";
 import { handleDatabaseOperation } from "../../utils/db-operation";
 import { handlePostPoint } from "../(point)/services/postPoint";
 
-export const handleRegister = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const handleRegister = async (req: Request, next: NextFunction) => {
   try {
-    const { username, imageUrl, id } = req.body;
-    if (!username || !imageUrl || !id)
+    const { username, imageUrl, id, email } = req.body;
+    if (!username || !imageUrl || !id || !email)
       throw new HttpException(400, "Username & ImageUrl & ID are required.");
 
     const duplicate = await User.findOne({
+      id,
       username,
+      email,
     });
     if (duplicate) throw new HttpException(409, "Username should be unique.");
 
     const newUser = new User({
       id,
       username,
+      email,
       imageUrl,
     });
 

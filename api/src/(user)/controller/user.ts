@@ -11,7 +11,7 @@ export const register = async (
   next: NextFunction
 ) => {
   try {
-    const newUser = await handleRegister(req, res, next);
+    const newUser = await handleRegister(req, next);
 
     return res.status(201).json(newUser);
   } catch (err) {

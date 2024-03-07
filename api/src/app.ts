@@ -24,6 +24,8 @@ import reviewTotalRouter from "./(review)/(total)/routes/review-total";
 import favorRouter from "./(user)/(favor)/routes/favor";
 import pointRouter from "./(user)/(point)/routes/point";
 
+import clerkRouter from "./webhook/clerk/routes/clerk";
+
 const app = express();
 
 connectDB();
@@ -49,6 +51,8 @@ app.use("/review", reviewRouter);
 app.use("/review/reply", reviewReplyRouter);
 app.use("/review/total", reviewTotalRouter);
 app.use("/user", userRouter);
+
+app.use("/webhook/clerk", clerkRouter);
 
 app.use("/api/specs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 

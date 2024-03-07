@@ -11,7 +11,7 @@ export const handleDeleteUser = async (req: Request, next: NextFunction) => {
   try {
     await handleDatabaseOperation(
       User.findOneAndDelete({
-        userId,
+        id: userId,
       }),
       next
     );
