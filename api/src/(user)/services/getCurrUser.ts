@@ -1,19 +1,13 @@
 import { NextFunction, Request } from "express";
-import User from "../model/user";
 import { HttpException } from "../../middleware/error/utils";
+import { UserInfo, findUser } from "./findUser";
 
-export const handleGetCurrUser = async (req: Request, next: NextFunction) => {
+export const handleGetCurrUser = async (
+  req: Request,
+  next: NextFunction
+): Promise<UserInfo | null | undefined> => {
   const userId = req.query.userId as string | undefined;
   if (!userId) throw new HttpException(400, "User Id required.");
 
-  try {
-    const user = await User.findOne({
-      id: userId,
-    });
-    if (!user) throw new HttpException(404, "User not found.");
-
-    return user;
-  } catch (err) {
-    next(err);
-  }
+  return await findUser({ id: userId }, next);
 };

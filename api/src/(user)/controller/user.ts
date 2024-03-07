@@ -4,6 +4,7 @@ import { handleRegister } from "../services/register";
 import { handleGetCurrUser } from "../services/getCurrUser";
 import { handleUpdateUser } from "../services/updateUser";
 import { handleDeleteUser } from "../services/deleteUser";
+import { findUserBySearchTerm } from "../services/findUserBySearchTerm";
 
 export const register = async (
   req: Request,
@@ -24,10 +25,14 @@ export const getCurrUser = async (
   res: Response,
   next: NextFunction
 ) => {
-  try {
-    const currUser = await handleGetCurrUser(req, next);
+  const keyword = req.query.keyword as string | undefined;
 
-    return res.status(200).json(currUser);
+  try {
+    const user = keyword
+      ? await findUserBySearchTerm(keyword, next)
+      : await handleGetCurrUser(req, next);
+
+    return res.status(200).json(user);
   } catch (err) {
     next(err);
   }

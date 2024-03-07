@@ -26,15 +26,12 @@ export const clerkUserCreated = async (
   if (!svix_signature)
     throw new HttpException(400, "No svix-signature header.");
 
-  const payload = JSON.parse(req.body);
-  const body = JSON.stringify(payload);
-
   const wh = new Webhook(WEBHOOK_SECRET);
 
   let evt: WebhookEvent;
 
   try {
-    evt = wh.verify(body, {
+    evt = wh.verify(JSON.stringify(req.body), {
       "svix-id": svix_id,
       "svix-timestamp": svix_timestamp,
       "svix-signature": svix_signature,
@@ -50,7 +47,7 @@ export const clerkUserCreated = async (
     const user = evt.data;
 
     const id = user.id;
-    const email = user.email_addresses;
+    const email = user.email_addresses[0].email_address;
     const username = user.username;
     const imageUrl = user.image_url;
 
@@ -61,7 +58,11 @@ export const clerkUserCreated = async (
       imageUrl,
     };
 
-    await handleRegister(req, next);
+    try {
+      await handleRegister(req, next);
+    } catch (err) {
+      next(err);
+    }
   }
 
   return res.sendStatus(204);
