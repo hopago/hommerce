@@ -11,6 +11,8 @@ import { getCurrPathname } from "../../utils/getCurrPathname";
 
 import { useSearchUserForm } from "../../hooks/use-search-form";
 
+import { toast } from "sonner";
+
 export default function UsersSearch() {
   const userId = "clerk_id";
 
@@ -23,7 +25,18 @@ export default function UsersSearch() {
     router.push(`/users/${userId}`);
   };
 
-  const { searchTerm, handleChange, handleSubmit } = useSearchUserForm();
+  const {
+    searchTerm,
+    handleChange,
+    handleSubmit,
+    isPending,
+    searchResults,
+    error,
+  } = useSearchUserForm({
+    onError: (message: string) => {
+      toast.error(message);
+    },
+  });
 
   return (
     <div className={styles.container}>

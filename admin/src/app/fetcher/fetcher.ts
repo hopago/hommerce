@@ -9,14 +9,14 @@ const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 type RestFetcherParams = {
   url: string;
   method: ApiMethod;
-  parsedValue: unknown | null;
+  parsedValue?: unknown | null;
 };
 
-export const restFetcher = async ({
+export const restFetcher = async <T = unknown>({
   url,
   method,
   parsedValue,
-}: RestFetcherParams) => {
+}: RestFetcherParams): Promise<T | HttpError> => {
   const config: AxiosRequestConfig = {
     method,
     url,

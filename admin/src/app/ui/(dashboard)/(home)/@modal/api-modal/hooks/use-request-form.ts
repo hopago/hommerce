@@ -7,6 +7,7 @@ import { ApiMethod } from "../../../types/api-specs";
 import { useState, useTransition } from "react";
 
 import { HttpError } from "@/app/fetcher/error";
+import { handleHttpError } from "@/app/fetcher/handle-error";
 
 type UseRequestFormParams = {
   path: string | undefined;
@@ -79,25 +80,7 @@ export default function useRequestForm({
       setData(data);
       onSuccess();
     } catch (error) {
-      setErr(true);
-
-      if (error instanceof HttpError) {
-        const httpError: HttpError = error;
-        const statusCode = httpError.status;
-
-        if (statusCode >= 400 && statusCode < 500) {
-          setErrMsg(
-            httpError.message ||
-              "클라이언트 오류입니다. 필수 필드를 다시 확인해주세요."
-          );
-        } else if (statusCode >= 500) {
-          setErrMsg(
-            httpError.message || "서버 오류입니다. 잠시 후 다시 시도해주세요."
-          );
-        }
-      } else {
-        setErrMsg("예상치 못한 오류가 발생했습니다.");
-      }
+      handleHttpError({ err: error, setErrMsg, setError: setErr });
 
       onError(errMsg);
     }

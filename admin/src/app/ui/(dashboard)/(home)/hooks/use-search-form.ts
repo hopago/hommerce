@@ -1,9 +1,21 @@
-import { useEffect, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  useTransition,
+} from "react";
 
 import { MenuListTitle } from "../types/menu-list";
 import { useRouter } from "next/navigation";
 
 import debounce from "lodash.debounce";
+import { restFetcher } from "@/app/fetcher/fetcher";
+
+import { createQueryString } from "../utils/createQueryString";
+import { IUser } from "../types/user";
+import { HttpError } from "@/app/fetcher/error";
+import { handleHttpError } from "@/app/fetcher/handle-error";
 
 type UseSearchProps = {
   type: MenuListTitle;
@@ -71,23 +83,31 @@ export function useNavigateForm({ type }: UseSearchProps) {
     },
   };
 
+  const memoNavigateFunctions = useMemo(
+    () => navigateFunctions,
+    [navigateFunctions]
+  );
+
   const handleSearch = debounce(() => {
-    const results = Object.entries(navigateFunctions).filter(([key]) =>
+    const results = Object.entries(memoNavigateFunctions).filter(([key]) =>
       key.includes(searchTerm.trim())
     );
     setSearchResults(results);
   }, 100);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-  };
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchTerm(e.target.value);
+    },
+    [searchTerm]
+  );
 
   const handleSubmit = () => {
-    if (!navigateFunctions[type]) {
+    if (!memoNavigateFunctions[type]) {
       throw new Error(`Something went wrong in type: ${type}`);
     }
 
-    return navigateFunctions[type]!();
+    return memoNavigateFunctions[type]!();
   };
 
   useEffect(() => {
@@ -104,18 +124,74 @@ export function useNavigateForm({ type }: UseSearchProps) {
   };
 }
 
-// TODO: Use searchUserForm
-export function useSearchUserForm() {
+type UseSearchUserFormParams = {
+  onError: (message: string) => void;
+};
+
+export function useSearchUserForm({ onError }: UseSearchUserFormParams) {
   const [searchTerm, setSearchTerm] = useState("");
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
+  const [searchResults, setSearchResults] = useState<IUser[]>([]);
+
+  const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
+
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchTerm(e.target.value);
+    },
+    [searchTerm]
+  );
+
+  const handleSubmit = async () => {
+    const queryString = createQueryString({ keyword: searchTerm });
+    const url = `/user?${queryString}`;
+
+    const data = await restFetcher<IUser[]>({ url, method: "GET" });
+
+    return data;
   };
 
-  const handleSubmit = () => {};
+  const handleSearch = debounce(async () => {
+    try {
+      const results = await handleSubmit();
+
+      if (results instanceof HttpError) {
+        const httpError = results;
+        const statusCode = httpError.status;
+
+        if (statusCode === 500) {
+          setError(true);
+          setErrMsg("서버 오류입니다. 잠시 후 다시 시도해주세요.");
+          onError(errMsg);
+          return;
+        }
+      }
+
+      setSearchResults(results as IUser[] | []);
+    } catch (err) {
+      handleHttpError({ err, setErrMsg, setError });
+      onError(errMsg);
+    }
+  }, 500);
+
+  useEffect(() => {
+    setError(false);
+    setErrMsg("");
+
+    if (searchTerm === "") return setSearchResults([]);
+
+    startTransition(() => {
+      handleSearch();
+    });
+  }, [searchTerm]);
 
   return {
     searchTerm,
     handleChange,
     handleSubmit,
+    isPending,
+    searchResults,
+    error,
   };
 }
