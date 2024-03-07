@@ -1,3 +1,5 @@
+import ReactQueryProvider from "@/app/providers/ReactQueryProvider";
+
 import Footer from "@/app/ui/(dashboard)/(home)/_components/Footer";
 import Navbar from "@/app/ui/(dashboard)/(home)/_components/Navbar";
 import Sidebar from "@/app/ui/(dashboard)/(home)/_components/Sidebar";
@@ -17,7 +19,9 @@ export default function DashboardLayout({
       <div className={styles.wrapper}>
         <Navbar />
         <div className={styles.contents}>
-          <section>{children}</section>
+          <section>
+            <ReactQueryProvider>{children}</ReactQueryProvider>
+          </section>
           <Footer />
         </div>
       </div>

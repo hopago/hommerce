@@ -34,7 +34,7 @@ export default function useRequestForm({
   const [err, setErr] = useState(false);
   const [errMsg, setErrMsg] = useState("");
 
-  let url: string = "";
+  let externalUrl: string = "";
 
   if (pathField) {
     const finalPath = path
@@ -48,14 +48,14 @@ export default function useRequestForm({
       }
       const queryString = queryParams.toString();
 
-      url = queryString ? `${finalPath}?${queryString}` : finalPath;
+      externalUrl = queryString ? `${finalPath}?${queryString}` : finalPath;
     }
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (url === path && (pathField?.value || queryField?.value)) {
+    if (externalUrl === path && (pathField?.value || queryField?.value)) {
       setErr(true);
       setErrMsg("URL 설정 오류입니다. 다시 시도해주세요.");
       onError(errMsg);
@@ -63,7 +63,7 @@ export default function useRequestForm({
 
     try {
       const data = await restFetcher({
-        url,
+        url: externalUrl,
         method: method!,
         parsedValue,
       });

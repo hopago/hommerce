@@ -1,21 +1,19 @@
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-  useTransition,
-} from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { MenuListTitle } from "../types/menu-list";
+
 import { useRouter } from "next/navigation";
 
 import debounce from "lodash.debounce";
-import { restFetcher } from "@/app/fetcher/fetcher";
 
-import { createQueryString } from "../utils/createQueryString";
-import { IUser } from "../types/user";
+import { useQuery } from "@tanstack/react-query";
+
 import { HttpError } from "@/app/fetcher/error";
-import { handleHttpError } from "@/app/fetcher/handle-error";
+
+import { fetchUserBySearchTerm } from "../services/fetchUser";
+import { IUser } from "../types/user";
+import { daysToMs } from "../utils/daysToMs";
+import useDebounce from "./use-debounce";
 
 type UseSearchProps = {
   type: MenuListTitle;
@@ -128,70 +126,40 @@ type UseSearchUserFormParams = {
   onError: (message: string) => void;
 };
 
-export function useSearchUserForm({ onError }: UseSearchUserFormParams) {
+export const useSearchUserForm = ({ onError }: UseSearchUserFormParams) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState<IUser[]>([]);
 
-  const [isPending, startTransition] = useTransition();
-  const [error, setError] = useState(false);
-  const [errMsg, setErrMsg] = useState("");
-
-  const handleChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setSearchTerm(e.target.value);
-    },
-    [searchTerm]
-  );
-
-  const handleSubmit = async () => {
-    const queryString = createQueryString({ keyword: searchTerm });
-    const url = `/user?${queryString}`;
-
-    const data = await restFetcher<IUser[]>({ url, method: "GET" });
-
-    return data;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
   };
 
-  const handleSearch = debounce(async () => {
-    try {
-      const results = await handleSubmit();
+  const debouncedSearchTerm = useDebounce({ value: searchTerm, delay: 500 });
 
-      if (results instanceof HttpError) {
-        const httpError = results;
-        const statusCode = httpError.status;
-
-        if (statusCode === 500) {
-          setError(true);
-          setErrMsg("서버 오류입니다. 잠시 후 다시 시도해주세요.");
-          onError(errMsg);
-          return;
-        }
-      }
-
-      setSearchResults(results as IUser[] | []);
-    } catch (err) {
-      handleHttpError({ err, setErrMsg, setError });
-      onError(errMsg);
-    }
-  }, 500);
+  const {
+    data: searchResults,
+    error,
+    isLoading,
+  } = useQuery<IUser[]>({
+    queryKey: ["userSearchResults", debouncedSearchTerm],
+    queryFn: () => fetchUserBySearchTerm({ searchTerm: debouncedSearchTerm }),
+    staleTime: daysToMs(1),
+    gcTime: daysToMs(3),
+    enabled: !!debouncedSearchTerm,
+  });
 
   useEffect(() => {
-    setError(false);
-    setErrMsg("");
-
-    if (searchTerm === "") return setSearchResults([]);
-
-    startTransition(() => {
-      handleSearch();
-    });
-  }, [searchTerm]);
+    if (error instanceof HttpError) {
+      onError(`${error.status}: ${error.message}`);
+    } else if (error) {
+      onError("예기치 못한 오류입니다.");
+    }
+  }, [error]);
 
   return {
     searchTerm,
     handleChange,
-    handleSubmit,
-    isPending,
+    isLoading,
     searchResults,
     error,
   };
-}
+};

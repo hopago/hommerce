@@ -2,18 +2,17 @@
 
 import { MdSearch } from "react-icons/md";
 
-import Button from "./Button";
-import Input from "./Input";
-import SearchResults from "./SearchResults";
-
 import styles from "./search.module.css";
+
+import Button from "../../_components/Button";
+import Input from "../../_components/Input";
+import { IUser } from "../../types/user";
 
 type SearchProps = {
   placeholder: string;
   searchTerm: string;
-  searchResults: [string, () => void][] | [];
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: () => void;
+  searchResults: IUser[] | undefined;
 };
 
 export default function Search({
@@ -21,18 +20,11 @@ export default function Search({
   searchTerm,
   searchResults,
   handleChange,
-  handleSubmit,
 }: SearchProps) {
-  const onSubmit = async (e: React.FocusEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const res = handleSubmit();
-
-    return res;
-  };
+  console.log(searchResults);
 
   return (
-    <form className={styles.container} onSubmit={onSubmit}>
+    <form className={styles.container} onSubmit={(e) => e.preventDefault()}>
       <MdSearch />
       <Input
         type="text"
@@ -41,9 +33,6 @@ export default function Search({
         onChange={handleChange}
       />
       <Button type="submit" disabled={false} display="none" />
-      {searchResults.length ? (
-        <SearchResults searchResults={searchResults} />
-      ) : null}
     </form>
   );
 }

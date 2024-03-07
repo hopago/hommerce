@@ -9,12 +9,26 @@ import UsersTableItem from "./UsersTableItem";
 
 import { useCreatorPagination } from "@/app/store/use-pagination";
 
+/* TODO:
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+} from "@tanstack/react-query";
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ["posts", postId],
+    queryFn: () => getSinglePost({ postId: postId as string }),
+  });
+  await queryClient.prefetchQuery({
+    queryKey: ["comments", postId],
+    queryFn: () => getComments({ postId: postId as string }),
+  });
+  const dehydratedState = dehydrate(queryClient);
+*/
+
 export default function UsersTable() {
   const { currentPage } = useCreatorPagination();
-
-  useEffect(() => {
-    // TODO: GET User Info By PageNum & Filter
-  }, [currentPage]);
 
   const temporaryUser: UserInfo = {
     _id: "mongo_id",

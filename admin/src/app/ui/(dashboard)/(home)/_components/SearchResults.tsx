@@ -1,13 +1,9 @@
-import { IUser } from "../types/user";
-
-import UserResults from "./UserResults";
-
 import styles from "./search.module.css";
 
-type TSearchResult = [string, () => void] | IUser | undefined;
+type TSearchResult = [string, () => void] | undefined;
 
 type SearchResultsProps = {
-  searchResults: [string, () => void][] | [] | IUser[];
+  searchResults: [string, () => void][] | [];
 };
 
 export default function SearchResults({ searchResults }: SearchResultsProps) {
@@ -19,8 +15,6 @@ export default function SearchResults({ searchResults }: SearchResultsProps) {
           {key}
         </li>
       );
-    } else if (item && ("username" in item && "email" in item)) {
-      return <UserResults key={item._id} user={item} />;
     } else {
       return null;
     }

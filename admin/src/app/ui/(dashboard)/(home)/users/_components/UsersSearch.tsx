@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 
 import Button from "../../_components/Button";
-import Search from "../../_components/Search";
+import Search from "./Search";
 
 import styles from "./users-search.module.css";
 
@@ -25,18 +25,12 @@ export default function UsersSearch() {
     router.push(`/users/${userId}`);
   };
 
-  const {
-    searchTerm,
-    handleChange,
-    handleSubmit,
-    isPending,
-    searchResults,
-    error,
-  } = useSearchUserForm({
-    onError: (message: string) => {
-      toast.error(message);
-    },
-  });
+  const { searchTerm, handleChange, isLoading, searchResults, error } =
+    useSearchUserForm({
+      onError: (message: string) => {
+        toast.error(message);
+      },
+    });
 
   return (
     <div className={styles.container}>
@@ -45,8 +39,7 @@ export default function UsersSearch() {
           placeholder={`${pathname} 검색하기`}
           searchTerm={searchTerm}
           handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          searchResults={[]}
+          searchResults={searchResults}
         />
         <Button
           type="button"
