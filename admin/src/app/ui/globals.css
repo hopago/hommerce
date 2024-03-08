@@ -6,6 +6,7 @@
   --textPurple: #5d57c9;
   --divider: rgba(255,255,255,.18);
   --hover: #2e374a;
+  --error: #F23E5C;
 }
 
 * {
@@ -31,4 +32,11 @@ input::placeholder {
 ul,
 ol {
     list-style: none;
+}
+
+.styleNone {
+    border: none;
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
 }

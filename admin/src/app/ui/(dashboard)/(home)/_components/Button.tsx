@@ -8,6 +8,8 @@ import styles from "./button.module.css";
 
 import { cn } from "@/app/ui/lib/utils";
 
+import { API_SUBMIT_BUTTON, CLOSE_BUTTON, MANAGE_BUTTON } from "../constants/classNames";
+
 type ButtonProps = {
   type: "button" | "submit";
   text?: string;
@@ -18,6 +20,7 @@ type ButtonProps = {
   disabled?: boolean;
   display?: "none" | "flex" | "block" | "inline-block";
   className?: "manage" | "close" | "api-submit" | string;
+  ariaLabel?: string;
 };
 
 export default function Button({
@@ -30,6 +33,7 @@ export default function Button({
   disabled,
   display = "flex",
   className,
+  ariaLabel,
 }: ButtonProps) {
   let btnIcon = icon;
 
@@ -48,14 +52,15 @@ export default function Button({
     <button
       className={cn(
         styles.button,
-        className === "manage" && styles.manage,
-        className === "close" && styles.close,
-        className === "api-submit" && styles.apiSubmit
+        className === MANAGE_BUTTON && styles.manage,
+        className === CLOSE_BUTTON && styles.close,
+        className === API_SUBMIT_BUTTON && styles.apiSubmit
       )}
       type={type}
       onClick={onClick}
       disabled={disabled}
       style={{ display: `${display}` }}
+      aria-label={ariaLabel}
     >
       <div className={styles.iconWrap}>{btnIcon}</div>
       <span className={styles.text}>{text}</span>

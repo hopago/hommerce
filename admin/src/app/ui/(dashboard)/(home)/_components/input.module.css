@@ -22,3 +22,11 @@
 .input.prepare:focus {
     outline: 1px solid #47494A;
 }
+
+.input.userSearch {
+    padding: 0px 0.5rem;
+}
+
+.input.userSearch:focus {
+    width: inherit;
+}

@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    min-width: 270px;
+    border-radius: 0.5rem;
+    border: 1px solid transparent;
+    background-color: #2e374a;
+    position: relative;
+    transition: all .3s ease;
+}
+
+.container:focus-within,
+.container.active {
+    border-color: var(--textSoft);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-color: 1px solid rgba(255, 255, 255, .05);
+}
+
+.container.error {
+    border: 1px solid #F23E5C;
+}

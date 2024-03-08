@@ -1,0 +1,31 @@
+.container {
+    padding: 0.25rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--textSoft);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-size: 14px;
+    letter-spacing: -0.01em;
+    line-height: 16px;
+    color: var(--textSoft);
+}
+
+.container:hover {
+    background-color: var(--bgSoft);
+}
+
+.userImg {
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.desc {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 0.5rem;
+}

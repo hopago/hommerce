@@ -133,7 +133,7 @@ export const useSearchUserForm = ({ onError }: UseSearchUserFormParams) => {
     setSearchTerm(e.target.value);
   };
 
-  const debouncedSearchTerm = useDebounce({ value: searchTerm, delay: 500 });
+  const debouncedSearchTerm = useDebounce({ value: searchTerm, delay: 750 });
 
   const {
     data: searchResults,
@@ -149,6 +149,8 @@ export const useSearchUserForm = ({ onError }: UseSearchUserFormParams) => {
 
   useEffect(() => {
     if (error instanceof HttpError) {
+      if (error.status === 404) return onError("유저를 찾지 못했습니다.");
+
       onError(`${error.status}: ${error.message}`);
     } else if (error) {
       onError("예기치 못한 오류입니다.");

@@ -4,15 +4,23 @@ import { MdSearch } from "react-icons/md";
 
 import styles from "./search.module.css";
 
-import Button from "../../_components/Button";
 import Input from "../../_components/Input";
+import SearchResultList from "./SearchResultList";
+
 import { IUser } from "../../types/user";
+
+import { cn } from "@/app/ui/lib/utils";
+import { checkValidResponse } from "../../utils/checkValidResponse";
+
+import { USER_SEARCH_INPUT } from "../../constants/classNames";
 
 type SearchProps = {
   placeholder: string;
   searchTerm: string;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  searchResults: IUser[] | undefined;
+  searchResults: IUser[] | null;
+  isLoading: boolean;
+  error: Error | null;
 };
 
 export default function Search({
@@ -20,19 +28,31 @@ export default function Search({
   searchTerm,
   searchResults,
   handleChange,
+  isLoading,
+  error,
 }: SearchProps) {
-  console.log(searchResults);
+  const hasError = error;
+  const isLoadingOrNoResults =
+    isLoading || (Array.isArray(searchResults) && !searchResults.length);
+  const isValidResponse = checkValidResponse(searchResults);
 
   return (
-    <form className={styles.container} onSubmit={(e) => e.preventDefault()}>
+    <div
+      className={cn(
+        styles.container,
+        hasError && styles.error,
+        (isLoadingOrNoResults || isValidResponse) && styles.active
+      )}
+    >
       <MdSearch />
       <Input
         type="text"
         value={searchTerm}
         placeholder={placeholder}
         onChange={handleChange}
+        className={USER_SEARCH_INPUT}
       />
-      <Button type="submit" disabled={false} display="none" />
-    </form>
+      <SearchResultList search={searchResults!} isLoading={isLoading} />
+    </div>
   );
 }

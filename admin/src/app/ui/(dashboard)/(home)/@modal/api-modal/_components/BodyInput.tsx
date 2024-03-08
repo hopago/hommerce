@@ -6,6 +6,8 @@ import styles from "../api-modal.module.css";
 
 import { toast } from "sonner";
 
+import { API_PREPARE_INPUT } from "../../../constants/classNames";
+
 type BodyInputProps = {
   body: unknown;
   required: boolean;
@@ -32,7 +34,7 @@ export default function BodyInput({ body, required }: BodyInputProps) {
           value={inputValue}
           placeholder="JSON 형식으로 입력해주세요."
           onChange={handleInputChange}
-          className="prepare"
+          className={API_PREPARE_INPUT}
           error={error}
           required={required}
         />

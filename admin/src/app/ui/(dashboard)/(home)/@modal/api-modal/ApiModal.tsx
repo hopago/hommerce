@@ -16,6 +16,8 @@ import { MdClose } from "react-icons/md";
 
 import { toast } from "sonner";
 
+import { CLOSE_BUTTON } from "../../constants/classNames";
+
 export default function ApiModal() {
   const { show, setShow, apiSpecs, apiEndpoint, resetState } = useApiModal();
 
@@ -73,7 +75,7 @@ export default function ApiModal() {
             type="button"
             onClick={handleClose}
             icon={<MdClose />}
-            className="close"
+            className={CLOSE_BUTTON}
             disabled={isPending}
           />
         </div>
