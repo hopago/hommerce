@@ -11,12 +11,17 @@ export const findUser = async (
   next: NextFunction
 ) => {
   try {
-    const user = await User.findOne(condition);
-    if (!user) throw new HttpException(404, "User not found.");
+    const users = await User.find({
+      username: { $regex: `^${condition.username}`, $options: "i" },
+    });
 
-    const { _id, id, ...userInfo } = user as IUser;
+    const filterUserInfo = users.reduce((acc: any[], user: any) => {
+      const { _id, id, ...userInfo } = user._doc as IUser;
+      acc.push(userInfo);
+      return acc;
+    }, []);
 
-    return userInfo as UserInfo;
+    return filterUserInfo as UserInfo[];
   } catch (err) {
     next(err);
   }

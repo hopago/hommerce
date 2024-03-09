@@ -6,7 +6,7 @@ import { UserInfo, findUser } from "./findUser";
 export const findUserBySearchTerm = async (
   keyword: string,
   next: NextFunction
-): Promise<UserInfo | null | undefined> => {
+): Promise<UserInfo[] | undefined> => {
   const condition = isEmail(keyword)
     ? { email: keyword }
     : { username: getValidSearchTerm(keyword) };
