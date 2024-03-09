@@ -15,3 +15,8 @@ export const getQueryClient = () => {
     });
   return client;
 };
+
+export const QueryKeys = {
+  USER: "user",
+  USER_SEARCH: "userSearchResults",
+};

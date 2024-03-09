@@ -15,7 +15,7 @@ import { fetchUserBySearchTerm } from "../services/fetchUser";
 
 import { daysToMs } from "../utils/daysToMs";
 
-import { getQueryClient } from "@/app/lib/getQueryClient";
+import { QueryKeys, getQueryClient } from "@/app/lib/getQueryClient";
 
 type UseSearchProps = {
   type: MenuListTitle;
@@ -144,7 +144,7 @@ export const useSearchUserForm = ({ onError }: UseSearchUserFormParams) => {
     error,
     isLoading,
   } = useQuery<IUser[]>({
-    queryKey: ["userSearchResults", debouncedSearchTerm],
+    queryKey: [QueryKeys.USER_SEARCH, debouncedSearchTerm],
     queryFn: () => fetchUserBySearchTerm({ searchTerm: debouncedSearchTerm }),
     staleTime: daysToMs(1),
     gcTime: daysToMs(3),
@@ -154,7 +154,7 @@ export const useSearchUserForm = ({ onError }: UseSearchUserFormParams) => {
   useEffect(() => {
     if (debouncedSearchTerm.trim() === "") {
       queryClient.resetQueries({
-        queryKey: ["userSearchResults", debouncedSearchTerm],
+        queryKey: [QueryKeys.USER_SEARCH, debouncedSearchTerm],
       });
     }
   }, [debouncedSearchTerm]);

@@ -7,10 +7,11 @@ import styles from "./input.module.css";
 import { API_PREPARE_INPUT, USER_SEARCH_INPUT } from "../constants/classNames";
 
 type InputProps = {
-  type: "text";
+  type: "text" | "password" | "email";
   value: string;
   placeholder: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  name?: string;
   className?: "prepare" | string;
   required?: boolean;
 };
@@ -20,6 +21,7 @@ export default function Input({
   placeholder,
   onChange,
   value,
+  name,
   className,
   required,
 }: InputProps) {
@@ -27,6 +29,7 @@ export default function Input({
     <input
       type={type}
       value={value}
+      name={name}
       placeholder={placeholder}
       className={cn(
         styles.input,

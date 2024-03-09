@@ -1,6 +1,6 @@
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 
-import { getQueryClient } from "@/app/lib/getQueryClient";
+import { QueryKeys, getQueryClient } from "@/app/lib/getQueryClient";
 
 import { daysToMs } from "@/app/ui/(dashboard)/(home)/utils/daysToMs";
 
@@ -25,7 +25,7 @@ export default async function User({ params }: UserProps) {
   const queryClient = getQueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: ["user", username],
+    queryKey: [QueryKeys.USER, username],
     queryFn: () => fetchUserBySearchTerm({ searchTerm: username }),
     staleTime: daysToMs(1),
     gcTime: daysToMs(3),
