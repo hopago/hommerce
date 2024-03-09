@@ -5,13 +5,17 @@ import TotalCardList from "@/app/ui/(dashboard)/(home)/_components/TotalCardList
 
 import styles from "@/app/ui/(dashboard)/(home)/dashboard.module.css";
 
+import { Suspense } from "react";
+
 export default function DashBoard() {
   return (
     <div className={styles.dashboardContainer}>
       <main className={styles.main}>
         <TotalCardList />
         <LatestReport />
-        <DataChart />
+        <Suspense fallback={<DataChart.Skeleton />}>
+          <DataChart />
+        </Suspense>
       </main>
       <aside className={styles.aside}>
         <RightBar />

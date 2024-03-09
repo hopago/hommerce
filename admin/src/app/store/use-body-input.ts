@@ -31,6 +31,13 @@ export const useBodyInput = create<CreatorUseBodyInput>((set) => ({
         const parsedValue = JSON.parse(value);
         return { ...state, parsedValue, error: false, errMsg: null };
       } catch (error) {
+        if (state.inputValue.trim() === "")
+          return {
+            ...state,
+            error: false,
+            errMsg: null,
+          };
+
         return {
           ...state,
           error: true,

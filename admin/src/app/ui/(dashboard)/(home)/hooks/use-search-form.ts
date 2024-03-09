@@ -1,19 +1,21 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { MenuListTitle } from "../types/menu-list";
+import { IUser } from "../types/user";
 
 import { useRouter } from "next/navigation";
 
 import debounce from "lodash.debounce";
+import useDebounce from "./use-debounce";
 
 import { useQuery } from "@tanstack/react-query";
 
 import { HttpError } from "@/app/fetcher/error";
-
 import { fetchUserBySearchTerm } from "../services/fetchUser";
-import { IUser } from "../types/user";
+
 import { daysToMs } from "../utils/daysToMs";
-import useDebounce from "./use-debounce";
+
+import { getQueryClient } from "@/app/lib/getQueryClient";
 
 type UseSearchProps = {
   type: MenuListTitle;
@@ -127,6 +129,8 @@ type UseSearchUserFormParams = {
 };
 
 export const useSearchUserForm = ({ onError }: UseSearchUserFormParams) => {
+  const queryClient = getQueryClient();
+
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -148,17 +152,32 @@ export const useSearchUserForm = ({ onError }: UseSearchUserFormParams) => {
   });
 
   useEffect(() => {
-    if (error instanceof HttpError) {
-      if (error.status === 404) return onError("유저를 찾지 못했습니다.");
+    if (debouncedSearchTerm.trim() === "") {
+      queryClient.resetQueries({
+        queryKey: ["userSearchResults", debouncedSearchTerm],
+      });
+    }
+  }, [debouncedSearchTerm]);
 
-      onError(`${error.status}: ${error.message}`);
-    } else if (error) {
-      onError("예기치 못한 오류입니다.");
+  useEffect(() => {
+    if (error) {
+      if (error instanceof HttpError) {
+        if (error.status === 404) {
+          onError("유저를 찾지 못했습니다.");
+        } else {
+          onError(`${error.status}: ${error.message}`);
+        }
+      } else if (error instanceof Error) {
+        onError(`${error.name}: ${error.message}`);
+      } else {
+        onError("예기치 못한 오류입니다.");
+      }
     }
   }, [error]);
 
   return {
     searchTerm,
+    setSearchTerm,
     handleChange,
     isLoading,
     searchResults,

@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import Button from "../../_components/Button";
 import Search from "./Search";
@@ -18,8 +18,11 @@ import { useManageUsers } from "@/app/store/use-manage-users";
 
 import { toast } from "sonner";
 import { MANAGE_BUTTON } from "../../constants/classNames";
+import { useOutsideClick } from "../hooks/use-outside-click";
 
 export default function UsersSearch() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const router = useRouter();
 
   const pathname = getCurrPathname();
@@ -29,12 +32,18 @@ export default function UsersSearch() {
     router.push(`/users/management`);
   };
 
-  const { searchTerm, handleChange, isLoading, searchResults, error } =
-    useSearchUserForm({
-      onError: (message: string) => {
-        toast.error(message);
-      },
-    });
+  const {
+    searchTerm,
+    setSearchTerm,
+    handleChange,
+    isLoading,
+    searchResults,
+    error,
+  } = useSearchUserForm({
+    onError: (message: string) => {
+      toast.error(message);
+    },
+  });
 
   const { usernames, errMsg, error: manageError } = useManageUsers();
 
@@ -44,6 +53,8 @@ export default function UsersSearch() {
     searchTerm,
   });
 
+  useOutsideClick({ ref: containerRef, setSearchTerm });
+
   useEffect(() => {
     if (manageError && errMsg) {
       toast.error(errMsg);
@@ -51,7 +62,7 @@ export default function UsersSearch() {
   }, [manageError, errMsg]);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={containerRef}>
       <div className={styles.wrapper}>
         <Search
           placeholder={`${pathname} 검색하기`}

@@ -1,0 +1,54 @@
+.container {
+    width: 100%;
+}
+
+.container ul {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.tab {
+    min-width: 80px;
+}
+
+.tabWrap {
+    width: 100%;
+    background-color: var(--hover);
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    border: 1px solid var(--textSoft);
+    transition: all .15s ease;
+    color: #7d75f9;
+    cursor: pointer;
+}
+
+.tabWrap.active {
+    border-bottom: 1px solid transparent;
+}
+
+.tabWrap span {
+    color: var(--text);
+    line-height: 18px;
+    letter-spacing: 0.01em;
+}
+
+.tabWrap:hover,
+.tabWrap.active {
+    background-color: var(--textPurple);
+}
+
+.close {
+    cursor: pointer;
+    transition: all .15s ease;
+}
+
+.tabWrap:hover > .close,
+.close:hover {
+    color: var(--text);
+}

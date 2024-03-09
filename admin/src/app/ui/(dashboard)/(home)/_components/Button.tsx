@@ -8,12 +8,20 @@ import styles from "./button.module.css";
 
 import { cn } from "@/app/ui/lib/utils";
 
-import { API_SUBMIT_BUTTON, CLOSE_BUTTON, MANAGE_BUTTON } from "../constants/classNames";
+import {
+  API_SUBMIT_BUTTON,
+  CLOSE_BUTTON,
+  MANAGE_BUTTON,
+} from "../constants/classNames";
+
+type VoidFunc = () => void;
+type PromiseVoidFunc = () => Promise<void>;
+type ParamsVoidFunc = (params: unknown) => void;
 
 type ButtonProps = {
   type: "button" | "submit";
   text?: string;
-  onClick?: () => void | (() => Promise<void>) | ((params: unknown) => void);
+  onClick?: VoidFunc | PromiseVoidFunc | ParamsVoidFunc;
   icon?: string | ReactElement<any, any>;
   width?: number;
   height?: number;

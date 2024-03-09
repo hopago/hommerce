@@ -1,6 +1,7 @@
 import { usePathname } from "next/navigation";
 
 import { MenuListTitle } from "../types/menu-list";
+import { getFirstPathname } from "./getFirstPathname";
 
 const pathnameToMenuListTitle: Record<string, MenuListTitle | null> = {
   "/": "대시보드",
@@ -20,5 +21,9 @@ const pathnameToMenuListTitle: Record<string, MenuListTitle | null> = {
 export function getCurrPathname(): MenuListTitle | null {
   const pathname = usePathname();
 
-  return pathnameToMenuListTitle[pathname] || null;
+  let firstPathname = getFirstPathname(pathname);
+
+  firstPathname = "/" + firstPathname;
+
+  return pathnameToMenuListTitle[firstPathname] || null;
 }

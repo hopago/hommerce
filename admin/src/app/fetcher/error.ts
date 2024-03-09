@@ -1,3 +1,5 @@
+"use client"
+
 import { AxiosError, AxiosResponse } from "axios";
 
 export interface ServerErrorResponse {

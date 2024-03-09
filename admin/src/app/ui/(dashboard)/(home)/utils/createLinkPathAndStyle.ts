@@ -4,6 +4,8 @@ import { MenuLink } from "../types/menu-list";
 
 import styles from "../_components/sidebar.module.css";
 
+import { getFirstPathname } from "./getFirstPathname";
+
 type CreateLinkPathAndStyleParams = {
   link: MenuLink;
   userId?: string;
@@ -19,7 +21,7 @@ export const createLinkPathAndStyle = ({
   const userSettingPath = `/setting/${userId}`;
   const isActive = isUserSettingLink
     ? pathname.includes("setting")
-    : pathname === link.path;
+    : getFirstPathname(pathname) === getFirstPathname(link.path);
 
   const linkPath = isUserSettingLink ? userSettingPath : link.path;
   const linkStyle = `${styles.sidebarMenuContainer} ${

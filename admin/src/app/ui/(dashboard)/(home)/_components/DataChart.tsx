@@ -14,6 +14,8 @@ import styles from "./data-chart.module.css";
 
 import { ChartData } from "../types/chart-data";
 
+import { FaSpinner } from "react-icons/fa";
+
 const temporaryChartData: ChartData = [
   {
     day: "월",
@@ -81,3 +83,15 @@ export default function DataChart() {
     </div>
   );
 }
+
+DataChart.Skeleton = () => (
+  <div className={styles.container}>
+    <h2 className={styles.title}>주간 동향</h2>
+    <div className={styles.skeletonContainer}>
+      <div className={styles.spinner}>
+        <FaSpinner className={styles.loadingIcon} />
+        <span>데이터를 불러오는 중입니다.</span>
+      </div>
+    </div>
+  </div>
+);
