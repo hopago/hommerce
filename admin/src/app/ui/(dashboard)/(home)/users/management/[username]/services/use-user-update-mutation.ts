@@ -3,7 +3,7 @@ import { QueryKeys, getQueryClient } from "@/app/lib/getQueryClient";
 import { useRouter } from "next/navigation";
 
 import { getUsernameByPath } from "../utils/getUsernameByPath";
-import { useMutation } from "@tanstack/react-query";
+import { QueryFilters, useMutation } from "@tanstack/react-query";
 
 import { IUser } from "../../../../types/user";
 
@@ -34,38 +34,6 @@ export const useUserUpdateMutation = () => {
           ...(email !== undefined && { email }),
         },
       }),
-    onMutate: async ({ username, email }) => {
-      await queryClient.cancelQueries({
-        queryKey: [QueryKeys.USER, pathUsername],
-      });
-
-      const data = (await queryClient.getQueryData([
-        QueryKeys.USER,
-        pathUsername,
-      ])) as IUser[] | undefined;
-      if (!data) {
-        toast.error("데이터 변형 중 유저 데이터를 불러오지 못했어요.");
-        console.log(data);
-        return;
-      }
-
-      const user = data[0];
-      username
-        ? (user.username = username)
-        : email
-        ? (user.email = email)
-        : user;
-      const updatedUser = [user];
-
-      try {
-        queryClient.setQueryData([QueryKeys.USER, pathUsername], updatedUser);
-      } catch (err) {
-        console.log(err);
-        toast.error("유저 데이터 변형 중 오류가 발생했어요.");
-      }
-
-      return data;
-    },
     onSuccess: async (updatedUser) => {
       const mutatedUser = [updatedUser];
 
@@ -75,7 +43,7 @@ export const useUserUpdateMutation = () => {
           mutatedUser
         );
         toast.success("유저 업데이트가 성공적으로 처리됐습니다.");
-        
+
         router.push(`/users/management/${updatedUser.username}`);
       } catch (err) {
         console.log(err);

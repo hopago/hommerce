@@ -75,6 +75,7 @@ export default function UpdateUserForm({
           className={USER_DETAIL_BUTTON}
           disabled={isLoading}
           ariaLabel="변경하기"
+          display={uiType === "select" ? "none" : "flex"}
         />
       </div>
     </form>
