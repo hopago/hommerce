@@ -15,10 +15,15 @@ import { useManageUsers } from "@/app/store/use-manage-users";
 type UsernameTabProps = {
   name: string;
   isSingleTab: boolean;
+  currPathname: string;
 };
 
-export default function UsernameTab({ name, isSingleTab }: UsernameTabProps) {
-  const isActive = getUsernameByPath() === name;
+export default function UsernameTab({
+  name,
+  isSingleTab,
+  currPathname,
+}: UsernameTabProps) {
+  const isActive = currPathname === name;
 
   const { removeUsername } = useManageUsers();
 

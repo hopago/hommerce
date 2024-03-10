@@ -1,10 +1,11 @@
 import { QueryKeys, getQueryClient } from "@/app/lib/getQueryClient";
 
+import { useRouter } from "next/navigation";
+
 import { getUsernameByPath } from "../utils/getUsernameByPath";
 import { useMutation } from "@tanstack/react-query";
 
 import { IUser } from "../../../../types/user";
-import { UseUserInputParams } from "../hooks/use-user-input";
 
 import { HttpError } from "@/app/fetcher/error";
 import { reactQueryFetcher } from "@/app/fetcher/fetcher";
@@ -13,7 +14,10 @@ import { toast } from "sonner";
 
 export const useUserUpdateMutation = () => {
   const queryClient = getQueryClient();
+
   const pathUsername = getUsernameByPath();
+
+  const router = useRouter();
 
   const { mutate, isPending } = useMutation<
     IUser,
@@ -34,11 +38,16 @@ export const useUserUpdateMutation = () => {
       await queryClient.cancelQueries({
         queryKey: [QueryKeys.USER, pathUsername],
       });
-      const data = queryClient.getQueryData([QueryKeys.USER, pathUsername]) as
-        | IUser[]
-        | undefined;
-      if (!data)
-        return toast.error("데이터 변형 중 유저 데이터를 불러오지 못했어요.");
+
+      const data = (await queryClient.getQueryData([
+        QueryKeys.USER,
+        pathUsername,
+      ])) as IUser[] | undefined;
+      if (!data) {
+        toast.error("데이터 변형 중 유저 데이터를 불러오지 못했어요.");
+        console.log(data);
+        return;
+      }
 
       const user = data[0];
       username
@@ -57,12 +66,17 @@ export const useUserUpdateMutation = () => {
 
       return data;
     },
-    onSuccess: (updatedUser) => {
+    onSuccess: async (updatedUser) => {
       const mutatedUser = [updatedUser];
 
       try {
-        queryClient.setQueryData([QueryKeys.USER, pathUsername], mutatedUser);
+        await queryClient.setQueryData(
+          [QueryKeys.USER, pathUsername],
+          mutatedUser
+        );
         toast.success("유저 업데이트가 성공적으로 처리됐습니다.");
+        
+        router.push(`/users/management/${updatedUser.username}`);
       } catch (err) {
         console.log(err);
         toast.error("유저 데이터 변형 중 오류가 발생했어요.");

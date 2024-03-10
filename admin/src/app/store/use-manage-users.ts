@@ -1,16 +1,22 @@
+import { toast } from "sonner";
+
 import { create } from "zustand";
 
 interface CreatorUseManageUsers {
   usernames: string[] | null;
+  activeUser: string | null;
   error: boolean;
   errMsg: string | null;
   addUsername: (username: string | string[]) => void;
   removeUsername: (username: string) => void;
+  setActiveUser: (username: string) => void;
+  onMutate: (username: string) => void;
   resetState: () => void;
 }
 
 export const useManageUsers = create<CreatorUseManageUsers>((set) => ({
   usernames: null,
+  activeUser: null,
   error: false,
   errMsg: null,
   addUsername: (username) => {
@@ -52,5 +58,29 @@ export const useManageUsers = create<CreatorUseManageUsers>((set) => ({
 
       return { ...state, usernames: newUsernames };
     }),
-  resetState: () => set({ usernames: null, error: false, errMsg: null }),
+  setActiveUser: (username: string) =>
+    set({
+      activeUser: username,
+    }),
+  onMutate: (username: string) => {
+    const mutatedUsername = username;
+    set((state) => {
+      const prevUsername = state.activeUser;
+
+      const prevIdx = state.usernames?.findIndex(
+        (name) => name === prevUsername
+      );
+      if (prevIdx !== -1) {
+        state.usernames?.splice(prevIdx!, 1, mutatedUsername);
+      } else {
+        toast.error("유저 관리 탭을 설정하지 못했어요.");
+      }
+
+      return {
+        ...state,
+      };
+    });
+  },
+  resetState: () =>
+    set({ usernames: null, activeUser: null, error: false, errMsg: null }),
 }));

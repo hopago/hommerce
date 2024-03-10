@@ -1,7 +1,15 @@
 import { HttpError } from "@/app/fetcher/error";
 import { restFetcher } from "@/app/fetcher/fetcher";
 
-import { FormEvent, useEffect, useState, useTransition } from "react";
+import {
+  FormEvent,
+  useCallback,
+  useEffect,
+  useState,
+  useTransition,
+} from "react";
+
+import { validatePassword } from "../constants/validate";
 
 type UsePasswordFormParams = {
   userId: string;
@@ -34,9 +42,12 @@ export const usePasswordForm = ({
     }
   };
 
-  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
+  const onChangePassword = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setPassword(e.target.value);
+    },
+    []
+  );
 
   const handleSubmit = async () => {
     try {

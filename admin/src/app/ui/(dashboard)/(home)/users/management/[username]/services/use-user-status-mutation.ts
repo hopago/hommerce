@@ -32,18 +32,22 @@ export const useUserStatusMutation = () => {
       await queryClient.cancelQueries({
         queryKey: [QueryKeys.USER, username],
       });
-      const data = queryClient.getQueryData([QueryKeys.USER, username]) as
-        | IUser[]
-        | undefined;
-      if (!data)
-        return toast.error("데이터 변형 중 유저 데이터를 불러오지 못했어요.");
+      const data = (await queryClient.getQueryData([
+        QueryKeys.USER,
+        username,
+      ])) as IUser[] | undefined;
+      if (!data) {
+        toast.error("데이터 변형 중 유저 데이터를 불러오지 못했어요.");
+        console.log(data);
+        return;
+      }
 
       const user = data[0];
       user.status = status;
       const updatedUser = [user];
 
       try {
-        queryClient.setQueryData([QueryKeys.USER, username], updatedUser);
+        await queryClient.setQueryData([QueryKeys.USER, username], updatedUser);
       } catch (err) {
         console.log(err);
         toast.error("유저 데이터 변형 중 오류가 발생했어요.");
@@ -51,11 +55,11 @@ export const useUserStatusMutation = () => {
 
       return data;
     },
-    onSuccess: (updatedUser) => {
+    onSuccess: async (updatedUser) => {
       const mutatedUser = [updatedUser];
 
       try {
-        queryClient.setQueryData([QueryKeys.USER, username], mutatedUser);
+        await queryClient.setQueryData([QueryKeys.USER, username], mutatedUser);
         toast.success("유저 업데이트가 성공적으로 처리됐습니다.");
       } catch (err) {
         console.log(err);

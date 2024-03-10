@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+
 import { useQuery } from "@tanstack/react-query";
 import ApiRefetch from "../../../../@modal/api-refetch/ApiRefetch";
 import { fetchUserBySearchTerm } from "../../../../services/fetchUser";
@@ -19,30 +21,23 @@ import UserDetailsInfo, { UserDetailsInfoSkeleton } from "./UserDetailsInfo";
 
 import { QueryKeys } from "@/app/lib/getQueryClient";
 
-// TODO: 상세 로딩 스켈레톤, 전체 스켈레톤, 에러 모달
-
 export default function UserDetails() {
   const username = getUsernameByPath();
 
-  const {
-    data,
-    isError,
-    error,
-    refetch,
-    isRefetching,
-    isRefetchError,
-  } = useQuery({
-    queryKey: [QueryKeys.USER, username],
-    queryFn: () => fetchUserBySearchTerm({ searchTerm: username }),
-    staleTime: daysToMs(1),
-    gcTime: daysToMs(3),
-  });
+  const { data, isError, error, refetch, isRefetching, isRefetchError } =
+    useQuery({
+      queryKey: [QueryKeys.USER, username],
+      queryFn: () => fetchUserBySearchTerm({ searchTerm: username }),
+      staleTime: daysToMs(1),
+      gcTime: daysToMs(3),
+    });
 
   const isLoading = false;
 
   if (isLoading) return <UserDetailsSkeleton />;
 
-  if (isError && !isRefetching) return <ApiRefetch refetch={refetch} />;
+  if (isError && isRefetchError)
+    return <ApiRefetch refetch={refetch} isRefetching={isRefetching} />;
 
   useHandleError({ error, isError, isRefetchError });
 

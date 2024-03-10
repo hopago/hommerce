@@ -40,6 +40,10 @@
     color: var(--text);
 }
 
+.input.userDetail:focus {
+    width: inherit;
+}
+
 .input.userDetail::placeholder {
     color: var(--textSoft);
 }

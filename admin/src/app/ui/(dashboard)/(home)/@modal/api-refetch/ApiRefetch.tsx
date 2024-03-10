@@ -10,12 +10,14 @@ type ApiRefetchProps<T> = {
   refetch: (
     options?: RefetchOptions | undefined
   ) => Promise<QueryObserverResult<T[], Error>>;
+  isRefetching: boolean;
 };
 
-export default function ApiRefetch<T>({ refetch }: ApiRefetchProps<T>) {
-  const onClick = async () => {
-    await refetch();
-  };
+export default function ApiRefetch<T>({
+  refetch,
+  isRefetching,
+}: ApiRefetchProps<T>) {
+  const onClick = () => refetch();
 
   return (
     <section className={styles.conatiner}>
@@ -24,7 +26,7 @@ export default function ApiRefetch<T>({ refetch }: ApiRefetchProps<T>) {
           <div className={styles.text}>
             <span>데이터를 불러오지 못했어요. 다시 시도하겠어요?</span>
           </div>
-          <Button type="button" text="불러오기" onClick={onClick} />
+          <Button type="button" text="재시도" onClick={onClick} />
         </div>
       </main>
     </section>

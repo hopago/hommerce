@@ -4,6 +4,8 @@ import { useUserUpdateMutation } from "../services/use-user-update-mutation";
 
 import { toast } from "sonner";
 
+import { validateEmail } from "../constants/validate";
+
 export type UseUserInputParams = {
   email: string;
   username: string;
@@ -26,7 +28,7 @@ export const useUserInput = ({ email, username }: UseUserInputParams) => {
   };
 
   useEffect(() => {
-    if (field.email === "" || field.email === null)
+    if (field.email === "" || field.email === undefined)
       return setIsValidEmail(true);
 
     const checkEmail = setTimeout(() => {
