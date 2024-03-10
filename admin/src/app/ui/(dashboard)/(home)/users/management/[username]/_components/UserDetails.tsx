@@ -1,5 +1,7 @@
 "use client";
 
+import { useMemo } from "react";
+
 import { useQuery } from "@tanstack/react-query";
 import ApiRefetch from "../../../../@modal/api-refetch/ApiRefetch";
 import { fetchUserBySearchTerm } from "../../../../services/fetchUser";
@@ -16,29 +18,20 @@ import UserDetailsHeader, {
   UserDetailsHeaderSkeleton,
 } from "./UserDetailsHeader";
 import UserDetailsInfo, { UserDetailsInfoSkeleton } from "./UserDetailsInfo";
+import UserLogs from "./UserLogs";
 
 import { QueryKeys } from "@/app/lib/getQueryClient";
-import { useMemo } from "react";
 
 export default function UserDetails() {
   const username = getUsernameByPath();
 
-  const {
-    data,
-    error,
-    refetch,
-    isError,
-    isRefetching,
-    isRefetchError,
-    isLoading,
-  } = useQuery({
-    queryKey: [QueryKeys.USER, username],
-    queryFn: () => fetchUserBySearchTerm({ searchTerm: username }),
-    staleTime: daysToMs(1),
-    gcTime: daysToMs(3),
-  });
-
-  if (isLoading) return <UserDetailsSkeleton />;
+  const { data, error, refetch, isError, isRefetching, isRefetchError } =
+    useQuery({
+      queryKey: [QueryKeys.USER, username],
+      queryFn: () => fetchUserBySearchTerm({ searchTerm: username }),
+      staleTime: daysToMs(1),
+      gcTime: daysToMs(3),
+    });
 
   useHandleError({ error, isError, isRefetchError });
 
@@ -62,6 +55,11 @@ export default function UserDetails() {
             email={memoUser.email}
             status={memoUser.status}
             createdAt={memoUser.createdAt}
+          />
+          <UserLogs
+            userId={memoUser.id}
+            createdAt={memoUser.createdAt}
+            updatedAt={memoUser.updatedAt}
           />
         </div>
       </div>

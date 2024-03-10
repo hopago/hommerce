@@ -52,10 +52,9 @@ export const usePasswordForm = ({
   const handleSubmit = async () => {
     try {
       await restFetcher({
-        url: "/session",
+        url: `/user/session?userId=${userId}`,
         method: "PATCH",
         parsedValue: {
-          userId,
           password,
         },
       });

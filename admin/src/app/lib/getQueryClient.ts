@@ -19,4 +19,5 @@ export const getQueryClient = () => {
 export const QueryKeys = {
   USER: "user",
   USER_SEARCH: "userSearchResults",
+  USER_SESSION: "userSession",
 };

@@ -7,6 +7,7 @@ import styles from "./api-refetch.module.css";
 import { useRouter } from "next/navigation";
 
 import { API_MODAL_BUTTON } from "../../constants/classNames";
+
 import { FaSpinner } from "react-icons/fa";
 
 type ApiRefetchProps<T> = {
@@ -28,6 +29,16 @@ export default function ApiRefetch<T>({
 
   const onClick = () => (isRefetchError ? refetch() : router.back());
 
+  const buttonText = isError
+    ? "재시도"
+    : isRefetchError
+    ? "이전 페이지로"
+    : null;
+
+  const buttonIcon = isRefetching ? (
+    <FaSpinner className={styles.loadingIcon} />
+  ) : null;
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
@@ -47,18 +58,8 @@ export default function ApiRefetch<T>({
         <div className={styles.buttonWrap}>
           <Button
             type="button"
-            text={
-              isError
-                ? "재시도"
-                : isRefetching
-                ? null
-                : isRefetchError
-                ? "이전 페이지로"
-                : null
-            }
-            icon={
-              isRefetching ? <FaSpinner className={styles.loadingIcon} /> : null
-            }
+            text={buttonText}
+            icon={buttonIcon}
             onClick={onClick}
             disabled={isRefetching}
             display="inline-block"
