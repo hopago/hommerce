@@ -1,3 +1,4 @@
+import UIProvider from "@/app/providers/NextUIProvider";
 import ReactQueryProvider from "@/app/providers/ReactQueryProvider";
 
 import Footer from "@/app/ui/(dashboard)/(home)/_components/Footer";
@@ -20,7 +21,9 @@ export default function DashboardLayout({
         <Navbar />
         <div className={styles.contents}>
           <section>
-            <ReactQueryProvider>{children}</ReactQueryProvider>
+            <ReactQueryProvider>
+              <UIProvider>{children}</UIProvider>
+            </ReactQueryProvider>
           </section>
           <Footer />
         </div>

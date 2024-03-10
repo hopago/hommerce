@@ -11,25 +11,21 @@ import { daysToMs } from "../../../../utils/daysToMs";
 
 import styles from "./user-details.module.css";
 
-import UserProfile from "./UserProfile";
-import UserDetailsHeader from "./UserDetailsHeader";
-import UserDetailsInfo from "./UserDetailsInfo";
+import UserProfile, { UserProfileSkeleton } from "./UserProfile";
+import UserDetailsHeader, {
+  UserDetailsHeaderSkeleton,
+} from "./UserDetailsHeader";
+import UserDetailsInfo, { UserDetailsInfoSkeleton } from "./UserDetailsInfo";
 
 import { QueryKeys } from "@/app/lib/getQueryClient";
 
 // TODO: 상세 로딩 스켈레톤, 전체 스켈레톤, 에러 모달
-
-// 유저 상세 로딩
-const UserLoading = () => {
-  return <div className={styles.container}>유저 로딩</div>;
-};
 
 export default function UserDetails() {
   const username = getUsernameByPath();
 
   const {
     data,
-    isLoading,
     isError,
     error,
     refetch,
@@ -42,7 +38,9 @@ export default function UserDetails() {
     gcTime: daysToMs(3),
   });
 
-  if (isLoading) return <UserLoading />;
+  const isLoading = false;
+
+  if (isLoading) return <UserDetailsSkeleton />;
 
   if (isError && !isRefetching) return <ApiRefetch refetch={refetch} />;
 
@@ -71,5 +69,14 @@ export default function UserDetails() {
   );
 }
 
-// 첫 화면 로딩
-UserDetails.Skeleton = () => <div>Loading...</div>;
+export const UserDetailsSkeleton = () => (
+  <div className={styles.container}>
+    <UserDetailsHeaderSkeleton />
+    <div className={styles.contents}>
+      <div className={styles.contentsWrap}>
+        <UserProfileSkeleton />
+        <UserDetailsInfoSkeleton />
+      </div>
+    </div>
+  </div>
+);

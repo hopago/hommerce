@@ -6,6 +6,7 @@
     width: 100%;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid var(--divider);
 }
 
 .tab {
@@ -30,6 +31,10 @@
 
 .tabWrap.active {
     border-bottom: 1px solid transparent;
+}
+
+.tabWrap.active.singleTab {
+    border-bottom: 1px solid var(--textSoft);
 }
 
 .tabWrap span {

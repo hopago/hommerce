@@ -1,12 +1,12 @@
 :root {
-  --bg: #151c2c;
-  --bgSoft: #182237;
-  --text: #f7f7f7;
-  --textSoft: #b7bac1;
-  --textPurple: #5d57c9;
-  --divider: rgba(255,255,255,.18);
-  --hover: #2e374a;
-  --error: #F23E5C;
+    --bg: #151c2c;
+    --bgSoft: #182237;
+    --text: #f7f7f7;
+    --textSoft: #b7bac1;
+    --textPurple: #5d57c9;
+    --divider: rgba(255, 255, 255, .18);
+    --hover: #2e374a;
+    --error: #F23E5C;
 }
 
 * {
@@ -39,4 +39,59 @@ ol {
     background-color: transparent;
     color: inherit;
     padding: 0;
+}
+
+.skeleton {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--color-content3);
+    --tw-bg-opacity: 1;
+
+    --tw-before-opacity: 1;
+}
+
+.skeleton::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    animation: shimmer 2s infinite;
+    border-top: 1px solid rgba(var(--color-content4), 0.3);
+    background-image: linear-gradient(to right, transparent, var(--color-content4), transparent);
+    opacity: var(--tw-before-opacity);
+    transition: opacity 300ms;
+}
+
+.skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -10;
+    background-color: var(--color-content3);
+    opacity: 1;
+}
+
+[data-loaded="true"] .skeleton {
+    background-color: transparent;
+}
+
+[data-loaded="true"] .skeleton::before,
+[data-loaded="true"] .skeleton::after {
+    opacity: 0;
+    animation: none;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+:root {
+    --color-content3: var(--bg);
+    --color-content4: var(--bgSoft);
 }

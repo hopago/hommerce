@@ -12,6 +12,7 @@ import {
   API_SUBMIT_BUTTON,
   CLOSE_BUTTON,
   MANAGE_BUTTON,
+  USER_DETAIL_BUTTON,
 } from "../constants/classNames";
 
 type VoidFunc = () => void;
@@ -62,7 +63,8 @@ export default function Button({
         styles.button,
         className === MANAGE_BUTTON && styles.manage,
         className === CLOSE_BUTTON && styles.close,
-        className === API_SUBMIT_BUTTON && styles.apiSubmit
+        className === API_SUBMIT_BUTTON && styles.apiSubmit,
+        className === USER_DETAIL_BUTTON && styles.userDetail
       )}
       type={type}
       onClick={onClick}

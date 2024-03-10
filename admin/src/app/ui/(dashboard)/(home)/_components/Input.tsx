@@ -4,7 +4,11 @@ import { cn } from "@/app/ui/lib/utils";
 
 import styles from "./input.module.css";
 
-import { API_PREPARE_INPUT, USER_SEARCH_INPUT } from "../constants/classNames";
+import {
+  API_PREPARE_INPUT,
+  USER_DETAIL_INPUT,
+  USER_SEARCH_INPUT,
+} from "../constants/classNames";
 
 type InputProps = {
   type: "text" | "password" | "email";
@@ -34,7 +38,8 @@ export default function Input({
       className={cn(
         styles.input,
         className === API_PREPARE_INPUT && styles.prepare,
-        className === USER_SEARCH_INPUT && styles.userSearch
+        className === USER_SEARCH_INPUT && styles.userSearch,
+        className === USER_DETAIL_INPUT && styles.userDetail
       )}
       onChange={onChange}
       required={required}

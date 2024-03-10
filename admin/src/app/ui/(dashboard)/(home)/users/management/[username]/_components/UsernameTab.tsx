@@ -14,9 +14,10 @@ import { useManageUsers } from "@/app/store/use-manage-users";
 
 type UsernameTabProps = {
   name: string;
+  isSingleTab: boolean;
 };
 
-export default function UsernameTab({ name }: UsernameTabProps) {
+export default function UsernameTab({ name, isSingleTab }: UsernameTabProps) {
   const isActive = getUsernameByPath() === name;
 
   const { removeUsername } = useManageUsers();
@@ -34,7 +35,11 @@ export default function UsernameTab({ name }: UsernameTabProps) {
   return (
     <li className={styles.tab}>
       <button
-        className={cn(styles.tabWrap, isActive && styles.active)}
+        className={cn(
+          styles.tabWrap,
+          isActive && styles.active,
+          isSingleTab && styles.singleTab
+        )}
         onClick={handleNavigate}
       >
         <span>{name}</span>

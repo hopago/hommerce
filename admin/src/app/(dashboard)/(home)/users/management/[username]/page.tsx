@@ -9,7 +9,9 @@ import { fetchUserBySearchTerm } from "@/app/ui/(dashboard)/(home)/services/fetc
 import styles from "@/app/ui/(dashboard)/(home)/users/management/[username]/user-page.module.css";
 
 import TabList from "@/app/ui/(dashboard)/(home)/users/management/[username]/_components/TabList";
-import UserDetails from "@/app/ui/(dashboard)/(home)/users/management/[username]/_components/UserDetails";
+import UserDetails, {
+  UserDetailsSkeleton,
+} from "@/app/ui/(dashboard)/(home)/users/management/[username]/_components/UserDetails";
 
 import { Suspense } from "react";
 
@@ -38,7 +40,7 @@ export default async function User({ params }: UserProps) {
       <HydrationBoundary state={dehydratedState}>
         <section className={styles.contents}>
           <TabList />
-          <Suspense fallback={<UserDetails.Skeleton />}>
+          <Suspense fallback={<UserDetailsSkeleton />}>
             <UserDetails />
           </Suspense>
         </section>

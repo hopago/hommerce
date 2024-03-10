@@ -1,0 +1,38 @@
+.form {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--divider);
+    margin-bottom: 1rem;
+}
+
+.inputWrap {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.buttonWrap {
+    min-width: 80px;
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+}
+
+.labelSkeleton {
+    width: 80px;
+    height: 20px;
+}
+
+.inputSkeleton {
+    border-radius: 0.5rem;
+    flex: 1;
+    height: 20px;
+}
+
+.buttonSkeleton {
+    width: 80px;
+    height: 20px;
+}

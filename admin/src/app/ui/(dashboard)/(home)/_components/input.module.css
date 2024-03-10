@@ -30,3 +30,20 @@
 .input.userSearch:focus {
     width: inherit;
 }
+
+.input.userDetail {
+    transition: all .3s ease;
+    border-radius: 0.5rem;
+    flex: 1;
+    padding: 0.5rem;
+    background-color: var(--hover);
+    color: var(--text);
+}
+
+.input.userDetail::placeholder {
+    color: var(--textSoft);
+}
+
+.input.userDetail:focus {
+    outline: 1px solid var(--textSoft);
+}
