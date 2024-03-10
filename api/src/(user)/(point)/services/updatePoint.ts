@@ -11,15 +11,27 @@ export const handleUpdatePoint = async (req: Request, next: NextFunction) => {
     throw new HttpException(400, "Desc and amount required.");
 
   try {
-    const foundPoint = await Point.findOne({
-      userId: req.params.userId,
-    });
+    const foundPoint = await Point.findOneAndUpdate(
+      {
+        userId: req.params.userId,
+      },
+      {
+        $inc: { point: point.amount },
+      },
+      {
+        new: true,
+      }
+    );
     if (!foundPoint) throw new HttpException(404, "Point Docs not found.");
 
-    const foundPointLog = await PointLog.findOne({
-      userId: req.params.userId,
-    });
-    if (!foundPointLog) throw new HttpException(404, "Point Log not found.");
+    try {
+      const foundPointLog = await PointLog.findOne({
+        userId: req.params.userId,
+      });
+      if (!foundPointLog) throw new HttpException(404, "Point Log not found.");
+    } catch (err) {
+      next(err);
+    }
 
     try {
       await postPointLog({ userId: req.params.userId, desc, amount }, next);
@@ -27,23 +39,7 @@ export const handleUpdatePoint = async (req: Request, next: NextFunction) => {
       next(err);
     }
 
-    try {
-      const savedPoint = (await foundPoint?.updateOne(
-        {
-          $inc: { point: point.amount },
-        },
-        {
-          new: true,
-        }
-      )) as IPoint;
-
-      if (savedPoint.point < 0)
-        throw new HttpException(500, "Something went wrong in point.");
-
-      return savedPoint.point;
-    } catch (err) {
-      next(err);
-    }
+    return foundPoint.point;
   } catch (err) {
     next(err);
   }

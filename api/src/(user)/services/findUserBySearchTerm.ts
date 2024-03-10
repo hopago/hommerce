@@ -1,12 +1,13 @@
 import { NextFunction } from "express";
 import isEmail from "../utils/isEmail";
 import { getValidSearchTerm } from "../utils/getValidSearchTerm";
-import { UserInfo, findUser } from "./findUser";
+import { findUser } from "./findUser";
+import { IUser } from "../model/user";
 
 export const findUserBySearchTerm = async (
   keyword: string,
   next: NextFunction
-): Promise<UserInfo[] | undefined> => {
+): Promise<IUser[] | undefined> => {
   const condition = isEmail(keyword)
     ? { email: keyword }
     : { username: getValidSearchTerm(keyword) };

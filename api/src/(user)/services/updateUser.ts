@@ -1,27 +1,49 @@
 import { NextFunction, Request } from "express";
 import User from "../model/user";
 import { HttpException } from "../../middleware/error/utils";
+import { validateFields } from "../../utils/validateFields";
+import isEmail from "../utils/isEmail";
+import { filterUndefinedFieldOfObject } from "../../utils/filterUndefined";
 
 export const handleUpdateUser = async (req: Request, next: NextFunction) => {
-  const { imageUrl, username, id } = req.body;
-  const currUser = await User.findOne({
-    id,
-  });
-  if (!currUser) throw new HttpException(404, "User not found.");
+  const username = req.query.username as string | undefined;
+  if (!username) throw new HttpException(400, "Username required.");
 
-  const newImageUrl = imageUrl ?? currUser.imageUrl;
-  const newUsername = username ?? currUser.username;
+  const fields = ["imageUrl", "grade", "username", "email", "status"];
+
+  validateFields(fields, req);
+
+  const { username: updatedUsername, email } = req.body;
+
+  if (email) {
+    const isValid = isEmail(email);
+    if (!isValid) throw new HttpException(400, "Invalid email.");
+  }
+
+  if (updatedUsername) {
+    try {
+      const isExist = await User.findOne({
+        updatedUsername,
+      });
+      if (isExist) throw new HttpException(409, "User already exist.");
+    } catch (err) {
+      next(err);
+    }
+  }
 
   try {
-    const newUser = await currUser.updateOne(
+    const updateData = filterUndefinedFieldOfObject(req);
+
+    const newUser = await User.findOneAndUpdate(
+      { username },
       {
-        imageUrl: newImageUrl,
-        username: newUsername,
+        ...updateData,
       },
       {
         new: true,
       }
     );
+    if (!newUser) throw new HttpException(404, "User not found.");
 
     return newUser;
   } catch (err) {

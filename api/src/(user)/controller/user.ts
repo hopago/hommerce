@@ -5,6 +5,8 @@ import { handleGetCurrUser } from "../services/getCurrUser";
 import { handleUpdateUser } from "../services/updateUser";
 import { handleDeleteUser } from "../services/deleteUser";
 import { findUserBySearchTerm } from "../services/findUserBySearchTerm";
+import { handleUpdatePassword } from "../services/updatePassword";
+import { handleGetSession } from "../services/getSession";
 
 export const register = async (
   req: Request,
@@ -59,6 +61,34 @@ export const deleteUser = async (
 ) => {
   try {
     await handleDeleteUser(req, next);
+
+    return res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getSession = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const session = await handleGetSession(req, next);
+
+    return res.status(200).json(session);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const updatePassword = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    await handleUpdatePassword(req, next);
 
     return res.sendStatus(204);
   } catch (err) {
