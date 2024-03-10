@@ -3,12 +3,6 @@ import { restFetcher } from "@/app/fetcher/fetcher";
 
 import { FormEvent, useEffect, useState, useTransition } from "react";
 
-const validatePassword = (password: string) => {
-  const re =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  return re.test(password);
-};
-
 type UsePasswordFormParams = {
   userId: string;
   onSuccess: () => void;

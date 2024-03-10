@@ -18,16 +18,16 @@ import { cn } from "@/app/ui/lib/utils";
 
 export type UiType = "select" | "default";
 
-type InputNameType = "grade" | "username" | "email" | "status";
+export type InputNameType = "grade" | "username" | "email" | "status";
 
 type UpdateUserFormProps = {
   title: string;
   uiType: UiType;
   inputName: InputNameType;
   value: string | UserGrade | UserStatus;
-  onChange: () => void | ((e: React.ChangeEvent<HTMLInputElement>) => void);
-  onSubmit: () => void | (() => Promise<void>);
-  isLoading: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
+  isLoading?: boolean;
 };
 
 export default function UpdateUserForm({

@@ -1,3 +1,5 @@
+import { cn } from "@/app/ui/lib/utils";
+
 import { STYLE_NONE_BUTTON } from "../../../../constants/classNames";
 
 import styles from "./update-user-form.module.css";
@@ -15,13 +17,14 @@ const SelectInput = ({
   isPending,
   value,
 }: SelectInputProps) => {
-  console.log(value);
-
   return (
     <div className={styles.select}>
       <ol className={styles.selectList}>
         {items.map((item) => (
-          <li key={item} className={styles.selectItem}>
+          <li
+            key={item}
+            className={cn(styles.selectItem, value === item && styles.active)}
+          >
             <button
               className={STYLE_NONE_BUTTON}
               onClick={() => onClickItem(item)}

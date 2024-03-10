@@ -10,8 +10,6 @@ import { reactQueryFetcher } from "@/app/fetcher/fetcher";
 
 import { toast } from "sonner";
 
-import { AxiosError } from "axios";
-
 export const useUserGradeMutation = () => {
   const queryClient = getQueryClient();
   const username = getUsernameByPath();
@@ -25,7 +23,7 @@ export const useUserGradeMutation = () => {
     mutationFn: ({ grade }) =>
       reactQueryFetcher<IUser>({
         method: "PATCH",
-        path: "/user",
+        path: `/user?username=${username}`,
         body: {
           grade,
         },
@@ -34,19 +32,20 @@ export const useUserGradeMutation = () => {
       await queryClient.cancelQueries({
         queryKey: [QueryKeys.USER, username],
       });
-      const data = queryClient.getQueryData([
-        QueryKeys.USER,
-        username,
-      ]) as IUser[];
+      const data = queryClient.getQueryData([QueryKeys.USER, username]) as
+        | IUser[]
+        | undefined;
+      if (!data)
+        return toast.error("데이터 변형 중 유저 데이터를 불러오지 못했어요.");
+
       const user = data[0];
-
       user.grade = grade;
-
       const updatedUser = [user];
 
       try {
         queryClient.setQueryData([QueryKeys.USER, username], updatedUser);
       } catch (err) {
+        console.log(err);
         toast.error("유저 데이터 변형 중 오류가 발생했어요.");
       }
 
@@ -59,11 +58,12 @@ export const useUserGradeMutation = () => {
         queryClient.setQueryData([QueryKeys.USER, username], mutatedUser);
         toast.success("유저 업데이트가 성공적으로 처리됐습니다.");
       } catch (err) {
+        console.log(err);
         toast.error("유저 데이터 변형 중 오류가 발생했어요.");
       }
     },
     onError: (err) => {
-      if (err instanceof AxiosError) {
+      if (err instanceof HttpError) {
         const { status } = err;
 
         if (status === 400) {

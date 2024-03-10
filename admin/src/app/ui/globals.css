@@ -7,6 +7,8 @@
     --divider: rgba(255, 255, 255, .18);
     --hover: #2e374a;
     --error: #F23E5C;
+    --color-content3: var(--bg);
+    --color-content4: var(--bgSoft);
 }
 
 * {
@@ -89,9 +91,4 @@ ol {
     100% {
         transform: translateX(100%);
     }
-}
-
-:root {
-    --color-content3: var(--bg);
-    --color-content4: var(--bgSoft);
 }

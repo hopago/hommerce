@@ -1,49 +1,55 @@
+import { QueryKeys, getQueryClient } from "@/app/lib/getQueryClient";
+
+import { getUsernameByPath } from "../utils/getUsernameByPath";
 import { useMutation } from "@tanstack/react-query";
 
 import { IUser } from "../../../../types/user";
+import { UseUserInputParams } from "../hooks/use-user-input";
 
 import { HttpError } from "@/app/fetcher/error";
-
-import { QueryKeys, getQueryClient } from "@/app/lib/getQueryClient";
-import { getUsernameByPath } from "../utils/getUsernameByPath";
 import { reactQueryFetcher } from "@/app/fetcher/fetcher";
 
 import { toast } from "sonner";
 
-export const useUserStatusMutation = () => {
+export const useUserUpdateMutation = () => {
   const queryClient = getQueryClient();
-  const username = getUsernameByPath();
+  const pathUsername = getUsernameByPath();
 
   const { mutate, isPending } = useMutation<
     IUser,
     HttpError | Error | unknown,
-    { status: UserStatus }
+    { username?: string; email?: string }
   >({
-    mutationKey: [QueryKeys.USER, username],
-    mutationFn: ({ status }) =>
+    mutationKey: [QueryKeys.USER, pathUsername],
+    mutationFn: ({ username, email }) =>
       reactQueryFetcher<IUser>({
         method: "PATCH",
-        path: `/user?username=${username}`,
+        path: `/user?username=${pathUsername}`,
         body: {
-          status,
+          ...(username !== undefined && { username }),
+          ...(email !== undefined && { email }),
         },
       }),
-    onMutate: async ({ status }) => {
+    onMutate: async ({ username, email }) => {
       await queryClient.cancelQueries({
-        queryKey: [QueryKeys.USER, username],
+        queryKey: [QueryKeys.USER, pathUsername],
       });
-      const data = queryClient.getQueryData([QueryKeys.USER, username]) as
+      const data = queryClient.getQueryData([QueryKeys.USER, pathUsername]) as
         | IUser[]
         | undefined;
       if (!data)
         return toast.error("데이터 변형 중 유저 데이터를 불러오지 못했어요.");
 
       const user = data[0];
-      user.status = status;
+      username
+        ? (user.username = username)
+        : email
+        ? (user.email = email)
+        : user;
       const updatedUser = [user];
 
       try {
-        queryClient.setQueryData([QueryKeys.USER, username], updatedUser);
+        queryClient.setQueryData([QueryKeys.USER, pathUsername], updatedUser);
       } catch (err) {
         console.log(err);
         toast.error("유저 데이터 변형 중 오류가 발생했어요.");
@@ -55,7 +61,7 @@ export const useUserStatusMutation = () => {
       const mutatedUser = [updatedUser];
 
       try {
-        queryClient.setQueryData([QueryKeys.USER, username], mutatedUser);
+        queryClient.setQueryData([QueryKeys.USER, pathUsername], mutatedUser);
         toast.success("유저 업데이트가 성공적으로 처리됐습니다.");
       } catch (err) {
         console.log(err);
@@ -67,7 +73,7 @@ export const useUserStatusMutation = () => {
         const { status } = err;
 
         if (status === 400) {
-          toast.error("적합한 상태 타입이 아닙니다.");
+          toast.error("적합한 유저명 혹은 이메일 타입이 아닙니다.");
         }
 
         if (status === 404) {
@@ -87,12 +93,18 @@ export const useUserStatusMutation = () => {
     },
   });
 
-  const mutateUserStatus = (status: UserStatus) => {
-    mutate({ status });
+  const mutateUserField = ({
+    username,
+    email,
+  }: {
+    username?: string;
+    email?: string;
+  }) => {
+    mutate({ username, email });
   };
 
   return {
-    mutateUserStatus,
+    mutateUserField,
     isPending,
   };
 };

@@ -36,3 +36,36 @@
     width: 80px;
     height: 20px;
 }
+
+.select {
+    flex: 1;
+}
+
+.selectList {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.selectItem {
+    padding: 0.5rem 1rem;
+    background-color: var(--hover);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all .15s ease;
+    width: max-content;
+    height: max-content;
+}
+
+.selectItem button,
+.selectItem button span {
+    cursor: pointer;
+}
+
+.selectItem:hover {
+    background-color: #008000;
+}
+
+.active {
+    background-color: #008000;
+}
