@@ -9,6 +9,7 @@ import styles from "./button.module.css";
 import { cn } from "@/app/ui/lib/utils";
 
 import {
+  API_MODAL_BUTTON,
   API_SUBMIT_BUTTON,
   CLOSE_BUTTON,
   MANAGE_BUTTON,
@@ -21,9 +22,9 @@ type ParamsVoidFunc = (params: unknown) => void;
 
 type ButtonProps = {
   type: "button" | "submit";
-  text?: string;
+  text?: string | null;
   onClick?: VoidFunc | PromiseVoidFunc | ParamsVoidFunc;
-  icon?: string | ReactElement<any, any>;
+  icon?: string | ReactElement<any, any> | null;
   width?: number;
   height?: number;
   disabled?: boolean;
@@ -64,7 +65,8 @@ export default function Button({
         className === MANAGE_BUTTON && styles.manage,
         className === CLOSE_BUTTON && styles.close,
         className === API_SUBMIT_BUTTON && styles.apiSubmit,
-        className === USER_DETAIL_BUTTON && styles.userDetail
+        className === USER_DETAIL_BUTTON && styles.userDetail,
+        className === API_MODAL_BUTTON && styles.apiModal
       )}
       type={type}
       onClick={onClick}

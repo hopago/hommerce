@@ -18,7 +18,7 @@ export const useHandleError = ({
   useEffect(() => {
     if (!isError || !error) return;
 
-    if (isError && error) {
+    if ((isError && error) || (isRefetchError && error)) {
       if (error instanceof HttpError) {
         if (error.status === 404) {
           toast.error("유저를 찾지 못했습니다.");
