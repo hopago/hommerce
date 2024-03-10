@@ -1,7 +1,7 @@
-import clerkClient from "@clerk/clerk-sdk-node";
 import { NextFunction, Request } from "express";
 import { isFieldsFullFilled } from "../../utils/isFieldsFullFilled";
 import { HttpException } from "../../middleware/error/utils";
+import { clerkClient } from "../../config/clerkClient";
 
 const validatePassword = (password: string) => {
   const re =
