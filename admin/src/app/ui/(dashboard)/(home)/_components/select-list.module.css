@@ -7,11 +7,17 @@
     width: 120px;
 }
 
+.select.filterReview {
+    width: 180px;
+    height: 33px;
+    margin-right: 0.5rem;
+}
+
 .selectWrap {
     width: 100%;
+    height: 100%;
     padding: 0.25rem 0.5rem;
     background-color: #3A4E7A;
-    border-radius: 0.5rem;
     border: none;
     color: var(--text);
     font-size: 15px;
@@ -25,15 +31,15 @@
 }
 
 .selectList {
+    border-top: 1px solid var(--textSoft);
     position: absolute;
-    bottom: -39px;
+    top: 30px;
     left: 0;
-    padding-top: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
     background-color: #3A4E7A;
     animation: fadeUp 0.15s ease-out forwards;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    overflow: hidden;
 }
 
 @keyframes fadeUp {
@@ -47,12 +53,18 @@
 
 .selectList.postLogs {
     width: 120px;
-    text-align: center;
+}
+
+.selectList.filterReview {
+    width: 180px;
+    top: 34px;
 }
 
 .selectItem {
     cursor: pointer;
     transition: all .15s ease;
+    width: 100%;
+    padding: 0.5rem;
 }
 
 .selectItem button,
@@ -64,6 +76,7 @@
     letter-spacing: -0.01em;
     line-height: 18px;
     color: var(--textSoft);
+    text-align: left;
 }
 
 .selectItem:hover {

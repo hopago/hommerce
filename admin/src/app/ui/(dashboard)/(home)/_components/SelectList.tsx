@@ -6,7 +6,10 @@ import SelectItem from "./SelectItem";
 
 import { cn } from "@/app/ui/lib/utils";
 
-import { POST_LOGS_SELECT } from "../constants/classNames";
+import {
+  FILTER_REVIEW_SELECT,
+  POST_LOGS_SELECT,
+} from "../constants/classNames";
 
 import { useEffect, useRef } from "react";
 
@@ -15,9 +18,9 @@ import { LogTabList } from "../users/management/[username]/types/log-tab-list";
 // 사용시 타입 추가
 
 type SelectListProps = {
-  selectList: LogTabList[];
-  currSelect: LogTabList;
-  handleItemClick: (tab: LogTabList) => void;
+  selectList: LogTabList[] | FilterOptions;
+  currSelect: LogTabList | FilterOption;
+  handleItemClick: (param: any) => void;
   show: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
   handleShow: () => void;
@@ -59,7 +62,8 @@ export default function SelectList({
     <div
       className={cn(
         styles.select,
-        className === POST_LOGS_SELECT && styles.postLogs
+        className === POST_LOGS_SELECT && styles.postLogs,
+        className === FILTER_REVIEW_SELECT && styles.filterReview
       )}
     >
       <button

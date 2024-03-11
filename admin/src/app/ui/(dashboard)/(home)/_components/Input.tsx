@@ -6,6 +6,7 @@ import styles from "./input.module.css";
 
 import {
   API_PREPARE_INPUT,
+  FILTER_REVIEW_INPUT,
   USER_DETAIL_INPUT,
   USER_SEARCH_INPUT,
 } from "../constants/classNames";
@@ -39,7 +40,8 @@ export default function Input({
         styles.input,
         className === API_PREPARE_INPUT && styles.prepare,
         className === USER_SEARCH_INPUT && styles.userSearch,
-        className === USER_DETAIL_INPUT && styles.userDetail
+        className === USER_DETAIL_INPUT && styles.userDetail,
+        className === FILTER_REVIEW_INPUT && styles.filterReview,
       )}
       onChange={onChange}
       required={required}

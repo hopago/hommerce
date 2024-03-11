@@ -14,8 +14,11 @@ export default function UserPostLogs() {
   return (
     <div className={styles.postLogs}>
       <div className={styles.postLogsWrap}>
-        <h1 className={styles.postLogsTitle}>고객 참여 활동</h1>
-        <PostLogsTabList currTab={currTab} setCurrTab={setCurrTab} />
+        <h1>고객 참여 활동</h1>
+        <div className={styles.setTab}>
+          <h1 className={styles.currTab}>{currTab}</h1>
+          <PostLogsTabList currTab={currTab} setCurrTab={setCurrTab} />
+        </div>
         {renderContents}
       </div>
     </div>

@@ -8,6 +8,8 @@ import NextPage from "./NextPage";
 
 import styles from "./pagination.module.css";
 
+import { useEffect } from "react";
+
 type PaginateControlProps = {
   pageTotal: number;
 };
@@ -25,6 +27,10 @@ export default function PaginateControl({ pageTotal }: PaginateControlProps) {
   const PAGE_THRESHOLD = 8;
   const prevPageDisabled = currentPage === 1;
   const nextPageDisabled = currentPage === pageTotal;
+
+  useEffect(() => {
+    handleSetPage(1);
+  }, []);
 
   return (
     <div className={styles.container}>
