@@ -12,7 +12,11 @@ import { daysToMs } from "../../../../utils/daysToMs";
 import { toast } from "sonner";
 
 import styles from "./user-logs.module.css";
+
 import { formatDate } from "../../../../utils/formatDate";
+
+import { Skeleton } from "@nextui-org/react";
+import { cn } from "@/app/ui/lib/utils";
 
 type UserSessionLogsProps = {
   userId: string;
@@ -73,5 +77,12 @@ export default function UserSessionLogs({ userId }: UserSessionLogsProps) {
 }
 
 export const UserSessionLogsSkeleton = () => {
-  return <div>로딩중</div>;
+  return (
+    <div className={styles.session}>
+      <Skeleton className={cn("skeleton", styles.titleSkeleton)} />
+      <div className={styles.sessionTextWrap}>
+        <Skeleton className={cn("skeleton", styles.sessionTextSkeleton)} />
+      </div>
+    </div>
+  );
 };

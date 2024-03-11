@@ -1,7 +1,3 @@
-import { useFilterReviews } from "@/app/store/use-filter-reviews";
-
-import { useCallback, useEffect, useState } from "react";
-
 import {
   FILTER_REVIEW_INPUT,
   FILTER_REVIEW_SELECT,
@@ -13,6 +9,11 @@ import SelectList from "../../../../_components/SelectList";
 import Input from "../../../../_components/Input";
 import Button from "../../../../_components/Button";
 
+import { useFilterReviews } from "../hooks/use-filter-reviews";
+
+import { Skeleton } from "@nextui-org/react";
+import { cn } from "@/app/ui/lib/utils";
+
 export default function FilterReviewLogs() {
   const filterOptions: FilterOptions = [
     "검색 옵션",
@@ -21,24 +22,16 @@ export default function FilterReviewLogs() {
     "책 제목",
   ];
 
-  const { filter, setFilter, searchTerm, setSearchTerm, resetSearchState } =
-    useFilterReviews();
-
-  const [show, setShow] = useState(false);
-
-  const handleShow = () => {
-    setShow((prev) => !prev);
-  };
-
-  const handleSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-  }, []);
-
-  const handleReset = () => resetSearchState();
-
-  useEffect(() => {
-    setShow(false);
-  }, [filter]);
+  const {
+    show,
+    toggleShow,
+    handleSearch,
+    handleReset,
+    filter,
+    setFilter,
+    setShow,
+    searchTerm,
+  } = useFilterReviews();
 
   return (
     <div className={styles.filter}>
@@ -51,7 +44,7 @@ export default function FilterReviewLogs() {
           className={FILTER_REVIEW_SELECT}
           show={show}
           setShow={setShow}
-          handleShow={handleShow}
+          handleShow={toggleShow}
         />
         <Input
           type="text"
@@ -65,3 +58,16 @@ export default function FilterReviewLogs() {
     </div>
   );
 }
+
+export const FilterReviewSkeleton = () => {
+  return (
+    <div className={styles.filter}>
+      <Skeleton className={cn("skeleton", styles.titleSkeleton)} />
+      <div className={styles.filterOptions}>
+        <Skeleton className={cn("skeleton", styles.select)} />
+        <Skeleton className={cn("skeleton", styles.input)} />
+        <Skeleton className={cn("skeleton", styles.button)} />
+      </div>
+    </div>
+  )
+};

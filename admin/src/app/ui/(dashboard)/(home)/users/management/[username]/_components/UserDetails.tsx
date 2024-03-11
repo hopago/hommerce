@@ -18,7 +18,7 @@ import UserDetailsHeader, {
   UserDetailsHeaderSkeleton,
 } from "./UserDetailsHeader";
 import UserDetailsInfo, { UserDetailsInfoSkeleton } from "./UserDetailsInfo";
-import UserLogs from "./UserLogs";
+import UserLogs, { UserLogsSkeleton } from "./UserLogs";
 
 import { QueryKeys } from "@/app/lib/getQueryClient";
 
@@ -82,6 +82,7 @@ export const UserDetailsSkeleton = () => (
       <div className={styles.contentsWrap}>
         <UserProfileSkeleton />
         <UserDetailsInfoSkeleton />
+        <UserLogsSkeleton />
       </div>
     </div>
   </div>

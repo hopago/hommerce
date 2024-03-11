@@ -10,7 +10,7 @@ interface CreatorPagination {
 }
 
 export const useCreatorPagination = create<CreatorPagination>((set) => ({
-  currentPage: 1,
+  currentPage: 0,
   handlePrevPage: () =>
     set((state) => ({
       currentPage:

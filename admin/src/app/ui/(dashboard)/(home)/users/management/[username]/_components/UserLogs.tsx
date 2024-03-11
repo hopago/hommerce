@@ -1,9 +1,14 @@
+import { Skeleton } from "@nextui-org/react";
+
 import UserPointLogs from "./UserPointLogs";
-import UserPostLogs from "./UserPostLogs";
-import UserRegistrationDate from "./UserRegistrationDate";
-import UserSessionLogs from "./UserSessionLogs";
+import UserPostLogs, { UserPostLogsSkeleton } from "./UserPostLogs";
+import UserRegistrationDate, {
+  UserRegistrationDateSkeleton,
+} from "./UserRegistrationDate";
+import UserSessionLogs, { UserSessionLogsSkeleton } from "./UserSessionLogs";
 
 import styles from "./user-logs.module.css";
+import { cn } from "@/app/ui/lib/utils";
 
 type UserLogsProps = {
   userId: string;
@@ -31,8 +36,13 @@ export default function UserLogs({
 
 export const UserLogsSkeleton = () => {
   return (
-    <div>
-      로딩 중...
+    <div className={styles.userLogs}>
+      <div className={styles.userLogsWrap}>
+        <Skeleton className={cn("skeleton", styles.titleSkeleton)} />
+        <UserRegistrationDateSkeleton />
+        <UserSessionLogsSkeleton />
+        <UserPostLogsSkeleton />
+      </div>
     </div>
-  )
-}
+  );
+};

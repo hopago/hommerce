@@ -1,3 +1,4 @@
+import { Skeleton } from "@nextui-org/react";
 import { useTabList } from "../hooks/use-tab-list";
 
 import FAQLogs from "./FAQLogs";
@@ -5,6 +6,7 @@ import PostLogsTabList from "./PostLogsTabList";
 import ReviewLogs from "./ReviewLogs";
 
 import styles from "./user-logs.module.css";
+import { cn } from "@/app/ui/lib/utils";
 
 export default function UserPostLogs() {
   const { currTab, setCurrTab } = useTabList();
@@ -24,3 +26,17 @@ export default function UserPostLogs() {
     </div>
   );
 }
+
+export const UserPostLogsSkeleton = () => {
+  return (
+    <div className={styles.postLogs}>
+      <div className={styles.postLogsWrap}>
+        <Skeleton className={cn("skeleton", styles.titleSkeleton)} />
+        <div className={styles.setTab}>
+          <Skeleton className={cn("skeleton", styles.currTabSkeleton)} />
+          {/* TODO: 스켈레톤 CSS */}
+        </div>
+      </div>
+    </div>
+  );
+};

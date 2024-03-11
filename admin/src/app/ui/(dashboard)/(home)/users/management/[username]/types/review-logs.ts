@@ -1,5 +1,5 @@
 type ReviewLog = {
-  reviewId: string;
+  _id: string;
   bookTitle: string;
   desc: string;
   createdAt: Date;
