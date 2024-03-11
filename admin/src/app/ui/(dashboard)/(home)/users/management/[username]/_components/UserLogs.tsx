@@ -19,7 +19,7 @@ export default function UserLogs({
   return (
     <div className={styles.userLogs}>
       <div className={styles.userLogsWrap}>
-        <h1 className={styles.title}>활동 정보</h1>
+        <h1>활동 정보</h1>
         <UserRegistrationDate createdAt={createdAt} updatedAt={updatedAt} />
         <UserSessionLogs userId={userId} />
         <UserPostLogs />
@@ -27,4 +27,12 @@ export default function UserLogs({
       </div>
     </div>
   );
+}
+
+export const UserLogsSkeleton = () => {
+  return (
+    <div>
+      로딩 중...
+    </div>
+  )
 }

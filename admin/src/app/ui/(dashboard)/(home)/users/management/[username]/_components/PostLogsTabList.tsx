@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction, useState } from "react";
 
-import { STYLE_NONE_BUTTON } from "../../../../constants/classNames";
 import { logTabList } from "../constants/log-tab-list";
-
 import { LogTabList } from "../types/log-tab-list";
 
-import styles from "./post-logs-tab-list.module.css";
+import { POST_LOGS_SELECT } from "../../../../constants/classNames";
+
+import SelectList from "../../../../_components/SelectList";
 
 type PostLogsTabListProps = {
   currTab: LogTabList;
@@ -18,30 +18,24 @@ export default function PostLogsTabList({
 }: PostLogsTabListProps) {
   const [show, setShow] = useState(false);
 
-  const onClick = (tab: LogTabList) => {
+  const handleTabClick = (tab: LogTabList) => {
     setCurrTab(tab);
+    setShow(false);
+  };
+
+  const handleShow = () => {
+    setShow((prev) => !prev);
   };
 
   return (
-    <div className={styles.tabList}>
-      <div className={styles.tabListWrap}>
-        <h1 className={styles.tabListTitle}>고객 참여 활동</h1>
-        <span>{currTab}</span>
-        {show && (
-          <ul className={styles.selectList}>
-            {logTabList.map((tab) => (
-              <li key={tab} className={styles.selectItem}>
-                <button
-                  className={STYLE_NONE_BUTTON}
-                  onClick={() => onClick(tab)}
-                >
-                  <span className={styles.selectText}>{currTab}</span>
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-    </div>
+    <SelectList
+      currSelect={currTab}
+      handleItemClick={handleTabClick}
+      selectList={logTabList}
+      show={show}
+      setShow={setShow}
+      handleShow={handleShow}
+      className={POST_LOGS_SELECT}
+    />
   );
 }

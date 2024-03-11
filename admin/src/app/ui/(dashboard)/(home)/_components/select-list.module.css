@@ -1,0 +1,76 @@
+.select {
+  position: relative;
+  z-index: 9;
+}
+
+.select.postLogs {
+    width: 120px;
+}
+
+.selectWrap {
+    width: 100%;
+    padding: 0.25rem 0.5rem;
+    background-color: #3A4E7A;
+    border-radius: 0.5rem;
+    border: none;
+    color: var(--text);
+    font-size: 15px;
+}
+
+.textWrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.selectList {
+    position: absolute;
+    bottom: -39px;
+    left: 0;
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    background-color: #3A4E7A;
+    animation: fadeUp 0.15s ease-out forwards;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0.5;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.selectList.postLogs {
+    width: 120px;
+    text-align: center;
+}
+
+.selectItem {
+    cursor: pointer;
+    transition: all .15s ease;
+}
+
+.selectItem button,
+.selectItem button span {
+    width: 100%;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: -0.01em;
+    line-height: 18px;
+    color: var(--textSoft);
+}
+
+.selectItem:hover {
+    background-color: var(--bgSoft);
+    color: var(--text);
+}
+
+.selectItem:hover.selectItem button span {
+    color: var(--text);
+}

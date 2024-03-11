@@ -1,0 +1,73 @@
+.userLogs {
+    width: 66%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1.5rem;
+    background-color: var(--bgSoft);
+    border-radius: 0.5rem;
+}
+
+.userLogsWrap {
+    width: 100%;
+    padding: 1rem;
+}
+
+.title {
+    width: max-content;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    line-height: 18px;
+    margin-bottom: 1rem;
+}
+
+.registrationDate,
+.session,
+.postLogs {
+    width: 100%;
+    margin: 1rem 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: #24324D;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.registrationDateWrap {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.registrationTitle,
+.sessionTitle {
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    line-height: 18px;
+}
+
+.registrationDesc,
+.sessionTextWrap {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--textSoft);
+}
+
+.session {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.postLogsTitle {
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    line-height: 18px;
+    margin-bottom: 1rem;
+}
+
+.tabList {
+    
+}

@@ -26,7 +26,7 @@ export default function UserDetailsHeader() {
         size={16}
         className={styles.arrowLeft}
       />
-      <h1 className={styles.title}>유저 프로필</h1>
+      <h1 className={styles.title}>유저 상세</h1>
     </div>
   );
 }

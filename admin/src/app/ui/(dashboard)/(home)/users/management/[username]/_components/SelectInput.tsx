@@ -26,6 +26,7 @@ const SelectInput = ({
             className={cn(styles.selectItem, value === item && styles.active)}
           >
             <button
+              type="button"
               className={STYLE_NONE_BUTTON}
               onClick={() => onClickItem(item)}
               disabled={isPending}

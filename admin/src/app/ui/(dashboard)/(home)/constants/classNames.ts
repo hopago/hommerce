@@ -10,3 +10,5 @@ export const USER_SEARCH_INPUT = "userSearch";
 export const USER_DETAIL_INPUT = "userDetail";
 
 export const USER_DETAIL_LABEL = "userDetail";
+
+export const POST_LOGS_SELECT = "postLogs";
