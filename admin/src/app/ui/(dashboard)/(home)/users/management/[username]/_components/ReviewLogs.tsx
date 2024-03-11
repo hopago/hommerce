@@ -4,7 +4,7 @@ import FilterReviewLogs, { FilterReviewSkeleton } from "./FilterReviewLogs";
 import ReviewLogTable from "./ReviewLogTable";
 import PaginateControl from "../../../../_components/PaginateControl";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCreatorPagination } from "@/app/store/use-pagination";
 
 export default function ReviewLogs() {
@@ -26,6 +26,9 @@ export default function ReviewLogs() {
   );
 
   const [reviews, setReviews] = useState<ReviewLogs>(temporaryReviewLogs);
+  const [firstRender, setFirstRender] = useState(true);
+
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const pageTotal = getPageTotal(temporaryReviewLogs.length);
 
@@ -44,15 +47,23 @@ export default function ReviewLogs() {
     setReviews(slicedReviews);
   }, [currentPage]);
 
+  useEffect(() => {
+    if (firstRender) {
+      setFirstRender(false);
+    } else if (scrollRef.current) {
+      scrollRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [currentPage]);
+
   return (
-    <>
+    <div ref={scrollRef}>
       <FilterReviewLogs />
       <ReviewLogTable
         reviews={reviews}
         dataLength={temporaryReviewLogs.length}
       />
       <PaginateControl pageTotal={pageTotal} />
-    </>
+    </div>
   );
 }
 

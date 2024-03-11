@@ -3,7 +3,8 @@
   z-index: 9;
 }
 
-.select.postLogs {
+.select.postLogs,
+.select.reviewSort {
     width: 120px;
 }
 
@@ -51,7 +52,8 @@
     }
 }
 
-.selectList.postLogs {
+.selectList.postLogs,
+.selectList.reviewSort {
     width: 120px;
 }
 

@@ -3,8 +3,15 @@ import { useFilterReviews as creatorFilterReviews } from "@/app/store/use-filter
 import { useState, useCallback, useEffect } from "react";
 
 export function useFilterReviews() {
-  const { filter, setFilter, searchTerm, setSearchTerm, resetSearchState } =
-    creatorFilterReviews();
+  const {
+    filter,
+    setFilter,
+    sort,
+    setSort,
+    searchTerm,
+    setSearchTerm,
+    resetSearchState,
+  } = creatorFilterReviews();
 
   const [show, setShow] = useState(false);
 
@@ -17,6 +24,10 @@ export function useFilterReviews() {
     [setSearchTerm]
   );
 
+  const handleSort = (sort: "desc" | "asc") => {
+    setSort(sort);
+  };
+
   const handleReset = () => resetSearchState();
 
   useEffect(() => {
@@ -27,6 +38,8 @@ export function useFilterReviews() {
     show,
     setShow,
     toggleShow,
+    sort,
+    handleSort,
     handleSearch,
     handleReset,
     filter,

@@ -9,17 +9,19 @@ import { cn } from "@/app/ui/lib/utils";
 import {
   FILTER_REVIEW_SELECT,
   POST_LOGS_SELECT,
+  REVIEW_SORT_SELECT,
 } from "../constants/classNames";
 
 import { useEffect, useRef } from "react";
 
 import { LogTabList } from "../users/management/[username]/types/log-tab-list";
+import { SortOption } from "../users/management/[username]/_components/ReviewControlPanel";
 
 // 사용시 타입 추가
 
 type SelectListProps = {
-  selectList: LogTabList[] | FilterOptions;
-  currSelect: LogTabList | FilterOption;
+  selectList: LogTabList[] | FilterOptions | SortOption[];
+  currSelect: LogTabList | FilterOption | SortOption;
   handleItemClick: (param: any) => void;
   show: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
@@ -63,7 +65,8 @@ export default function SelectList({
       className={cn(
         styles.select,
         className === POST_LOGS_SELECT && styles.postLogs,
-        className === FILTER_REVIEW_SELECT && styles.filterReview
+        className === FILTER_REVIEW_SELECT && styles.filterReview,
+        className === REVIEW_SORT_SELECT && styles.reviewSort
       )}
     >
       <button

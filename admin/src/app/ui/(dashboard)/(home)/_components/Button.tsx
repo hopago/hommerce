@@ -13,6 +13,8 @@ import {
   API_SUBMIT_BUTTON,
   CLOSE_BUTTON,
   MANAGE_BUTTON,
+  REVIEW_ACTION_BUTTON,
+  SELECT_ALL_BUTTON,
   USER_DETAIL_BUTTON,
 } from "../constants/classNames";
 
@@ -66,7 +68,9 @@ export default function Button({
         className === CLOSE_BUTTON && styles.close,
         className === API_SUBMIT_BUTTON && styles.apiSubmit,
         className === USER_DETAIL_BUTTON && styles.userDetail,
-        className === API_MODAL_BUTTON && styles.apiModal
+        className === API_MODAL_BUTTON && styles.apiModal,
+        className === SELECT_ALL_BUTTON && styles.selectAll,
+        className === REVIEW_ACTION_BUTTON && styles.reviewAction
       )}
       type={type}
       onClick={onClick}

@@ -1,6 +1,7 @@
 import ReviewControlPanel from "./ReviewControlPanel";
 import ReviewRow from "./ReviewRow";
 import ReviewSelectAllCheckBox from "./ReviewSelectAllCheckBox";
+
 import styles from "./review-log-list.module.css";
 
 type ReviewLogListProps = {
@@ -14,6 +15,8 @@ export default function ReviewLogTable({
 }: ReviewLogListProps) {
   // TODO: No-content 컴포넌트 UI
 
+  const ids = reviews.map((review) => review._id);
+
   return (
     <div className={styles.container}>
       <div className={styles.wrap}>
@@ -21,7 +24,7 @@ export default function ReviewLogTable({
         <table>
           <thead>
             <tr>
-              <ReviewSelectAllCheckBox />
+              <ReviewSelectAllCheckBox ids={ids} />
               <td>리뷰 ID</td>
               <td>책 제목</td>
               <td>리뷰 내용</td>

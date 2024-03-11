@@ -4,7 +4,7 @@ interface CreatorUseFilterReviews {
   sort: "desc" | "asc";
   filter: FilterOption;
   searchTerm: string;
-  setSort: () => void;
+  setSort: (sort: "desc" | "asc") => void;
   setFilter: (filter: FilterOption) => void;
   setSearchTerm: (searchTerm: string) => void;
   resetSearchState: () => void;
@@ -14,15 +14,9 @@ export const useFilterReviews = create<CreatorUseFilterReviews>((set) => ({
   sort: "desc",
   filter: "검색 옵션",
   searchTerm: "",
-  setSort: () =>
-    set((state) => {
-      const currSort = state.sort;
-
-      currSort === "desc" ? (state.sort = "asc") : (state.sort = "desc");
-
-      return {
-        ...state,
-      };
+  setSort: (sort: "desc" | "asc") =>
+    set({
+      sort,
     }),
   setFilter: (filter: FilterOption) =>
     set({

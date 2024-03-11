@@ -10,11 +10,11 @@ type ReviewRowProps = {
 export default function ReviewRow({ review }: ReviewRowProps) {
   return (
     <tr>
-      <ReviewSelectedCheckBox />
+      <ReviewSelectedCheckBox id={review._id} />
       <td>{review._id}</td>
       <td>{review.bookTitle}</td>
       <td>{review.desc}</td>
-      <ReviewActions />
+      <ReviewActions id={review._id} />
     </tr>
   );
 }
