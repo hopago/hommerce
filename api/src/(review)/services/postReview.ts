@@ -4,7 +4,15 @@ import Review from "../models/review";
 import { handlePostTotal } from "../(total)/services/postTotal";
 
 export const handlePostReview = async (req: Request, next: NextFunction) => {
-  const fields = ["buyWay", "bookId", "username", "rating", "keyword", "desc"];
+  const fields = [
+    "buyWay",
+    "bookId",
+    "bookTitle",
+    "username",
+    "rating",
+    "keyword",
+    "desc",
+  ];
 
   isFieldsFullFilled(fields, req);
 

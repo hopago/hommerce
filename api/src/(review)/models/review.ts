@@ -4,6 +4,7 @@ export interface IReview extends Document {
   _id: Types.ObjectId;
   buyWay: SellWay;
   bookId: string;
+  bookTitle: string;
   userId: string;
   username: string;
   rating: ReviewRatingType;
@@ -21,6 +22,10 @@ const reviewSchema = new Schema(
       require: true,
     },
     bookId: {
+      type: String,
+      require: true,
+    },
+    bookTitle: {
       type: String,
       require: true,
     },

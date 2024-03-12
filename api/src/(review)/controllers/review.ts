@@ -4,6 +4,27 @@ import { handleGetReviews } from "../services/getReviews";
 import { handlePostReview } from "../services/postReview";
 import { handleUpdateReview } from "../services/updateReview";
 import { handleDeleteReview } from "../services/deleteReview";
+import { handleDeleteReviewById } from "../services/deleteReviewById";
+import { handleGetReviewByUserId } from "../services/getReviewByUserId";
+
+type FilterType = "_id" | "bookTitle" | "desc";
+
+export const deleteReviewById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const reviewId = req.query.reviewId as string | undefined;
+  if (!reviewId) throw new HttpException(400, "Review Id required.");
+
+  try {
+    await handleDeleteReviewById(reviewId, next);
+
+    return res.status(201).json(reviewId);
+  } catch (err) {
+    next(err);
+  }
+};
 
 export const getReviews = async (
   req: Request,
@@ -23,6 +44,32 @@ export const getReviews = async (
     );
 
     return res.status(200).json({ reviews, hasNextPage, totalReviews });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getReviewByUserId = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { userId } = req.params;
+  if (!userId) throw new HttpException(400, "User Id required.");
+  const filter = req.query.filter as FilterType | undefined;
+  const searchTerm = req.query.searchTerm as string | undefined;
+  if (filter && searchTerm?.trim() === "")
+    throw new HttpException(400, "Search term required.");
+
+  const { pageNum }: { pageNum: number | undefined } = req.body;
+
+  try {
+    const reviews = await handleGetReviewByUserId(
+      { userId, filter, searchTerm, pageNum },
+      next
+    );
+
+    return res.status(200).json(reviews);
   } catch (err) {
     next(err);
   }
