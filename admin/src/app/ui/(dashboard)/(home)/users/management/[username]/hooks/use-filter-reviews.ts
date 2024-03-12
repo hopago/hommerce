@@ -1,6 +1,6 @@
 import { useFilterReviews as creatorFilterReviews } from "@/app/store/use-filter-reviews";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 
 export function useFilterReviews() {
   const {
@@ -15,7 +15,7 @@ export function useFilterReviews() {
 
   const [show, setShow] = useState(false);
 
-  const toggleShow = () => setShow((prev) => !prev);
+  const toggleShow = useCallback(() => setShow((prev) => !prev), []);
 
   const handleSearch = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,15 +24,18 @@ export function useFilterReviews() {
     [setSearchTerm]
   );
 
-  const handleSort = (sort: "최신순" | "오래된순") => {
-    setSort(sort);
-  };
+  const handleSort = useCallback(
+    (sort: "최신순" | "오래된순") => {
+      setSort(sort);
+      setShow(false);
+    },
+    [setSort]
+  );
 
-  const handleReset = () => resetSearchState();
-
-  useEffect(() => {
+  const handleReset = useCallback(() => {
+    resetSearchState();
     setShow(false);
-  }, [filter]);
+  }, [resetSearchState]);
 
   return {
     show,

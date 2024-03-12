@@ -1,7 +1,7 @@
 import { Skeleton } from "@nextui-org/react";
 
 import UserPointLogs from "./UserPointLogs";
-import UserPostLogs, { UserPostLogsSkeleton } from "./UserPostLogs";
+import UserPostLogs from "./UserPostLogs";
 import UserRegistrationDate, {
   UserRegistrationDateSkeleton,
 } from "./UserRegistrationDate";
@@ -41,7 +41,6 @@ export const UserLogsSkeleton = () => {
         <Skeleton className={cn("skeleton", styles.titleSkeleton)} />
         <UserRegistrationDateSkeleton />
         <UserSessionLogsSkeleton />
-        <UserPostLogsSkeleton />
       </div>
     </div>
   );

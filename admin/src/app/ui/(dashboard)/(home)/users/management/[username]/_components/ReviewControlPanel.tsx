@@ -1,8 +1,11 @@
 import SelectList from "../../../../_components/SelectList";
+import Button from "../../../../_components/Button";
 
 import { REVIEW_SORT_SELECT } from "../../../../constants/classNames";
 
 import { useFilterReviews } from "../hooks/use-filter-reviews";
+import { useSelectReview } from "@/app/store/use-select-review";
+import { useUserReviewMutation } from "../services/use-user-review-mutation";
 
 import styles from "./review-log-list.module.css";
 
@@ -21,16 +24,15 @@ type ReviewControlPanelProps = {
   dataLength: number;
 };
 
-// TODO: 타이틀 -> 선택된 아이템이 있다면 개수, 일괄 삭제 기능 제공
-
 export default function ReviewControlPanel({
   dataLength,
 }: ReviewControlPanelProps) {
   const { sort, handleSort, show, toggleShow, setShow } = useFilterReviews();
+  const { ids } = useSelectReview();
 
-  // TODO: 선택된 항목, 일괄 삭제 컴포넌트
-
-  return (
+  const renderPanel = ids.length ? (
+    <DeleteReview ids={ids} />
+  ) : (
     <SortReview
       dataLength={dataLength}
       sort={sort}
@@ -40,7 +42,30 @@ export default function ReviewControlPanel({
       setShow={setShow}
     />
   );
+
+  return renderPanel;
 }
+
+const DeleteReview = ({ ids }: { ids: string[] }) => {
+  const { mutate, isPending } = useUserReviewMutation();
+
+  const onClick = () => {
+    mutate(ids);
+  };
+
+  return (
+    <div className={styles.reviewControlPanel}>
+      <h1 className={styles.title}>{ids.length}개 선택됨</h1>
+      <Button
+        type="button"
+        text="일괄삭제"
+        backgroundColor="#BF444A"
+        onClick={onClick}
+        disabled={isPending}
+      />
+    </div>
+  );
+};
 
 const SortReview = ({
   dataLength,

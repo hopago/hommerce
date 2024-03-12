@@ -1,16 +1,20 @@
 import { useRef, useState } from "react";
 
+import { useRouter } from "next/navigation";
+
 import styles from "./review-log-list.module.css";
 
 import { MdClose, MdMoreVert } from "react-icons/md";
 
 import Button from "../../../../_components/Button";
 
-import { useRouter } from "next/navigation";
-
 import { REVIEW_ACTION_BUTTON } from "../../../../constants/classNames";
 
 import { useOutsideClick } from "../../../hooks/use-outside-click";
+import { useUserReviewMutation } from "../services/use-user-review-mutation";
+
+import { Skeleton } from "@nextui-org/react";
+import { cn } from "@/app/ui/lib/utils";
 
 type ReviewActionsProps = {
   id: string;
@@ -67,7 +71,11 @@ function Navigate({ id }: { id: string }) {
 }
 
 function Delete({ id }: { id: string }) {
-  const onClick = () => {};
+  const { mutate, isPending } = useUserReviewMutation();
+
+  const onClick = () => {
+    mutate(id);
+  };
 
   return (
     <Button
@@ -77,6 +85,15 @@ function Delete({ id }: { id: string }) {
       ariaLabel="리뷰 삭제"
       className={REVIEW_ACTION_BUTTON}
       backgroundColor="#BF444A"
+      disabled={isPending}
     />
   );
 }
+
+export const ReviewActionsSkeleton = () => {
+  return (
+    <td>
+      <Skeleton className={cn("skeleton", styles.tdIcon)} />
+    </td>
+  );
+};

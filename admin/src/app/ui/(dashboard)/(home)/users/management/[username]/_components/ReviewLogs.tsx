@@ -8,7 +8,6 @@ import { useFilterReviews } from "../hooks/use-filter-reviews";
 import { daysToMs } from "../../../../utils/daysToMs";
 import { usePaginatedReviews } from "../../../hooks/use-paginated-reviews";
 import { fetchUserReviews } from "../services/fetchUserReviews";
-import { useEffect } from "react";
 
 export default function ReviewLogs() {
   const temporaryReviewLog: ReviewLog = {
@@ -30,7 +29,7 @@ export default function ReviewLogs() {
 
   const { filter, searchTerm, sort } = useFilterReviews();
 
-  const { data, refetch, error, isLoading } = useQuery<ReviewLogs>({
+  const { data, error, isError } = useQuery<ReviewLogs>({
     queryKey: [QueryKeys.USER_REVIEW, filter, searchTerm],
     queryFn: () => fetchUserReviews({ filter, searchTerm }),
     staleTime: daysToMs(1),
@@ -39,21 +38,8 @@ export default function ReviewLogs() {
 
   const { paginatedReviews, pageTotal } = usePaginatedReviews({
     reviews: temporaryReviewLogs,
+    sort,
   });
-
-  useEffect(() => {
-    if (paginatedReviews.length) {
-      sort === "최신순"
-        ? paginatedReviews.sort(
-            (a, b) =>
-              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-          )
-        : paginatedReviews.sort(
-            (a, b) =>
-              new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-          );
-    }
-  }, [sort]);
 
   return (
     <>
@@ -66,11 +52,3 @@ export default function ReviewLogs() {
     </>
   );
 }
-
-export const ReviewLogsSkeleton = () => {
-  return (
-    <>
-      <FilterReviewSkeleton />
-    </>
-  );
-};

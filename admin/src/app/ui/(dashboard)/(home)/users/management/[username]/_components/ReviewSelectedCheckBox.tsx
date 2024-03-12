@@ -6,6 +6,11 @@ import Button from "../../../../_components/Button";
 
 import { useSelectReview } from "@/app/store/use-select-review";
 
+import { Skeleton } from "@nextui-org/react";
+import { cn } from "@/app/ui/lib/utils";
+
+import styles from "./review-log-list.module.css";
+
 type ReviewSelectCheckBoxProps = {
   id: string;
 };
@@ -33,3 +38,11 @@ export default function ReviewSelectCheckBox({
     </td>
   );
 }
+
+export const ReviewSelectCheckBoxSkeleton = () => {
+  return (
+    <td>
+      <Skeleton className={cn("skeleton", styles.tdButton)} />
+    </td>
+  );
+};

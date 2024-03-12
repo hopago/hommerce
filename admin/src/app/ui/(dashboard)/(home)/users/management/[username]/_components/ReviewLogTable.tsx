@@ -1,5 +1,7 @@
+import { Suspense } from "react";
+
 import ReviewControlPanel from "./ReviewControlPanel";
-import ReviewRow from "./ReviewRow";
+import ReviewRow, { ReviewRowSkeleton } from "./ReviewRow";
 import ReviewSelectAllCheckBox from "./ReviewSelectAllCheckBox";
 
 import styles from "./review-log-list.module.css";
@@ -32,7 +34,9 @@ export default function ReviewLogTable({
           </thead>
           <tbody>
             {reviews.map((review) => (
-              <ReviewRow key={review._id} review={review} />
+              <Suspense fallback={<ReviewRowSkeleton />}>
+                <ReviewRow key={review._id} review={review} />
+              </Suspense>
             ))}
           </tbody>
         </table>

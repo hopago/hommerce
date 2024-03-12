@@ -26,17 +26,3 @@ export default function UserPostLogs() {
     </div>
   );
 }
-
-export const UserPostLogsSkeleton = () => {
-  return (
-    <div className={styles.postLogs}>
-      <div className={styles.postLogsWrap}>
-        <Skeleton className={cn("skeleton", styles.titleSkeleton)} />
-        <div className={styles.setTab}>
-          <Skeleton className={cn("skeleton", styles.currTabSkeleton)} />
-          {/* TODO: 스켈레톤 CSS */}
-        </div>
-      </div>
-    </div>
-  );
-};
