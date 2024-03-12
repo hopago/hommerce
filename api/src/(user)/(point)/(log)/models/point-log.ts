@@ -2,7 +2,9 @@ import { Schema, model, Document } from "mongoose";
 
 export interface IPointLogSchema extends Document {
   userId: string;
-  point: number;
+  pointId: string;
+  desc: string;
+  amount: number;
 }
 
 const pointLogSchema = new Schema(
@@ -11,9 +13,17 @@ const pointLogSchema = new Schema(
       type: String,
       require: true,
     },
-    point: {
+    pointId: {
+      type: String,
+      require: true,
+    },
+    desc: {
+      type: String,
+      require: true,
+    },
+    amount: {
       type: Number,
-      default: 0,
+      require: true,
     },
   },
   {

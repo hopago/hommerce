@@ -55,17 +55,19 @@ export const getReviewByUserId = async (
   next: NextFunction
 ) => {
   const { userId } = req.params;
-  if (!userId) throw new HttpException(400, "User Id required.");
   const filter = req.query.filter as FilterType | undefined;
-  const searchTerm = req.query.searchTerm as string | undefined;
-  if (filter && searchTerm?.trim() === "")
+  const keyword = req.query.keyword as string | undefined;
+
+  if (!userId || userId === "undefined")
+    throw new HttpException(400, "User Id required.");
+  if (filter && keyword?.trim() === "")
     throw new HttpException(400, "Search term required.");
 
   const { pageNum }: { pageNum: number | undefined } = req.body;
 
   try {
     const reviews = await handleGetReviewByUserId(
-      { userId, filter, searchTerm, pageNum },
+      { userId, filter, keyword, pageNum },
       next
     );
 

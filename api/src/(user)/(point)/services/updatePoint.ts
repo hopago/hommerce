@@ -34,7 +34,7 @@ export const handleUpdatePoint = async (req: Request, next: NextFunction) => {
     }
 
     try {
-      await postPointLog({ userId: req.params.userId, desc, amount }, next);
+      await postPointLog({ userId: req.params.userId, desc, amount, pointId: foundPoint._id }, next);
     } catch (err) {
       next(err);
     }
