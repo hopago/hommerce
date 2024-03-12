@@ -17,6 +17,7 @@ import {
   SELECT_ALL_BUTTON,
   USER_DETAIL_BUTTON,
 } from "../constants/classNames";
+import { Viewport } from "next";
 
 type VoidFunc = () => void;
 type PromiseVoidFunc = () => Promise<void>;
@@ -33,6 +34,12 @@ type ButtonProps = {
   display?: "none" | "flex" | "block" | "inline-block";
   className?: "manage" | "close" | "api-submit" | string;
   ariaLabel?: string;
+  active?: boolean;
+  backgroundColor?: string;
+};
+
+export const viewPort: Viewport = {
+  themeColor: "#BF444A",
 };
 
 export default function Button({
@@ -46,6 +53,8 @@ export default function Button({
   display = "flex",
   className,
   ariaLabel,
+  active,
+  backgroundColor,
 }: ButtonProps) {
   let btnIcon = icon;
 
@@ -70,12 +79,13 @@ export default function Button({
         className === USER_DETAIL_BUTTON && styles.userDetail,
         className === API_MODAL_BUTTON && styles.apiModal,
         className === SELECT_ALL_BUTTON && styles.selectAll,
-        className === REVIEW_ACTION_BUTTON && styles.reviewAction
+        className === REVIEW_ACTION_BUTTON && styles.reviewAction,
+        active && styles.active
       )}
       type={type}
       onClick={onClick}
       disabled={disabled}
-      style={{ display: `${display}` }}
+      style={{ display: `${display}`, backgroundColor: `${backgroundColor}` }}
       aria-label={ariaLabel}
     >
       <div className={styles.iconWrap}>{btnIcon}</div>

@@ -62,3 +62,22 @@
     background-color: #C2C4CA;
     color: #3B3E43;
 }
+
+.button.selectAll {
+    width: 21px;
+    height: 21px;
+    align-items: center;
+    justify-content: center;
+    color: var(--textPurple);
+    background-color: var(--text);
+    transition: all .15s ease;
+}
+
+.button.selectAll.active {
+    background-color: var(--textPurple);
+    color: var(--text);
+}
+
+.button.reviewAction {
+    width: max-content;
+}

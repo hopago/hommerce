@@ -1,11 +1,14 @@
-import { getPageTotal } from "../../../../utils/getPageTotal";
-
 import FilterReviewLogs, { FilterReviewSkeleton } from "./FilterReviewLogs";
 import ReviewLogTable from "./ReviewLogTable";
 import PaginateControl from "../../../../_components/PaginateControl";
 
-import { useEffect, useRef, useState } from "react";
-import { useCreatorPagination } from "@/app/store/use-pagination";
+import { useQuery } from "@tanstack/react-query";
+import { QueryKeys } from "@/app/lib/getQueryClient";
+import { useFilterReviews } from "../hooks/use-filter-reviews";
+import { daysToMs } from "../../../../utils/daysToMs";
+import { usePaginatedReviews } from "../../../hooks/use-paginated-reviews";
+import { fetchUserReviews } from "../services/fetchUserReviews";
+import { useEffect } from "react";
 
 export default function ReviewLogs() {
   const temporaryReviewLog: ReviewLog = {
@@ -25,45 +28,42 @@ export default function ReviewLogs() {
     }
   );
 
-  const [reviews, setReviews] = useState<ReviewLogs>(temporaryReviewLogs);
-  const [firstRender, setFirstRender] = useState(true);
+  const { filter, searchTerm, sort } = useFilterReviews();
 
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const { data, refetch, error, isLoading } = useQuery<ReviewLogs>({
+    queryKey: [QueryKeys.USER_REVIEW, filter, searchTerm],
+    queryFn: () => fetchUserReviews({ filter, searchTerm }),
+    staleTime: daysToMs(1),
+    gcTime: daysToMs(3),
+  });
 
-  const pageTotal = getPageTotal(temporaryReviewLogs.length);
-
-  const { currentPage } = useCreatorPagination();
-
-  useEffect(() => {
-    const PAGE_THRESHOLD = 8;
-
-    const skipNumber = PAGE_THRESHOLD * (currentPage - 1);
-
-    const slicedReviews = temporaryReviewLogs.slice(
-      skipNumber,
-      skipNumber + PAGE_THRESHOLD
-    );
-
-    setReviews(slicedReviews);
-  }, [currentPage]);
+  const { paginatedReviews, pageTotal } = usePaginatedReviews({
+    reviews: temporaryReviewLogs,
+  });
 
   useEffect(() => {
-    if (firstRender) {
-      setFirstRender(false);
-    } else if (scrollRef.current) {
-      scrollRef.current.scrollIntoView({ behavior: "smooth" });
+    if (paginatedReviews.length) {
+      sort === "최신순"
+        ? paginatedReviews.sort(
+            (a, b) =>
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          )
+        : paginatedReviews.sort(
+            (a, b) =>
+              new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+          );
     }
-  }, [currentPage]);
+  }, [sort]);
 
   return (
-    <div ref={scrollRef}>
+    <>
       <FilterReviewLogs />
       <ReviewLogTable
-        reviews={reviews}
+        reviews={paginatedReviews}
         dataLength={temporaryReviewLogs.length}
       />
       <PaginateControl pageTotal={pageTotal} />
-    </div>
+    </>
   );
 }
 

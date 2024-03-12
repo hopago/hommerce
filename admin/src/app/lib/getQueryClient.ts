@@ -20,4 +20,5 @@ export const QueryKeys = {
   USER: "user",
   USER_SEARCH: "userSearchResults",
   USER_SESSION: "userSession",
+  USER_REVIEW: "userReviews",
 };

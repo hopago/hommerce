@@ -1,3 +1,5 @@
+import { Viewport } from "next";
+
 import { MdArrowDropDown } from "react-icons/md";
 
 import styles from "./select-list.module.css";
@@ -27,6 +29,11 @@ type SelectListProps = {
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
   handleShow: () => void;
   className?: string;
+  backgroundColor?: string;
+};
+
+export const viewPort: Viewport = {
+  themeColor: "#414B5D",
 };
 
 export default function SelectList({
@@ -37,6 +44,7 @@ export default function SelectList({
   setShow,
   handleShow,
   className,
+  backgroundColor,
 }: SelectListProps) {
   const selectListRef = useRef<HTMLButtonElement>(null);
   const selectItemRef = useRef<HTMLUListElement>(null);
@@ -73,6 +81,7 @@ export default function SelectList({
         className={styles.selectWrap}
         ref={selectListRef}
         onClick={handleShow}
+        style={{ backgroundColor: `${backgroundColor}` }}
       >
         <div className={styles.textWrap}>
           <span>{currSelect}</span>

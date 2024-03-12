@@ -2,11 +2,13 @@ import { Dispatch, SetStateAction, useEffect } from "react";
 
 type UserOutsideClickParams<T extends HTMLElement> = {
   ref: React.RefObject<T>;
-  setSearchTerm: Dispatch<SetStateAction<string>>;
+  setShow?: Dispatch<SetStateAction<boolean>> | undefined;
+  setSearchTerm?: Dispatch<SetStateAction<string>> | undefined;
 };
 
 export const useOutsideClick = <T extends HTMLElement>({
   ref,
+  setShow,
   setSearchTerm,
 }: UserOutsideClickParams<T>) => {
   useEffect(() => {
@@ -14,7 +16,8 @@ export const useOutsideClick = <T extends HTMLElement>({
       if (!ref.current) return;
 
       if (!ref.current.contains(e.target as Node)) {
-        setSearchTerm("");
+        setShow && setShow(false);
+        setSearchTerm && setSearchTerm("");
       }
     };
 

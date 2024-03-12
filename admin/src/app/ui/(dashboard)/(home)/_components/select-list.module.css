@@ -57,6 +57,10 @@
     width: 120px;
 }
 
+.selectList.reviewSort {
+    background-color: #414B5D;
+}
+
 .selectList.filterReview {
     width: 180px;
     top: 34px;
@@ -88,4 +92,8 @@
 
 .selectItem:hover.selectItem button span {
     color: var(--text);
+}
+
+.selectList.reviewSort > .selectItem:hover {
+    background-color: #505A6B;
 }

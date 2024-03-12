@@ -24,7 +24,7 @@ export function useFilterReviews() {
     [setSearchTerm]
   );
 
-  const handleSort = (sort: "desc" | "asc") => {
+  const handleSort = (sort: "최신순" | "오래된순") => {
     setSort(sort);
   };
 

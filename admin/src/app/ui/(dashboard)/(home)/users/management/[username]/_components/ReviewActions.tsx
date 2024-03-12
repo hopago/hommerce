@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import styles from "./review-log-list.module.css";
 
-import { MdMoreVert } from "react-icons/md";
+import { MdClose, MdMoreVert } from "react-icons/md";
 
 import Button from "../../../../_components/Button";
 
@@ -10,28 +10,40 @@ import { useRouter } from "next/navigation";
 
 import { REVIEW_ACTION_BUTTON } from "../../../../constants/classNames";
 
-type ActionType = "상세 보기" | "리뷰 삭제";
+import { useOutsideClick } from "../../../hooks/use-outside-click";
 
 type ReviewActionsProps = {
   id: string;
 };
 
 export default function ReviewActions({ id }: ReviewActionsProps) {
+  const containerRef = useRef<HTMLTableDataCellElement>(null);
+
   const [show, setShow] = useState(false);
 
   const toggleClick = () => {
     setShow((prev) => !prev);
   };
 
-  const reviewActions: ActionType[] = ["상세 보기", "리뷰 삭제"];
-
-  const renderButton = (action: ActionType) =>
-    action === "상세 보기" ? <Navigate id={id} /> : <Delete />;
+  useOutsideClick<HTMLTableDataCellElement>({ ref: containerRef, setShow });
 
   return (
-    <td className={styles.reviewActions}>
-      <MdMoreVert onClick={toggleClick} />
-      {show && reviewActions.map((action) => renderButton(action))}
+    <td className={styles.reviewActions} ref={containerRef}>
+      {!show ? (
+        <MdMoreVert
+          onClick={toggleClick}
+          className={styles.moreVert}
+          size={21}
+        />
+      ) : (
+        <MdClose onClick={toggleClick} className={styles.close} />
+      )}
+      {show && (
+        <div className={styles.reviewActionsButtons}>
+          <Navigate id={id} />
+          <Delete id={id} />
+        </div>
+      )}
     </td>
   );
 }
@@ -54,7 +66,7 @@ function Navigate({ id }: { id: string }) {
   );
 }
 
-function Delete() {
+function Delete({ id }: { id: string }) {
   const onClick = () => {};
 
   return (
@@ -64,6 +76,7 @@ function Delete() {
       onClick={onClick}
       ariaLabel="리뷰 삭제"
       className={REVIEW_ACTION_BUTTON}
+      backgroundColor="#BF444A"
     />
   );
 }

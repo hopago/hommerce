@@ -6,7 +6,7 @@ import { useFilterReviews } from "../hooks/use-filter-reviews";
 
 import styles from "./review-log-list.module.css";
 
-export type SortOption = "desc" | "asc";
+export type SortOption = "최신순" | "오래된순";
 
 type SortReviewProps = {
   dataLength: number;
@@ -50,7 +50,7 @@ const SortReview = ({
   toggleShow,
   setShow,
 }: SortReviewProps) => {
-  const selectList: SortOption[] = ["desc", "asc"];
+  const selectList: SortOption[] = ["최신순", "오래된순"];
 
   return (
     <div className={styles.reviewControlPanel}>
@@ -63,6 +63,7 @@ const SortReview = ({
         setShow={setShow}
         handleShow={toggleShow}
         className={REVIEW_SORT_SELECT}
+        backgroundColor="#414B5D"
       />
     </div>
   );

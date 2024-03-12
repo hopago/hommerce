@@ -4,6 +4,8 @@ import { SELECT_ALL_BUTTON } from "../../../../constants/classNames";
 
 import Button from "../../../../_components/Button";
 
+import { useSelectReview } from "@/app/store/use-select-review";
+
 type ReviewSelectCheckBoxProps = {
   id: string;
 };
@@ -11,7 +13,13 @@ type ReviewSelectCheckBoxProps = {
 export default function ReviewSelectCheckBox({
   id,
 }: ReviewSelectCheckBoxProps) {
-  const onClick = () => {};
+  const { ids, toggleId } = useSelectReview();
+
+  const onClick = () => {
+    toggleId(id);
+  };
+
+  const isActive = ids?.includes(id);
 
   return (
     <td>
@@ -20,6 +28,7 @@ export default function ReviewSelectCheckBox({
         icon={<FaCheck />}
         onClick={onClick}
         className={SELECT_ALL_BUTTON}
+        active={isActive}
       />
     </td>
   );
