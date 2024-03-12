@@ -7,34 +7,18 @@ import { QueryKeys } from "@/app/lib/getQueryClient";
 import { daysToMs } from "../../../../utils/daysToMs";
 import { fetchUserReviews } from "../services/fetchUserReviews";
 
-import { usePaginatedReviews } from "../../../hooks/use-paginated-reviews";
+import { usePaginatedData } from "../../../hooks/use-paginated-data";
 import { useHandleError } from "../hooks/use-handle-error";
 import { useCreatorPagination } from "@/app/store/use-pagination";
 import { useFilterReviews } from "@/app/store/use-filter-reviews";
 
+import styles from "./review-log-list.module.css";
+import { cn } from "@/app/ui/lib/utils";
+
 export default function ReviewLogs({ userId }: { userId: string }) {
-  // const temporaryReviewLog: ReviewLog = {
-  //   _id: "mongoId_1837541092",
-  //   bookTitle: "인간관계론",
-  //   desc: "I could never stop doing this.",
-  //   createdAt: new Date(),
-  // };
-
-  // const temporaryReviewLogs: ReviewLogs = [...Array.from({ length: 22 })].map(
-  //   (_, i) => {
-  //     const log = { ...temporaryReviewLog };
-
-  //     log._id = log._id + i;
-
-  //     return log;
-  //   }
-  // );
-
-  // 클라이언트 상태 반영 후 store값으로 쿼리 패칭
   const { filter, searchTerm, sort } = useFilterReviews();
   const { currentPage, handleMoveToFirstPage } = useCreatorPagination();
 
-  // TODO: 데이터 타입 data[0].reviews === ReviewLogs, data[0].pagination.totalPages === pageTotal
   const { data, error, isError, isLoading } = useQuery<ReviewData>({
     queryKey: [QueryKeys.USER_REVIEW, currentPage, filter, searchTerm],
     queryFn: () =>
@@ -43,10 +27,10 @@ export default function ReviewLogs({ userId }: { userId: string }) {
     gcTime: daysToMs(3),
   });
 
-  if (!data || !data.reviews || !data.pagination) return null; // TODO: No-Content-ui
+  if (!data || !data.reviews || !data.pagination) return <NoContent />;
 
-  const { paginatedReviews, pageTotal } = usePaginatedReviews({
-    reviews: data.reviews,
+  const { paginatedData, pageTotal } = usePaginatedData({
+    data: data.reviews,
     sort,
     handleMoveToFirstPage,
     currentPage,
@@ -59,10 +43,37 @@ export default function ReviewLogs({ userId }: { userId: string }) {
       <FilterReviewLogs />
       <ReviewLogTable
         isLoading={isLoading}
-        reviews={paginatedReviews}
+        reviews={paginatedData}
         dataLength={data.pagination.totalPages}
       />
       <PaginateControl pageTotal={pageTotal} />
     </>
   );
 }
+
+function NoContent() {
+  return (
+    <div className={styles.container}>
+      <div className={cn(styles.wrap, styles.noContent)}>
+        <span className={styles.noContent}>리뷰를 아직 작성하지 않았어요.</span>
+      </div>
+    </div>
+  );
+}
+
+// const temporaryReviewLog: ReviewLog = {
+//   _id: "mongoId_1837541092",
+//   bookTitle: "인간관계론",
+//   desc: "I could never stop doing this.",
+//   createdAt: new Date(),
+// };
+
+// const temporaryReviewLogs: ReviewLogs = [...Array.from({ length: 22 })].map(
+//   (_, i) => {
+//     const log = { ...temporaryReviewLog };
+
+//     log._id = log._id + i;
+
+//     return log;
+//   }
+// );

@@ -28,7 +28,7 @@ export default function UserLogs({
         <UserRegistrationDate createdAt={createdAt} updatedAt={updatedAt} />
         <UserSessionLogs userId={userId} />
         <UserPostLogs userId={userId} />
-        <UserPointLogs />
+        <UserPointLogs userId={userId} />
       </div>
     </div>
   );

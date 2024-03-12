@@ -5,6 +5,7 @@ import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import ApiRefetch from "../../../../@modal/api-refetch/ApiRefetch";
 import { fetchUserBySearchTerm } from "../../../../services/fetchUser";
+import { QueryKeys } from "@/app/lib/getQueryClient";
 
 import { useHandleError } from "../hooks/use-handle-error";
 
@@ -19,8 +20,6 @@ import UserDetailsHeader, {
 } from "./UserDetailsHeader";
 import UserDetailsInfo, { UserDetailsInfoSkeleton } from "./UserDetailsInfo";
 import UserLogs, { UserLogsSkeleton } from "./UserLogs";
-
-import { QueryKeys } from "@/app/lib/getQueryClient";
 
 export default function UserDetails() {
   const username = getUsernameByPath();

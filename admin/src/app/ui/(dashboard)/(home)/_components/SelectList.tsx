@@ -18,12 +18,13 @@ import { useEffect, useRef } from "react";
 
 import { LogTabList } from "../users/management/[username]/types/log-tab-list";
 import { SortOption } from "../users/management/[username]/_components/ReviewControlPanel";
+import { PointFilterOption } from "../users/management/[username]/_components/FilterPointLogs";
 
 // 사용시 타입 추가
 
 type SelectListProps = {
-  selectList: LogTabList[] | FilterOptions | SortOption[];
-  currSelect: LogTabList | FilterOption | SortOption;
+  selectList: LogTabList[] | FilterOptions | SortOption[] | PointFilterOption[];
+  currSelect: LogTabList | FilterOption | SortOption | PointFilterOption;
   handleItemClick: (param: any) => void;
   show: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;

@@ -4,8 +4,8 @@ import { getPageTotal } from "../../utils/getPageTotal";
 
 import { useSelectReview } from "@/app/store/use-select-review";
 
-type UsePaginatedReviewsProps = {
-  reviews: ReviewLogs;
+type UsePaginatedDataParams = {
+  data: ReviewLogs;
   sort: "최신순" | "오래된순";
   handleMoveToFirstPage: () => void;
   currentPage: number;
@@ -13,13 +13,13 @@ type UsePaginatedReviewsProps = {
 
 const PAGE_THRESHOLD = 8;
 
-export function usePaginatedReviews({
-  reviews,
+export function usePaginatedData({
+  data,
   sort,
   handleMoveToFirstPage,
   currentPage,
-}: UsePaginatedReviewsProps) {
-  const [paginatedReviews, setPaginatedReviews] = useState<ReviewLogs>(reviews);
+}: UsePaginatedDataParams) {
+  const [paginatedData, setPaginatedData] = useState<ReviewLogs>(data);
 
   const { resetState } = useSelectReview();
 
@@ -27,10 +27,10 @@ export function usePaginatedReviews({
     const computePaginatedReviews = () => {
       const startIdx = PAGE_THRESHOLD * (currentPage - 1);
       const endIdx = startIdx + PAGE_THRESHOLD;
-      return reviews.slice(startIdx, endIdx);
+      return paginatedData.slice(startIdx, endIdx);
     };
 
-    setPaginatedReviews(computePaginatedReviews());
+    setPaginatedData(computePaginatedReviews());
   }, [currentPage]);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export function usePaginatedReviews({
       return sort === "최신순" ? dateB - dateA : dateA - dateB;
     };
 
-    setPaginatedReviews((prev) => [...prev].sort(sortReviews));
+    setPaginatedData((prev) => [...prev].sort(sortReviews));
   }, [sort]);
 
   useEffect(() => {
@@ -51,7 +51,7 @@ export function usePaginatedReviews({
   }, [currentPage]);
 
   return {
-    paginatedReviews,
-    pageTotal: getPageTotal(reviews.length),
+    paginatedData,
+    pageTotal: getPageTotal(data.length),
   };
 }
