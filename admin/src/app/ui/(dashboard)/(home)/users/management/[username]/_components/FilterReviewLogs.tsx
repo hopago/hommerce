@@ -22,25 +22,27 @@ export default function FilterReviewLogs() {
     "책 제목",
   ];
 
+  // 클라이언트 검색 상태 관리
   const {
     show,
     toggleShow,
     handleSearch,
     handleReset,
-    filter,
-    setFilter,
+    clientFilter,
+    setClientFilter,
     setShow,
-    searchTerm,
+    clientSearch,
+    handleSubmit,
   } = useFilterReviews();
 
   return (
     <div className={styles.filter}>
       <h1 className={styles.filterTitle}>검색 옵션 설정</h1>
-      <div className={styles.filterOptions}>
+      <form className={styles.filterOptions} onSubmit={handleSubmit}>
         <SelectList
           selectList={filterOptions}
-          currSelect={filter}
-          handleItemClick={setFilter}
+          currSelect={clientFilter}
+          handleItemClick={setClientFilter}
           className={FILTER_REVIEW_SELECT}
           show={show}
           setShow={setShow}
@@ -48,13 +50,13 @@ export default function FilterReviewLogs() {
         />
         <Input
           type="text"
-          value={searchTerm}
+          value={clientSearch}
           placeholder="검색어를 입력해주세요."
           onChange={handleSearch}
           className={FILTER_REVIEW_INPUT}
         />
         <Button type="button" text="초기화" onClick={handleReset} />
-      </div>
+      </form>
     </div>
   );
 }
@@ -69,5 +71,5 @@ export const FilterReviewSkeleton = () => {
         <Skeleton className={cn("skeleton", styles.button)} />
       </div>
     </div>
-  )
+  );
 };

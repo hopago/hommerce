@@ -84,7 +84,7 @@ export default function DataChart() {
   );
 }
 
-DataChart.Skeleton = () => (
+export const DataChartSkeleton = () => (
   <div className={styles.container}>
     <h2 className={styles.title}>주간 동향</h2>
     <div className={styles.skeletonContainer}>

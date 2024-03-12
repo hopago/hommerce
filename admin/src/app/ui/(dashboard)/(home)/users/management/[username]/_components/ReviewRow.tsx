@@ -1,5 +1,7 @@
 import { Skeleton } from "@nextui-org/react";
 
+import React from "react";
+
 import ReviewActions, { ReviewActionsSkeleton } from "./ReviewActions";
 import ReviewSelectedCheckBox, {
   ReviewSelectCheckBoxSkeleton,
@@ -10,9 +12,14 @@ import { cn } from "@/app/ui/lib/utils";
 
 type ReviewRowProps = {
   review: ReviewLog;
+  isLoading: boolean;
 };
 
-export default function ReviewRow({ review }: ReviewRowProps) {
+export const ReviewRowAsync = React.lazy(() => import("./ReviewRow"));
+
+export default function ReviewRow({ review, isLoading }: ReviewRowProps) {
+  if (isLoading) return <ReviewRowSkeleton />;
+
   return (
     <tr>
       <ReviewSelectedCheckBox id={review._id} />
@@ -29,13 +36,13 @@ export const ReviewRowSkeleton = () => {
     <tr>
       <ReviewSelectCheckBoxSkeleton />
       <td>
-        <Skeleton className={cn("skeleton", styles.td)} />
+        <Skeleton className={cn("skeleton", styles.tdSkeleton)} />
       </td>
       <td>
-        <Skeleton className={cn("skeleton", styles.td)} />
+        <Skeleton className={cn("skeleton", styles.tdSkeleton)} />
       </td>
       <td>
-        <Skeleton className={cn("skeleton", styles.td)} />
+        <Skeleton className={cn("skeleton", styles.tdSkeleton)} />
       </td>
       <ReviewActionsSkeleton />
     </tr>

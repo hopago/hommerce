@@ -27,7 +27,7 @@ export default function UserLogs({
         <h1>활동 정보</h1>
         <UserRegistrationDate createdAt={createdAt} updatedAt={updatedAt} />
         <UserSessionLogs userId={userId} />
-        <UserPostLogs />
+        <UserPostLogs userId={userId} />
         <UserPointLogs />
       </div>
     </div>

@@ -32,3 +32,19 @@ export const handleHttpError = ({
     setErrMsg("예상치 못한 오류가 발생했습니다.");
   }
 };
+
+export function handleError(error: unknown, fieldName: string) {
+  if (error instanceof HttpError) {
+    switch (error.status) {
+      case 404:
+        return `${fieldName}를 찾지 못했습니다.`;
+      case 500:
+        return `서버 오류입니다. 잠시 후 다시 시도해주세요.`;
+      default:
+        return `${error.status}: ${error.message}`;
+    }
+  } else if (error instanceof Error) {
+    return `${error.name}: ${error.message}`;
+  }
+  return "예기치 못한 오류입니다.";
+}

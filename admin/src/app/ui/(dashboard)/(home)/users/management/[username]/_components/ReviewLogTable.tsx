@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
 import ReviewControlPanel from "./ReviewControlPanel";
-import ReviewRow, { ReviewRowSkeleton } from "./ReviewRow";
+import { ReviewRowAsync, ReviewRowSkeleton } from "./ReviewRow";
 import ReviewSelectAllCheckBox from "./ReviewSelectAllCheckBox";
 
 import styles from "./review-log-list.module.css";
@@ -9,14 +9,14 @@ import styles from "./review-log-list.module.css";
 type ReviewLogListProps = {
   reviews: ReviewLogs;
   dataLength: number;
+  isLoading: boolean;
 };
 
 export default function ReviewLogTable({
   reviews,
   dataLength,
+  isLoading,
 }: ReviewLogListProps) {
-  // TODO: No-content 컴포넌트 UI
-
   const ids = reviews.map((review) => review._id);
 
   return (
@@ -34,8 +34,8 @@ export default function ReviewLogTable({
           </thead>
           <tbody>
             {reviews.map((review) => (
-              <Suspense fallback={<ReviewRowSkeleton />}>
-                <ReviewRow key={review._id} review={review} />
+              <Suspense key={review._id} fallback={<ReviewRowSkeleton />}>
+                <ReviewRowAsync review={review} isLoading={isLoading} />
               </Suspense>
             ))}
           </tbody>

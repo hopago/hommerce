@@ -25,15 +25,24 @@ import { QueryKeys } from "@/app/lib/getQueryClient";
 export default function UserDetails() {
   const username = getUsernameByPath();
 
-  const { data, error, refetch, isError, isRefetching, isRefetchError } =
-    useQuery({
-      queryKey: [QueryKeys.USER, username],
-      queryFn: () => fetchUserBySearchTerm({ searchTerm: username }),
-      staleTime: daysToMs(1),
-      gcTime: daysToMs(3),
-    });
+  const {
+    data,
+    error,
+    refetch,
+    isLoading,
+    isError,
+    isRefetching,
+    isRefetchError,
+  } = useQuery({
+    queryKey: [QueryKeys.USER, username],
+    queryFn: () => fetchUserBySearchTerm({ searchTerm: username }),
+    staleTime: daysToMs(1),
+    gcTime: daysToMs(3),
+  });
 
-  useHandleError({ error, isError, isRefetchError });
+  if (isLoading) return <UserDetailsSkeleton />;
+
+  useHandleError({ error, isError, isRefetchError, fieldName: "유저" });
 
   if (!data) return null;
 

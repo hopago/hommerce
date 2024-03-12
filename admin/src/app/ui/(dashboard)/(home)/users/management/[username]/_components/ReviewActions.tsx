@@ -93,7 +93,7 @@ function Delete({ id }: { id: string }) {
 export const ReviewActionsSkeleton = () => {
   return (
     <td>
-      <Skeleton className={cn("skeleton", styles.tdIcon)} />
+      <Skeleton className={cn("skeleton", styles.tdIconSkeleton)} />
     </td>
   );
 };

@@ -1,3 +1,10 @@
+type ReviewData = {
+  reviews: ReviewLogs;
+  pagination: {
+    totalPages: number;
+  };
+};
+
 type ReviewLog = {
   _id: string;
   bookTitle: string;

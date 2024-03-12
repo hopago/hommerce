@@ -42,7 +42,7 @@ export default function ReviewSelectCheckBox({
 export const ReviewSelectCheckBoxSkeleton = () => {
   return (
     <td>
-      <Skeleton className={cn("skeleton", styles.tdButton)} />
+      <Skeleton className={cn("skeleton", styles.tdButtonSkeleton)} />
     </td>
   );
 };

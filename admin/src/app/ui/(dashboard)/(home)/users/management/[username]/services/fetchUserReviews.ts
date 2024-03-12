@@ -1,3 +1,5 @@
+import { toast } from "sonner";
+
 import { createQueryString } from "../../../../utils/createQueryString";
 
 import { reactQueryFetcher } from "@/app/fetcher/fetcher";
@@ -5,6 +7,8 @@ import { reactQueryFetcher } from "@/app/fetcher/fetcher";
 type FetchUserReviewsParams = {
   filter?: FilterOption;
   searchTerm?: string;
+  pageNum: number;
+  userId: string;
 };
 
 const translateQueryValueToEn = (filter: FilterOption) => {
@@ -21,25 +25,27 @@ const translateQueryValueToEn = (filter: FilterOption) => {
 export const fetchUserReviews = ({
   filter,
   searchTerm,
-}: FetchUserReviewsParams): Promise<ReviewLogs> => {
-  let path: string = "/review";
+  pageNum,
+  userId,
+}: FetchUserReviewsParams): Promise<ReviewData> => {
+  let path: string = `/review/user/${userId}`;
 
   let filterQueryString: string | null = null;
   if (filter && translateQueryValueToEn(filter)) {
     filterQueryString = translateQueryValueToEn(filter);
     path += `?${filterQueryString}`;
+
+    if (searchTerm && searchTerm.trim() !== "") {
+      const keywordQueryString = createQueryString({ keyword: searchTerm });
+      path += `&${keywordQueryString}`;
+    }
   }
 
-  let keywordQueryString: string | null = null;
-  if (searchTerm && searchTerm.trim() !== "") {
-    keywordQueryString = createQueryString({ keyword: searchTerm });
-    path += filterQueryString
-      ? `&${keywordQueryString}`
-      : `?${keywordQueryString}`;
-  }
-
-  return reactQueryFetcher({
+  return reactQueryFetcher<ReviewData>({
     method: "GET",
     path,
+    body: {
+      pageNum,
+    },
   });
 };

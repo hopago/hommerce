@@ -38,6 +38,7 @@ const SelectItem = forwardRef<HTMLUListElement, SelectItemProps>(
             return (
               <li key={`${list}-${i}`} className={styles.selectItem}>
                 <button
+                  type="button"
                   className={STYLE_NONE_BUTTON}
                   onClick={() => handleItemClick(list)}
                 >

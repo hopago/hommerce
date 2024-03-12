@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 
 import { getPageTotal } from "../../utils/getPageTotal";
 
-import { useCreatorPagination } from "@/app/store/use-pagination";
 import { useSelectReview } from "@/app/store/use-select-review";
 
 type UsePaginatedReviewsProps = {
   reviews: ReviewLogs;
   sort: "최신순" | "오래된순";
+  handleMoveToFirstPage: () => void;
+  currentPage: number;
 };
 
 const PAGE_THRESHOLD = 8;
@@ -15,10 +16,11 @@ const PAGE_THRESHOLD = 8;
 export function usePaginatedReviews({
   reviews,
   sort,
+  handleMoveToFirstPage,
+  currentPage,
 }: UsePaginatedReviewsProps) {
   const [paginatedReviews, setPaginatedReviews] = useState<ReviewLogs>(reviews);
 
-  const { currentPage, handleMoveToFirstPage } = useCreatorPagination();
   const { resetState } = useSelectReview();
 
   useEffect(() => {

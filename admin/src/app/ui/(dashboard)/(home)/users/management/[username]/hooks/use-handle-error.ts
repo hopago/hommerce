@@ -1,34 +1,29 @@
 import { HttpError } from "@/app/fetcher/error";
+import { handleError } from "@/app/fetcher/handle-error";
 
 import { useEffect } from "react";
 
 import { toast } from "sonner";
 
 type UseHandleErrorParams = {
+  fieldName: string;
   error: Error | null;
   isError: boolean;
-  isRefetchError: boolean;
+  isRefetchError?: boolean;
 };
 
 export const useHandleError = ({
   error,
   isError,
   isRefetchError,
+  fieldName,
 }: UseHandleErrorParams) => {
   useEffect(() => {
     if (!isError || !error) return;
 
     if ((isError && error) || (isRefetchError && error)) {
       if (error instanceof HttpError) {
-        if (error.status === 404) {
-          toast.error("유저를 찾지 못했습니다.");
-        } else {
-          toast.error(`${error.status}: ${error.message}`);
-        }
-      } else if (error instanceof Error) {
-        toast.error(`${error.name}: ${error.message}`);
-      } else {
-        toast.error("예기치 못한 오류입니다.");
+        toast.error(handleError(error, fieldName));
       }
     }
   }, [isError, isRefetchError]);

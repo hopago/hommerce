@@ -78,6 +78,7 @@ export default function SelectList({
       )}
     >
       <button
+        type="button"
         className={styles.selectWrap}
         ref={selectListRef}
         onClick={handleShow}
