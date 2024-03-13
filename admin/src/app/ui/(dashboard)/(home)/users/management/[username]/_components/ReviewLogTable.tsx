@@ -6,7 +6,7 @@ import ReviewSelectAllCheckBox from "./ReviewSelectAllCheckBox";
 
 import styles from "./review-log-list.module.css";
 
-type ReviewLogListProps = {
+type ReviewLogTableProps = {
   reviews: ReviewLogs;
   dataLength: number;
   isLoading: boolean;
@@ -16,7 +16,7 @@ export default function ReviewLogTable({
   reviews,
   dataLength,
   isLoading,
-}: ReviewLogListProps) {
+}: ReviewLogTableProps) {
   const ids = reviews.map((review) => review._id);
 
   return (

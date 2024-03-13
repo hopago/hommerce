@@ -10,6 +10,7 @@ type ReviewLog = {
   bookTitle: string;
   desc: string;
   createdAt: Date;
+  updatedAt: Date;
 };
 
 type ReviewLogs = ReviewLog[];

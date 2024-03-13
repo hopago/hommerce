@@ -38,10 +38,6 @@ type ButtonProps = {
   backgroundColor?: string;
 };
 
-export const viewPort: Viewport = {
-  themeColor: "#BF444A",
-};
-
 export default function Button({
   type,
   text,

@@ -9,6 +9,7 @@ import NextPage from "./NextPage";
 import styles from "./pagination.module.css";
 
 import { useEffect } from "react";
+import { PAGE_THRESHOLD } from "../constants/pagination";
 
 type PaginateControlProps = {
   pageTotal: number;
@@ -24,7 +25,6 @@ export default function PaginateControl({ pageTotal }: PaginateControlProps) {
     handleMoveToLastPage,
   } = useCreatorPagination();
 
-  const PAGE_THRESHOLD = 8;
   const prevPageDisabled = currentPage === 1;
   const nextPageDisabled = currentPage === pageTotal;
 

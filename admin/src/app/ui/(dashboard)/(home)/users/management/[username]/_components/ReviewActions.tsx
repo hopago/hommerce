@@ -15,6 +15,7 @@ import { useUserReviewMutation } from "../services/use-user-review-mutation";
 
 import { Skeleton } from "@nextui-org/react";
 import { cn } from "@/app/ui/lib/utils";
+import { useToggle } from "../../../hooks/use-toggle";
 
 type ReviewActionsProps = {
   id: string;
@@ -23,13 +24,7 @@ type ReviewActionsProps = {
 export default function ReviewActions({ id }: ReviewActionsProps) {
   const containerRef = useRef<HTMLTableDataCellElement>(null);
 
-  const [show, setShow] = useState(false);
-
-  const toggleClick = () => {
-    setShow((prev) => !prev);
-  };
-
-  useOutsideClick<HTMLTableDataCellElement>({ ref: containerRef, setShow });
+  const { show, toggleClick } = useToggle(containerRef);
 
   return (
     <td className={styles.reviewActions} ref={containerRef}>
@@ -44,7 +39,7 @@ export default function ReviewActions({ id }: ReviewActionsProps) {
       )}
       {show && (
         <div className={styles.reviewActionsButtons}>
-          <Navigate id={id} />
+          <Navigate id={id} path="review" text="상세보기" />
           <Delete id={id} />
         </div>
       )}
@@ -52,17 +47,25 @@ export default function ReviewActions({ id }: ReviewActionsProps) {
   );
 }
 
-function Navigate({ id }: { id: string }) {
+export function Navigate({
+  id,
+  path,
+  text,
+}: {
+  id: string;
+  path: string;
+  text: string;
+}) {
   const router = useRouter();
 
   const onClick = () => {
-    router.push(`/review/${id}`);
+    router.push(`/${path}/${id}`);
   };
 
   return (
     <Button
       type="button"
-      text="상세 보기"
+      text={text}
       onClick={onClick}
       ariaLabel="상세 보기"
       className={REVIEW_ACTION_BUTTON}

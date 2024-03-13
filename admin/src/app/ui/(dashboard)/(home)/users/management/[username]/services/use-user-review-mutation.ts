@@ -3,7 +3,7 @@ import { reactQueryFetcher } from "@/app/fetcher/fetcher";
 import { QueryKeys, getQueryClient } from "@/app/lib/getQueryClient";
 import { useMutation } from "@tanstack/react-query";
 
-import { useFilterReviews } from "@/app/store/use-filter-reviews";
+import { creatorFilterReviews } from "@/app/store/use-filter-reviews";
 
 import { toast } from "sonner";
 
@@ -17,7 +17,7 @@ const deleteReview = async (id: string) => {
 export const useUserReviewMutation = () => {
   const queryClient = getQueryClient();
 
-  const { filter, searchTerm } = useFilterReviews();
+  const { filter, searchTerm } = creatorFilterReviews();
 
   const { mutate, isPending } = useMutation<
     string | string[],
@@ -55,12 +55,11 @@ export const useUserReviewMutation = () => {
           [QueryKeys.USER_REVIEW, filter, searchTerm],
           filteredReviews
         );
+        toast.success("리뷰 삭제를 성공적으로 마쳤어요.");
       } catch (err) {
         console.error(err);
         toast.error("리뷰 삭제는 완료했으나 쿼리키에 문제가 있어요.");
       }
-
-      toast.success("리뷰 삭제를 성공적으로 마쳤어요.");
     },
     onError: (err) => {
       if (err instanceof HttpError) {

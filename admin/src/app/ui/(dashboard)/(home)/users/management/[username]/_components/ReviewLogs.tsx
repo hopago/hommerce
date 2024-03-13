@@ -10,13 +10,15 @@ import { fetchUserReviews } from "../services/fetchUserReviews";
 import { usePaginatedData } from "../../../hooks/use-paginated-data";
 import { useHandleError } from "../hooks/use-handle-error";
 import { useCreatorPagination } from "@/app/store/use-pagination";
-import { useFilterReviews } from "@/app/store/use-filter-reviews";
+import { creatorFilterReviews } from "@/app/store/use-filter-reviews";
 
 import styles from "./review-log-list.module.css";
 import { cn } from "@/app/ui/lib/utils";
 
+import { PAGE_THRESHOLD } from "../../../../constants/pagination";
+
 export default function ReviewLogs({ userId }: { userId: string }) {
-  const { filter, searchTerm, sort } = useFilterReviews();
+  const { filter, searchTerm, sort } = creatorFilterReviews();
   const { currentPage, handleMoveToFirstPage } = useCreatorPagination();
 
   const { data, error, isError, isLoading } = useQuery<ReviewData>({
@@ -43,8 +45,8 @@ export default function ReviewLogs({ userId }: { userId: string }) {
       <FilterReviewLogs />
       <ReviewLogTable
         isLoading={isLoading}
-        reviews={paginatedData}
-        dataLength={data.pagination.totalPages}
+        reviews={paginatedData as ReviewLogs}
+        dataLength={pageTotal * PAGE_THRESHOLD}
       />
       <PaginateControl pageTotal={pageTotal} />
     </>

@@ -1,14 +1,14 @@
 import { create } from "zustand";
 
-import { PointFilterOptions } from "../ui/(dashboard)/(home)/users/management/[username]/_components/FilterPointLogs";
+import { PointFilterOption } from "../ui/(dashboard)/(home)/users/management/[username]/_components/FilterPointLogs";
 
 interface CreatorUseFilterReviews {
   sort: "최신순" | "오래된순";
-  filter: PointFilterOptions;
+  filter: PointFilterOption;
   searchTerm: string;
   enabled: boolean;
   setSort: (sort: "최신순" | "오래된순") => void;
-  setFilter: (filter: PointFilterOptions) => void;
+  setFilter: (filter: PointFilterOption) => void;
   setSearchTerm: (searchTerm: string) => void;
   setEnabled: (param: boolean) => void;
   resetSearchState: () => void;
@@ -24,7 +24,7 @@ export const creatorFilterPoints = create<CreatorUseFilterReviews>((set) => ({
       enabled: false,
       sort,
     }),
-  setFilter: (filter: PointFilterOptions) =>
+  setFilter: (filter: PointFilterOption) =>
     set({
       enabled: false,
       filter,
