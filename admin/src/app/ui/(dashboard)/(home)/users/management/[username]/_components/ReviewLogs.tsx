@@ -36,6 +36,8 @@ export default function ReviewLogs({ userId }: { userId: string }) {
     gcTime: daysToMs(3),
   });
 
+  useHandleError({ error, isError, fieldName: "리뷰" });
+
   if (!data || !data.reviews || !data.pagination)
     return (
       <NoContent
@@ -43,6 +45,9 @@ export default function ReviewLogs({ userId }: { userId: string }) {
         error={error}
         isRefetching={isRefetching}
         isRefetchError={isRefetchError}
+        filter={filter}
+        currentPage={currentPage}
+        searchTerm={searchTerm}
       />
     );
 
@@ -52,8 +57,6 @@ export default function ReviewLogs({ userId }: { userId: string }) {
     handleMoveToFirstPage,
     currentPage,
   });
-
-  useHandleError({ error, isError, fieldName: "리뷰" });
 
   return (
     <>

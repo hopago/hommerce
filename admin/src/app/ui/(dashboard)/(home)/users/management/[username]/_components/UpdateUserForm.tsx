@@ -5,12 +5,6 @@ import Label from "../../../../_components/Label";
 import Button from "../../../../_components/Button";
 import SelectForm from "./SelectForm";
 
-import {
-  USER_DETAIL_BUTTON,
-  USER_DETAIL_LABEL,
-  USER_DETAIL_INPUT,
-} from "../../../../constants/classNames";
-
 import { changeTitleToKor } from "../utils/changeTitleToKor";
 
 import { Skeleton } from "@nextui-org/react";
@@ -54,7 +48,6 @@ export default function UpdateUserForm({
             type={inputName === "email" ? "email" : "text"}
             name={inputName}
             placeholder={`${changeTitleToKor(inputName)} 변경하기`}
-            className={USER_DETAIL_INPUT}
             onChange={onChange}
             value={value}
           />
@@ -65,14 +58,13 @@ export default function UpdateUserForm({
   return (
     <form className={styles.form} onSubmit={onSubmit}>
       <div className={styles.inputWrap}>
-        <Label text={title} className={USER_DETAIL_LABEL} />
+        <Label text={title} />
         {renderInputComponent()}
       </div>
       <div className={styles.buttonWrap}>
         <Button
           type="submit"
           text="변경하기"
-          className={USER_DETAIL_BUTTON}
           disabled={isLoading}
           ariaLabel="변경하기"
           display={uiType === "select" ? "none" : "flex"}

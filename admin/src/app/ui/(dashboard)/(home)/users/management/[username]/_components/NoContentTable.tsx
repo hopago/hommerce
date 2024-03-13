@@ -11,16 +11,28 @@ import { cn } from "@/app/ui/lib/utils";
 
 import Button from "../../../../_components/Button";
 
+import { PointFilterOption } from "./FilterPointLogs";
+
+import { toast } from "sonner";
+
 type NoContentProps = {
+  text?: string;
   refetch: (
     options?: RefetchOptions | undefined
-  ) => Promise<QueryObserverResult<ReviewData, Error>>;
+  ) => Promise<QueryObserverResult<ReviewData | PointData, Error>>;
   error: Error | null;
   isRefetching: boolean;
   isRefetchError: boolean;
+  currentPage?: number;
+  searchTerm?: string;
+  filter?: PointFilterOption | FilterOption;
 };
 
 export function NoContent({
+  currentPage,
+  searchTerm,
+  filter,
+  text = "리뷰를 아직 작성하지 않았어요.",
   refetch,
   error,
   isRefetching,
@@ -30,15 +42,25 @@ export function NoContent({
 
   const router = useRouter();
 
-  const onClick = isRefetchError
-    ? () => router.refresh()
-    : () => async () => {
-        await queryClient.resetQueries({
-          queryKey: [QueryKeys.USER_REVIEW],
-        });
+  const handleRefetch = () => async () => {
+    try {
+      await queryClient.resetQueries({
+        queryKey: [QueryKeys.USER_REVIEW, currentPage, searchTerm, filter],
+      });
+    } catch (err) {
+      toast.error("쿼리키를 처리하던 도중 오류가 발생했습니다.");
+    }
 
-        refetch();
-      };
+    try {
+      refetch();
+
+      toast.message("데이터를 성공적으로 불러왔어요.");
+    } catch (err) {
+      toast.error("데이터를 불러오지 못했어요. 잠시 후 다시 시도해주세요.");
+    }
+  };
+
+  const onClick = isRefetchError ? () => router.refresh() : handleRefetch();
 
   useHandleError({ error, isError: isRefetchError, fieldName: "리뷰" });
 
@@ -55,7 +77,7 @@ export function NoContent({
   return (
     <div className={styles.container}>
       <div className={cn(styles.wrap, styles.noContent)}>
-        <span className={styles.noContent}>리뷰를 아직 작성하지 않았어요.</span>
+        <span className={styles.noContent}>{text}</span>
         <Button
           type="button"
           text={buttonText}
