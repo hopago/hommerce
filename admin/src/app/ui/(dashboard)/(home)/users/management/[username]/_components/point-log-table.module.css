@@ -38,11 +38,14 @@
 
 .amountInc,
 .amountDec {
-    font-weight: 600;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 16px;
+    letter-spacing: -0.01em;
 }
 
 .amountInc {
-    color: #58C472;
+    color: lime;
 }
 
 .amountDec {
@@ -143,4 +146,19 @@
 
 .buttonWrap {
     justify-content: flex-end;
+}
+
+.loadingIcon {
+    animation: spin 1s infinite linear;
+    margin-bottom: 0.25rem;
+}
+
+@keyframes spin {
+    from {
+        transform: scale(1) rotate(0deg);
+    }
+
+    to {
+        transform: scale(1) rotate(360deg);
+    }
 }

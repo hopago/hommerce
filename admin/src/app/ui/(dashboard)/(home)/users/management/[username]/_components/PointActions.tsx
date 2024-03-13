@@ -21,11 +21,13 @@ import { useToggle } from "../../../hooks/use-controlled-toggle";
 import { useMutatePointLogModal } from "../../../hooks/use-mutate-point-log-modal";
 
 import { BUTTON_CLASS } from "../../../../constants/classNames";
+import { FaSpinner } from "react-icons/fa";
 
 type PointActionsProps = {
-  id: string;
+  pointId: string;
   desc: string;
   amount: number;
+  userId: string;
 };
 
 type UpdateModalProps = {
@@ -38,7 +40,12 @@ type UpdateModalProps = {
   localDesc: string;
 };
 
-export default function PointActions({ id, amount, desc }: PointActionsProps) {
+export default function PointActions({
+  pointId,
+  amount,
+  desc,
+  userId,
+}: PointActionsProps) {
   const containerRef = useRef<HTMLTableDataCellElement>(null);
   const modalRef = useRef<HTMLFormElement>(null);
 
@@ -52,7 +59,7 @@ export default function PointActions({ id, amount, desc }: PointActionsProps) {
     setDesc,
     localAmount,
     localDesc,
-  } = useMutatePointLogModal(modalRef, id, amount, desc);
+  } = useMutatePointLogModal(modalRef, pointId, userId, amount, desc);
 
   useEffect(() => {
     if (modalShow) {
@@ -84,7 +91,7 @@ export default function PointActions({ id, amount, desc }: PointActionsProps) {
       )}
       {show && (
         <div className={styles.reviewActionsButtons}>
-          <Navigate id={id} path="point" text="상세보기" />
+          <Navigate id={pointId} path="point" text="상세보기" />
           <Button
             type="button"
             text="포인트 수정"
@@ -121,7 +128,10 @@ const Update = forwardRef<HTMLFormElement, UpdateModalProps>(
     },
     ref
   ) => {
-    
+    const buttonText = isPending ? null : "수정하기";
+    const buttonIcon = isPending ? (
+      <FaSpinner className={styles.loadingIcon} />
+    ) : null;
 
     return (
       <div className={styles.modal}>
@@ -160,10 +170,7 @@ const Update = forwardRef<HTMLFormElement, UpdateModalProps>(
                 </div>
               </div>
               <div className={styles.buttonWrap}>
-                <Button
-                  type="submit"
-                  text="수정하기"
-                />
+                <Button type="submit" text={buttonText} icon={buttonIcon} />
               </div>
             </div>
             <Button

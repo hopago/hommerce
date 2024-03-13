@@ -12,11 +12,12 @@ import styles from "./point-log-table.module.css";
 type PointRowProps = {
   point: PointLog;
   isLoading: boolean;
+  userId: string;
 };
 
 export const PointRowAsync = React.lazy(() => import("./PointRow"));
 
-export default function PointRow({ point, isLoading }: PointRowProps) {
+export default function PointRow({ point, isLoading, userId }: PointRowProps) {
   if (isLoading) return <TableRowSkeleton />;
 
   return (
@@ -31,7 +32,12 @@ export default function PointRow({ point, isLoading }: PointRowProps) {
       >
         {point.amount}
       </td>
-      <PointActions id={point._id} desc={point.desc} amount={point.amount} />
+      <PointActions
+        pointId={point._id}
+        desc={point.desc}
+        amount={point.amount}
+        userId={userId}
+      />
     </tr>
   );
 }

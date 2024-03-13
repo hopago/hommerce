@@ -4,19 +4,24 @@ import { QueryKeys, getQueryClient } from "@/app/lib/getQueryClient";
 import { creatorFilterPoints } from "@/app/store/use-filter-points";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { createQueryString } from "../../../../utils/createQueryString";
 
 const updatePointLog = async ({
-  id,
+  userId,
+  pointId,
   amount,
   desc,
 }: {
-  id: string;
+  userId: string;
+  pointId: string;
   amount?: number;
   desc?: string;
 }) => {
+  const query = createQueryString({ pointLogId: pointId });
+
   return reactQueryFetcher<PointLog>({
     method: "PATCH",
-    path: `/point/log/${id}`,
+    path: `/point/log/${userId}?${query}`,
     body: {
       amount,
       desc,
@@ -29,13 +34,14 @@ export const useUserPointLogMutation = () => {
 
   const { filter, searchTerm } = creatorFilterPoints();
 
-  const { mutate, isPending } = useMutation<
+  const { mutate, isPending, isSuccess } = useMutation<
     PointLog,
     HttpError | Error | unknown,
-    { id: string; amount?: number; desc?: string }
+    { pointId: string; userId: string; amount?: number; desc?: string }
   >({
     mutationKey: [QueryKeys.USER_POINT_LOG],
-    mutationFn: ({ id, amount, desc }) => updatePointLog({ id, amount, desc }),
+    mutationFn: ({ pointId, userId, amount, desc }) =>
+      updatePointLog({ pointId, userId, amount, desc }),
     onSuccess: async (mutatedLogs) => {
       try {
         await queryClient.setQueryData(
@@ -76,5 +82,6 @@ export const useUserPointLogMutation = () => {
   return {
     mutate,
     isPending,
+    isSuccess,
   };
 };

@@ -54,6 +54,7 @@ export default function UserPointLogs({ userId }: UserPointLogsProps) {
         pointLogs={paginatedData as PointLogs}
         dataLength={pageTotal * PAGE_THRESHOLD}
         isLoading={false}
+        userId={userId}
       />
       <PaginateControl pageTotal={pageTotal} />
     </div>

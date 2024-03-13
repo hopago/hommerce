@@ -10,12 +10,14 @@ type PointLogTableProps = {
   pointLogs: PointLogs;
   dataLength: number;
   isLoading: boolean;
+  userId: string;
 };
 
 export default function PointLogTable({
   pointLogs,
   dataLength,
   isLoading,
+  userId
 }: PointLogTableProps) {
   return (
     <div className={styles.container}>
@@ -34,7 +36,7 @@ export default function PointLogTable({
                 key={`${point._id}-${i}`}
                 fallback={<TableRowSkeleton />}
               >
-                <PointRowAsync point={point} isLoading={isLoading} />
+                <PointRowAsync point={point} isLoading={isLoading} userId={userId} />
               </Suspense>
             ))}
           </tbody>

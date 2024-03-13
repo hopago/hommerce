@@ -1,4 +1,4 @@
-import { FormEvent, RefObject, useState } from "react";
+import { FormEvent, RefObject, useEffect, useState } from "react";
 
 import { useToggle } from "./use-controlled-toggle";
 
@@ -8,19 +8,20 @@ import { toast } from "sonner";
 
 export const useMutatePointLogModal = <T extends HTMLElement>(
   ref: RefObject<T>,
-  id: string,
+  pointId: string,
+  userId: string,
   amount: number,
   desc: string
 ) => {
   const { show, setShow } = useToggle(ref);
 
-  const { mutate, isPending } = useUserPointLogMutation();
+  const { mutate, isPending, isSuccess } = useUserPointLogMutation();
 
   const [localAmount, setLocalAmount] = useState(amount);
   const [localDesc, setLocalDesc] = useState(desc);
 
   const setAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLocalAmount(e.target.valueAsNumber);
+    setLocalAmount(Number(e.target.value));
   };
 
   const setDesc = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,16 +41,25 @@ export const useMutatePointLogModal = <T extends HTMLElement>(
       return;
     }
 
-    const payload: { id: string; amount?: number; desc?: string } = {
-      id,
+    const payload: { pointId: string; amount?: number; desc?: string; userId: string; } = {
+      pointId,
+      userId,
       amount: localAmount,
       desc: localDesc,
     };
-    if (localAmount !== undefined) payload.amount = amount;
-    if (localDesc !== undefined) payload.desc = desc;
+    if (!isNaN(localAmount) && localAmount !== null) {
+      payload.amount = localAmount;
+    }
+    if (localDesc.trim() === "") payload.desc = desc;
 
     mutate(payload);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      setShow(false);
+    }
+  }, [isSuccess]);
 
   return {
     show,
