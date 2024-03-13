@@ -16,9 +16,9 @@ type UserPointLogsProps = {
 
 export default function UserPointLogs({ userId }: UserPointLogsProps) {
   const temporaryPointLog: PointLog = {
-    _id: "mongo_id_1166813939",
-    userId: "clerk_id_190375910795",
-    pointId: "mongo_id_3298023580",
+    _id: "mongo_id_1",
+    userId: "clerk_id_2",
+    pointId: "mongo_id_3",
     desc: "저는 일단 이 문제에 대해서 생각하지 않는 사람들, 디지털 치매 등을 읽었고, 넷플릭스 다큐멘터리 소셜 딜레마도 추천합니다.",
     amount: 800,
     createdAt: new Date(),
@@ -28,9 +28,6 @@ export default function UserPointLogs({ userId }: UserPointLogsProps) {
   const temporaryPointLogs: PointLogs = [...Array.from({ length: 22 })].map(
     (_, i) => {
       const data = temporaryPointLog;
-      data._id += i;
-      data.userId += i;
-      data.pointId += i;
 
       return data;
     }

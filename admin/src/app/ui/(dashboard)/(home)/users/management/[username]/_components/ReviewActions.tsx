@@ -1,6 +1,4 @@
-import { useRef, useState } from "react";
-
-import { useRouter } from "next/navigation";
+import { useRef } from "react";
 
 import styles from "./review-log-list.module.css";
 
@@ -10,12 +8,12 @@ import Button from "../../../../_components/Button";
 
 import { REVIEW_ACTION_BUTTON } from "../../../../constants/classNames";
 
-import { useOutsideClick } from "../../../hooks/use-outside-click";
 import { useUserReviewMutation } from "../services/use-user-review-mutation";
 
 import { Skeleton } from "@nextui-org/react";
 import { cn } from "@/app/ui/lib/utils";
 import { useToggle } from "../../../hooks/use-toggle";
+import { Navigate } from "./NavigateButton";
 
 type ReviewActionsProps = {
   id: string;
@@ -44,32 +42,6 @@ export default function ReviewActions({ id }: ReviewActionsProps) {
         </div>
       )}
     </td>
-  );
-}
-
-export function Navigate({
-  id,
-  path,
-  text,
-}: {
-  id: string;
-  path: string;
-  text: string;
-}) {
-  const router = useRouter();
-
-  const onClick = () => {
-    router.push(`/${path}/${id}`);
-  };
-
-  return (
-    <Button
-      type="button"
-      text={text}
-      onClick={onClick}
-      ariaLabel="상세 보기"
-      className={REVIEW_ACTION_BUTTON}
-    />
   );
 }
 

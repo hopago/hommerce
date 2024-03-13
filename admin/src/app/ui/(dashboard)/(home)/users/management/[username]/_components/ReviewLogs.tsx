@@ -12,16 +12,23 @@ import { useHandleError } from "../hooks/use-handle-error";
 import { useCreatorPagination } from "@/app/store/use-pagination";
 import { creatorFilterReviews } from "@/app/store/use-filter-reviews";
 
-import styles from "./review-log-list.module.css";
-import { cn } from "@/app/ui/lib/utils";
-
 import { PAGE_THRESHOLD } from "../../../../constants/pagination";
+
+import { NoContent } from "./NoContentTable";
 
 export default function ReviewLogs({ userId }: { userId: string }) {
   const { filter, searchTerm, sort } = creatorFilterReviews();
   const { currentPage, handleMoveToFirstPage } = useCreatorPagination();
 
-  const { data, error, isError, isLoading } = useQuery<ReviewData>({
+  const {
+    data,
+    error,
+    isError,
+    isLoading,
+    refetch,
+    isRefetching,
+    isRefetchError,
+  } = useQuery<ReviewData>({
     queryKey: [QueryKeys.USER_REVIEW, currentPage, filter, searchTerm],
     queryFn: () =>
       fetchUserReviews({ pageNum: currentPage, filter, searchTerm, userId }),
@@ -29,7 +36,15 @@ export default function ReviewLogs({ userId }: { userId: string }) {
     gcTime: daysToMs(3),
   });
 
-  if (!data || !data.reviews || !data.pagination) return <NoContent />;
+  if (!data || !data.reviews || !data.pagination)
+    return (
+      <NoContent
+        refetch={refetch}
+        error={error}
+        isRefetching={isRefetching}
+        isRefetchError={isRefetchError}
+      />
+    );
 
   const { paginatedData, pageTotal } = usePaginatedData({
     data: data.reviews,
@@ -52,30 +67,3 @@ export default function ReviewLogs({ userId }: { userId: string }) {
     </>
   );
 }
-
-function NoContent() {
-  return (
-    <div className={styles.container}>
-      <div className={cn(styles.wrap, styles.noContent)}>
-        <span className={styles.noContent}>리뷰를 아직 작성하지 않았어요.</span>
-      </div>
-    </div>
-  );
-}
-
-// const temporaryReviewLog: ReviewLog = {
-//   _id: "mongoId_1837541092",
-//   bookTitle: "인간관계론",
-//   desc: "I could never stop doing this.",
-//   createdAt: new Date(),
-// };
-
-// const temporaryReviewLogs: ReviewLogs = [...Array.from({ length: 22 })].map(
-//   (_, i) => {
-//     const log = { ...temporaryReviewLog };
-
-//     log._id = log._id + i;
-
-//     return log;
-//   }
-// );

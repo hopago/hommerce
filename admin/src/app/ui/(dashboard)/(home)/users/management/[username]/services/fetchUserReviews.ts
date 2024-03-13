@@ -1,5 +1,3 @@
-import { toast } from "sonner";
-
 import { createQueryString } from "../../../../utils/createQueryString";
 
 import { reactQueryFetcher } from "@/app/fetcher/fetcher";

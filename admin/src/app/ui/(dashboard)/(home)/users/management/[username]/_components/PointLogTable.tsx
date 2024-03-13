@@ -3,7 +3,8 @@ import { Suspense } from "react";
 import styles from "./point-log-table.module.css";
 
 import { PointRowAsync } from "./PointRow";
-import { ReviewRowSkeleton } from "./ReviewRow";
+
+import { TableRowSkeleton } from "./TableRowSkeleton";
 
 type PointLogTableProps = {
   pointLogs: PointLogs;
@@ -16,8 +17,6 @@ export default function PointLogTable({
   dataLength,
   isLoading,
 }: PointLogTableProps) {
-  const ids = pointLogs.map((point) => point._id);
-
   return (
     <div className={styles.container}>
       <div className={styles.wrap}>
@@ -30,8 +29,11 @@ export default function PointLogTable({
             </tr>
           </thead>
           <tbody>
-            {pointLogs.map((point) => (
-              <Suspense key={point._id} fallback={<ReviewRowSkeleton />}>
+            {pointLogs.map((point, i) => (
+              <Suspense
+                key={`${point._id}-${i}`}
+                fallback={<TableRowSkeleton />}
+              >
                 <PointRowAsync point={point} isLoading={isLoading} />
               </Suspense>
             ))}

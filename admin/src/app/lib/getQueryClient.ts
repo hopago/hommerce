@@ -21,5 +21,6 @@ export const QueryKeys = {
   USER_SEARCH: "userSearchResults",
   USER_SESSION: "userSession",
   USER_REVIEW: "userReviews",
+  USER_POINT: "userPoint",
   USER_POINT_LOG: "userPointLogs",
 };

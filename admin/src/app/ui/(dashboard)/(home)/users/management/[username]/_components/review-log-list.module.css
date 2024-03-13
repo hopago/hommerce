@@ -36,7 +36,7 @@
     border-bottom: 1px solid #414B5D;
 }
 
-.wrap table td, 
+.wrap table td,
 .wrap table th {
     padding: 1rem 0.5rem;
 }
@@ -92,4 +92,20 @@
     font-weight: bold;
     letter-spacing: -0.01em;
     line-height: 18px;
+    padding-bottom: 0.5rem;
+}
+
+.loadingIcon {
+    animation: spin 1s infinite linear;
+    margin-bottom: 0.25rem;
+}
+
+@keyframes spin {
+    from {
+        transform: scale(1) rotate(0deg);
+    }
+
+    to {
+        transform: scale(1) rotate(360deg);
+    }
 }

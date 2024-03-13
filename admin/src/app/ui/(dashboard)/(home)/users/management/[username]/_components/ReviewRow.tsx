@@ -1,14 +1,9 @@
-import { Skeleton } from "@nextui-org/react";
-
 import React from "react";
 
-import ReviewActions, { ReviewActionsSkeleton } from "./ReviewActions";
-import ReviewSelectedCheckBox, {
-  ReviewSelectCheckBoxSkeleton,
-} from "./ReviewSelectedCheckBox";
+import ReviewActions from "./ReviewActions";
+import ReviewSelectedCheckBox from "./ReviewSelectedCheckBox";
 
-import styles from "./review-log-list.module.css";
-import { cn } from "@/app/ui/lib/utils";
+import { TableRowSkeleton } from "./TableRowSkeleton";
 
 type ReviewRowProps = {
   review: ReviewLog;
@@ -18,7 +13,7 @@ type ReviewRowProps = {
 export const ReviewRowAsync = React.lazy(() => import("./ReviewRow"));
 
 export default function ReviewRow({ review, isLoading }: ReviewRowProps) {
-  if (isLoading) return <ReviewRowSkeleton />;
+  if (isLoading) return <TableRowSkeleton />;
 
   return (
     <tr>
@@ -30,21 +25,3 @@ export default function ReviewRow({ review, isLoading }: ReviewRowProps) {
     </tr>
   );
 }
-
-export const ReviewRowSkeleton = () => {
-  return (
-    <tr>
-      <ReviewSelectCheckBoxSkeleton />
-      <td>
-        <Skeleton className={cn("skeleton", styles.tdSkeleton)} />
-      </td>
-      <td>
-        <Skeleton className={cn("skeleton", styles.tdSkeleton)} />
-      </td>
-      <td>
-        <Skeleton className={cn("skeleton", styles.tdSkeleton)} />
-      </td>
-      <ReviewActionsSkeleton />
-    </tr>
-  );
-};
