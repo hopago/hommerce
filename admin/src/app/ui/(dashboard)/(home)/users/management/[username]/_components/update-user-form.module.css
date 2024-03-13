@@ -7,6 +7,31 @@
     margin-bottom: 1rem;
 }
 
+.form input {
+    transition: all .3s ease;
+    border-radius: 0.5rem;
+    flex: 1;
+    padding: 0.5rem;
+    background-color: var(--hover);
+    color: var(--text);
+}
+
+.form input:focus {
+    width: inherit;
+    outline: 1px solid var(--textSoft);
+}
+
+.form input::placeholder {
+    color: var(--textSoft);
+}
+
+.form label {
+    min-width: 5rem;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--textSoft);
+}
+
 .inputWrap {
     width: 100%;
     display: flex;

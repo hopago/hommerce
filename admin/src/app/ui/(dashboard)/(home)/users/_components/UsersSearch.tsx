@@ -17,7 +17,7 @@ import { useSearchUserForm } from "../../hooks/use-search-form";
 import { useManageUsers } from "@/app/store/use-manage-users";
 
 import { toast } from "sonner";
-import { MANAGE_BUTTON } from "../../constants/classNames";
+import { BUTTON_CLASS } from "../../constants/classNames";
 import { useOutsideClick } from "../hooks/use-outside-click";
 
 export default function UsersSearch() {
@@ -77,7 +77,7 @@ export default function UsersSearch() {
           type="button"
           text="관리하기"
           onClick={onClick}
-          className={MANAGE_BUTTON}
+          className={BUTTON_CLASS.MANAGE}
           disabled={!usernames}
         />
       </div>

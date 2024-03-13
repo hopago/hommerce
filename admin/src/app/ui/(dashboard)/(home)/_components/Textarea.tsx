@@ -3,7 +3,7 @@
 import { cn } from "@/app/ui/lib/utils";
 
 import styles from "./textarea.module.css";
-import { API_PREPARE_INPUT } from "../constants/classNames";
+import { INPUT_CLASS } from "../constants/classNames";
 
 type TextareaProps = {
   value: string;
@@ -28,7 +28,7 @@ export default function Textarea({
       placeholder={placeholder}
       className={cn(
         styles.textarea,
-        className === API_PREPARE_INPUT && styles.prepare,
+        className === INPUT_CLASS.API_PREPARE && styles.prepare,
         error && "error"
       )}
       onChange={onChange}

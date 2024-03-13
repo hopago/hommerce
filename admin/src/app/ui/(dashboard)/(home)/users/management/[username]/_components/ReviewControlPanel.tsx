@@ -1,7 +1,7 @@
 import SelectList from "../../../../_components/SelectList";
 import Button from "../../../../_components/Button";
 
-import { REVIEW_SORT_SELECT } from "../../../../constants/classNames";
+import { SELECT_CLASS } from "../../../../constants/classNames";
 
 import { useFilterReviews } from "../hooks/use-filter-reviews";
 import { useSelectReview } from "@/app/store/use-select-review";
@@ -87,7 +87,7 @@ const SortReview = ({
         show={show}
         setShow={setShow}
         handleShow={toggleShow}
-        className={REVIEW_SORT_SELECT}
+        className={SELECT_CLASS.REVIEW_SORT_SELECT}
         backgroundColor="#414B5D"
       />
     </div>

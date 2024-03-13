@@ -8,7 +8,7 @@ import Input from "../../../_components/Input";
 
 import useParamsInput from "../hooks/use-params-input";
 
-import { API_PREPARE_INPUT } from "../../../constants/classNames";
+import { INPUT_CLASS } from "../../../constants/classNames";
 
 type RequestInfoProps = {
   info: RequestInfo;
@@ -42,7 +42,7 @@ export default function ParamsInput({ info, paramsType }: RequestInfoProps) {
           value={field[paramsType]?.value!}
           placeholder={desc}
           onChange={handleInputChange}
-          className={API_PREPARE_INPUT}
+          className={INPUT_CLASS.API_PREPARE}
           required={required}
         />
       </div>

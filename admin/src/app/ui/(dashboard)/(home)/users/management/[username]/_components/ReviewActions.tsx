@@ -6,13 +6,13 @@ import { MdClose, MdMoreVert } from "react-icons/md";
 
 import Button from "../../../../_components/Button";
 
-import { REVIEW_ACTION_BUTTON } from "../../../../constants/classNames";
+import { BUTTON_CLASS } from "../../../../constants/classNames";
 
 import { useUserReviewMutation } from "../services/use-user-review-mutation";
 
 import { Skeleton } from "@nextui-org/react";
 import { cn } from "@/app/ui/lib/utils";
-import { useToggle } from "../../../hooks/use-toggle";
+import { useToggle } from "../../../hooks/use-controlled-toggle";
 import { Navigate } from "./NavigateButton";
 
 type ReviewActionsProps = {
@@ -58,7 +58,7 @@ function Delete({ id }: { id: string }) {
       text="리뷰 삭제"
       onClick={onClick}
       ariaLabel="리뷰 삭제"
-      className={REVIEW_ACTION_BUTTON}
+      className={BUTTON_CLASS.REVIEW_ACTION}
       backgroundColor="#BF444A"
       disabled={isPending}
     />

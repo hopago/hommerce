@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 
 import Button from "../../../../_components/Button";
 
-import { REVIEW_ACTION_BUTTON } from "../../../../constants/classNames";
+import { BUTTON_CLASS } from "../../../../constants/classNames";
 
 export function Navigate({
   id,
@@ -25,7 +25,7 @@ export function Navigate({
       text={text}
       onClick={onClick}
       ariaLabel="상세 보기"
-      className={REVIEW_ACTION_BUTTON}
+      className={BUTTON_CLASS.REVIEW_ACTION}
     />
   );
 }

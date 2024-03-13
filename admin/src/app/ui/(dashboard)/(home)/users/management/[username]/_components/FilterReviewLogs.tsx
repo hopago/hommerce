@@ -1,6 +1,6 @@
 import {
-  FILTER_REVIEW_INPUT,
-  FILTER_REVIEW_SELECT,
+  INPUT_CLASS,
+  SELECT_CLASS,
 } from "../../../../constants/classNames";
 
 import styles from "./filter-review-logs.module.css";
@@ -43,7 +43,7 @@ export default function FilterReviewLogs() {
           selectList={filterOptions}
           currSelect={clientFilter}
           handleItemClick={setClientFilter}
-          className={FILTER_REVIEW_SELECT}
+          className={SELECT_CLASS.FILTER_REVIEW_SELECT}
           show={show}
           setShow={setShow}
           handleShow={toggleShow}
@@ -53,7 +53,7 @@ export default function FilterReviewLogs() {
           value={clientSearch}
           placeholder="검색어를 입력해주세요."
           onChange={handleSearch}
-          className={FILTER_REVIEW_INPUT}
+          className={INPUT_CLASS.FILTER_REVIEW_INPUT}
         />
         <Button type="button" text="초기화" onClick={handleReset} />
       </form>

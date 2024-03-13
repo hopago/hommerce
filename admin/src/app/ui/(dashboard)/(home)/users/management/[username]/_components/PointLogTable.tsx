@@ -1,10 +1,10 @@
 import { Suspense } from "react";
 
-import styles from "./point-log-table.module.css";
-
 import { PointRowAsync } from "./PointRow";
 
 import { TableRowSkeleton } from "./TableRowSkeleton";
+
+import styles from "./review-log-list.module.css";
 
 type PointLogTableProps = {
   pointLogs: PointLogs;

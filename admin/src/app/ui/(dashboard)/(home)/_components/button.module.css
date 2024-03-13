@@ -47,22 +47,6 @@
     color: var(--text);
 }
 
-.button.apiSubmit {
-    align-items: center;
-    justify-content: center;
-}
-
-.button.apiModal {
-    background-color: #E4E6EB;
-    color: #242526;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.button.apiModal:hover {
-    background-color: #C2C4CA;
-    color: #3B3E43;
-}
-
 .button.selectAll {
     width: 21px;
     height: 21px;
@@ -80,4 +64,8 @@
 
 .button.reviewAction {
     width: max-content;
+}
+
+.button.pointAction {
+    justify-content: flex-end;
 }

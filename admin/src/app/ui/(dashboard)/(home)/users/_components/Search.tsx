@@ -12,7 +12,7 @@ import { IUser } from "../../types/user";
 import { cn } from "@/app/ui/lib/utils";
 import { checkValidResponse } from "../../utils/checkValidResponse";
 
-import { USER_SEARCH_INPUT } from "../../constants/classNames";
+import { INPUT_CLASS } from "../../constants/classNames";
 
 type SearchProps = {
   placeholder: string;
@@ -50,7 +50,7 @@ export default function Search({
         value={searchTerm}
         placeholder={placeholder}
         onChange={handleChange}
-        className={USER_SEARCH_INPUT}
+        className={INPUT_CLASS.USER_SEARCH_INPUT}
       />
       <SearchResultList search={searchResults!} isLoading={isLoading} />
     </div>

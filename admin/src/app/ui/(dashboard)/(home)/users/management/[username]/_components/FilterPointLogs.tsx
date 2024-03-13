@@ -3,13 +3,13 @@ import Input from "../../../../_components/Input";
 import SelectList from "../../../../_components/SelectList";
 
 import {
-  FILTER_REVIEW_INPUT,
-  FILTER_REVIEW_SELECT,
+  INPUT_CLASS,
+  SELECT_CLASS,
 } from "../../../../constants/classNames";
 
 import { useFilterPoints } from "../hooks/use-filter-points";
 
-import styles from "./user-point-logs.module.css";
+import styles from "./filter-review-logs.module.css";
 
 export type PointFilterOption =
   | "검색 옵션"
@@ -44,7 +44,7 @@ export default function FilterPointLogs() {
           selectList={filterOptions}
           currSelect={filter}
           handleItemClick={setFilter}
-          className={FILTER_REVIEW_SELECT}
+          className={SELECT_CLASS.FILTER_REVIEW_SELECT}
           show={show}
           setShow={setShow}
           handleShow={toggleShow}
@@ -54,7 +54,7 @@ export default function FilterPointLogs() {
           value={searchTerm}
           placeholder="검색어를 입력해주세요."
           onChange={handleSearch}
-          className={FILTER_REVIEW_INPUT}
+          className={INPUT_CLASS.FILTER_REVIEW_INPUT}
         />
         <Button type="button" text="초기화" />
       </form>

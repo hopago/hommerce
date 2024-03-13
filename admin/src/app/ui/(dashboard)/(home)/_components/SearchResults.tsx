@@ -1,4 +1,4 @@
-import { STYLE_NONE_BUTTON } from "../constants/classNames";
+import { BUTTON_CLASS } from "../constants/classNames";
 import styles from "./search.module.css";
 
 type TSearchResult = [string, () => void] | undefined;
@@ -13,7 +13,7 @@ export default function SearchResults({ searchResults }: SearchResultsProps) {
       const [key, value] = item;
       return (
         <li key={key} className={styles.searchItem}>
-          <button className={STYLE_NONE_BUTTON} onClick={value}>
+          <button className={BUTTON_CLASS.STYLE_NONE} onClick={value}>
             {key}
           </button>
         </li>

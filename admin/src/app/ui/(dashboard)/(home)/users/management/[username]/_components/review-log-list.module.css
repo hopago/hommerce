@@ -34,11 +34,23 @@
 
 .wrap table tr {
     border-bottom: 1px solid #414B5D;
+    height: max-content;
 }
 
 .wrap table td,
 .wrap table th {
     padding: 1rem 0.5rem;
+    height: 100%;
+}
+
+.wrap table td {
+    max-width: 315px;
+    white-space: normal;
+    word-break: break-all;
+    font-size: 15px;
+    line-height: 23px;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
 }
 
 .reviewActions {

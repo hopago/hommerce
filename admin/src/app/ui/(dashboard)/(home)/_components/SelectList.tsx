@@ -8,11 +8,7 @@ import SelectItem from "./SelectItem";
 
 import { cn } from "@/app/ui/lib/utils";
 
-import {
-  FILTER_REVIEW_SELECT,
-  POST_LOGS_SELECT,
-  REVIEW_SORT_SELECT,
-} from "../constants/classNames";
+import { SELECT_CLASS } from "../constants/classNames";
 
 import { useEffect, useRef } from "react";
 
@@ -73,9 +69,9 @@ export default function SelectList({
     <div
       className={cn(
         styles.select,
-        className === POST_LOGS_SELECT && styles.postLogs,
-        className === FILTER_REVIEW_SELECT && styles.filterReview,
-        className === REVIEW_SORT_SELECT && styles.reviewSort
+        className === SELECT_CLASS.POST_LOGS_SELECT && styles.postLogs,
+        className === SELECT_CLASS.FILTER_REVIEW_SELECT && styles.filterReview,
+        className === SELECT_CLASS.REVIEW_SORT_SELECT && styles.reviewSort
       )}
     >
       <button

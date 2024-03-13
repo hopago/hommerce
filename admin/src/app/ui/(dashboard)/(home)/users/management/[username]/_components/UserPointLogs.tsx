@@ -6,6 +6,7 @@ import PointLogTable from "./PointLogTable";
 import UserPoint from "./UserPoint";
 
 import styles from "./user-point-logs.module.css";
+
 import { creatorFilterPoints } from "@/app/store/use-filter-points";
 import { useCreatorPagination } from "@/app/store/use-pagination";
 import { PAGE_THRESHOLD } from "../../../../constants/pagination";
@@ -46,17 +47,15 @@ export default function UserPointLogs({ userId }: UserPointLogsProps) {
 
   return (
     <div className={styles.pointLogs}>
-      <div className={styles.postLogsWrap}>
-        <h1>포인트 기록</h1>
-        <UserPoint userId={userId} />
-        <FilterPointLogs />
-        <PointLogTable
-          pointLogs={paginatedData as PointLogs}
-          dataLength={pageTotal * PAGE_THRESHOLD}
-          isLoading={false}
-        />
-        <PaginateControl pageTotal={pageTotal} />
-      </div>
+      <h1>포인트 기록</h1>
+      <UserPoint userId={userId} />
+      <FilterPointLogs />
+      <PointLogTable
+        pointLogs={paginatedData as PointLogs}
+        dataLength={pageTotal * PAGE_THRESHOLD}
+        isLoading={false}
+      />
+      <PaginateControl pageTotal={pageTotal} />
     </div>
   );
 }

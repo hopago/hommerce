@@ -6,8 +6,6 @@ import styles from "./api-refetch.module.css";
 
 import { useRouter } from "next/navigation";
 
-import { API_MODAL_BUTTON } from "../../constants/classNames";
-
 import { FaSpinner } from "react-icons/fa";
 
 type ApiRefetchProps<T> = {
@@ -63,7 +61,6 @@ export default function ApiRefetch<T>({
             onClick={onClick}
             disabled={isRefetching}
             display="inline-block"
-            className={API_MODAL_BUTTON}
           />
         </div>
       </div>

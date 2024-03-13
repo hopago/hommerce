@@ -7,7 +7,8 @@ import { daysToMs } from "../../../../utils/daysToMs";
 import { useHandleError } from "../hooks/use-handle-error";
 
 import styles from "./user-point-logs.module.css";
-import Image from "next/image";
+
+import { FaUser } from "react-icons/fa";
 
 type UserPointProps = {
   userId: string;
@@ -27,10 +28,10 @@ export default function UserPoint({ userId }: UserPointProps) {
   return (
     <div className={styles.userPoint}>
       <div className={styles.userPointWrap}>
-        <Image src="/img_my-point.png" width={40} height={40} alt="my-point" />
+        <FaUser size={34} className={styles.userIco} />
         <div className={styles.userPointTexts}>
           <h1>통합 포인트</h1>
-          <span>{Number(data) ?? 0}P</span>
+          <span>{Number(data) ?? 0}&nbsp;P</span>
         </div>
       </div>
     </div>

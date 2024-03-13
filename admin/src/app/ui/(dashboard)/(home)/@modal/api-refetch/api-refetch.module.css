@@ -60,3 +60,14 @@
         transform: scale(1) rotate(360deg);
     }
 }
+
+.buttonWrap button {
+    background-color: #E4E6EB;
+    color: #242526;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.buttonWrap button:hover {
+    background-color: #C2C4CA;
+    color: #3B3E43;
+}

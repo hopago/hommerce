@@ -1,6 +1,6 @@
 import { cn } from "@/app/ui/lib/utils";
 
-import { STYLE_NONE_BUTTON } from "../../../../constants/classNames";
+import { BUTTON_CLASS } from "../../../../constants/classNames";
 
 import styles from "./update-user-form.module.css";
 
@@ -27,7 +27,7 @@ const SelectInput = ({
           >
             <button
               type="button"
-              className={STYLE_NONE_BUTTON}
+              className={BUTTON_CLASS.STYLE_NONE}
               onClick={() => onClickItem(item)}
               disabled={isPending}
             >

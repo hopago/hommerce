@@ -1,8 +1,9 @@
 import { FormEvent, RefObject, useState } from "react";
 
-import { useToggle } from "./use-toggle";
+import { useToggle } from "./use-controlled-toggle";
 
 import { useUserPointLogMutation } from "../management/[username]/services/use-user-point-log-mutation";
+
 import { toast } from "sonner";
 
 export const useMutatePointLogModal = <T extends HTMLElement>(
@@ -18,12 +19,8 @@ export const useMutatePointLogModal = <T extends HTMLElement>(
   const [localAmount, setLocalAmount] = useState(amount);
   const [localDesc, setLocalDesc] = useState(desc);
 
-  const addAmount = () => {
-    setLocalAmount((prev) => prev + 100);
-  };
-
-  const decreaseAmount = () => {
-    setLocalAmount((prev) => prev - 100);
+  const setAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLocalAmount(e.target.valueAsNumber);
   };
 
   const setDesc = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,8 +56,7 @@ export const useMutatePointLogModal = <T extends HTMLElement>(
     setShow,
     isPending,
     onSubmit,
-    addAmount,
-    decreaseAmount,
+    setAmount,
     setDesc,
     localAmount,
     localDesc,

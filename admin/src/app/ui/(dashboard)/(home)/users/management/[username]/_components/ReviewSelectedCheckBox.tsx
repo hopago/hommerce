@@ -1,6 +1,6 @@
 import { FaCheck } from "react-icons/fa";
 
-import { SELECT_ALL_BUTTON } from "../../../../constants/classNames";
+import { BUTTON_CLASS } from "../../../../constants/classNames";
 
 import Button from "../../../../_components/Button";
 
@@ -32,7 +32,7 @@ export default function ReviewSelectCheckBox({
         type="button"
         icon={<FaCheck />}
         onClick={onClick}
-        className={SELECT_ALL_BUTTON}
+        className={BUTTON_CLASS.SELECT_ALL}
         active={isActive}
       />
     </td>

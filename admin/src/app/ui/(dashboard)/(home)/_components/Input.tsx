@@ -4,16 +4,11 @@ import { cn } from "@/app/ui/lib/utils";
 
 import styles from "./input.module.css";
 
-import {
-  API_PREPARE_INPUT,
-  FILTER_REVIEW_INPUT,
-  USER_DETAIL_INPUT,
-  USER_SEARCH_INPUT,
-} from "../constants/classNames";
+import { INPUT_CLASS } from "../constants/classNames";
 
 type InputProps = {
-  type: "text" | "password" | "email";
-  value: string;
+  type: "text" | "password" | "email" | "number";
+  value: string | number;
   placeholder: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   name?: string;
@@ -38,10 +33,9 @@ export default function Input({
       placeholder={placeholder}
       className={cn(
         styles.input,
-        className === API_PREPARE_INPUT && styles.prepare,
-        className === USER_SEARCH_INPUT && styles.userSearch,
-        className === USER_DETAIL_INPUT && styles.userDetail,
-        className === FILTER_REVIEW_INPUT && styles.filterReview,
+        className === INPUT_CLASS.API_PREPARE && styles.prepare,
+        className === INPUT_CLASS.API_PREPARE && styles.userSearch,
+        className === INPUT_CLASS.FILTER_REVIEW_INPUT && styles.filterReview
       )}
       onChange={onChange}
       required={required}

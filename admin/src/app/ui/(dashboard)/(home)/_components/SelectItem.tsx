@@ -1,11 +1,6 @@
 import { cn } from "@/app/ui/lib/utils";
 
-import {
-  FILTER_REVIEW_SELECT,
-  POST_LOGS_SELECT,
-  REVIEW_SORT_SELECT,
-  STYLE_NONE_BUTTON,
-} from "../constants/classNames";
+import { BUTTON_CLASS, SELECT_CLASS } from "../constants/classNames";
 
 import styles from "./select-list.module.css";
 
@@ -29,9 +24,10 @@ const SelectItem = forwardRef<HTMLUListElement, SelectItemProps>(
         ref={ref}
         className={cn(
           styles.selectList,
-          className === POST_LOGS_SELECT && styles.postLogs,
-          className === FILTER_REVIEW_SELECT && styles.filterReview,
-          className === REVIEW_SORT_SELECT && styles.reviewSort
+          className === SELECT_CLASS.POST_LOGS_SELECT && styles.postLogs,
+          className === SELECT_CLASS.FILTER_REVIEW_SELECT &&
+            styles.filterReview,
+          className === SELECT_CLASS.REVIEW_SORT_SELECT && styles.reviewSort
         )}
       >
         {selectList.map((list, i) => {
@@ -40,7 +36,7 @@ const SelectItem = forwardRef<HTMLUListElement, SelectItemProps>(
               <li key={`${list}-${i}`} className={styles.selectItem}>
                 <button
                   type="button"
-                  className={STYLE_NONE_BUTTON}
+                  className={BUTTON_CLASS.STYLE_NONE}
                   onClick={() => handleItemClick(list)}
                 >
                   <span className={styles.selectText}>{list}</span>

@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { logTabList } from "../constants/log-tab-list";
 import { LogTabList } from "../types/log-tab-list";
 
-import { POST_LOGS_SELECT } from "../../../../constants/classNames";
+import { SELECT_CLASS } from "../../../../constants/classNames";
 
 import SelectList from "../../../../_components/SelectList";
 
@@ -35,7 +35,7 @@ export default function PostLogsTabList({
       show={show}
       setShow={setShow}
       handleShow={handleShow}
-      className={POST_LOGS_SELECT}
+      className={SELECT_CLASS.POST_LOGS_SELECT}
     />
   );
 }

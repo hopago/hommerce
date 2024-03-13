@@ -12,12 +12,6 @@ import Input from "../../../../_components/Input";
 import Label from "../../../../_components/Label";
 import Button from "../../../../_components/Button";
 
-import {
-  USER_DETAIL_BUTTON,
-  USER_DETAIL_INPUT,
-  USER_DETAIL_LABEL,
-} from "../../../../constants/classNames";
-
 import { toast } from "sonner";
 
 import { QueryKeys } from "@/app/lib/getQueryClient";
@@ -48,13 +42,12 @@ export default function ChangePasswordForm() {
   return (
     <form className={styles.form} onSubmit={onSubmit}>
       <div className={styles.inputWrap}>
-        <Label text="비밀번호" className={USER_DETAIL_LABEL} />
+        <Label text="비밀번호" />
         <Input
           type="password"
           placeholder="비밀번호 변경하기"
           value={password}
           onChange={onChangePassword}
-          className={USER_DETAIL_INPUT}
         />
       </div>
       <div className={styles.buttonWrap}>
@@ -63,7 +56,6 @@ export default function ChangePasswordForm() {
           text="변경하기"
           disabled={isPending}
           ariaLabel="변경하기"
-          className={USER_DETAIL_BUTTON}
         />
       </div>
     </form>

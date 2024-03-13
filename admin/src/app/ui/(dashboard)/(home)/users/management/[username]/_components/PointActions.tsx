@@ -3,6 +3,8 @@ import {
   Dispatch,
   FormEvent,
   SetStateAction,
+  forwardRef,
+  useEffect,
   useRef,
 } from "react";
 
@@ -10,13 +12,15 @@ import styles from "./point-log-table.module.css";
 
 import { MdClose, MdMoreVert } from "react-icons/md";
 
-import { Navigate } from "./ReviewActions";
 import Button from "../../../../_components/Button";
+import { Navigate } from "./NavigateButton";
+import Label from "../../../../_components/Label";
+import Input from "../../../../_components/Input";
 
-import { REVIEW_ACTION_BUTTON } from "../../../../constants/classNames";
-
-import { useToggle } from "../../../hooks/use-toggle";
+import { useToggle } from "../../../hooks/use-controlled-toggle";
 import { useMutatePointLogModal } from "../../../hooks/use-mutate-point-log-modal";
+
+import { BUTTON_CLASS } from "../../../../constants/classNames";
 
 type PointActionsProps = {
   id: string;
@@ -28,43 +32,55 @@ type UpdateModalProps = {
   setModalShow: Dispatch<SetStateAction<boolean>>;
   isPending: boolean;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
-  addAmount: () => void;
-  decreaseAmount: () => void;
+  setAmount: (e: ChangeEvent<HTMLInputElement>) => void;
   setDesc: (e: ChangeEvent<HTMLInputElement>) => void;
   localAmount: number;
   localDesc: string;
-  id: string;
-  amount?: number;
-  desc?: string;
 };
 
 export default function PointActions({ id, amount, desc }: PointActionsProps) {
   const containerRef = useRef<HTMLTableDataCellElement>(null);
-  const modalRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLFormElement>(null);
 
-  const { show, toggleClick } = useToggle(containerRef);
+  const { show, toggleClick, setShow } = useToggle(containerRef);
   const {
     show: modalShow,
     setShow: setModalShow,
     isPending,
     onSubmit,
-    addAmount,
-    decreaseAmount,
+    setAmount,
     setDesc,
     localAmount,
     localDesc,
   } = useMutatePointLogModal(modalRef, id, amount, desc);
 
+  useEffect(() => {
+    if (modalShow) {
+      setShow(false);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [modalShow]);
+
   return (
     <td className={styles.reviewActions} ref={containerRef}>
       {!show ? (
-        <MdMoreVert
-          onClick={toggleClick}
-          className={styles.moreVert}
-          size={21}
-        />
+        <div className={styles.buttonWrap}>
+          <MdMoreVert
+            onClick={toggleClick}
+            className={styles.moreVert}
+            size={21}
+          />
+        </div>
       ) : (
-        <MdClose onClick={toggleClick} className={styles.close} />
+        <div className={styles.buttonWrap}>
+          <MdClose onClick={toggleClick} className={styles.close} />
+        </div>
       )}
       {show && (
         <div className={styles.reviewActionsButtons}>
@@ -78,44 +94,90 @@ export default function PointActions({ id, amount, desc }: PointActionsProps) {
       )}
       {modalShow && (
         <Update
+          ref={modalRef}
           setModalShow={setModalShow}
           isPending={isPending}
           onSubmit={onSubmit}
-          addAmount={addAmount}
-          decreaseAmount={decreaseAmount}
+          setAmount={setAmount}
           setDesc={setDesc}
           localAmount={localAmount}
           localDesc={localDesc}
-          id={id}
-          amount={amount}
-          desc={desc}
         />
       )}
     </td>
   );
 }
 
-function Update({
-  setModalShow,
-  isPending,
-  onSubmit,
-  addAmount,
-  decreaseAmount,
-  setDesc,
-  localAmount,
-  localDesc,
-  id,
-  amount,
-  desc,
-}: UpdateModalProps) {
-  return (
-    <Button
-      type="submit"
-      text="수정하기"
-      ariaLabel="수정하기"
-      className={REVIEW_ACTION_BUTTON}
-      backgroundColor="#01B8FC"
-      disabled={isPending}
-    />
-  );
-}
+const Update = forwardRef<HTMLFormElement, UpdateModalProps>(
+  (
+    {
+      setModalShow,
+      isPending,
+      onSubmit,
+      setAmount,
+      setDesc,
+      localAmount,
+      localDesc,
+    },
+    ref
+  ) => {
+    
+
+    return (
+      <div className={styles.modal}>
+        <div className={styles.modalBg} />
+        <div className={styles.modalWrap}>
+          <form className={styles.form} onSubmit={onSubmit} ref={ref}>
+            <div className={styles.formWrap}>
+              <div className={styles.formInfo}>
+                <h2>포인트 수정</h2>
+                <p className={styles.subtitle}>
+                  포인트의 지급 사유와 지급량을 수정할 수 있습니다.
+                  <br />
+                  변경 성공 시 창이 자동으로 닫혀요.
+                </p>
+              </div>
+              <div className={styles.inputContainer}>
+                <div className={styles.inputWrap}>
+                  <Label text="사유 변경" />
+                  <Input
+                    type="text"
+                    value={localDesc}
+                    onChange={setDesc}
+                    placeholder="포인트 지급 사유를 입력해주세요."
+                    required={true}
+                  />
+                </div>
+                <div className={styles.inputWrap}>
+                  <Label text="지급량 수정" />
+                  <Input
+                    type="text"
+                    value={localAmount}
+                    onChange={setAmount}
+                    placeholder="포인트 지급량을 수정해주세요."
+                    required={true}
+                  />
+                </div>
+              </div>
+              <div className={styles.buttonWrap}>
+                <Button
+                  type="submit"
+                  text="수정하기"
+                />
+              </div>
+            </div>
+            <Button
+              type="button"
+              icon={<MdClose />}
+              className={BUTTON_CLASS.CLOSE}
+              onClick={() => setModalShow(false)}
+              right="0"
+              width="27px"
+              height="27px"
+            />
+          </form>
+        </div>
+      </div>
+    );
+  }
+);

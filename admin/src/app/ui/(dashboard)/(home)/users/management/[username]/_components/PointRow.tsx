@@ -2,7 +2,12 @@ import React from "react";
 
 import PointActions from "./PointActions";
 
-import { ReviewRowSkeleton } from "./ReviewRow";
+import { TableRowSkeleton } from "./TableRowSkeleton";
+
+import { formatDate } from "../../../../utils/formatDate";
+
+import { cn } from "@/app/ui/lib/utils";
+import styles from "./point-log-table.module.css";
 
 type PointRowProps = {
   point: PointLog;
@@ -12,13 +17,20 @@ type PointRowProps = {
 export const PointRowAsync = React.lazy(() => import("./PointRow"));
 
 export default function PointRow({ point, isLoading }: PointRowProps) {
-  if (isLoading) return <ReviewRowSkeleton />;
+  if (isLoading) return <TableRowSkeleton />;
 
   return (
     <tr>
-      <td>{point._id}</td>
-      <td>{point.pointId}</td>
+      <td>{formatDate(point.createdAt)}</td>
       <td>{point.desc}</td>
+      <td
+        className={cn(
+          "",
+          point.amount > 0 ? styles.amountInc : styles.amountDec
+        )}
+      >
+        {point.amount}
+      </td>
       <PointActions id={point._id} desc={point.desc} amount={point.amount} />
     </tr>
   );

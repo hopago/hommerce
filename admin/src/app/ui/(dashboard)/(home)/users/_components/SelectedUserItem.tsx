@@ -4,7 +4,7 @@ import styles from "./selected-users.module.css";
 
 import { useManageUsers } from "@/app/store/use-manage-users";
 
-import { STYLE_NONE_BUTTON } from "../../constants/classNames";
+import { BUTTON_CLASS } from "../../constants/classNames";
 
 import { cn } from "@/app/ui/lib/utils";
 
@@ -21,7 +21,7 @@ export default function SelectedUserItem({ name }: SelectedUserItemProps) {
 
   return (
     <li className={styles.item} onClick={onClick}>
-      <button className={cn(STYLE_NONE_BUTTON, styles.itemWrap)}>
+      <button className={cn(BUTTON_CLASS.STYLE_NONE, styles.itemWrap)}>
         <span>{name}</span>
         <MdClose size={16} />
       </button>

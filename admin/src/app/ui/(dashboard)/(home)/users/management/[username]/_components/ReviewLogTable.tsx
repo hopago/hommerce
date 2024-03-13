@@ -1,10 +1,12 @@
 import { Suspense } from "react";
 
 import ReviewControlPanel from "./ReviewControlPanel";
-import { ReviewRowAsync, ReviewRowSkeleton } from "./ReviewRow";
+import { ReviewRowAsync } from "./ReviewRow";
 import ReviewSelectAllCheckBox from "./ReviewSelectAllCheckBox";
 
 import styles from "./review-log-list.module.css";
+
+import { TableRowSkeleton } from "./TableRowSkeleton";
 
 type ReviewLogTableProps = {
   reviews: ReviewLogs;
@@ -34,7 +36,7 @@ export default function ReviewLogTable({
           </thead>
           <tbody>
             {reviews.map((review) => (
-              <Suspense key={review._id} fallback={<ReviewRowSkeleton />}>
+              <Suspense key={review._id} fallback={<TableRowSkeleton />}>
                 <ReviewRowAsync review={review} isLoading={isLoading} />
               </Suspense>
             ))}

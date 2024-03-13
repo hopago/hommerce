@@ -1,19 +1,19 @@
-export const MANAGE_BUTTON = "manage";
-export const CLOSE_BUTTON = "close";
-export const API_SUBMIT_BUTTON = "apiSubmit";
-export const STYLE_NONE_BUTTON = "styleNone";
-export const USER_DETAIL_BUTTON = "userDetail";
-export const API_MODAL_BUTTON = "apiModal";
-export const SELECT_ALL_BUTTON = "selectAll";
-export const REVIEW_ACTION_BUTTON = "reviewAction";
+export const BUTTON_CLASS = {
+  CLOSE: "close",
+  MANAGE: "manage",
+  STYLE_NONE: "styleNone",
+  SELECT_ALL: "selectAll",
+  REVIEW_ACTION: "reviewAction",
+};
 
-export const API_PREPARE_INPUT = "prepare";
-export const USER_SEARCH_INPUT = "userSearch";
-export const USER_DETAIL_INPUT = "userDetail";
-export const FILTER_REVIEW_INPUT = "filterReview";
+export const INPUT_CLASS = {
+  API_PREPARE: "prepare",
+  USER_SEARCH_INPUT: "useSearch",
+  FILTER_REVIEW_INPUT: "filterReview",
+};
 
-export const USER_DETAIL_LABEL = "userDetail";
-
-export const POST_LOGS_SELECT = "postLogs";
-export const FILTER_REVIEW_SELECT = "filterReview";
-export const REVIEW_SORT_SELECT = "reviewSort";
+export const SELECT_CLASS = {
+  POST_LOGS_SELECT: "postLogs",
+  FILTER_REVIEW_SELECT: "filterReview",
+  REVIEW_SORT_SELECT: "reviewSort",
+};

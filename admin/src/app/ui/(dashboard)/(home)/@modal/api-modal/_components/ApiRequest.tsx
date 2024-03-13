@@ -1,7 +1,5 @@
 import Button from "../../../_components/Button";
 
-import { API_SUBMIT_BUTTON } from "../../../constants/classNames";
-
 import { ApiMethod, RequestInfo } from "../../../types/api-specs";
 
 import styles from "../api-modal.module.css";
@@ -37,7 +35,7 @@ export default function ApiRequest({
       <MethodInfo method={method} />
       <ParamsPrepare params={params} query={query} />
       <BodyPrepare body={body} />
-      <Button type="submit" text="제출" className={API_SUBMIT_BUTTON} />
+      <Button type="submit" text="제출" />
     </form>
   );
 }
