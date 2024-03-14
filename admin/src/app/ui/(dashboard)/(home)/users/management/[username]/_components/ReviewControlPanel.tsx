@@ -3,11 +3,13 @@ import Button from "../../../../_components/Button";
 
 import { SELECT_CLASS } from "../../../../constants/classNames";
 
-import { useFilterReviews } from "../hooks/use-filter-reviews";
 import { useSelectReview } from "@/app/store/use-select-review";
 import { useUserReviewMutation } from "../services/use-user-review-mutation";
 
 import styles from "./review-log-list.module.css";
+
+import { creatorFilterReviews } from "@/app/store/use-filter";
+import { useFilter } from "../../../../hooks/use-filter";
 
 export type SortOption = "최신순" | "오래된순";
 
@@ -27,7 +29,8 @@ type ReviewControlPanelProps = {
 export default function ReviewControlPanel({
   dataLength,
 }: ReviewControlPanelProps) {
-  const { sort, handleSort, show, toggleShow, setShow } = useFilterReviews();
+  const props = creatorFilterReviews();
+  const { sort, handleSort, show, toggleShow, setShow } = useFilter(props);
   const { ids } = useSelectReview();
 
   const renderPanel = ids.length ? (

@@ -7,6 +7,7 @@ type FetchUserReviewsParams = {
   searchTerm?: string;
   pageNum: number;
   userId: string;
+  sort: "최신순" | "오래된순";
 };
 
 const translateQueryValueToEn = (filter: FilterOption) => {
@@ -25,8 +26,11 @@ export const fetchUserReviews = ({
   searchTerm,
   pageNum,
   userId,
+  sort = "최신순",
 }: FetchUserReviewsParams): Promise<ReviewData> => {
   let path: string = `/review/user/${userId}`;
+
+  const sortQueryString = createQueryString({ sort });
 
   let filterQueryString: string | null = null;
   if (filter && translateQueryValueToEn(filter)) {
@@ -37,6 +41,10 @@ export const fetchUserReviews = ({
       const keywordQueryString = createQueryString({ keyword: searchTerm });
       path += `&${keywordQueryString}`;
     }
+
+    path += `&${sortQueryString}`;
+  } else {
+    path += `?${sortQueryString}`;
   }
 
   return reactQueryFetcher<ReviewData>({

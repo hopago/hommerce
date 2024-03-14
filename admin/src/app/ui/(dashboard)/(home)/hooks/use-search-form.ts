@@ -6,16 +6,14 @@ import { IUser } from "../types/user";
 import { useRouter } from "next/navigation";
 
 import debounce from "lodash.debounce";
-import useDebounce from "./use-debounce";
 
 import { useQuery } from "@tanstack/react-query";
-
-import { HttpError } from "@/app/fetcher/error";
 import { fetchUserBySearchTerm } from "../services/fetchUser";
-
 import { daysToMs } from "../utils/daysToMs";
-
 import { QueryKeys, getQueryClient } from "@/app/lib/getQueryClient";
+import { useHandleError } from "../users/management/[username]/hooks/use-handle-error";
+import { useDebouncedSearch } from "./use-debounced-search";
+import { fetchBookBySearchTerm } from "../books/services/fetchBookBySearchTerm";
 
 type UseSearchProps = {
   type: MenuListTitle;
@@ -124,24 +122,16 @@ export function useNavigateForm({ type }: UseSearchProps) {
   };
 }
 
-type UseSearchUserFormParams = {
-  onError: (message: string) => void;
-};
-
-export const useSearchUserForm = ({ onError }: UseSearchUserFormParams) => {
+export const useSearchUserForm = () => {
   const queryClient = getQueryClient();
 
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const debouncedSearchTerm = useDebounce({ value: searchTerm, delay: 750 });
+  const { debouncedSearchTerm, searchTerm, setSearchTerm, handleChange } =
+    useDebouncedSearch();
 
   const {
     data: searchResults,
     error,
+    isError,
     isLoading,
   } = useQuery<IUser[]>({
     queryKey: [QueryKeys.USER_SEARCH, debouncedSearchTerm],
@@ -159,21 +149,38 @@ export const useSearchUserForm = ({ onError }: UseSearchUserFormParams) => {
     }
   }, [debouncedSearchTerm]);
 
-  useEffect(() => {
-    if (error) {
-      if (error instanceof HttpError) {
-        if (error.status === 404) {
-          onError("유저를 찾지 못했습니다.");
-        } else {
-          onError(`${error.status}: ${error.message}`);
-        }
-      } else if (error instanceof Error) {
-        onError(`${error.name}: ${error.message}`);
-      } else {
-        onError("예기치 못한 오류입니다.");
-      }
-    }
-  }, [error]);
+  useHandleError({ error, isError, fieldName: "유저" });
+
+  return {
+    searchTerm,
+    setSearchTerm,
+    handleChange,
+    isLoading,
+    searchResults,
+    error,
+  };
+};
+
+export const useSearchBookForm = () => {
+  const queryClient = getQueryClient();
+
+  const { debouncedSearchTerm, searchTerm, setSearchTerm, handleChange } =
+    useDebouncedSearch();
+
+  const {
+    data: searchResults,
+    error,
+    isError,
+    isLoading,
+  } = useQuery<IBook[]>({
+    queryKey: [QueryKeys.USER_SEARCH, debouncedSearchTerm],
+    queryFn: () => fetchBookBySearchTerm({ searchTerm: debouncedSearchTerm }),
+    staleTime: daysToMs(1),
+    gcTime: daysToMs(3),
+    enabled: !!debouncedSearchTerm,
+  });
+
+  useHandleError({ error, isError, fieldName: "유저" });
 
   return {
     searchTerm,

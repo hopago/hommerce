@@ -15,12 +15,23 @@ import { useEffect, useRef } from "react";
 import { LogTabList } from "../users/management/[username]/types/log-tab-list";
 import { SortOption } from "../users/management/[username]/_components/ReviewControlPanel";
 import { PointFilterOption } from "../users/management/[username]/_components/FilterPointLogs";
+import { BookFilterOption } from "../books/_components/FilterBooks";
 
 // 사용시 타입 추가
 
 type SelectListProps = {
-  selectList: LogTabList[] | FilterOptions | SortOption[] | PointFilterOption[];
-  currSelect: LogTabList | FilterOption | SortOption | PointFilterOption;
+  selectList:
+    | LogTabList[]
+    | FilterOptions
+    | SortOption[]
+    | PointFilterOption[]
+    | BookFilterOption[];
+  currSelect:
+    | LogTabList
+    | FilterOption
+    | SortOption
+    | PointFilterOption
+    | BookFilterOption;
   handleItemClick: (param: any) => void;
   show: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;

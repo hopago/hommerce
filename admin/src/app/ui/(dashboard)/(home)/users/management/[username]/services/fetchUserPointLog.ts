@@ -8,6 +8,7 @@ type FetchUserPointLogProps = {
   filter?: PointFilterOption;
   searchTerm?: string;
   pageNum: number;
+  sort: "최신순" | "오래된순";
 };
 
 const translateQueryValueToEn = (filter: PointFilterOption) => {
@@ -26,8 +27,11 @@ export const fetchUserPointLog = ({
   filter,
   searchTerm,
   pageNum,
+  sort = "최신순",
 }: FetchUserPointLogProps) => {
   let path = `/point/log/${userId}`;
+
+  const sortQueryString = createQueryString({ sort });
 
   let filterQueryString: string | null = null;
   if (filter && translateQueryValueToEn(filter)) {
@@ -38,6 +42,9 @@ export const fetchUserPointLog = ({
       const keywordQueryString = createQueryString({ keyword: searchTerm });
       path += `&${keywordQueryString}`;
     }
+    path += `&${sortQueryString}`;
+  } else {
+    path += `?${sortQueryString}`;
   }
 
   return reactQueryFetcher<PointData>({

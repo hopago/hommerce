@@ -1,15 +1,14 @@
+import { creatorFilterPoints } from "@/app/store/use-filter";
+
 import Button from "../../../../_components/Button";
 import Input from "../../../../_components/Input";
 import SelectList from "../../../../_components/SelectList";
 
-import {
-  INPUT_CLASS,
-  SELECT_CLASS,
-} from "../../../../constants/classNames";
-
-import { useFilterPoints } from "../hooks/use-filter-points";
+import { INPUT_CLASS, SELECT_CLASS } from "../../../../constants/classNames";
 
 import styles from "./filter-review-logs.module.css";
+
+import { useFilter } from "../../../../hooks/use-filter";
 
 export type PointFilterOption =
   | "검색 옵션"
@@ -25,6 +24,8 @@ export default function FilterPointLogs() {
     "지급량",
   ];
 
+  const props = creatorFilterPoints();
+
   const {
     filter,
     setFilter,
@@ -34,7 +35,7 @@ export default function FilterPointLogs() {
     searchTerm,
     handleSearch,
     handleSubmit,
-  } = useFilterPoints();
+  } = useFilter<PointFilterOption>(props);
 
   return (
     <div className={styles.filter}>

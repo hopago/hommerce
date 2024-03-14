@@ -19,11 +19,22 @@ export const createLinkPathAndStyle = ({
 
   const isUserSettingLink = link.path === "/setting/:userId";
   const userSettingPath = `/setting/${userId}`;
+
+  const isBooksDetailsLink = link.path === "/books/details";
+  const booksDetailsPath = `/books/details`;
+
   const isActive = isUserSettingLink
     ? pathname.includes("setting")
+    : isBooksDetailsLink
+    ? pathname.includes("books/details")
     : getFirstPathname(pathname) === getFirstPathname(link.path);
 
-  const linkPath = isUserSettingLink ? userSettingPath : link.path;
+  const linkPath = isUserSettingLink
+    ? userSettingPath
+    : isBooksDetailsLink
+    ? booksDetailsPath
+    : link.path;
+
   const linkStyle = `${styles.sidebarMenuContainer} ${
     isActive ? styles.active : ""
   }`;

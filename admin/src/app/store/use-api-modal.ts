@@ -119,6 +119,132 @@ const API_CONSTANTS: Record<ApiOperationIds, ApiInfo> = {
       },
     ],
   },
+  getBooks: {
+    responses: [
+      {
+        code: 200,
+        desc: "책 목록 조회 성공",
+      },
+      {
+        code: 500,
+        desc: "서버 오류",
+      },
+    ],
+  },
+  postBook: {
+    body: {
+      value: {
+        title: "string",
+        desc: "string",
+        representImg: "string",
+        parentCategory: "string",
+        category: "string",
+        author: "string",
+        price: 0,
+        unit: "string",
+        publisher: "string",
+      },
+      required: true,
+    },
+    responses: [
+      {
+        code: 200,
+        desc: "책 추가 성공"
+      },
+      {
+        code: 400,
+        desc: "필수 필드 누락"
+      },
+      {
+        code: 500,
+        desc: "서버 오류"
+      }
+    ]
+  },
+  getBook: {
+    params: {
+      value: {
+        name: "bookId",
+        type: "string",
+        desc: "조회하려는 책의 ID"
+      },
+      required: true,
+    },
+    responses: [
+      {
+        code: 200,
+        desc: "책 조회 성공"
+      },
+      {
+        code: 400,
+        desc: "잘못된 요청"
+      },
+      {
+        code: 404,
+        desc: "책을 찾을 수 없음"
+      },
+      {
+        code: 500,
+        desc: "서버 오류"
+      }
+    ]
+  },
+  updateBook: {
+    params: {
+      value: {
+        name: "bookId",
+        type: "string",
+        desc: "수정하려는 책의 ID"
+      },
+      required: true,
+    },
+    responses: [
+      {
+        code: 200,
+        desc: "책 수정 성공"
+      },
+      {
+        code: 400,
+        desc: "잘못된 요청"
+      },
+      {
+        code: 404,
+        desc: "책을 찾을 수 없음"
+      },
+      {
+        code: 500,
+        desc: "서버 오류"
+      }
+    ],
+  },
+  deleteBook: {
+    params: {
+      value: {
+        name: "bookId",
+        type: "string",
+        desc: "삭제하려는 책의 ID"
+      },
+      required: true,
+    },
+    responses: [
+      {
+        code: 204,
+        desc: "책 삭제 성공"
+      },
+      {
+        code: 400,
+        desc: "잘못된 요청"
+      },
+      {
+        code: 404,
+        desc: "책을 찾을 수 없음"
+      },
+      {
+        code: 500,
+        desc: "서버 오류"
+      }
+    ],
+  }
 };
 
 interface CreatorApiModal {

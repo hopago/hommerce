@@ -3,7 +3,7 @@ import { reactQueryFetcher } from "@/app/fetcher/fetcher";
 import { QueryKeys, getQueryClient } from "@/app/lib/getQueryClient";
 import { useMutation } from "@tanstack/react-query";
 
-import { creatorFilterReviews } from "@/app/store/use-filter-reviews";
+import { creatorFilterReviews } from "@/app/store/use-filter";
 
 import { toast } from "sonner";
 

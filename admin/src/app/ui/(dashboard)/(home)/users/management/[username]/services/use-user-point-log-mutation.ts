@@ -1,7 +1,7 @@
 import { HttpError } from "@/app/fetcher/error";
 import { reactQueryFetcher } from "@/app/fetcher/fetcher";
 import { QueryKeys, getQueryClient } from "@/app/lib/getQueryClient";
-import { creatorFilterPoints } from "@/app/store/use-filter-points";
+import { creatorFilterPoints } from "@/app/store/use-filter";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { createQueryString } from "../../../../utils/createQueryString";

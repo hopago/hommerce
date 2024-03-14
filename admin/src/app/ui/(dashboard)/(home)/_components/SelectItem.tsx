@@ -9,10 +9,21 @@ import { forwardRef } from "react";
 import { LogTabList } from "../users/management/[username]/types/log-tab-list";
 import { SortOption } from "../users/management/[username]/_components/ReviewControlPanel";
 import { PointFilterOption } from "../users/management/[username]/_components/FilterPointLogs";
+import { BookFilterOption } from "../books/_components/FilterBooks";
 
 type SelectItemProps = {
-  currSelect: LogTabList | FilterOption | SortOption | PointFilterOption;
-  selectList: LogTabList[] | FilterOptions | SortOption[] | PointFilterOption[];
+  currSelect:
+    | LogTabList
+    | FilterOption
+    | SortOption
+    | PointFilterOption
+    | BookFilterOption;
+  selectList:
+    | LogTabList[]
+    | FilterOptions
+    | SortOption[]
+    | PointFilterOption[]
+    | BookFilterOption[];
   handleItemClick: (param: any) => void;
   className?: string;
 };

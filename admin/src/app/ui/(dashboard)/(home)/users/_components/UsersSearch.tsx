@@ -15,10 +15,11 @@ import { getCurrPathname } from "../../utils/getCurrPathname";
 import { useFilterResults } from "../hooks/use-filter-results";
 import { useSearchUserForm } from "../../hooks/use-search-form";
 import { useManageUsers } from "@/app/store/use-manage-users";
+import { useOutsideClick } from "../hooks/use-outside-click";
 
 import { toast } from "sonner";
+
 import { BUTTON_CLASS } from "../../constants/classNames";
-import { useOutsideClick } from "../hooks/use-outside-click";
 
 export default function UsersSearch() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -39,11 +40,7 @@ export default function UsersSearch() {
     isLoading,
     searchResults,
     error,
-  } = useSearchUserForm({
-    onError: (message: string) => {
-      toast.error(message);
-    },
-  });
+  } = useSearchUserForm();
 
   const { usernames, errMsg, error: manageError } = useManageUsers();
 

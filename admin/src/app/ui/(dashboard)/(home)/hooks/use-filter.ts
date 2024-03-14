@@ -1,10 +1,20 @@
-import { creatorFilterReviews } from "@/app/store/use-filter-reviews";
-
 import { useState, useCallback, useEffect, FormEvent } from "react";
 
 import { toast } from "sonner";
 
-export function useFilterReviews() {
+interface UseFilterProps<T> {
+  sort: "최신순" | "오래된순";
+  filter: T;
+  searchTerm: string;
+  enabled: boolean;
+  setSort: (sort: "최신순" | "오래된순") => void;
+  setFilter: (filter: T) => void;
+  setSearchTerm: (searchTerm: string) => void;
+  setEnabled: (param: boolean) => void;
+  resetSearchState: () => void;
+}
+
+export function useFilter<T>(props: UseFilterProps<T>) {
   const {
     filter,
     setFilter,
@@ -13,17 +23,15 @@ export function useFilterReviews() {
     searchTerm,
     setSearchTerm,
     resetSearchState,
-  } = creatorFilterReviews();
+    setEnabled,
+  } = props;
 
   const [show, setShow] = useState(false);
-
-  const [clientSearch, setClientSearch] = useState("");
-  const [clientFilter, setClientFilter] = useState<FilterOption>("검색 옵션");
 
   const toggleShow = useCallback(() => setShow((prev) => !prev), []);
 
   const handleSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setClientSearch(e.target.value);
+    setSearchTerm(e.target.value);
   }, []);
 
   const handleSort = useCallback((sort: "최신순" | "오래된순") => {
@@ -33,28 +41,22 @@ export function useFilterReviews() {
 
   const handleReset = useCallback(() => {
     resetSearchState();
-    setClientFilter("검색 옵션");
-    setClientSearch("");
     setShow(false);
   }, [resetSearchState]);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (clientFilter && clientSearch.trim() === "") {
+    if (filter && searchTerm.trim() === "") {
       toast.message("검색어를 입력해주세요.");
     }
 
-    setSearchTerm(clientSearch);
-    setFilter(clientFilter);
-
-    setClientFilter("검색 옵션");
-    setClientSearch("");
+    setEnabled(true);
   };
 
   useEffect(() => {
     setShow(false);
-  }, [clientFilter, sort]);
+  }, [filter, sort]);
 
   return {
     show,
@@ -64,12 +66,10 @@ export function useFilterReviews() {
     handleSort,
     handleSearch,
     handleReset,
-    clientFilter,
-    setClientFilter,
-    searchTerm,
-    clientSearch,
-    setClientSearch,
     filter,
+    setFilter,
+    searchTerm,
+    setSearchTerm,
     handleSubmit,
   };
 }

@@ -1,7 +1,4 @@
-import {
-  INPUT_CLASS,
-  SELECT_CLASS,
-} from "../../../../constants/classNames";
+import { INPUT_CLASS, SELECT_CLASS } from "../../../../constants/classNames";
 
 import styles from "./filter-review-logs.module.css";
 
@@ -9,10 +6,11 @@ import SelectList from "../../../../_components/SelectList";
 import Input from "../../../../_components/Input";
 import Button from "../../../../_components/Button";
 
-import { useFilterReviews } from "../hooks/use-filter-reviews";
-
 import { Skeleton } from "@nextui-org/react";
 import { cn } from "@/app/ui/lib/utils";
+
+import { creatorFilterReviews } from "@/app/store/use-filter";
+import { useFilter } from "../../../../hooks/use-filter";
 
 export default function FilterReviewLogs() {
   const filterOptions: FilterOptions = [
@@ -22,18 +20,19 @@ export default function FilterReviewLogs() {
     "책 제목",
   ];
 
-  // 클라이언트 검색 상태 관리
+  const props = creatorFilterReviews();
+
   const {
     show,
     toggleShow,
     handleSearch,
     handleReset,
-    clientFilter,
-    setClientFilter,
+    filter,
+    setFilter,
     setShow,
-    clientSearch,
+    searchTerm,
     handleSubmit,
-  } = useFilterReviews();
+  } = useFilter<FilterOption>(props);
 
   return (
     <div className={styles.filter}>
@@ -41,8 +40,8 @@ export default function FilterReviewLogs() {
       <form className={styles.filterOptions} onSubmit={handleSubmit}>
         <SelectList
           selectList={filterOptions}
-          currSelect={clientFilter}
-          handleItemClick={setClientFilter}
+          currSelect={filter}
+          handleItemClick={setFilter}
           className={SELECT_CLASS.FILTER_REVIEW_SELECT}
           show={show}
           setShow={setShow}
@@ -50,7 +49,7 @@ export default function FilterReviewLogs() {
         />
         <Input
           type="text"
-          value={clientSearch}
+          value={searchTerm}
           placeholder="검색어를 입력해주세요."
           onChange={handleSearch}
           className={INPUT_CLASS.FILTER_REVIEW_INPUT}
