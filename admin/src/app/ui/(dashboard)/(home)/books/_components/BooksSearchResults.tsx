@@ -6,29 +6,70 @@ import FilterBooks from "./FilterBooks";
 
 import styles from "./book-search.module.css";
 
+import { creatorFilterBooks } from "@/app/store/use-filter";
+import { useCreatorPagination } from "@/app/store/use-pagination";
+import { usePaginatedData } from "../../users/hooks/use-paginated-data";
+
+import { QueryKeys } from "@/app/lib/getQueryClient";
+import { useQuery } from "@tanstack/react-query";
+import { fetchBookBySearchTerm } from "../services/fetchBookBySearchTerm";
+import { daysToMs } from "../../utils/daysToMs";
+import { useHandleError } from "../../users/management/[username]/hooks/use-handle-error";
+
+import { NoContent } from "../../users/management/[username]/_components/NoContentTable";
+import { PAGE_THRESHOLD } from "../../constants/pagination";
+
+// TODO: Sort 옵션 추가, DB 검색 옵션 수정
+
 export default function BooksSearchResults() {
-  const temporaryBook: IBook = {
-    _id: "mongo_id",
-    representImg:
-      "https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791198356680.jpg",
-    category: "인문",
-    parentCategory: "국내도서",
-    title: "[뇌건강] 스스로 치유하는 뇌",
-    author: "노먼 도이치",
-    discount: 17,
-    price: 19600,
-    unit: "원",
-    comment: "뇌의 변화를 통한 놀라운 치유",
-    desc: "우리의 뇌는 당신의 생각보다 유연하다",
-    publisher: "동아시아",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  };
+  const { sort, filter, searchTerm, enabled } = creatorFilterBooks();
+  const { handleMoveToFirstPage, currentPage } = useCreatorPagination();
 
-  const books = [...Array.from({ length: 8 })].map((_, i) => {
-    temporaryBook._id = temporaryBook._id + 1;
+  const {
+    data,
+    error,
+    isError,
+    isLoading,
+    refetch,
+    isRefetching,
+    isRefetchError,
+  } = useQuery<BookData>({
+    queryKey: [QueryKeys.BOOK],
+    queryFn: () =>
+      fetchBookBySearchTerm({
+        pageNum: currentPage,
+        filter,
+        searchTerm,
+        sort,
+      }),
+    staleTime: daysToMs(1),
+    gcTime: daysToMs(3),
+    enabled,
+  });
 
-    return temporaryBook;
+  useHandleError({ error, isError, fieldName: "리뷰" });
+
+  if (!data || !data.books || !data.pagination)
+    return (
+      <div className={styles.container}>
+        <div className={styles.wrapper}>
+          <NoContent
+            text="준비된 도서가 아직 없습니다."
+            queryKey={[QueryKeys.BOOK]}
+            refetch={refetch}
+            error={error}
+            isRefetching={isRefetching}
+            isRefetchError={isRefetchError}
+          />
+        </div>
+      </div>
+    );
+
+  const { paginatedData, pageTotal } = usePaginatedData({
+    data: data.books,
+    sort,
+    handleMoveToFirstPage,
+    currentPage,
   });
 
   return (
@@ -36,8 +77,12 @@ export default function BooksSearchResults() {
       <div className={styles.wrapper}>
         <h1 className={styles.title}>도서 목록</h1>
         <FilterBooks />
-        <BookTable books={books as IBook[]} isLoading={false} />
-        <PaginateControl pageTotal={69} />
+        <BookTable
+          books={paginatedData as IBook[]}
+          isLoading={isLoading}
+          dataLength={pageTotal * PAGE_THRESHOLD}
+        />
+        <PaginateControl pageTotal={pageTotal} />
       </div>
     </div>
   );

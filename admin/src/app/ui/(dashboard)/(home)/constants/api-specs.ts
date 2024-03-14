@@ -31,6 +31,24 @@ const booksApiSpecs: Endpoints = [
     method: "DELETE",
     desc: "특정 책 삭제",
   },
+  {
+    operationId: "getBookDetails",
+    path: "/book/details",
+    method: "GET",
+    desc: "책의 세부정보 가져오기",
+  },
+  {
+    operationId: "postBookDetails",
+    path: "/book/details",
+    method: "POST",
+    desc: "책의 세부정보 추가",
+  },
+  {
+    operationId: "updateBookDetails",
+    path: "/book/details",
+    method: "PATCH",
+    desc: "책의 세부정보 수정",
+  },
 ];
 
 const usersApiSpecs: Endpoints = [

@@ -4,6 +4,7 @@ export const BUTTON_CLASS = {
   STYLE_NONE: "styleNone",
   SELECT_ALL: "selectAll",
   REVIEW_ACTION: "reviewAction",
+  IMG_UPLOAD: "imgUpload",
 };
 
 export const INPUT_CLASS = {

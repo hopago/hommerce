@@ -9,9 +9,7 @@ import { NoContent } from "./NoContentTable";
 
 import styles from "./user-point-logs.module.css";
 
-import {
-  creatorFilterPoints,
-} from "@/app/store/use-filter";
+import { creatorFilterPoints } from "@/app/store/use-filter";
 import { useCreatorPagination } from "@/app/store/use-pagination";
 
 import { useQuery } from "@tanstack/react-query";
@@ -36,7 +34,7 @@ export default function UserPointLogs({ userId }: UserPointLogsProps) {
     isRefetching,
     isRefetchError,
   } = useQuery<PointData>({
-    queryKey: [QueryKeys.USER_POINT_LOG, currentPage, filter, searchTerm, sort],
+    queryKey: [QueryKeys.USER_POINT_LOG, userId],
     queryFn: () =>
       fetchUserPointLog({
         pageNum: currentPage,
@@ -61,9 +59,7 @@ export default function UserPointLogs({ userId }: UserPointLogsProps) {
           error={error}
           isRefetching={isRefetching}
           isRefetchError={isRefetchError}
-          currentPage={currentPage}
-          filter={filter}
-          searchTerm={searchTerm}
+          queryKey={[QueryKeys.USER_POINT_LOG, userId]}
         />
       </div>
     );

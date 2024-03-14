@@ -52,3 +52,10 @@ interface IBook {
   createdAt: Date;
   updatedAt: Date;
 }
+
+type BookData = {
+  books: IBook[];
+  pagination: {
+    totalPages: number;
+  };
+};

@@ -29,7 +29,7 @@ export default function ReviewLogs({ userId }: { userId: string }) {
     isRefetching,
     isRefetchError,
   } = useQuery<ReviewData>({
-    queryKey: [QueryKeys.USER_REVIEW, currentPage, filter, searchTerm, sort],
+    queryKey: [QueryKeys.USER_REVIEW, userId],
     queryFn: () =>
       fetchUserReviews({
         pageNum: currentPage,
@@ -48,13 +48,11 @@ export default function ReviewLogs({ userId }: { userId: string }) {
   if (!data || !data.reviews || !data.pagination)
     return (
       <NoContent
+        queryKey={[QueryKeys.USER_REVIEW, userId]}
         refetch={refetch}
         error={error}
         isRefetching={isRefetching}
         isRefetchError={isRefetchError}
-        filter={filter}
-        currentPage={currentPage}
-        searchTerm={searchTerm}
       />
     );
 
@@ -69,6 +67,7 @@ export default function ReviewLogs({ userId }: { userId: string }) {
     <>
       <FilterReviewLogs />
       <ReviewLogTable
+        userId={userId}
         isLoading={isLoading}
         reviews={paginatedData as ReviewLogs}
         dataLength={pageTotal * PAGE_THRESHOLD}

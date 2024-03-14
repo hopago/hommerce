@@ -23,4 +23,5 @@ export const QueryKeys = {
   USER_REVIEW: "userReviews",
   USER_POINT: "userPoint",
   USER_POINT_LOG: "userPointLogs",
+  BOOK: "book",
 };

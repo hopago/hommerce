@@ -12,6 +12,9 @@ export type ApiOperationIds =
   | "getBook"
   | "updateBook"
   | "deleteBook"
+  | "getBookDetails"
+  | "postBookDetails"
+  | "updateBookDetails";
 
 export type Endpoint = {
   operationId: ApiOperationIds;
@@ -37,7 +40,7 @@ export type RequestInfo = {
     name: string;
     type: string;
     desc: string;
-  }
+  };
   required: boolean;
 };
 
@@ -49,4 +52,5 @@ export type ApiInfo = {
     required: boolean;
   };
   responses: ResponseType[];
+  hasImg?: boolean;
 };

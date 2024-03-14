@@ -149,102 +149,176 @@ const API_CONSTANTS: Record<ApiOperationIds, ApiInfo> = {
     responses: [
       {
         code: 200,
-        desc: "책 추가 성공"
+        desc: "책 추가 성공",
       },
       {
         code: 400,
-        desc: "필수 필드 누락"
+        desc: "필수 필드 누락",
       },
       {
         code: 500,
-        desc: "서버 오류"
-      }
-    ]
+        desc: "서버 오류",
+      },
+    ],
+    hasImg: true,
   },
   getBook: {
     params: {
       value: {
         name: "bookId",
         type: "string",
-        desc: "조회하려는 책의 ID"
+        desc: "조회하려는 책의 ID",
       },
       required: true,
     },
     responses: [
       {
         code: 200,
-        desc: "책 조회 성공"
+        desc: "책 조회 성공",
       },
       {
         code: 400,
-        desc: "잘못된 요청"
+        desc: "잘못된 요청",
       },
       {
         code: 404,
-        desc: "책을 찾을 수 없음"
+        desc: "책을 찾을 수 없음",
       },
       {
         code: 500,
-        desc: "서버 오류"
-      }
-    ]
+        desc: "서버 오류",
+      },
+    ],
   },
   updateBook: {
     params: {
       value: {
         name: "bookId",
         type: "string",
-        desc: "수정하려는 책의 ID"
+        desc: "수정하려는 책의 ID",
       },
       required: true,
     },
     responses: [
       {
         code: 200,
-        desc: "책 수정 성공"
+        desc: "책 수정 성공",
       },
       {
         code: 400,
-        desc: "잘못된 요청"
+        desc: "잘못된 요청",
       },
       {
         code: 404,
-        desc: "책을 찾을 수 없음"
+        desc: "책을 찾을 수 없음",
       },
       {
         code: 500,
-        desc: "서버 오류"
-      }
+        desc: "서버 오류",
+      },
     ],
+    hasImg: true,
   },
   deleteBook: {
     params: {
       value: {
         name: "bookId",
         type: "string",
-        desc: "삭제하려는 책의 ID"
+        desc: "삭제하려는 책의 ID",
       },
       required: true,
     },
     responses: [
       {
         code: 204,
-        desc: "책 삭제 성공"
+        desc: "책 삭제 성공",
       },
       {
         code: 400,
-        desc: "잘못된 요청"
+        desc: "잘못된 요청",
       },
       {
         code: 404,
-        desc: "책을 찾을 수 없음"
+        desc: "책을 찾을 수 없음",
       },
       {
         code: 500,
-        desc: "서버 오류"
-      }
+        desc: "서버 오류",
+      },
     ],
-  }
+  },
+  getBookDetails: {
+    params: {
+      value: {
+        name: "bookId",
+        type: "string",
+        desc: "세부 정보를 가져오려는 책의 ID",
+      },
+      required: true,
+    },
+    responses: [
+      {
+        code: 200,
+        desc: "세부 정보 조회 성공",
+      },
+      {
+        code: 400,
+        desc: "잘못된 요청",
+      },
+      {
+        code: 500,
+        desc: "서버 오류",
+      },
+    ],
+  },
+  postBookDetails: {
+    params: {
+      value: {
+        name: "bookId",
+        type: "string",
+        desc: "세부 정보를 가져오려는 책의 ID",
+      },
+      required: true,
+    },
+    responses: [
+      {
+        code: 201,
+        desc: "세부 정보 추가 성공",
+      },
+      {
+        code: 400,
+        desc: "잘못된 요청 (책 ID 필요 또는 필수 필드 누락)",
+      },
+      {
+        code: 500,
+        desc: "서버 오류",
+      },
+    ],
+  },
+  updateBookDetails: {
+    params: {
+      value: {
+        name: "bookId",
+        type: "string",
+        desc: "세부 정보를 가져오려는 책의 ID",
+      },
+      required: true,
+    },
+    responses: [
+      {
+        code: 201,
+        desc: "세부 정보 수정 성공",
+      },
+      {
+        code: 400,
+        desc: "잘못된 요청 (책 ID 필요 또는 유효하지 않은 필드)",
+      },
+      {
+        code: 500,
+        desc: "서버 오류",
+      },
+    ],
+  },
 };
 
 interface CreatorApiModal {

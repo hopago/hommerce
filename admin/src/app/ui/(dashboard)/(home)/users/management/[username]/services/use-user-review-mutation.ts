@@ -14,10 +14,10 @@ const deleteReview = async (id: string) => {
   });
 };
 
-export const useUserReviewMutation = () => {
+export const useUserReviewMutation = ({ userId }: { userId: string }) => {
   const queryClient = getQueryClient();
 
-  const { filter, searchTerm } = creatorFilterReviews();
+  const { filter, searchTerm, sort } = creatorFilterReviews();
 
   const { mutate, isPending } = useMutation<
     string | string[],
@@ -41,7 +41,7 @@ export const useUserReviewMutation = () => {
       ]);
       if (!prevReviews) {
         await queryClient.invalidateQueries({
-          queryKey: [QueryKeys.USER_REVIEW, filter, searchTerm],
+          queryKey: [QueryKeys.USER_REVIEW, userId],
         });
         return;
       }

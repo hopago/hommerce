@@ -12,14 +12,17 @@ import { useUserReviewMutation } from "../services/use-user-review-mutation";
 
 import { Skeleton } from "@nextui-org/react";
 import { cn } from "@/app/ui/lib/utils";
+
 import { useToggle } from "../../../hooks/use-controlled-toggle";
+
 import { Navigate } from "./NavigateButton";
 
 type ReviewActionsProps = {
   id: string;
+  userId: string;
 };
 
-export default function ReviewActions({ id }: ReviewActionsProps) {
+export default function ReviewActions({ id, userId }: ReviewActionsProps) {
   const containerRef = useRef<HTMLTableDataCellElement>(null);
 
   const { show, toggleClick } = useToggle(containerRef);
@@ -38,15 +41,15 @@ export default function ReviewActions({ id }: ReviewActionsProps) {
       {show && (
         <div className={styles.reviewActionsButtons}>
           <Navigate path={`/reviews/${id}`} text="상세보기" />
-          <Delete id={id} />
+          <Delete userId={userId} id={id} />
         </div>
       )}
     </td>
   );
 }
 
-function Delete({ id }: { id: string }) {
-  const { mutate, isPending } = useUserReviewMutation();
+function Delete({ id, userId }: { id: string; userId: string; }) {
+  const { mutate, isPending } = useUserReviewMutation({ userId });
 
   const onClick = () => {
     mutate(id);

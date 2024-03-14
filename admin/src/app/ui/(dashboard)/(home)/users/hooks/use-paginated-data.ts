@@ -17,7 +17,7 @@ type LogItem = {
   updatedAt: Date;
 };
 
-type Data = ReviewLogs | PointLogs;
+type Data = ReviewLogs | PointLogs | IBook[];
 
 type UsePaginatedDataParams = {
   data: Data;

@@ -12,19 +12,21 @@ type ReviewLogTableProps = {
   reviews: ReviewLogs;
   dataLength: number;
   isLoading: boolean;
+  userId: string;
 };
 
 export default function ReviewLogTable({
   reviews,
   dataLength,
   isLoading,
+  userId,
 }: ReviewLogTableProps) {
   const ids = reviews.map((review) => review._id);
 
   return (
     <div className={styles.container}>
       <div className={styles.wrap}>
-        <ReviewControlPanel dataLength={dataLength} />
+        <ReviewControlPanel dataLength={dataLength} userId={userId} />
         <table>
           <thead>
             <tr>
@@ -37,7 +39,11 @@ export default function ReviewLogTable({
           <tbody>
             {reviews.map((review) => (
               <Suspense key={review._id} fallback={<TableRowSkeleton />}>
-                <ReviewRowAsync review={review} isLoading={isLoading} />
+                <ReviewRowAsync
+                  review={review}
+                  isLoading={isLoading}
+                  userId={userId}
+                />
               </Suspense>
             ))}
           </tbody>

@@ -1,9 +1,10 @@
 import { HttpError } from "@/app/fetcher/error";
 import { reactQueryFetcher } from "@/app/fetcher/fetcher";
 import { QueryKeys, getQueryClient } from "@/app/lib/getQueryClient";
-import { creatorFilterPoints } from "@/app/store/use-filter";
 import { useMutation } from "@tanstack/react-query";
+
 import { toast } from "sonner";
+
 import { createQueryString } from "../../../../utils/createQueryString";
 
 const updatePointLog = async ({
@@ -32,8 +33,6 @@ const updatePointLog = async ({
 export const useUserPointLogMutation = () => {
   const queryClient = getQueryClient();
 
-  const { filter, searchTerm } = creatorFilterPoints();
-
   const { mutate, isPending, isSuccess } = useMutation<
     PointLog,
     HttpError | Error | unknown,
@@ -45,7 +44,7 @@ export const useUserPointLogMutation = () => {
     onSuccess: async (mutatedLogs) => {
       try {
         await queryClient.setQueryData(
-          [QueryKeys.USER_POINT_LOG, filter, searchTerm],
+          [QueryKeys.USER_POINT_LOG, mutatedLogs.userId],
           mutatedLogs
         );
         toast.success("포인트 변경을 성공적으로 마쳤어요.");

@@ -1,9 +1,10 @@
 "use client";
 
 import { useApiModal } from "@/app/store/use-api-modal";
+
 import useRequestForm from "./hooks/use-request-form";
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import styles from "./api-modal.module.css";
 
@@ -12,11 +13,14 @@ import ApiDocs from "./_components/ApiDocs";
 import Button from "../../_components/Button";
 import ApiResponse from "./_components/ApiResponse";
 
-import { MdClose } from "react-icons/md";
+import { MdClose, MdOutlineAddAPhoto } from "react-icons/md";
 
 import { toast } from "sonner";
 
 import { BUTTON_CLASS } from "../../constants/classNames";
+
+import { UploadButton } from "@/app/utils/uploadthing/uploadthing";
+import { ClientUploadedFileData } from "uploadthing/types";
 
 export default function ApiModal() {
   const { show, setShow, apiSpecs, apiEndpoint, resetState } = useApiModal();
@@ -54,6 +58,24 @@ export default function ApiModal() {
 
   if (!show || !memoApiSpecs || !memoApiEndpoint) return null;
 
+  const [showUpload, setShowUpload] = useState(false);
+  const [imgUrls, setImgUrls] = useState<string[] | null>(null);
+
+  const showUploadButton = () => {
+    setShowUpload(true);
+  };
+
+  const handleUploadSuccess = (
+    res: ClientUploadedFileData<{
+      fileUrl: string;
+    }>[]
+  ) => {
+    toast.message("이미지 업로드를 성공적으로 마쳤어요.");
+    const urls = res.map((res) => res.url);
+    setImgUrls(urls);
+    setShowUpload(false);
+  };
+
   return (
     <section className={styles.container}>
       <div className={styles.bg} />
@@ -78,6 +100,25 @@ export default function ApiModal() {
             className={BUTTON_CLASS.CLOSE}
             disabled={isPending}
           />
+          {memoApiSpecs?.hasImg && !imgUrls?.length ? (
+            <Button
+              type="button"
+              onClick={showUploadButton}
+              icon={<MdOutlineAddAPhoto />}
+              className={BUTTON_CLASS.IMG_UPLOAD}
+              disabled={false}
+            />
+          ) : (
+            <div>{JSON.stringify(imgUrls)}</div>
+          )}
+          {showUpload && (
+            <div className={styles.uploadButtonWrap}>
+              <UploadButton
+                endpoint="imageUploader"
+                onClientUploadComplete={(res) => handleUploadSuccess(res)}
+              />
+            </div>
+          )}
         </div>
       </main>
     </section>

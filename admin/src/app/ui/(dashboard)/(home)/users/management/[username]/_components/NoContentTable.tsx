@@ -1,5 +1,9 @@
 import { QueryKeys, getQueryClient } from "@/app/lib/getQueryClient";
-import { QueryObserverResult, RefetchOptions } from "@tanstack/react-query";
+import {
+  QueryKey,
+  QueryObserverResult,
+  RefetchOptions,
+} from "@tanstack/react-query";
 
 import { useRouter } from "next/navigation";
 import { useHandleError } from "../hooks/use-handle-error";
@@ -11,32 +15,26 @@ import { cn } from "@/app/ui/lib/utils";
 
 import Button from "../../../../_components/Button";
 
-import { PointFilterOption } from "./FilterPointLogs";
-
 import { toast } from "sonner";
 
 type NoContentProps = {
   text?: string;
   refetch: (
     options?: RefetchOptions | undefined
-  ) => Promise<QueryObserverResult<ReviewData | PointData, Error>>;
+  ) => Promise<QueryObserverResult<ReviewData | PointData | BookData | Error>>;
   error: Error | null;
   isRefetching: boolean;
   isRefetchError: boolean;
-  currentPage?: number;
-  searchTerm?: string;
-  filter?: PointFilterOption | FilterOption;
+  queryKey: QueryKey;
 };
 
 export function NoContent({
-  currentPage,
-  searchTerm,
-  filter,
   text = "리뷰를 아직 작성하지 않았어요.",
   refetch,
   error,
   isRefetching,
   isRefetchError,
+  queryKey,
 }: NoContentProps) {
   const queryClient = getQueryClient();
 
@@ -45,7 +43,7 @@ export function NoContent({
   const handleRefetch = () => async () => {
     try {
       await queryClient.resetQueries({
-        queryKey: [QueryKeys.USER_REVIEW, currentPage, searchTerm, filter],
+        queryKey,
       });
     } catch (err) {
       toast.error("쿼리키를 처리하던 도중 오류가 발생했습니다.");

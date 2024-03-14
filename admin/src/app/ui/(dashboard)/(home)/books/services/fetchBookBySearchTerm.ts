@@ -1,16 +1,55 @@
 import { reactQueryFetcher } from "@/app/fetcher/fetcher";
+
 import { createQueryString } from "../../utils/createQueryString";
 
-export const fetchBookBySearchTerm = ({
-  searchTerm,
-}: {
-  searchTerm: string;
-}): Promise<IBook[]> => {
-  const queryString = createQueryString({ keyword: searchTerm });
-  const path = `/book?${queryString}`;
+import { BookFilterOption } from "../_components/FilterBooks";
 
-  return reactQueryFetcher({
+type FetchBookBySearchTermParams = {
+  filter?: BookFilterOption;
+  searchTerm?: string;
+  pageNum: number;
+  sort: "최신순" | "오래된순";
+};
+
+const translateQueryValueToEn = (filter: BookFilterOption) => {
+  const filterMap = {
+    통합검색: null,
+    제목: "title",
+    저자: "author",
+  };
+
+  return filterMap[filter] || null;
+};
+
+export const fetchBookBySearchTerm = ({
+  filter,
+  searchTerm,
+  pageNum,
+  sort = "최신순",
+}: FetchBookBySearchTermParams): Promise<BookData> => {
+  let path = `/book`;
+
+  const sortQueryString = createQueryString({ sort });
+
+  let filterQueryString: string | null = null;
+  if (filter && translateQueryValueToEn(filter)) {
+    filterQueryString = translateQueryValueToEn(filter);
+    path += `?${filterQueryString}`;
+
+    if (searchTerm && searchTerm.trim() !== "") {
+      const keywordQueryString = createQueryString({ keyword: searchTerm });
+      path += `&${keywordQueryString}`;
+    }
+    path += `&${sortQueryString}`;
+  } else {
+    path += `?${sortQueryString}`;
+  }
+
+  return reactQueryFetcher<BookData>({
     method: "GET",
     path,
+    body: {
+      pageNum,
+    },
   });
 };

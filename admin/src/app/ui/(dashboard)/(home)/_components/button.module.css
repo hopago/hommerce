@@ -69,3 +69,9 @@
 .button.pointAction {
     justify-content: flex-end;
 }
+
+.button.imgUpload {
+    position: absolute;
+    top: -5%;
+    right: -3.5%;
+}
