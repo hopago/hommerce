@@ -1,6 +1,6 @@
 import { Schema, model, Document } from "mongoose";
 
-export interface IPointLogSchema extends Document {
+export interface IPointLog extends Document {
   userId: string;
   pointId: string;
   desc: string;
@@ -31,6 +31,6 @@ const pointLogSchema = new Schema(
   }
 );
 
-const PointLog = model<IPointLogSchema>("PointLog", pointLogSchema);
+const PointLog = model<IPointLog>("PointLog", pointLogSchema);
 
 export default PointLog;

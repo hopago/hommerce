@@ -23,6 +23,7 @@ import reviewReplyRouter from "./(review)/(reply)/routes/review-reply";
 import reviewTotalRouter from "./(review)/(total)/routes/review-total";
 import favorRouter from "./(user)/(favor)/routes/favor";
 import pointRouter from "./(user)/(point)/routes/point";
+import pointLogRouter from "./(user)/(point)/(log)/routes/point-log";
 
 import clerkRouter from "./webhook/clerk/routes/clerk";
 
@@ -47,6 +48,7 @@ app.use("/book/:bookId/details", bookDetailsRouter);
 app.use("/cart", cartRouter);
 app.use("/favor", favorRouter);
 app.use("/point", pointRouter);
+app.use("/point/log", pointLogRouter);
 app.use("/review", reviewRouter);
 app.use("/review/reply", reviewReplyRouter);
 app.use("/review/total", reviewTotalRouter);

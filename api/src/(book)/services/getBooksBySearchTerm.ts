@@ -1,63 +1,55 @@
 import { NextFunction } from "express";
-import User from "../../../model/user";
-import { HttpException } from "../../../../middleware/error/utils";
-import PointLog from "../models/point-log";
+import { HttpException } from "../../middleware/error/utils";
+import Book from "../models/book";
 
-type FilterType = "pointId" | "amount" | "desc";
+type FilterType = "통합검색" | "제목" | "저자";
 
 type QueryField = {
   filter: FilterType | undefined;
-  keyword: string | number | undefined;
-  userId: string;
+  keyword: string | undefined;
   pageNum?: number;
   sort: "최신순" | "오래된순";
 };
 
 const PAGE_SIZE = 8;
 
-export const handleGetUserPointLog = async (
-  { filter, keyword, userId, pageNum, sort = "최신순" }: QueryField,
+export const handleGetBooksBySearchTerm = async (
+  { filter, keyword, pageNum, sort = "최신순" }: QueryField,
   next: NextFunction
 ) => {
-  let query = { userId };
-  const isExist = await User.findOne({
-    id: userId,
-  });
-  if (!isExist) throw new HttpException(404, "User not found.");
+  let query: {} = {};
 
   if (filter && keyword) {
     if (typeof keyword === "string") {
       query = {
-        ...query,
         [filter]: { $regex: new RegExp(keyword, "i") },
       };
     } else {
       query = {
-        ...query,
         [filter]: keyword,
       };
     }
   }
 
   try {
-    const totalReviews = await PointLog.countDocuments(query);
-    const totalPages = Math.ceil(totalReviews / PAGE_SIZE);
+    const totalBooks = await Book.countDocuments(query);
+    const totalPages = Math.ceil(totalBooks / PAGE_SIZE);
 
-    let pointsLogs;
+    let books;
 
     if (pageNum) {
-      pointsLogs = await PointLog.find(query)
+      books = await Book.find(query)
         .skip(PAGE_SIZE * (pageNum - 1))
         .limit(PAGE_SIZE)
         .sort(sort === "최신순" ? { createdAt: -1 } : { createdAt: 1 });
     } else {
-      pointsLogs = await PointLog.find(query).sort(
+      books = await Book.find(query).sort(
         sort === "최신순" ? { createdAt: -1 } : { createdAt: 1 }
       );
     }
 
     const response = {
-      pointsLogs,
+      books,
       ...(pageNum && {
         pagination: {
           currentPage: pageNum,

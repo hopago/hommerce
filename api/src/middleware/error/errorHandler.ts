@@ -13,5 +13,7 @@ export const errorHandler = (
 
   logger.error(`Status: ${status}, Message: ${message}`);
 
-  return res.status(status).json({ status, message });
+  res.status(status).json({ status, message });
+
+  next();
 };

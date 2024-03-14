@@ -11,22 +11,25 @@ export const getUserPointLog = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { userId } = req.params;
-  // { userId: "undefined" }로 요청이 오는 것을 확인
-  if (!userId || userId === "undefined")
-    throw new HttpException(400, "User Id required.");
-
   const filter = req.query.filter as FilterType | undefined;
   const keyword = req.query.keyword as string | number;
+  const sort = req.query.sort as "최신순" | "오래된순";
   const { pageNum } = req.body;
 
   try {
+    const { userId } = req.params;
+    // { userId: "undefined" }로 요청이 오는 것을 확인
+    if (!userId || userId === "undefined")
+      throw new HttpException(400, "User Id required.");
+
     const pointLogs = await handleGetUserPointLog(
-      { filter, keyword, userId, pageNum },
+      { filter, keyword, userId, pageNum, sort },
       next
     );
 
-    return res.status(200).json(pointLogs);
+    if (pointLogs) {
+      return res.status(200).json(pointLogs);
+    }
   } catch (err) {
     next(err);
   }
@@ -37,17 +40,22 @@ export const updateUserPointLog = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { userId } = req.params;
-  const pointId = req.query.pointLogId;
-
-  if (!userId) throw new HttpException(400, "User Id required.");
-  if (!pointId || pointId === "undefined")
-    throw new HttpException(400, "Point id required.");
-
   try {
-    const updatedPointLog = await handleUpdatePointLog(req, next);
+    const { userId } = req.params;
+    const pointId = req.query.pointLogId;
 
-    return res.status(201).json(updatedPointLog);
+    if (!userId) throw new HttpException(400, "User Id required.");
+    if (!pointId) throw new HttpException(400, "Point id required.");
+
+    try {
+      const updatedPointLog = await handleUpdatePointLog(req, next);
+
+      if (updatedPointLog) {
+        return res.status(201).json(updatedPointLog);
+      }
+    } catch (err) {
+      next(err);
+    }
   } catch (err) {
     next(err);
   }
@@ -58,15 +66,15 @@ export const deleteUserPointLog = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { userId } = req.params;
-  const pointId = req.query.pointLogId as string | "undefined" | undefined;
-
-  if (!userId) throw new HttpException(400, "User Id required.");
-
   try {
-    const deletedPointLogId = await handleDeletePointLog(userId, next, pointId);
+    const { userId } = req.params;
+    const pointId = req.query.pointLogId as string | undefined;
 
-    return res.status(201).json(deletedPointLogId);
+    if (!userId) throw new HttpException(400, "User Id required.");
+
+    await handleDeletePointLog(userId, next, pointId);
+
+    return res.status(201).json(pointId);
   } catch (err) {
     next(err);
   }

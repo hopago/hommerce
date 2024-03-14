@@ -10,11 +10,11 @@ export const getReplies = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { reviewId } = req.params;
-
-  if (!reviewId) throw new HttpException(400, "Review Id required.");
-
   try {
+    const { reviewId } = req.params;
+
+    if (!reviewId) throw new HttpException(400, "Review Id required.");
+
     const replies = await handleGetReplies({ reviewId }, next);
 
     return res.status(200).json(replies);
@@ -28,11 +28,11 @@ export const postReply = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { reviewId } = req.params;
-
-  if (!reviewId) throw new HttpException(400, "Review Id required.");
-
   try {
+    const { reviewId } = req.params;
+
+    if (!reviewId) throw new HttpException(400, "Review Id required.");
+
     const newReply = await handlePostReply(req, next);
 
     return res.status(201).json(newReply);
@@ -46,13 +46,13 @@ export const updateReply = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { reviewId } = req.params;
-  const { userId } = req.body;
-
-  if (!reviewId) throw new HttpException(400, " Review Id required.");
-  if (!userId) throw new HttpException(400, "User Id required.");
-
   try {
+    const { reviewId } = req.params;
+    const { userId } = req.body;
+  
+    if (!reviewId) throw new HttpException(400, " Review Id required.");
+    if (!userId) throw new HttpException(400, "User Id required.");
+
     const updatedReply = await handleUpdateReply(req, next);
 
     return res.status(201).json(updatedReply);
@@ -66,13 +66,13 @@ export const deleteReply = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { reviewId } = req.params;
-  const userId = req.query.userId as string;
-
-  if (!reviewId) throw new HttpException(400, "Review Id required.");
-  if (!userId) throw new HttpException(400, "User Id required.");
-
   try {
+    const { reviewId } = req.params;
+    const userId = req.query.userId as string;
+  
+    if (!reviewId) throw new HttpException(400, "Review Id required.");
+    if (!userId) throw new HttpException(400, "User Id required.");
+
     const _id = await handleDeleteReply({ userId, reviewId }, next);
 
     return res.status(201).json({ reviewId: _id });

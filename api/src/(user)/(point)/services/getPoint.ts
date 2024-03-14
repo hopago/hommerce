@@ -9,7 +9,7 @@ export const handleGetPoint = async (req: Request, next: NextFunction) => {
     })) as IPoint;
     if (!point) throw new HttpException(404, "Point not found.");
 
-    return point;
+    return point ?? 0;
   } catch (err) {
     next(err);
   }

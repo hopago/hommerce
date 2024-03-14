@@ -10,12 +10,19 @@ type HandleGetReviewByUserIdParams = {
   filter: FilterType | undefined;
   keyword: string | undefined;
   pageNum: number | undefined;
+  sort: "최신순" | "오래된순";
 };
 
 const PAGE_SIZE = 8;
 
 export const handleGetReviewByUserId = async (
-  { userId, filter, keyword, pageNum }: HandleGetReviewByUserIdParams,
+  {
+    userId,
+    filter,
+    keyword,
+    pageNum,
+    sort = "최신순",
+  }: HandleGetReviewByUserIdParams,
   next: NextFunction
 ) => {
   let query = { userId };
@@ -35,12 +42,18 @@ export const handleGetReviewByUserId = async (
     const totalReviews = await Review.countDocuments(query);
     const totalPages = Math.ceil(totalReviews / PAGE_SIZE);
 
-    const reviews = pageNum
-      ? await Review.find(query)
-          .skip(PAGE_SIZE * (pageNum - 1))
-          .limit(PAGE_SIZE)
-          .sort({ createdAt: -1 })
-      : await Review.find(query).sort({ createdAt: -1 });
+    let reviews;
+
+    if (pageNum) {
+      reviews = await Review.find(query)
+        .skip(PAGE_SIZE * (pageNum - 1))
+        .limit(PAGE_SIZE)
+        .sort(sort === "최신순" ? { createdAt: -1 } : { createdAt: 1 });
+    } else {
+      reviews = await Review.find(query).sort(
+        sort === "최신순" ? { createdAt: -1 } : { createdAt: 1 }
+      );
+    }
 
     const response = {
       reviews,

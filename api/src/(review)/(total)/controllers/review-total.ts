@@ -11,11 +11,11 @@ export const getTotal = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { bookId } = req.params;
-
-  if (!bookId) throw new HttpException(400, "Book Id required.");
-
   try {
+    const { bookId } = req.params;
+
+    if (!bookId) throw new HttpException(400, "Book Id required.");
+
     const total = await handleGetTotal({ bookId }, next);
 
     return res.status(200).json(total);
@@ -29,11 +29,11 @@ export const postTotal = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { bookId } = req.params;
-
-  if (!bookId) throw new HttpException(400, "Book Id required.");
-
   try {
+    const { bookId } = req.params;
+
+    if (!bookId) throw new HttpException(400, "Book Id required.");
+
     const newTotal = await handlePostTotal(req, next);
 
     return res.status(201).json(newTotal);
@@ -47,11 +47,11 @@ export const updateTotal = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { bookId } = req.params;
-
-  if (!bookId) throw new HttpException(400, "Book Id required.");
-
   try {
+    const { bookId } = req.params;
+
+    if (!bookId) throw new HttpException(400, "Book Id required.");
+
     const updatedTotal = await handleUpdateTotal(req, next);
 
     return res.status(201).json(updatedTotal);
@@ -65,22 +65,26 @@ export const deleteTotal = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { bookId } = req.params;
-  if (!bookId) throw new HttpException(400, "Book Id required.");
-
-  const { rating, keyword } = req.query as {
-    rating: ReviewRatingType;
-    keyword: ReviewKeywords;
-  };
-  isFieldsFullFilled(["rating, keyword"], req);
-
   try {
-    const deletedTotal = await handleDeleteTotal(
-      { bookId, rating, keyword },
-      next
-    );
+    const { bookId } = req.params;
+    if (!bookId) throw new HttpException(400, "Book Id required.");
 
-    return res.status(201).json(deletedTotal);
+    const { rating, keyword } = req.query as {
+      rating: ReviewRatingType;
+      keyword: ReviewKeywords;
+    };
+    isFieldsFullFilled(["rating, keyword"], req);
+
+    try {
+      const deletedTotal = await handleDeleteTotal(
+        { bookId, rating, keyword },
+        next
+      );
+
+      return res.status(201).json(deletedTotal);
+    } catch (err) {
+      next(err);
+    }
   } catch (err) {
     next(err);
   }

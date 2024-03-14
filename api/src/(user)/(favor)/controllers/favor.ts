@@ -10,10 +10,10 @@ export const getFavorList = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { userId } = req.params;
-  if (!userId) throw new HttpException(400, "User Id required.");
-
   try {
+    const { userId } = req.params;
+    if (!userId) throw new HttpException(400, "User Id required.");
+
     const favorList = await handleGetFavorList({ userId }, next);
 
     return res.status(200).json(favorList);
@@ -27,10 +27,10 @@ export const postFavorList = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { userId } = req.params;
-  if (!userId) throw new HttpException(400, "User Id required.");
-
   try {
+    const { userId } = req.params;
+    if (!userId) throw new HttpException(400, "User Id required.");
+
     const newFavorList = await handlePostFavorList(req, next);
 
     return res.status(201).json(newFavorList);
@@ -44,10 +44,10 @@ export const updateFavorItem = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { userId } = req.params;
-  if (!userId) throw new HttpException(400, "User Id required.");
-
   try {
+    const { userId } = req.params;
+    if (!userId) throw new HttpException(400, "User Id required.");
+
     const updatedFavorList = await handleUpdateFavorItem(req, next);
 
     return res.status(201).json(updatedFavorList);
@@ -61,13 +61,13 @@ export const deleteFavorItem = async (
   res: Response,
   next: NextFunction
 ) => {
-  const bookId = req.query.bookId as string | undefined;
-  const { userId } = req.params;
-
-  if (!bookId) throw new HttpException(400, "Book Id required.");
-  if (!userId) throw new HttpException(400, "User Id required.");
-
   try {
+    const bookId = req.query.bookId as string | undefined;
+    const { userId } = req.params;
+  
+    if (!bookId) throw new HttpException(400, "Book Id required.");
+    if (!userId) throw new HttpException(400, "User Id required.");
+
     const deletedFavorList = await handleDeleteFavorItem(
       { bookId, userId },
       next

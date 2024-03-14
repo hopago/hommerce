@@ -10,10 +10,10 @@ export const getPoint = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { userId } = req.params;
-  if (!userId) throw new HttpException(400, "User Id required.");
-
   try {
+    const { userId } = req.params;
+    if (!userId) throw new HttpException(400, "User Id required.");
+
     const point = await handleGetPoint(req, next);
 
     return res.status(200).json(point);
@@ -27,10 +27,10 @@ export const postPoint = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { userId } = req.params;
-  if (!userId) throw new HttpException(400, "User Id required.");
-
   try {
+    const { userId } = req.params;
+    if (!userId) throw new HttpException(400, "User Id required.");
+
     const newPoint = await handlePostPoint({ userId }, next);
 
     return res.status(201).json(newPoint);
@@ -44,10 +44,10 @@ export const updatePoint = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { userId } = req.params;
-  if (!userId) throw new HttpException(400, "User Id required.");
-
   try {
+    const { userId } = req.params;
+    if (!userId) throw new HttpException(400, "User Id required.");
+
     const updatedPoint = await handleUpdatePoint(req, next);
 
     return res.status(201).json(updatedPoint);
@@ -61,10 +61,10 @@ export const deletePoint = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { userId } = req.params;
-  if (!userId) throw new HttpException(400, "User Id required.");
-
   try {
+    const { userId } = req.params;
+    if (!userId) throw new HttpException(400, "User Id required.");
+
     await handleDeletePoint({ userId }, next);
 
     return res.sendStatus(204);
