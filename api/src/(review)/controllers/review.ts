@@ -56,7 +56,9 @@ export const getReviewByUserId = async (
 ) => {
   try {
     const { userId } = req.params;
-    const sort = req.query.sort as "최신순" | "오래된순";
+    const sort = decodeURIComponent(req.query.sort as string) as
+      | "최신순"
+      | "오래된순";
     const filter = req.query.filter as FilterType | undefined;
     const keyword = req.query.keyword as string | undefined;
 

@@ -13,8 +13,12 @@ import { PORT } from "./config/port";
 
 import { errorHandler } from "./middleware/error/errorHandler";
 
+// a: 인사이트 제공, d: 데이터 수집 로직
+
 import userRouter from "./(user)/routes/user";
 import bookRouter from "./(book)/routes/book";
+import bookDataRouter from "./(book)/routes/data";
+import bookAnalyticsRouter from "./(book)/routes/bookAnalytics";
 import bookDetailsRouter from "./(book)/(details)/routes/detail";
 import authorRouter from "./(author)/routes/author";
 import cartRouter from "./(user)/(cart)/routes/cart";
@@ -43,15 +47,23 @@ app.use(helmet());
 app.use(morgan("dev"));
 
 app.use("/author", authorRouter);
+
 app.use("/book", bookRouter);
+app.use("/book/s", bookAnalyticsRouter);
+app.use("/book/d", bookDataRouter);
 app.use("/book/:bookId/details", bookDetailsRouter);
+
 app.use("/cart", cartRouter);
+
 app.use("/favor", favorRouter);
+
 app.use("/point", pointRouter);
 app.use("/point/log", pointLogRouter);
+
 app.use("/review", reviewRouter);
 app.use("/review/reply", reviewReplyRouter);
 app.use("/review/total", reviewTotalRouter);
+
 app.use("/user", userRouter);
 
 app.use("/webhook/clerk", clerkRouter);

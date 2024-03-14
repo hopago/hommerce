@@ -7,7 +7,7 @@ export interface IBook extends Document {
   category: BookSubCategory;
   title: string;
   author: string;
-  discount?: string;
+  discount?: number;
   price: number;
   eBookPrice?: number;
   unit: UnitType;
@@ -15,6 +15,7 @@ export interface IBook extends Document {
   desc: string;
   publisher: string;
   sellType?: SellType;
+  views: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -56,6 +57,10 @@ const bookSchema = new Schema(
     publisher: {
       type: String,
       require: true,
+    },
+    views: {
+      type: Number,
+      default: 0,
     },
     /* optional */
     comment: {
