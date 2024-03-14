@@ -37,6 +37,10 @@
     height: max-content;
 }
 
+.tableWrap table tr:last-of-type {
+    border: none;
+}
+
 .wrap table td,
 .wrap table th {
     padding: 1rem 0.5rem;

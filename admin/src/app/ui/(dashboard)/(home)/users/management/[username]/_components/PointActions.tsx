@@ -91,7 +91,7 @@ export default function PointActions({
       )}
       {show && (
         <div className={styles.reviewActionsButtons}>
-          <Navigate id={pointId} path="point" text="상세보기" />
+          <Navigate path={`/point/${pointId}`} text="상세보기" />
           <Button
             type="button"
             text="포인트 수정"

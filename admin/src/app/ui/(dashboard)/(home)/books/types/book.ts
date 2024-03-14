@@ -35,12 +35,13 @@ type BookSubCategoryList = BookSubCategory[];
 
 interface IBook {
   images?: string[];
+  _id: string;
   representImg: string;
   parentCategory: BookParentCategory;
   category: BookSubCategory;
   title: string;
   author: string;
-  discount?: string;
+  discount?: number;
   price: number;
   eBookPrice?: number;
   unit: UnitType;

@@ -37,7 +37,7 @@ export default function ReviewActions({ id }: ReviewActionsProps) {
       )}
       {show && (
         <div className={styles.reviewActionsButtons}>
-          <Navigate id={id} path="review" text="상세보기" />
+          <Navigate path={`/reviews/${id}`} text="상세보기" />
           <Delete id={id} />
         </div>
       )}

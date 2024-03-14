@@ -1,6 +1,3 @@
-
 export default function BookDataChart() {
-  return (
-    <div>BookTable</div>
-  )
+  return <div>BookDataChart</div>;
 }

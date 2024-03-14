@@ -27,6 +27,10 @@ const nextConfig = {
             {
                 protocol: "https",
                 hostname: "utfs.io"
+            },
+            {
+                protocol: "https",
+                hostname: "contents.kyobobook.co.kr"
             }
         ],
     },

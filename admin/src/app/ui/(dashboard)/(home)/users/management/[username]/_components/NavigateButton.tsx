@@ -4,19 +4,11 @@ import Button from "../../../../_components/Button";
 
 import { BUTTON_CLASS } from "../../../../constants/classNames";
 
-export function Navigate({
-  id,
-  path,
-  text,
-}: {
-  id: string;
-  path: string;
-  text: string;
-}) {
+export function Navigate({ path, text }: { path: string; text: string }) {
   const router = useRouter();
 
   const onClick = () => {
-    router.push(`/${path}/${id}`);
+    router.push(`${path}`);
   };
 
   return (

@@ -1,3 +1,5 @@
+"use client"
+
 import { useCreatorPagination } from "@/app/store/use-pagination";
 
 import PrevPage from "./PrevPage";
