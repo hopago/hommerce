@@ -4,7 +4,7 @@ import { useApiModal } from "@/app/store/use-api-modal";
 
 import useRequestForm from "./hooks/use-request-form";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 
 import styles from "./api-modal.module.css";
 
@@ -20,10 +20,24 @@ import { toast } from "sonner";
 import { BUTTON_CLASS } from "../../constants/classNames";
 
 import { UploadButton } from "@/app/utils/uploadthing/uploadthing";
-import { ClientUploadedFileData } from "uploadthing/types";
+import ImageUrls from "./_components/ImageUrls";
+import { useUploadthing } from "./hooks/use-uploadthing";
+import { deleteImages } from "@/app/actions/utApi";
 
 export default function ApiModal() {
   const { show, setShow, apiSpecs, apiEndpoint, resetState } = useApiModal();
+
+  useEffect(() => {
+    if (show) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [show]);
 
   const memoApiSpecs = useMemo(() => apiSpecs, [apiSpecs]);
   const memoApiEndpoint = useMemo(() => apiEndpoint, [apiEndpoint]);
@@ -39,41 +53,26 @@ export default function ApiModal() {
     },
   });
 
-  const handleClose = () => {
-    resetState();
-    setShow(false);
-  };
-
-  useEffect(() => {
-    if (show) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [show]);
+  const {
+    showUpload,
+    showUploadButton,
+    prepareImage,
+    handleUploadSuccess,
+    imgUrls,
+  } = useUploadthing({ specs: memoApiSpecs! });
 
   if (!show || !memoApiSpecs || !memoApiEndpoint) return null;
 
-  const [showUpload, setShowUpload] = useState(false);
-  const [imgUrls, setImgUrls] = useState<string[] | null>(null);
+  const handleClose = async () => {
+    if (imgUrls?.length) {
+      const isConfirm = confirm(
+        "이미지가 업로드된 상태에요. 파일을 저장할까요?"
+      );
 
-  const showUploadButton = () => {
-    setShowUpload(true);
-  };
-
-  const handleUploadSuccess = (
-    res: ClientUploadedFileData<{
-      fileUrl: string;
-    }>[]
-  ) => {
-    toast.message("이미지 업로드를 성공적으로 마쳤어요.");
-    const urls = res.map((res) => res.url);
-    setImgUrls(urls);
-    setShowUpload(false);
+      !isConfirm && (await deleteImages(imgUrls));
+    }
+    resetState();
+    setShow(false);
   };
 
   return (
@@ -100,7 +99,7 @@ export default function ApiModal() {
             className={BUTTON_CLASS.CLOSE}
             disabled={isPending}
           />
-          {memoApiSpecs?.hasImg && !imgUrls?.length ? (
+          {prepareImage ? (
             <Button
               type="button"
               onClick={showUploadButton}
@@ -109,7 +108,7 @@ export default function ApiModal() {
               disabled={false}
             />
           ) : (
-            <div>{JSON.stringify(imgUrls)}</div>
+            <ImageUrls urls={imgUrls!} />
           )}
           {showUpload && (
             <div className={styles.uploadButtonWrap}>
