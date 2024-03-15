@@ -1,6 +1,7 @@
 import { useBodyInput } from "@/app/store/use-body-input";
 
 import styles from "../api-modal.module.css";
+
 import { useEffect, useMemo } from "react";
 
 type BodyProps = {
@@ -14,7 +15,11 @@ export default function Body({ body }: BodyProps) {
   const { parsedValue, inputValue, setInputValue } = useBodyInput();
 
   useEffect(() => {
-    setInputValue(inputValue);
+    const debouncedSet = setTimeout(() => {
+      setInputValue(inputValue);
+    }, 1000);
+
+    return () => clearTimeout(debouncedSet);
   }, [inputValue]);
 
   const memoBody = useMemo(() => body, [body]);

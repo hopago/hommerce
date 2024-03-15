@@ -31,7 +31,7 @@ type ButtonProps = {
   width?: string;
   height?: string;
   color?: string;
-  border?: string | "none",
+  border?: string | "none";
 };
 
 export default function Button({
@@ -84,6 +84,7 @@ export default function Button({
         className === BUTTON_CLASS.CLOSE && styles.close,
         className === BUTTON_CLASS.SELECT_ALL && styles.selectAll,
         className === BUTTON_CLASS.REVIEW_ACTION && styles.reviewAction,
+        className === BUTTON_CLASS.IMG_UPLOAD && styles.imgUpload,
         active && styles.active
       )}
       type={type}

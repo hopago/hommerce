@@ -72,6 +72,11 @@
 
 .button.imgUpload {
     position: absolute;
-    top: -5%;
+    top: 7%;
     right: -3.5%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

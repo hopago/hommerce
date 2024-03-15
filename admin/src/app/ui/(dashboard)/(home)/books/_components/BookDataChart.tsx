@@ -12,7 +12,7 @@ import {
 
 import styles from "./book-data-chart.module.css";
 
-import { FaSpinner } from "react-icons/fa";
+import Spinner from "@/app/ui/_components/Spinner";
 
 const categoryDataSamples: CategoryData[] = [
   {
@@ -116,10 +116,7 @@ export const BookDataChartSkeleton = () => (
   <div className={styles.container}>
     <h2 className={styles.title}>주간 동향</h2>
     <div className={styles.skeletonContainer}>
-      <div className={styles.spinner}>
-        <FaSpinner className={styles.loadingIcon} />
-        <span>데이터를 불러오는 중입니다.</span>
-      </div>
+      <Spinner text="데이터를 불러오는 중입니다." />
     </div>
   </div>
 );

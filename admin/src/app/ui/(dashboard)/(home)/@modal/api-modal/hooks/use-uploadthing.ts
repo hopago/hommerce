@@ -7,13 +7,14 @@ import { toast } from "sonner";
 
 type UseUploadthingParams = {
   specs: ApiInfo | undefined | null;
-}
+};
 
 export const useUploadthing = ({ specs }: UseUploadthingParams) => {
   const [showUpload, setShowUpload] = useState(false);
   const [imgUrls, setImgUrls] = useState<string[] | null>(null);
 
-  const prepareImage = specs?.hasImg && !imgUrls?.length;
+  const prepareImage = specs?.hasImg;
+  const hasImage = imgUrls?.length ?? 0 > 0;
 
   const showUploadButton = () => {
     setShowUpload(true);
@@ -36,5 +37,6 @@ export const useUploadthing = ({ specs }: UseUploadthingParams) => {
     showUploadButton,
     prepareImage,
     handleUploadSuccess,
-  }
+    hasImage,
+  };
 };

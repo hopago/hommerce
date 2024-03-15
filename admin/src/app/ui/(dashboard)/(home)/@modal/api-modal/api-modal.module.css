@@ -295,3 +295,16 @@
     font-weight: 400;
 }
 
+.uploadButtonWrap {
+    width: max-content;
+    height: max-content;
+    position: absolute;
+    top: 6.7%;
+    right: -3.8%;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    background-color: #191D27;
+    border-radius: 0.5rem;
+    gap: 1rem;
+}

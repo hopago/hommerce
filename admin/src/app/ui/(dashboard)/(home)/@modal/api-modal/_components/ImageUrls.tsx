@@ -2,6 +2,13 @@ import { toast } from "sonner";
 
 import styles from "./image-urls.module.css";
 
+import { ClipBoard } from "../assets/Clipboard";
+
+import Tooltip from "./UrlsClipBoard";
+
+import { useCopyUrlsToClipboard } from "../hooks/use-copy-urls";
+import { useMouseCoordinates } from "../hooks/use-mouse-coordinates";
+
 type ImageUrlsProps = {
   urls: string[];
 };
@@ -9,19 +16,32 @@ type ImageUrlsProps = {
 export default function ImageUrls({ urls }: ImageUrlsProps) {
   if (!urls.length) {
     toast.error("이미지 URL을 불러오지 못했어요.");
+    return null;
   }
 
+  const { onMouseEnter, onMouseLeave, show, onMouseMove, mousePosition } =
+    useMouseCoordinates();
+  const { isLoading, onClick } = useCopyUrlsToClipboard(urls);
+
   return (
-    <div className={styles.container}>
+    <button
+      className={styles.container}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onMouseMove={onMouseMove}
+    >
       <div className={styles.wrapper}>
-        <ul>
-          {urls.map((url) => (
-            <li key={url}>
-              <span>{url}</span>
-            </li>
-          ))}
-        </ul>
+        <ClipBoard onClick={onClick} isLoading={isLoading} />
+        {show && (
+          <Tooltip
+            stylesProps={{
+              position: "absolute",
+              left: `${mousePosition.x + 16}px`,
+              top: `${mousePosition.y - 16}px`,
+            }}
+          />
+        )}
       </div>
-    </div>
+    </button>
   );
 }

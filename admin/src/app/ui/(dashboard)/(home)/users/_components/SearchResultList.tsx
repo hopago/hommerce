@@ -6,7 +6,7 @@ import SearchResultItem from "./SearchResultItem";
 
 import styles from "./search-results.module.css";
 
-import { FaSpinner } from "react-icons/fa";
+import Spinner from "@/app/ui/_components/Spinner";
 
 type SearchProps = {
   search: IUser[];
@@ -14,12 +14,7 @@ type SearchProps = {
 };
 
 function Loading() {
-  return (
-    <div className={styles.spinner}>
-      <FaSpinner className={styles.loadingIcon} />
-      <span>데이터를 불러오는 중입니다.</span>
-    </div>
-  );
+  return <Spinner text="데이터를 불러오는 중입니다." />;
 }
 
 function NoResults() {

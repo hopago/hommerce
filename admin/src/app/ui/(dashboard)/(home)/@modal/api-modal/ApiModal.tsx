@@ -57,6 +57,7 @@ export default function ApiModal() {
     showUpload,
     showUploadButton,
     prepareImage,
+    hasImage,
     handleUploadSuccess,
     imgUrls,
   } = useUploadthing({ specs: memoApiSpecs! });
@@ -64,12 +65,23 @@ export default function ApiModal() {
   if (!show || !memoApiSpecs || !memoApiEndpoint) return null;
 
   const handleClose = async () => {
-    if (imgUrls?.length) {
+    if (hasImage) {
       const isConfirm = confirm(
         "이미지가 업로드된 상태에요. 파일을 저장할까요?"
       );
 
-      !isConfirm && (await deleteImages(imgUrls));
+      if (!isConfirm) {
+        try {
+          await deleteImages(imgUrls!);
+        } catch (err: unknown) {
+          const { message, status } = err as {
+            message: string;
+            status: number;
+          };
+
+          toast.error(`에러 코드: ${status}, 에러 메시지: ${message}`);
+        }
+      }
     }
     resetState();
     setShow(false);
@@ -99,22 +111,38 @@ export default function ApiModal() {
             className={BUTTON_CLASS.CLOSE}
             disabled={isPending}
           />
-          {prepareImage ? (
+          {prepareImage && (
             <Button
               type="button"
               onClick={showUploadButton}
-              icon={<MdOutlineAddAPhoto />}
+              icon={<MdOutlineAddAPhoto size={23} />}
               className={BUTTON_CLASS.IMG_UPLOAD}
               disabled={false}
             />
-          ) : (
-            <ImageUrls urls={imgUrls!} />
           )}
+          {hasImage && <ImageUrls urls={imgUrls!} />}
           {showUpload && (
             <div className={styles.uploadButtonWrap}>
               <UploadButton
+                appearance={{
+                  button({ ready, isUploading }) {
+                    return {
+                      fontSize: "0.9rem",
+                      color: "black",
+                      ...(ready && { color: "#ecfdf5" }),
+                      ...(isUploading && { color: "#d1d5db" }),
+                    };
+                  },
+                  container: {
+                    marginTop: "1rem",
+                  },
+                  allowedContent: {
+                    color: "#a1a1aa",
+                  },
+                }}
                 endpoint="imageUploader"
                 onClientUploadComplete={(res) => handleUploadSuccess(res)}
+                className="upload-button"
               />
             </div>
           )}
