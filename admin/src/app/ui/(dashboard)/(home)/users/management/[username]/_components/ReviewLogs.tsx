@@ -1,24 +1,22 @@
 import FilterReviewLogs from "./FilterReviewLogs";
 import ReviewLogTable from "./ReviewLogTable";
 import PaginateControl from "../../../../_components/PaginateControl";
+import { NoContent } from "./NoContentTable";
 
 import { useQuery } from "@tanstack/react-query";
 import { QueryKeys } from "@/app/lib/getQueryClient";
 import { daysToMs } from "../../../../utils/daysToMs";
 import { fetchUserReviews } from "../services/fetchUserReviews";
 
-import { usePaginatedData } from "../../../hooks/use-paginated-data";
 import { useHandleError } from "../hooks/use-handle-error";
 import { useCreatorPagination } from "@/app/store/use-pagination";
 import { creatorFilterReviews } from "@/app/store/use-filter";
 
-import { PAGE_THRESHOLD } from "../../../../constants/pagination";
-
-import { NoContent } from "./NoContentTable";
+import { DataTableSkeleton } from "../../../../books/_components/BooksSearchResults";
 
 export default function ReviewLogs({ userId }: { userId: string }) {
   const { filter, searchTerm, sort, enabled } = creatorFilterReviews();
-  const { currentPage, handleMoveToFirstPage } = useCreatorPagination();
+  const { currentPage } = useCreatorPagination();
 
   const {
     data,
@@ -29,7 +27,14 @@ export default function ReviewLogs({ userId }: { userId: string }) {
     isRefetching,
     isRefetchError,
   } = useQuery<ReviewData>({
-    queryKey: [QueryKeys.USER_REVIEW, userId],
+    queryKey: [
+      QueryKeys.USER_REVIEW,
+      userId,
+      sort,
+      filter,
+      searchTerm,
+      currentPage,
+    ],
     queryFn: () =>
       fetchUserReviews({
         pageNum: currentPage,
@@ -45,7 +50,9 @@ export default function ReviewLogs({ userId }: { userId: string }) {
 
   useHandleError({ error, isError, fieldName: "리뷰" });
 
-  if (!data || !data.reviews || !data.pagination)
+  if (isLoading) return <DataTableSkeleton />;
+
+  if (!data?.reviews.length)
     return (
       <NoContent
         queryKey={[QueryKeys.USER_REVIEW, userId]}
@@ -56,23 +63,18 @@ export default function ReviewLogs({ userId }: { userId: string }) {
       />
     );
 
-  const { paginatedData, pageTotal } = usePaginatedData({
-    data: data.reviews,
-    sort,
-    handleMoveToFirstPage,
-    currentPage,
-  });
-
-  return (
-    <>
-      <FilterReviewLogs />
-      <ReviewLogTable
-        userId={userId}
-        isLoading={isLoading}
-        reviews={paginatedData as ReviewLogs}
-        dataLength={pageTotal * PAGE_THRESHOLD}
-      />
-      <PaginateControl pageTotal={pageTotal} />
-    </>
-  );
+  if (data.reviews.length) {
+    return (
+      <>
+        <FilterReviewLogs />
+        <ReviewLogTable
+          userId={userId}
+          isLoading={isLoading}
+          reviews={data.reviews as ReviewLogs}
+          dataLength={data?.pagination.totalReviews!}
+        />
+        <PaginateControl pageTotal={data?.pagination.totalPages!} />
+      </>
+    );
+  }
 }

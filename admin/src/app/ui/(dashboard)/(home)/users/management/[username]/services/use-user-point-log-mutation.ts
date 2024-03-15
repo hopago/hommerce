@@ -6,6 +6,8 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 import { createQueryString } from "../../../../utils/createQueryString";
+import { creatorFilterPoints } from "@/app/store/use-filter";
+import { useCreatorPagination } from "@/app/store/use-pagination";
 
 const updatePointLog = async ({
   userId,
@@ -33,6 +35,9 @@ const updatePointLog = async ({
 export const useUserPointLogMutation = () => {
   const queryClient = getQueryClient();
 
+  const { sort, filter, searchTerm } = creatorFilterPoints();
+  const { currentPage } = useCreatorPagination();
+
   const { mutate, isPending, isSuccess } = useMutation<
     PointLog,
     HttpError | Error | unknown,
@@ -44,7 +49,7 @@ export const useUserPointLogMutation = () => {
     onSuccess: async (mutatedLogs) => {
       try {
         await queryClient.setQueryData(
-          [QueryKeys.USER_POINT_LOG, mutatedLogs.userId],
+          [QueryKeys.USER_POINT_LOG, mutatedLogs.userId, sort, filter, searchTerm, currentPage],
           mutatedLogs
         );
         toast.success("포인트 변경을 성공적으로 마쳤어요.");

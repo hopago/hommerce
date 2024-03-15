@@ -47,11 +47,11 @@ export const fetchUserReviews = ({
     path += `?${sortQueryString}`;
   }
 
+  const pageNumQueryString = `pageNum=${pageNum}`;
+  path += `&${pageNumQueryString}`;
+
   return reactQueryFetcher<ReviewData>({
     method: "GET",
     path,
-    body: {
-      pageNum,
-    },
   });
 };

@@ -1,3 +1,4 @@
+import { Skeleton } from "@nextui-org/react";
 import { SELECT_CLASS } from "../constants/classNames";
 
 import { SortOption } from "../users/management/[username]/_components/ReviewControlPanel";
@@ -43,3 +44,10 @@ const SortReview = ({
 };
 
 export default SortReview;
+
+export const SortDataButtonSkeleton = () => (
+  <div className={styles.reviewControlPanel}>
+    <Skeleton className={styles.titleSkeleton} />
+    <Skeleton className={styles.selectSkeleton} />
+  </div>
+);

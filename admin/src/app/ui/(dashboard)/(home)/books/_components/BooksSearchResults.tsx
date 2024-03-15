@@ -1,14 +1,13 @@
 "use client";
 
 import PaginateControl from "../../_components/PaginateControl";
-import BookTable from "./BookTable";
-import FilterBooks from "./FilterBooks";
+import BookTable, { TableSkeleton } from "./BookTable";
+import FilterBooks, { FilterItemsSkeleton } from "./FilterBooks";
 
 import styles from "./book-search.module.css";
 
 import { creatorFilterBooks } from "@/app/store/use-filter";
 import { useCreatorPagination } from "@/app/store/use-pagination";
-import { usePaginatedData } from "../../users/hooks/use-paginated-data";
 
 import { QueryKeys } from "@/app/lib/getQueryClient";
 import { useQuery } from "@tanstack/react-query";
@@ -17,13 +16,13 @@ import { daysToMs } from "../../utils/daysToMs";
 import { useHandleError } from "../../users/management/[username]/hooks/use-handle-error";
 
 import { NoContent } from "../../users/management/[username]/_components/NoContentTable";
-import { PAGE_THRESHOLD } from "../../constants/pagination";
 
-// TODO: Sort 옵션 추가, DB 검색 옵션 수정
+import { Skeleton } from "@nextui-org/react";
+import { cn } from "@/app/ui/lib/utils";
 
 export default function BooksSearchResults() {
   const { sort, filter, searchTerm, enabled } = creatorFilterBooks();
-  const { handleMoveToFirstPage, currentPage } = useCreatorPagination();
+  const { currentPage } = useCreatorPagination();
 
   const {
     data,
@@ -34,7 +33,7 @@ export default function BooksSearchResults() {
     isRefetching,
     isRefetchError,
   } = useQuery<BookData>({
-    queryKey: [QueryKeys.BOOK],
+    queryKey: [QueryKeys.BOOK, sort, filter, searchTerm, currentPage],
     queryFn: () =>
       fetchBookBySearchTerm({
         pageNum: currentPage,
@@ -49,7 +48,9 @@ export default function BooksSearchResults() {
 
   useHandleError({ error, isError, fieldName: "리뷰" });
 
-  if (!data || !data.books || !data.pagination)
+  if (isLoading) return <DataTableSkeleton />;
+
+  if (!data?.books.length) {
     return (
       <div className={styles.container}>
         <div className={styles.wrapper}>
@@ -64,26 +65,32 @@ export default function BooksSearchResults() {
         </div>
       </div>
     );
+  }
 
-  const { paginatedData, pageTotal } = usePaginatedData({
-    data: data.books,
-    sort,
-    handleMoveToFirstPage,
-    currentPage,
-  });
-
-  return (
-    <div className={styles.container}>
-      <div className={styles.wrapper}>
-        <h1 className={styles.title}>도서 목록</h1>
-        <FilterBooks />
-        <BookTable
-          books={paginatedData as IBook[]}
-          isLoading={isLoading}
-          dataLength={pageTotal * PAGE_THRESHOLD}
-        />
-        <PaginateControl pageTotal={pageTotal} />
+  if (data.books.length) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.wrapper}>
+          <h1 className={styles.title}>도서 목록</h1>
+          <FilterBooks />
+          <BookTable
+            books={data.books as IBook[]}
+            isLoading={isLoading}
+            dataLength={data?.pagination.totalBooks!}
+          />
+          <PaginateControl pageTotal={data?.pagination.totalPages!} />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
+
+export const DataTableSkeleton = () => (
+  <div className={styles.container}>
+    <div className={styles.wrapper}>
+      <Skeleton className={cn("skeleton", styles.titleSkeleton)} />
+      <FilterItemsSkeleton />
+      <TableSkeleton />
+    </div>
+  </div>
+);

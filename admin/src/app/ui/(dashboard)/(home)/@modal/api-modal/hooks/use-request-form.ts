@@ -13,7 +13,7 @@ type UseRequestFormParams = {
   path: string | undefined;
   method: ApiMethod | undefined;
   onSuccess: (message?: string) => void;
-  onError: (message: string) => void;
+  onError: () => void;
 };
 
 export default function useRequestForm({
@@ -58,7 +58,7 @@ export default function useRequestForm({
     if (externalUrl === path && (pathField?.value || queryField?.value)) {
       setErr(true);
       setErrMsg("URL 설정 오류입니다. 다시 시도해주세요.");
-      onError(errMsg);
+      onError();
     }
 
     try {
@@ -81,8 +81,6 @@ export default function useRequestForm({
       onSuccess();
     } catch (error) {
       handleHttpError({ err: error, setErrMsg, setError: setErr });
-
-      onError(errMsg);
     }
   };
 

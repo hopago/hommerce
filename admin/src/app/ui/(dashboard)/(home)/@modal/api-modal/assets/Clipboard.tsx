@@ -7,9 +7,14 @@ type ClipBoardProps = {
   isLoading: boolean;
 };
 
+const stylesProps = {
+  minHeight: "max-content",
+  color: "white",
+};
+
 export const ClipBoard = ({ onClick, isLoading }: ClipBoardProps) => {
   const content = isLoading ? (
-    <Spinner />
+    <Spinner stylesProps={stylesProps} />
   ) : (
     <svg
       width="22"

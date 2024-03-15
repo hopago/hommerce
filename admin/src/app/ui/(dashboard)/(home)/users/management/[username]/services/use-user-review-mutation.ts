@@ -6,6 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import { creatorFilterReviews } from "@/app/store/use-filter";
 
 import { toast } from "sonner";
+import { useCreatorPagination } from "@/app/store/use-pagination";
 
 const deleteReview = async (id: string) => {
   return reactQueryFetcher<string>({
@@ -18,6 +19,7 @@ export const useUserReviewMutation = ({ userId }: { userId: string }) => {
   const queryClient = getQueryClient();
 
   const { filter, searchTerm, sort } = creatorFilterReviews();
+  const { currentPage } = useCreatorPagination();
 
   const { mutate, isPending } = useMutation<
     string | string[],
@@ -41,7 +43,14 @@ export const useUserReviewMutation = ({ userId }: { userId: string }) => {
       ]);
       if (!prevReviews) {
         await queryClient.invalidateQueries({
-          queryKey: [QueryKeys.USER_REVIEW, userId],
+          queryKey: [
+            QueryKeys.USER_REVIEW,
+            userId,
+            sort,
+            filter,
+            searchTerm,
+            currentPage,
+          ],
         });
         return;
       }

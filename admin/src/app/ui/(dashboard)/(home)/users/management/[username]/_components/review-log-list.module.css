@@ -125,3 +125,13 @@
         transform: scale(1) rotate(360deg);
     }
 }
+
+.titleSkeleton {
+    width: 130px;
+    height: 32px;
+}
+
+.selectSkeleton {
+    width: 120px;
+    height: 32px;
+}

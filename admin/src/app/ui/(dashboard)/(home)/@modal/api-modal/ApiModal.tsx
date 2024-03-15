@@ -42,14 +42,14 @@ export default function ApiModal() {
   const memoApiSpecs = useMemo(() => apiSpecs, [apiSpecs]);
   const memoApiEndpoint = useMemo(() => apiEndpoint, [apiEndpoint]);
 
-  const { execute, data, isPending } = useRequestForm({
+  const { execute, data, isPending, errMsg } = useRequestForm({
     path: apiEndpoint?.path,
     method: apiEndpoint?.method,
     onSuccess: (message?: string) => {
       toast.success(message ?? "요청이 성공적으로 처리 됐습니다.");
     },
-    onError: (message: string) => {
-      toast.error(`${message}`);
+    onError: () => {
+      toast.error(errMsg);
     },
   });
 

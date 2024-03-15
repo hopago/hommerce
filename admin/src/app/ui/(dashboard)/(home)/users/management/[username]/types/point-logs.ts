@@ -2,6 +2,7 @@ type PointData = {
   pointLogs: PointLogs;
   pagination: {
     totalPages: number;
+    totalPoints: number;
   };
 };
 

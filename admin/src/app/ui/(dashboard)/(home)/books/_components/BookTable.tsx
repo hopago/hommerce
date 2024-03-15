@@ -5,9 +5,15 @@ import styles from "./book-search.module.css";
 import { TableRowSkeleton } from "../../users/management/[username]/_components/TableRowSkeleton";
 
 import { BookRowAsync } from "./BookRow";
-import SortReview from "../../_components/SortDataButton";
+import SortReview, {
+  SortDataButtonSkeleton,
+} from "../../_components/SortDataButton";
+
 import { creatorFilterBooks } from "@/app/store/use-filter";
 import { useFilter } from "../../hooks/use-filter";
+
+import { Skeleton } from "@nextui-org/react";
+import { cn } from "@/app/ui/lib/utils";
 
 type BookTableProps = {
   books: IBook[];
@@ -44,7 +50,7 @@ export default function BookTable({
             </tr>
           </thead>
           <tbody>
-            {books.map((book, i) => (
+            {books?.map((book, i) => (
               <Suspense
                 key={`${book._id}-${i}`}
                 fallback={<TableRowSkeleton />}
@@ -58,3 +64,22 @@ export default function BookTable({
     </div>
   );
 }
+
+export const TableSkeleton = () => (
+  <div className={styles.tableContainer}>
+    <div className={styles.tableWrap}>
+      <SortDataButtonSkeleton />
+      <table>
+        <thead>
+          <tr>
+            <Skeleton className={cn("skeleton", styles.tdSkeleton)} />
+            <Skeleton className={cn("skeleton", styles.tdSkeleton)} />
+            <Skeleton className={cn("skeleton", styles.tdSkeleton)} />
+            <Skeleton className={cn("skeleton", styles.tdSkeleton)} />
+          </tr>
+        </thead>
+        <TableRowSkeleton />
+      </table>
+    </div>
+  </div>
+);

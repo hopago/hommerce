@@ -131,3 +131,15 @@
         transform: scale(1) rotate(360deg);
     }
 }
+
+.titleSkeleton {
+    width: 2rem;
+    height: 32px;
+    margin-bottom: 3rem;
+}
+
+.tdSkeleton {
+    padding: 1rem 0;
+    height: 100%;
+    width: 208px;
+}

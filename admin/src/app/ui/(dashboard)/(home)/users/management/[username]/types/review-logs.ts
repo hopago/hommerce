@@ -2,6 +2,7 @@ type ReviewData = {
   reviews: ReviewLogs;
   pagination: {
     totalPages: number;
+    totalReviews: number;
   };
 };
 

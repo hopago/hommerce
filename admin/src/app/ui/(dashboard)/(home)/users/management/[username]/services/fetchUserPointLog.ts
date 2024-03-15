@@ -47,11 +47,11 @@ export const fetchUserPointLog = ({
     path += `?${sortQueryString}`;
   }
 
+  const pageNumQueryString = `pageNum=${pageNum}`;
+  path += `&${pageNumQueryString}`;
+
   return reactQueryFetcher<PointData>({
     method: "GET",
     path,
-    body: {
-      pageNum,
-    },
   });
 };

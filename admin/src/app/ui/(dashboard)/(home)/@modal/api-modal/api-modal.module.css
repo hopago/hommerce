@@ -288,6 +288,10 @@
     min-height: 189px;
 }
 
+.jsonContentsDetails {
+    max-width: 719px;
+}
+
 .noContent {
     color: #E4E6EB;
     font-style: italic;

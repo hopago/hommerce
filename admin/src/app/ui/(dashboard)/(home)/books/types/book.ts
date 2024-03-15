@@ -57,5 +57,6 @@ type BookData = {
   books: IBook[];
   pagination: {
     totalPages: number;
+    totalBooks: number;
   };
 };

@@ -10,6 +10,9 @@ import { useFilter } from "../../hooks/use-filter";
 
 import styles from "../../users/management/[username]/_components/filter-review-logs.module.css";
 
+import { Skeleton } from "@nextui-org/react";
+import { cn } from "@/app/ui/lib/utils";
+
 export type BookFilterOption = "통합검색" | "제목" | "저자";
 
 export default function FilterBooks() {
@@ -54,3 +57,14 @@ export default function FilterBooks() {
     </div>
   );
 }
+
+export const FilterItemsSkeleton = () => (
+  <div className={styles.filter}>
+    <h1 className={styles.filterTitle}>검색 옵션 설정</h1>
+    <div className={styles.filterOptions}>
+      <Skeleton className={cn("skeleton", styles.selectSkeleton)} />
+      <Skeleton className={cn("skeleton", styles.inputSkeleton)} />
+      <Skeleton className={cn("skeleton", styles.buttonSkeleton)} />
+    </div>
+  </div>
+);

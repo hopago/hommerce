@@ -45,11 +45,11 @@ export const fetchBookBySearchTerm = ({
     path += `?${sortQueryString}`;
   }
 
+  const pageNumQueryString = `pageNum=${pageNum}`;
+  path += `&${pageNumQueryString}`;
+
   return reactQueryFetcher<BookData>({
     method: "GET",
     path,
-    body: {
-      pageNum,
-    },
   });
 };
