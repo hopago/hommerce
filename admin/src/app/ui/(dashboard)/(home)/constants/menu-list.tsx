@@ -16,6 +16,8 @@ import { IoMdHeart } from "react-icons/io";
 
 import { MenuList } from "../types/menu-list";
 
+// details 페이지 - DETAILS API CRUD 제공
+
 export const menuList: MenuList = [
   {
     title: "페이지",

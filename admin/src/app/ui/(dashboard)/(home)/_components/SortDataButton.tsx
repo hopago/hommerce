@@ -1,4 +1,3 @@
-import { Skeleton } from "@nextui-org/react";
 import { SELECT_CLASS } from "../constants/classNames";
 
 import { SortOption } from "../users/management/[username]/_components/ReviewControlPanel";
@@ -6,6 +5,9 @@ import { SortOption } from "../users/management/[username]/_components/ReviewCon
 import styles from "../users/management/[username]/_components/review-log-list.module.css";
 
 import SelectList from "./SelectList";
+
+import { Skeleton } from "@nextui-org/react";
+import { cn } from "@/app/ui/lib/utils";
 
 type SortReviewProps = {
   dataLength: number;
@@ -47,7 +49,7 @@ export default SortReview;
 
 export const SortDataButtonSkeleton = () => (
   <div className={styles.reviewControlPanel}>
-    <Skeleton className={styles.titleSkeleton} />
-    <Skeleton className={styles.selectSkeleton} />
+    <Skeleton className={cn("skeleton", styles.titleSkeleton)} />
+    <Skeleton className={cn("skeleton", styles.selectSkeleton)} />
   </div>
 );

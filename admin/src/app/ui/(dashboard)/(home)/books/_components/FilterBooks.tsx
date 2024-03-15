@@ -60,7 +60,7 @@ export default function FilterBooks() {
 
 export const FilterItemsSkeleton = () => (
   <div className={styles.filter}>
-    <h1 className={styles.filterTitle}>검색 옵션 설정</h1>
+    <Skeleton className={cn("skeleton", styles.titleSkeleton)} />
     <div className={styles.filterOptions}>
       <Skeleton className={cn("skeleton", styles.selectSkeleton)} />
       <Skeleton className={cn("skeleton", styles.inputSkeleton)} />

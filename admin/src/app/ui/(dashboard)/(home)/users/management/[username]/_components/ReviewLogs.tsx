@@ -14,6 +14,8 @@ import { creatorFilterReviews } from "@/app/store/use-filter";
 
 import { DataTableSkeleton } from "../../../../books/_components/BooksSearchResults";
 
+import { useEffect, useState } from "react";
+
 export default function ReviewLogs({ userId }: { userId: string }) {
   const { filter, searchTerm, sort, enabled } = creatorFilterReviews();
   const { currentPage } = useCreatorPagination();
@@ -49,6 +51,14 @@ export default function ReviewLogs({ userId }: { userId: string }) {
   });
 
   useHandleError({ error, isError, fieldName: "리뷰" });
+
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) return null;
 
   if (isLoading) return <DataTableSkeleton />;
 

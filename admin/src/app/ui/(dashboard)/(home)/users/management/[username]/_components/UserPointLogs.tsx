@@ -18,6 +18,8 @@ import { fetchUserPointLog } from "../services/fetchUserPointLog";
 
 import { DataTableSkeleton } from "../../../../books/_components/BooksSearchResults";
 
+import { useEffect, useState } from "react";
+
 type UserPointLogsProps = {
   userId: string;
 };
@@ -57,6 +59,14 @@ export default function UserPointLogs({ userId }: UserPointLogsProps) {
   });
 
   useHandleError({ error, isError, fieldName: "포인트" });
+
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) return null;
 
   if (isLoading) return <DataTableSkeleton />;
 

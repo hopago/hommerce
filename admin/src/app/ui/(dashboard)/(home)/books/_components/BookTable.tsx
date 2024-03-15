@@ -72,12 +72,26 @@ export const TableSkeleton = () => (
       <table>
         <thead>
           <tr>
-            <Skeleton className={cn("skeleton", styles.tdSkeleton)} />
-            <Skeleton className={cn("skeleton", styles.tdSkeleton)} />
-            <Skeleton className={cn("skeleton", styles.tdSkeleton)} />
-            <Skeleton className={cn("skeleton", styles.tdSkeleton)} />
+            <td>
+              <Skeleton className={cn("skeleton", styles.tdSkeleton)} />
+            </td>
+            <td>
+              <Skeleton className={cn("skeleton", styles.tdSkeleton)} />
+            </td>
+            <td>
+              <Skeleton className={cn("skeleton", styles.tdSkeleton)} />
+            </td>
+            <td>
+              <Skeleton className={cn("skeleton", styles.tdSkeleton)} />
+            </td>
           </tr>
         </thead>
+        <TableRowSkeleton />
+        <div style={{ marginBottom: "48px" }} />
+        <TableRowSkeleton />
+        <div style={{ marginBottom: "48px" }} />
+        <TableRowSkeleton />
+        <div style={{ marginBottom: "48px" }} />
         <TableRowSkeleton />
       </table>
     </div>
