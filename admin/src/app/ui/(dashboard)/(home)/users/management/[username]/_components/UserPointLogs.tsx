@@ -70,7 +70,7 @@ export default function UserPointLogs({ userId }: UserPointLogsProps) {
 
   if (isLoading) return <DataTableSkeleton />;
 
-  if (!data?.pointLogs.length)
+  if (!data?.pointLogs?.length)
     return (
       <div className={styles.pointLogs}>
         <NoContent

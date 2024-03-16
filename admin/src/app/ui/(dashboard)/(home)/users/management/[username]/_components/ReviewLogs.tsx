@@ -62,7 +62,7 @@ export default function ReviewLogs({ userId }: { userId: string }) {
 
   if (isLoading) return <DataTableSkeleton />;
 
-  if (!data?.reviews.length)
+  if (!data?.reviews?.length)
     return (
       <NoContent
         queryKey={[QueryKeys.USER_REVIEW, userId]}
@@ -73,7 +73,7 @@ export default function ReviewLogs({ userId }: { userId: string }) {
       />
     );
 
-  if (data.reviews.length) {
+  if (data?.reviews?.length) {
     return (
       <>
         <FilterReviewLogs />
