@@ -1,0 +1,183 @@
+.bookInfo {
+    width: calc(100% - 1rem);
+}
+
+.bookInfoWrap {
+    padding: 1rem;
+    background-color: var(--bgSoft);
+    border-radius: 0.5rem;
+}
+
+.bookInfoHeader {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--divider);
+    margin-bottom: 1rem;
+}
+
+.headerTitle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.headerButton button {
+    font-weight: bold;
+}
+
+.fill {
+    width: 0.5rem;
+    height: 25px;
+    background-color: #4EFDC9;
+    border-radius: 1rem;
+}
+
+.bookInfoDetails {
+    display: flex;
+    gap: 1.5rem;
+    width: 100%;
+    padding: 1rem;
+    background-color: #151C2C;
+    border-radius: 0.5rem;
+}
+
+.bookImg {
+    object-fit: contain;
+}
+
+.bookInfoDetailsTexts {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.bookDesc {
+    flex: 1;
+    width: 100%;
+}
+
+.bookDescFlexWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.5rem;
+    background-color: #24324D;
+    border-radius: 0.5rem;
+}
+
+.infoTextContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.infoTextContainer h3 {
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    line-height: 18px;
+}
+
+.infoTextContainer p {
+    font-size: 14px;
+    color: var(--textSoft);
+}
+
+.detailsCardContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #191D27;
+    border-radius: 0.5rem;
+}
+
+.detailsCardWrap {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.card {
+    width: 23%;
+}
+
+.cardWrap {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: #36383C;
+}
+
+.detailsCardWrap h3 {
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    line-height: 18px;
+}
+
+.detailsCardWrap span {
+    color: var(--textSoft);
+}
+
+.detailsCardWrap span:first-of-type {
+    margin-right: 0.25rem;
+}
+
+.imagesContainer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+}
+
+.imgList {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.imgList img {
+    width: 100%;
+    height: 100%;
+}
+
+.imgMutate {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background-color: #191D27;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    transition: all .3s ease;
+}
+
+.mutateTexts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mutateTexts span {
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    line-height: 18px;
+    color: var(--textSoft);
+}
+
+.imgList:hover .imgMutate {
+    opacity: 0.9;
+}

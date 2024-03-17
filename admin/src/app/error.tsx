@@ -33,7 +33,7 @@ export default function ErrorPage({ error, reset }: ErrorProps) {
         </div>
         <Image
           src="/img_cute-astronaut.png"
-          alt="error-fill-img"
+          alt="error-fill-image"
           width={512}
           height={512}
           className={styles.errorImg}

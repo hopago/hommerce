@@ -36,6 +36,9 @@ export const handleHttpError = ({
 export function handleError(error: unknown, fieldName: string) {
   if (error instanceof HttpError) {
     switch (error.status) {
+      case 400:
+        return `요청 필수 필드가 다 채워지지 않았어요.
+        ${error.message}`;
       case 404:
         return `${fieldName}를 찾지 못했습니다.`;
       case 500:

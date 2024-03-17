@@ -4,7 +4,7 @@ import { reactQueryFetcher } from "../fetcher/fetcher";
 
 export const getSingleBook = async (bookId: string) => {
   try {
-    const book = await reactQueryFetcher({
+    const book = await reactQueryFetcher<IBook>({
       method: "GET",
       path: `/book/${bookId}`,
     });

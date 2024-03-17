@@ -1,18 +1,35 @@
 import { getSingleBook } from "@/app/services/getBook";
+
+import { cache } from "react";
+
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 
-// TODO: 전체 에러 페이지, 404 페이지 UI
+import BookInfo from "@/app/ui/(dashboard)/(home)/books/[bookId]/_components/BookInfo";
+import BookDetails from "@/app/ui/(dashboard)/(home)/books/[bookId]/_components/BookDetails";
 
-async function getBook(bookId: string) {
+export const preload = (bookId: string) => {
+  void getBook(bookId);
+};
+
+export const getBook = cache(async (bookId: string) => {
   const book = await getSingleBook(bookId);
 
   return book;
-}
+});
 
 export default async function Book({ params }: Params) {
   const { bookId } = params;
 
   const book = await getBook(bookId);
 
-  return <div>page</div>;
+  return (
+    <>
+      <section>
+        <BookInfo book={book} />
+      </section>
+      <section>
+        <BookDetails bookId={book._id} />
+      </section>
+    </>
+  );
 }

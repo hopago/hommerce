@@ -1,6 +1,6 @@
 "use client"
 
-import styles from "@/app/ui/404.module.css";
+import styles from "@/app/ui/not-found.module.css";
 
 import Image from "next/image";
 
@@ -18,7 +18,7 @@ export default function GlobalNotFound() {
         </div>
         <Image
           src="/img_cute-astronaut.png"
-          alt="not-found-img"
+          alt="not-found-image"
           width={512}
           height={512}
           className={styles.notFoundImg}

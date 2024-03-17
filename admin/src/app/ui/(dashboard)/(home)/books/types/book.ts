@@ -34,6 +34,7 @@ type BookSubCategory =
 type BookSubCategoryList = BookSubCategory[];
 
 interface IBook {
+  [key: string]: any;
   images?: string[];
   _id: string;
   representImg: string;
