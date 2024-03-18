@@ -1,3 +1,5 @@
+import CardHeaderIcon from "../constants/card-header-icon";
+
 import { translateFieldTitleToKor } from "../utils/translateFieldValueToKor";
 
 import BookInfoDetailsImages from "./BookInfoDetailsImages";
@@ -7,6 +9,26 @@ import styles from "./book-info.module.css";
 type BookInfoDetailsCard = {
   title: string | "images";
   value: string | string[];
+};
+
+export type OptionalTitle =
+  | "discount"
+  | "eBookPrice"
+  | "unit"
+  | "comment"
+  | "sellType";
+
+type CardHeaderProps = {
+  title: OptionalTitle;
+};
+
+const CardHeader = ({ title }: CardHeaderProps) => {
+  return (
+    <div className={styles.cardWrapHeader}>
+      <h3>{translateFieldTitleToKor(title)}</h3>
+      <CardHeaderIcon title={title} />
+    </div>
+  );
 };
 
 const CardContent = ({ value }: { value: string | string[] }) => {
@@ -41,8 +63,7 @@ export default function BookInfoDetailsCard({
       <div className={styles.detailsCardWrap}>
         <div className={styles.card}>
           <div className={styles.cardWrap}>
-            <h3>{translateFieldTitleToKor(title)}</h3>{" "}
-            {/* TODO: 각 필드마다 적절한 아이콘 */}
+            <CardHeader title={title as OptionalTitle} />
             <CardContent value={value} />
           </div>
         </div>
