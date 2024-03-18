@@ -1,4 +1,4 @@
-"use server";
+"use server"
 
 import { revalidatePath } from "next/cache";
 
@@ -9,9 +9,17 @@ import {
 
 import { updateBookImage as mutateBookImageFn } from "../ui/(dashboard)/(home)/books/[bookId]/services/use-mutate-image";
 
-export async function updateBook({ bookId, file }: UpdateBookParams) {
+type UpdateBookImageParams = {
+  bookId: string;
+  updatedImageUrl: string | undefined;
+  imageUrl: string;
+};
+
+export async function updateBook({ bookId, images }: UpdateBookParams) {
   try {
-    const updatedBook = await mutateFn({ bookId, file });
+    const updatedBook = await mutateFn({ bookId, images });
+
+    console.log(updateBook);
 
     revalidatePath(`/book/${bookId}`);
 
@@ -23,11 +31,15 @@ export async function updateBook({ bookId, file }: UpdateBookParams) {
 
 export async function updateBookImage({
   bookId,
-  file,
+  updatedImageUrl,
   imageUrl,
-}: UpdateBookParams & { imageUrl: string }) {
+}: UpdateBookImageParams) {
   try {
-    const updatedBook = await mutateBookImageFn({ bookId, file, imageUrl });
+    const updatedBook = await mutateBookImageFn({
+      bookId,
+      updatedImageUrl,
+      imageUrl,
+    });
 
     revalidatePath(`/book/${bookId}`);
 

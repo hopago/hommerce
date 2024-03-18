@@ -1,17 +1,22 @@
 import { reactQueryFetcher } from "@/app/fetcher/fetcher";
 
-import { UpdateBookParams } from "./use-mutate-book";
+type UpdateBookImageParams = {
+  bookId: string;
+  updatedImageUrl: string | undefined;
+  imageUrl: string;
+};
 
 export const updateBookImage = async ({
   bookId,
-  file,
+  updatedImageUrl,
   imageUrl,
-}: UpdateBookParams & { imageUrl: string }) => {
+}: UpdateBookImageParams) => {
   return reactQueryFetcher<IBook>({
     method: "PATCH",
-    path: `/book/${bookId}/i/${imageUrl}`,
+    path: `/book/${bookId}/i`,
     body: {
-      images: file,
+      imageUrl,
+      updatedImageUrl,
     },
   });
 };

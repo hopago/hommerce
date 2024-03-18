@@ -181,3 +181,36 @@
 .imgList:hover .imgMutate {
     opacity: 0.9;
 }
+
+.bookImageUpload {
+    width: 100%;
+    height: 100%;
+}
+
+.bookImageUpload label {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    background-color: #36383C;
+    min-width: 140px;
+    min-height: 240px;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all .3s ease;
+    color: var(--textSoft);
+}
+
+.bookImageUpload label span {
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    line-height: 18px;
+}
+
+.bookImageUpload label:hover {
+    background-color: #74777B;
+    color: var(--text);
+}

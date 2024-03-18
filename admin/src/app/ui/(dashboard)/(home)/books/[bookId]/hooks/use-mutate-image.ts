@@ -14,27 +14,30 @@ export const useMutateImage = ({
   bookId: string;
   imageUrl: string;
 }) => {
-  const [file, setFile] = useState<FileList | null>(null);
-  const [newImgUrl, setNewImgUrl] = useState<string | string[] | null>(null);
+  const [files, setFiles] = useState<FileList | null>(null);
+  const [newImgUrl, setNewImgUrl] = useState<string | undefined | null>(null);
 
+  const [isUploadSuccess, setIsUploadSuccess] = useState(false);
   const [isPending, setIsPending] = useState(false);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFile(e.target.files);
+    setFiles(e.target.files);
   };
 
   useEffect(() => {
-    if (!file) return;
+    if (!files) return;
 
     const uploadImages = async () => {
+      setIsUploadSuccess(false);
       try {
-        const image = await uploadFiles(file);
+        const image = await uploadFiles(JSON.parse(JSON.stringify(files)));
 
-        if (image && image[0]) {
+        if (image) {
           setNewImgUrl(image[0]);
         }
 
-        setFile(null);
+        setFiles(null);
+        setIsUploadSuccess(true);
       } catch (err) {
         if (err instanceof UploadThingError) {
           toast.error(`
@@ -44,19 +47,28 @@ export const useMutateImage = ({
         } else {
           toast.error("이미지를 업로드 하던 중 에러가 발생했어요.");
         }
+        setIsUploadSuccess(false);
       }
     };
 
     uploadImages();
-  }, [file]);
+  }, [files]);
 
   useEffect(() => {
     if (!newImgUrl) return;
 
-    const mutate = async (imgUrls: string | string[]) => {
+    const mutate = async (newImageUrl: string | undefined) => {
       setIsPending(true);
       try {
-        await updateBookImage({ file: imgUrls, bookId, imageUrl });
+        await updateBookImage(
+          JSON.parse(
+            JSON.stringify({
+              updatedImageUrl: newImageUrl,
+              bookId,
+              imageUrl,
+            })
+          )
+        );
 
         setNewImgUrl(null);
         setIsPending(false);
@@ -68,8 +80,10 @@ export const useMutateImage = ({
       }
     };
 
-    mutate(newImgUrl);
-  }, [newImgUrl]);
+    if (isUploadSuccess) {
+      mutate(newImgUrl);
+    }
+  }, [newImgUrl, isUploadSuccess]);
 
   return {
     onChange,

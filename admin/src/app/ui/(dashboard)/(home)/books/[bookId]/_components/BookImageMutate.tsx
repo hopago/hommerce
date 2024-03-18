@@ -27,14 +27,14 @@ export default function BookImageMutate({ image }: BookImageMutateProps) {
         height={340}
         className="disabled-click"
       />
-      <label htmlFor="book-img-mutate" className={styles.imgMutate}>
+      <label htmlFor="update-book-image" className={styles.imgMutate}>
         <div className={styles.mutateTexts}>
           <FaCamera size={28} />
           <span>이미지 변경</span>
         </div>
         <input
           type="file"
-          id="book-img-mutate"
+          id="update-book-image"
           onChange={onChange}
           style={{ display: "none" }}
         />

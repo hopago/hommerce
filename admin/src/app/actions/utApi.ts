@@ -6,17 +6,14 @@ import { toast } from "sonner";
 
 import { UTApi } from "uploadthing/server";
 
-export const utApi = new UTApi();
+// files: JSON.stringify(FormDataEntryValue[]);
 
-export async function uploadFiles(files: FileList) {
-  const filesArray = [];
-  for (let i = 0; i < files.length; i++) {
-    filesArray.push(files[i]);
-  }
+export async function uploadFiles(formData: FormData) {
+  const utApi = new UTApi();
 
   try {
-    const response = await utApi.uploadFiles(filesArray);
-
+    const files = formData.getAll("files");
+    const response = await utApi.uploadFiles(files as File[]);
     const urls = response.map((res) => res.data?.url);
 
     return urls;
@@ -26,6 +23,8 @@ export async function uploadFiles(files: FileList) {
 }
 
 export async function deleteImages(urls: string[]) {
+  const utApi = new UTApi();
+
   if (Array.isArray(urls) && urls.length) {
     toast.warning("적합한 URL 타입이 아닙니다.");
 
