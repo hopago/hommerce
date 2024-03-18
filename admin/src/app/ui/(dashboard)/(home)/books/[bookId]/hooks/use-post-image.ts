@@ -64,12 +64,12 @@ export const usePostImage = ({
       try {
         await updateActions({ bookId, images: imageUrls });
         toast.message("이미지 업로드를 성공적으로 마쳤어요.");
-        setImageUrls(null);
       } catch (err) {
         const message = handleError(err, "도서");
         toast.error(message);
       } finally {
         setIsPending(false);
+        setImageUrls(null);
       }
     };
 

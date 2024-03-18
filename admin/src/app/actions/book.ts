@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import { revalidatePath } from "next/cache";
 
@@ -19,8 +19,6 @@ export async function updateBook({ bookId, images }: UpdateBookParams) {
   try {
     const updatedBook = await mutateFn({ bookId, images });
 
-    console.log(updateBook);
-
     revalidatePath(`/book/${bookId}`);
 
     return updatedBook;
@@ -35,6 +33,8 @@ export async function updateBookImage({
   imageUrl,
 }: UpdateBookImageParams) {
   try {
+    if (!updatedImageUrl) return;
+
     const updatedBook = await mutateBookImageFn({
       bookId,
       updatedImageUrl,

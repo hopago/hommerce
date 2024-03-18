@@ -2,91 +2,92 @@ import { updateBookImage } from "@/app/actions/book";
 import { uploadFiles } from "@/app/actions/utApi";
 import { handleError } from "@/app/fetcher/handle-error";
 
-import { useEffect, useState } from "react";
+import { RefObject, useEffect, useState } from "react";
 
 import { toast } from "sonner";
+
 import { UploadThingError } from "uploadthing/server";
 
 export const useMutateImage = ({
   bookId,
   imageUrl,
+  formRef,
 }: {
   bookId: string;
   imageUrl: string;
+  formRef: RefObject<HTMLFormElement>;
 }) => {
-  const [files, setFiles] = useState<FileList | null>(null);
   const [newImgUrl, setNewImgUrl] = useState<string | undefined | null>(null);
 
   const [isUploadSuccess, setIsUploadSuccess] = useState(false);
   const [isPending, setIsPending] = useState(false);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFiles(e.target.files);
+  const displayError = (err: unknown) => {
+    const errorMessage =
+      err instanceof UploadThingError
+        ? `이미지를 업로드 하던 중 에러가 발생했어요.\n${err.code}: ${err.message}`
+        : "이미지를 업로드 하던 중 에러가 발생했어요.";
+    toast.error(errorMessage);
+  };
+
+  const processUpload = async (formData: FormData) => {
+    try {
+      const images = await uploadFiles(formData);
+
+      if (images.length) {
+        setNewImgUrl(images[0]);
+        setIsUploadSuccess(true);
+      }
+    } catch (err) {
+      setIsUploadSuccess(false);
+      displayError(err);
+    }
+  };
+
+  const handleSubmit = async (e?: React.FormEvent<HTMLFormElement>) => {
+    if (e) e.preventDefault();
+    if (!formRef.current) return;
+
+    setIsUploadSuccess(false);
+
+    const formData = new FormData(e?.currentTarget ?? formRef.current);
+
+    await processUpload(formData);
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      handleSubmit();
+    }
   };
 
   useEffect(() => {
-    if (!files) return;
-
-    const uploadImages = async () => {
-      setIsUploadSuccess(false);
-      try {
-        const image = await uploadFiles(JSON.parse(JSON.stringify(files)));
-
-        if (image) {
-          setNewImgUrl(image[0]);
-        }
-
-        setFiles(null);
-        setIsUploadSuccess(true);
-      } catch (err) {
-        if (err instanceof UploadThingError) {
-          toast.error(`
-                이미지를 업로드 하던 중 에러가 발생했어요.
-                ${err.code}: ${err.message}
-                `);
-        } else {
-          toast.error("이미지를 업로드 하던 중 에러가 발생했어요.");
-        }
-        setIsUploadSuccess(false);
-      }
-    };
-
-    uploadImages();
-  }, [files]);
-
-  useEffect(() => {
-    if (!newImgUrl) return;
-
-    const mutate = async (newImageUrl: string | undefined) => {
+    const mutate = async (newImageUrl: string) => {
       setIsPending(true);
       try {
-        await updateBookImage(
-          JSON.parse(
-            JSON.stringify({
-              updatedImageUrl: newImageUrl,
-              bookId,
-              imageUrl,
-            })
-          )
-        );
-
-        setNewImgUrl(null);
-        setIsPending(false);
+        await updateBookImage({
+          updatedImageUrl: newImageUrl,
+          bookId,
+          imageUrl,
+        });
       } catch (err) {
-        setIsPending(false);
         const message = handleError(err, "도서");
 
         toast.error(message);
+      } finally {
+        setIsPending(false);
+        setNewImgUrl(null);
       }
     };
 
-    if (isUploadSuccess) {
+    if (isUploadSuccess && newImgUrl) {
       mutate(newImgUrl);
     }
-  }, [newImgUrl, isUploadSuccess]);
+  }, [newImgUrl, isUploadSuccess, bookId, imageUrl]);
 
   return {
-    onChange,
     isPending,
+    handleFileChange,
+    handleSubmit,
   };
 };

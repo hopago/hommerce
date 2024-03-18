@@ -17,12 +17,12 @@ export default function BookInfoDetailsImages({
   return (
     <div className={styles.detailsCardContainer}>
       <h3>{translateFieldTitleToKor(title)}</h3>
-      <ul className={styles.imagesContainer}>
+      <div className={styles.imagesContainer}>
         {images.length
           ? images.map((image) => <BookImageMutate key={image} image={image} />)
           : null}
         <BookImageUpload />
-      </ul>
+      </div>
     </div>
   );
 }

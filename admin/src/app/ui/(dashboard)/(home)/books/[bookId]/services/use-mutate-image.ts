@@ -2,7 +2,7 @@ import { reactQueryFetcher } from "@/app/fetcher/fetcher";
 
 type UpdateBookImageParams = {
   bookId: string;
-  updatedImageUrl: string | undefined;
+  updatedImageUrl: string;
   imageUrl: string;
 };
 
