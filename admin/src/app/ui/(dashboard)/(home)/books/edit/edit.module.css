@@ -1,0 +1,15 @@
+.container {
+    width: calc(100% - 1rem);
+}
+
+.wrap {
+    padding: 1rem 1rem 3rem 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: #191D27;
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.13);
+}

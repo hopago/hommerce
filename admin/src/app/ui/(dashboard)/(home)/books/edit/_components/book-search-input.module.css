@@ -1,0 +1,111 @@
+.container {
+    width: 100%;
+    max-width: 66%;
+    margin: 0 auto;
+}
+
+.wrap {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.inputContainer {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    min-width: 270px;
+    border-radius: 0.5rem;
+    border: 1px solid transparent;
+    background-color: #2e374a;
+    position: relative;
+    transition: all .3s ease;
+}
+
+.inputContainer:focus-within,
+.inputContainer.active {
+    border-color: var(--textSoft);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-color: 1px solid rgba(255, 255, 255, .05);
+}
+
+.inputContainer.error {
+    border: 1px solid #F23E5C;
+}
+
+.searchResultList {
+    width: 811px;
+    height: calc(100vh - 490px);
+    min-height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 46px;
+    left: -1px;
+    z-index: 9;
+    background-color: #2e374a;
+    border-top: 1px solid #2e374a;
+    border-left: 1px solid var(--textSoft);
+    border-right: 1px solid var(--textSoft);
+    border-bottom: 1px solid var(--textSoft);
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    overflow-y: auto;
+    display: none;
+}
+
+.searchResultList::-webkit-scrollbar {
+    display: none;
+}
+
+.searchResultList.show {
+    display: flex;
+}
+
+.listContainer {
+    width: 100%;
+    height: 100%;
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.searchResultItem {
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--textSoft);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-size: 14px;
+    letter-spacing: -0.01em;
+    line-height: 16px;
+    color: var(--textSoft);
+}
+
+.searchResultItem:hover {
+    background-color: var(--bgSoft);
+}
+
+.bookImg {
+    margin-right: 0.5rem;
+    object-fit: cover;
+}
+
+.desc {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 0.5rem;
+}

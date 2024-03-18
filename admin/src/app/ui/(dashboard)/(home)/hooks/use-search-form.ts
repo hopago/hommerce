@@ -173,13 +173,14 @@ export const useSearchBookForm = ({ filter }: { filter: BookFilterOption }) => {
     isLoading,
   } = useQuery<BookData>({
     queryKey: [QueryKeys.USER_SEARCH, filter, debouncedSearchTerm],
-    queryFn: () => fetchBookBySearchTerm({ searchTerm: debouncedSearchTerm }),
-    staleTime: daysToMs(1),
-    gcTime: daysToMs(3),
+    queryFn: () =>
+      fetchBookBySearchTerm({ filter, searchTerm: debouncedSearchTerm }),
+    staleTime: daysToMs(5),
+    gcTime: daysToMs(7),
     enabled: !!debouncedSearchTerm,
   });
 
-  useHandleError({ error, isError, fieldName: "유저" });
+  useHandleError({ error, isError, fieldName: "도서" });
 
   return {
     searchTerm,

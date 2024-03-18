@@ -34,8 +34,8 @@ export default function Input({
       className={cn(
         styles.input,
         className === INPUT_CLASS.API_PREPARE && styles.prepare,
-        className === INPUT_CLASS.API_PREPARE && styles.userSearch,
-        className === INPUT_CLASS.FILTER_REVIEW_INPUT && styles.filterReview
+        className === INPUT_CLASS.FILTER_REVIEW_INPUT && styles.filterReview,
+        className === INPUT_CLASS.USER_SEARCH_INPUT && styles.userSearch
       )}
       onChange={onChange}
       required={required}

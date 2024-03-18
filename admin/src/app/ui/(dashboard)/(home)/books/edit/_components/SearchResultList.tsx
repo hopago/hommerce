@@ -42,7 +42,7 @@ export default function SearchResultList({ search, isLoading }: SearchProps) {
   }
 
   return (
-    <div className={cn(styles.container, (isLoading || search) && styles.show)}>
+    <div className={cn(styles.searchResultList, (isLoading || search) && styles.show)}>
       {getSearchResult()}
     </div>
   );

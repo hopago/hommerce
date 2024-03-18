@@ -57,6 +57,7 @@ export default function BookSearchInput() {
           show={show}
           setShow={setShow}
           handleShow={toggleShow}
+          backgroundColor="#414B5D"
         />
         <div
           className={cn(
