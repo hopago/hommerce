@@ -48,10 +48,10 @@ app.use(morgan("dev"));
 
 app.use("/author", authorRouter);
 
-app.use("/book", bookRouter);
+app.use("/book/details", bookDetailsRouter);
 app.use("/book/s", bookAnalyticsRouter);
 app.use("/book/d", bookDataRouter);
-app.use("/book/:bookId/details", bookDetailsRouter);
+app.use("/book", bookRouter);
 
 app.use("/cart", cartRouter);
 

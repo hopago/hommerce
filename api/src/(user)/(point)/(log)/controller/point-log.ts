@@ -16,7 +16,7 @@ export const getUserPointLog = async (
   const sort = decodeURIComponent(req.query.sort as string) as
     | "최신순"
     | "오래된순";
-  const { pageNum } = req.body;
+  const pageNum = req.query.pageNum as number | undefined;
 
   try {
     const { userId } = req.params;

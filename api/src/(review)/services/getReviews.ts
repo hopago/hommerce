@@ -1,6 +1,6 @@
 import Review from "../models/review";
 
-export const handleGetReviews = async (bookId: string, pageNum: number) => {
+export const handleGetReviews = async (bookId: string, pageNum = 1) => {
   const perPage = 10;
   const skip = (pageNum - 1) * perPage;
 

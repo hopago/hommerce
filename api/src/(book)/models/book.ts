@@ -77,6 +77,7 @@ const bookSchema = new Schema(
     },
     sellType: {
       type: [String],
+      default: ["종이책"],
     },
   },
   {

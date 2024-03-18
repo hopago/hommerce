@@ -11,7 +11,9 @@ export const getBookDetails = async (
   try {
     const bookDetails = await handleGetBookDetails(req, next);
 
-    return res.status(200).json(bookDetails);
+    if (bookDetails) {
+      return res.status(200).json(bookDetails);
+    }
   } catch (err) {
     next(err);
   }
@@ -25,7 +27,9 @@ export const postBookDetails = async (
   try {
     const newBookDetails = await handlePostBookDetails(req, next);
 
-    return res.status(201).json(newBookDetails);
+    if (newBookDetails) {
+      return res.status(201).json(newBookDetails);
+    }
   } catch (err) {
     next(err);
   }
@@ -39,7 +43,9 @@ export const updateBookDetails = async (
   try {
     const updatedBookDetails = await handleUpdateBookDetails(req, next);
 
-    return res.status(201).json(updatedBookDetails);
+    if (updatedBookDetails) {
+      return res.status(201).json(updatedBookDetails);
+    }
   } catch (err) {
     next(err);
   }

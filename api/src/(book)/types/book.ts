@@ -6,19 +6,20 @@ type UnitType = "원";
 
 type TBook = {
   id: number;
-  images?: string[];
+  title: string;
+  price: number;
+  author: string;
   representImg: string;
+  desc?: string;
+  publisher: string;
   parentCategory: BookParentCategory;
   category: BookSubCategory;
-  title: string;
-  author: string;
-  discount?: string;
-  price: number;
+
+  images?: string[];
+  discount?: number;
   eBookPrice?: number;
   unit: UnitType;
   comment?: string;
-  desc?: string;
-  publisher: string;
   sellType?: SellType;
 };
 

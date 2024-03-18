@@ -33,7 +33,7 @@ export const getReviews = async (
 ) => {
   try {
     const { bookId } = req.params;
-    const { pageNum }: { pageNum: number } = req.body;
+    const pageNum = req.query.pageNum as number | undefined;
 
     if (!bookId) throw new HttpException(400, "Book Id required.");
     if (!pageNum) throw new HttpException(400, "Page number required.");

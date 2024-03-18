@@ -20,7 +20,7 @@ export const handleGetReviewByUserId = async (
     userId,
     filter,
     keyword,
-    pageNum,
+    pageNum = 1,
     sort = "최신순",
   }: HandleGetReviewByUserIdParams,
   next: NextFunction
@@ -61,6 +61,7 @@ export const handleGetReviewByUserId = async (
         pagination: {
           currentPage: pageNum,
           totalPages,
+          totalReviews,
         },
       }),
     };

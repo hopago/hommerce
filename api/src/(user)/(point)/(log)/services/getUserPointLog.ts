@@ -16,7 +16,7 @@ type QueryField = {
 const PAGE_SIZE = 8;
 
 export const handleGetUserPointLog = async (
-  { filter, keyword, userId, pageNum, sort = "최신순" }: QueryField,
+  { filter, keyword, userId, pageNum = 1, sort = "최신순" }: QueryField,
   next: NextFunction
 ) => {
   let query = { userId };
@@ -40,8 +40,8 @@ export const handleGetUserPointLog = async (
   }
 
   try {
-    const totalReviews = await PointLog.countDocuments(query);
-    const totalPages = Math.ceil(totalReviews / PAGE_SIZE);
+    const totalPoints = await PointLog.countDocuments(query);
+    const totalPages = Math.ceil(totalPoints / PAGE_SIZE);
 
     let pointsLogs;
 
@@ -62,6 +62,7 @@ export const handleGetUserPointLog = async (
         pagination: {
           currentPage: pageNum,
           totalPages,
+          totalPoints,
         },
       }),
     };

@@ -8,7 +8,7 @@ import {
 const router = express.Router();
 
 router
-  .route("/")
+  .route("/:bookId")
   .get(getBookDetails)
   .post(postBookDetails)
   .patch(updateBookDetails);

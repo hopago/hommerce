@@ -8,6 +8,7 @@ import { HttpException } from "../../middleware/error/utils";
 import { IBook } from "../models/book";
 import { handleGetBooksBySearchTerm } from "../services/getBooksBySearchTerm";
 import { DBResponse } from "../../types/response";
+import { handleUpdateImage } from "../services/updateImage";
 
 type FilterType = "통합검색" | "제목" | "저자";
 
@@ -27,21 +28,18 @@ export const getBooks = async (
   next: NextFunction
 ) => {
   const filter = req.query.filter as FilterType | undefined;
-  const keyword = req.query.keyword as string | undefined;
+  const keyword = req.query.keyword as string;
   const sort = decodeURIComponent(req.query.sort as string) as
     | "최신순"
     | "오래된순";
-  const { pageNum } = req.body as { pageNum: number | undefined };
+  const pageNum = req.query.pageNum as number | undefined;
 
   try {
-    let books: PaginatedResponse | DBResponse<IBook> | undefined;
-
-    keyword
-      ? (books = await handleGetBooksBySearchTerm(
-          { keyword, filter, sort, pageNum },
-          next
-        ))
-      : (books = await handleGetBooks(next));
+    const books: PaginatedResponse | undefined =
+      await handleGetBooksBySearchTerm(
+        { keyword, filter, sort, pageNum },
+        next
+      );
 
     if (books) {
       return res.status(200).json(books);
@@ -63,6 +61,31 @@ export const postBook = async (
   } catch (err) {
     next(err);
   }
+};
+
+export const updateImage = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { bookId } = req.params;
+    if (!bookId) throw new HttpException(400, "Book Id required.");
+
+    const {
+      updatedImageUrl,
+      imageUrl,
+    }: { updatedImageUrl: string; imageUrl: string } = req.body;
+    if (!updatedImageUrl || !imageUrl)
+      throw new HttpException(400, "Image url required.");
+
+    const updatedBook = await handleUpdateImage(
+      { bookId, imageUrl, updatedImageUrl },
+      next
+    );
+
+    return res.status(201).json(updatedBook);
+  } catch (err) {}
 };
 
 export const getBook = async (
