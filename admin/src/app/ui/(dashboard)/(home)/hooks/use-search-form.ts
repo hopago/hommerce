@@ -14,6 +14,7 @@ import { QueryKeys, getQueryClient } from "@/app/lib/getQueryClient";
 import { useHandleError } from "../users/management/[username]/hooks/use-handle-error";
 import { useDebouncedSearch } from "./use-debounced-search";
 import { fetchBookBySearchTerm } from "../books/services/fetchBookBySearchTerm";
+import { BookFilterOption } from "../books/_components/FilterBooks";
 
 type UseSearchProps = {
   type: MenuListTitle;
@@ -47,9 +48,9 @@ export function useNavigateForm({ type }: UseSearchProps) {
       setSearchTerm("");
       router.push("/authors");
     },
-    세부정보: () => {
+    "도서 정보 수정": () => {
       setSearchTerm("");
-      router.push("/books/details");
+      router.push("/books/edit");
     },
     리뷰: () => {
       setSearchTerm("");
@@ -161,9 +162,7 @@ export const useSearchUserForm = () => {
   };
 };
 
-export const useSearchBookForm = () => {
-  const queryClient = getQueryClient();
-
+export const useSearchBookForm = ({ filter }: { filter: BookFilterOption }) => {
   const { debouncedSearchTerm, searchTerm, setSearchTerm, handleChange } =
     useDebouncedSearch();
 
@@ -172,8 +171,8 @@ export const useSearchBookForm = () => {
     error,
     isError,
     isLoading,
-  } = useQuery<IBook[]>({
-    queryKey: [QueryKeys.USER_SEARCH, debouncedSearchTerm],
+  } = useQuery<BookData>({
+    queryKey: [QueryKeys.USER_SEARCH, filter, debouncedSearchTerm],
     queryFn: () => fetchBookBySearchTerm({ searchTerm: debouncedSearchTerm }),
     staleTime: daysToMs(1),
     gcTime: daysToMs(3),
@@ -187,7 +186,7 @@ export const useSearchBookForm = () => {
     setSearchTerm,
     handleChange,
     isLoading,
-    searchResults,
+    searchResults: searchResults?.books,
     error,
   };
 };

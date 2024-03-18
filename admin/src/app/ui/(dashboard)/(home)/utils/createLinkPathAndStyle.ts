@@ -20,18 +20,18 @@ export const createLinkPathAndStyle = ({
   const isUserSettingLink = link.path === "/setting/:userId";
   const userSettingPath = `/setting/${userId}`;
 
-  const isBooksDetailsLink = link.path === "/books/details";
-  const booksDetailsPath = `/books/details`;
+  const isBooksEditLink = link.path === "/books/edit";
+  const booksDetailsPath = `/books/edit`;
 
   const isActive = isUserSettingLink
     ? pathname.includes("setting")
-    : isBooksDetailsLink
-    ? pathname.includes("books/details")
+    : isBooksEditLink
+    ? pathname.includes("books/edit")
     : getFirstPathname(pathname) === getFirstPathname(link.path);
 
   const linkPath = isUserSettingLink
     ? userSettingPath
-    : isBooksDetailsLink
+    : isBooksEditLink
     ? booksDetailsPath
     : link.path;
 

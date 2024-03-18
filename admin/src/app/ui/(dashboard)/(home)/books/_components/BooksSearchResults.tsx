@@ -63,38 +63,42 @@ export default function BooksSearchResults() {
 
   if (isLoading) return <DataTableSkeleton />;
 
-  if (!data?.books.length) {
-    return (
-      <div className={styles.container} ref={scrollRef}>
-        <div className={styles.wrapper}>
-          <NoContent
-            text="준비된 도서가 아직 없습니다."
-            queryKey={[QueryKeys.BOOK]}
-            refetch={refetch}
-            error={error}
-            isRefetching={isRefetching}
-            isRefetchError={isRefetchError}
-          />
+  if (data && isBookData(data)) {
+    if (!data.books.length) {
+      return (
+        <div className={styles.container} ref={scrollRef}>
+          <div className={styles.wrapper}>
+            <NoContent
+              text="준비된 도서가 아직 없습니다."
+              queryKey={[QueryKeys.BOOK]}
+              refetch={refetch}
+              error={error}
+              isRefetching={isRefetching}
+              isRefetchError={isRefetchError}
+            />
+          </div>
         </div>
-      </div>
-    );
-  }
+      );
+    }
 
-  if (data.books.length) {
-    return (
-      <div className={styles.container} ref={scrollRef}>
-        <div className={styles.wrapper}>
-          <h1 className={styles.title}>도서 목록</h1>
-          <FilterBooks />
-          <BookTable
-            books={data.books as IBook[]}
-            isLoading={isLoading}
-            dataLength={data?.pagination.totalBooks!}
-          />
-          <PaginateControl pageTotal={data?.pagination.totalPages!} />
+    if (data.books.length) {
+      return (
+        <div className={styles.container} ref={scrollRef}>
+          <div className={styles.wrapper}>
+            <h1 className={styles.title}>도서 목록</h1>
+            <FilterBooks />
+            <BookTable
+              books={data.books as IBook[]}
+              isLoading={isLoading}
+              dataLength={data?.pagination.totalBooks!}
+            />
+            <PaginateControl pageTotal={data?.pagination.totalPages!} />
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+  } else {
+    return null;
   }
 }
 
@@ -107,3 +111,7 @@ export const DataTableSkeleton = () => (
     </div>
   </div>
 );
+
+function isBookData(data: BookData | IBook[]): data is BookData {
+  return (data as BookData).books !== undefined;
+}

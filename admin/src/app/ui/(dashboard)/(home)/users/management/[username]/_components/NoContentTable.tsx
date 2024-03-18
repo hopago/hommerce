@@ -21,7 +21,9 @@ type NoContentProps = {
   text?: string;
   refetch: (
     options?: RefetchOptions | undefined
-  ) => Promise<QueryObserverResult<ReviewData | PointData | BookData | Error>>;
+  ) => Promise<
+    QueryObserverResult<ReviewData | PointData | BookData | IBook[] | Error>
+  >;
   error: Error | null;
   isRefetching: boolean;
   isRefetchError: boolean;

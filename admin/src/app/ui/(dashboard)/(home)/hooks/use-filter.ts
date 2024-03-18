@@ -53,11 +53,16 @@ export function useFilter<T>(props: UseFilterProps<T>) {
     }
 
     setEnabled(true);
+    handleReset();
   };
 
   useEffect(() => {
     setShow(false);
   }, [filter, sort]);
+
+  useEffect(() => {
+    handleReset();
+  }, []);
 
   return {
     show,

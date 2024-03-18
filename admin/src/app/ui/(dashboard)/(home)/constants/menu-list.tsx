@@ -44,8 +44,8 @@ export const menuList: MenuList = [
             icon: <MdPerson />,
           },
           {
-            title: "세부정보",
-            path: "/books/details",
+            title: "도서 정보 수정",
+            path: "/books/edit",
             icon: <MdDetails />,
           },
           {

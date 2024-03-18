@@ -7,8 +7,8 @@ import { BookFilterOption } from "../_components/FilterBooks";
 type FetchBookBySearchTermParams = {
   filter?: BookFilterOption;
   searchTerm?: string;
-  pageNum: number;
-  sort: "최신순" | "오래된순";
+  pageNum?: number;
+  sort?: "최신순" | "오래된순";
 };
 
 const translateQueryValueToEn = (filter: BookFilterOption) => {
@@ -45,8 +45,10 @@ export const fetchBookBySearchTerm = ({
     path += `?${sortQueryString}`;
   }
 
-  const pageNumQueryString = `pageNum=${pageNum}`;
-  path += `&${pageNumQueryString}`;
+  if (pageNum) {
+    const pageNumQueryString = `pageNum=${pageNum}`;
+    path += `&${pageNumQueryString}`;
+  }
 
   return reactQueryFetcher<BookData>({
     method: "GET",
