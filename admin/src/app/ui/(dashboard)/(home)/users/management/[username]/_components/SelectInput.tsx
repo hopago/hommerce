@@ -10,7 +10,7 @@ type SelectInputProps = {
   items: UserGrade[] | UserStatus[] | BookParentCategory[] | SellType;
   onClickItem: any;
   isPending: boolean;
-  value: UserGrade | UserStatus | BookParentCategory | SellWay;
+  value: UserGrade | UserStatus | BookParentCategory[] | SellWay;
 };
 
 const SelectInput = ({
@@ -20,26 +20,30 @@ const SelectInput = ({
   value,
 }: SelectInputProps) => {
   const isActive = (item: TItem) =>
-    Array.isArray(value) ? value.includes(item) : value === item;
+    Array.isArray(value)
+      ? value.includes(item as BookParentCategory)
+      : value === item;
 
   return (
     <div className={styles.select}>
       <ol className={styles.selectList}>
-        {items.map((item) => (
-          <li
-            key={item}
-            className={cn(styles.selectItem, isActive(item) && styles.active)}
-          >
-            <button
-              type="button"
-              className={BUTTON_CLASS.STYLE_NONE}
-              onClick={() => onClickItem(item)}
-              disabled={isPending}
+        {items.map((item) => {
+          return (
+            <li
+              key={item}
+              className={cn(styles.selectItem, isActive(item) && styles.active)}
             >
-              <span>{item}</span>
-            </button>
-          </li>
-        ))}
+              <button
+                type="button"
+                className={BUTTON_CLASS.STYLE_NONE}
+                onClick={() => onClickItem(item)}
+                disabled={isPending}
+              >
+                <span>{item}</span>
+              </button>
+            </li>
+          );
+        })}
       </ol>
     </div>
   );

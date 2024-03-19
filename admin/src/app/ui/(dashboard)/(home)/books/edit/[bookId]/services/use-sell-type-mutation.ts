@@ -28,13 +28,8 @@ export const useSellTypeMutation = ({ bookId }: UseSellTypeMutationProps) => {
         },
       }),
     onSuccess: async (updatedBook) => {
-      try {
-        await queryClient.setQueryData([QueryKeys.BOOK, bookId], updatedBook);
-        toast.success("도서 정보가 성공적으로 업데이트 됐습니다.");
-      } catch (err) {
-        console.log(err);
-        toast.error("도서 정보 변형 중 오류가 발생했어요.");
-      }
+      queryClient.setQueryData<IBook>([QueryKeys.BOOK, bookId], updatedBook);
+      toast.success("도서 정보가 성공적으로 업데이트 됐습니다.");
     },
     onError: (err) => {
       if (err instanceof HttpError) {

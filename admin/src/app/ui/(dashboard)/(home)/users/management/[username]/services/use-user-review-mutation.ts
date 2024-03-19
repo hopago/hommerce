@@ -59,16 +59,11 @@ export const useUserReviewMutation = ({ userId }: { userId: string }) => {
         (review) => !idsArray.includes(review._id)
       );
 
-      try {
-        await queryClient.setQueryData(
-          [QueryKeys.USER_REVIEW, filter, searchTerm],
-          filteredReviews
-        );
-        toast.success("리뷰 삭제를 성공적으로 마쳤어요.");
-      } catch (err) {
-        console.error(err);
-        toast.error("리뷰 삭제는 완료했으나 쿼리키에 문제가 있어요.");
-      }
+      queryClient.setQueryData(
+        [QueryKeys.USER_REVIEW, filter, searchTerm],
+        filteredReviews
+      );
+      toast.success("리뷰 삭제를 성공적으로 마쳤어요.");
     },
     onError: (err) => {
       if (err instanceof HttpError) {

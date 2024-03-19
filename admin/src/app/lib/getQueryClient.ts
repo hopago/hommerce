@@ -1,6 +1,8 @@
 import { QueryClient } from "@tanstack/react-query";
 
-export const getQueryClient = () => {
+import { cache } from "react";
+
+export const getQueryClient = cache(() => {
   let client: QueryClient | null = null;
   if (!client)
     client = new QueryClient({
@@ -14,7 +16,7 @@ export const getQueryClient = () => {
       },
     });
   return client;
-};
+});
 
 export const QueryKeys = {
   USER: "user",

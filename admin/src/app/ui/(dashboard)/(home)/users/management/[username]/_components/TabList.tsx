@@ -21,10 +21,11 @@ export default function TabList() {
     alert("남은 관리 유저가 없습니다. 유저 페이지로 이동합니다.");
 
     resetState();
-    router.push("/users");
 
-    return null;
+    router.push("/users");
   }
+
+  if (!usernames) return null;
 
   const currPathname = getUsernameByPath();
 

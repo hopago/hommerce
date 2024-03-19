@@ -28,16 +28,11 @@ export const useUserGradeMutation = () => {
           grade,
         },
       }),
-    onSuccess: async (updatedUser) => {
+    onSuccess: (updatedUser) => {
       const mutatedUser = [updatedUser];
 
-      try {
-        await queryClient.setQueryData([QueryKeys.USER, username], mutatedUser);
-        toast.success("유저 업데이트가 성공적으로 처리됐습니다.");
-      } catch (err) {
-        console.log(err);
-        toast.error("유저 데이터 변형 중 오류가 발생했어요.");
-      }
+      queryClient.setQueryData([QueryKeys.USER, username], mutatedUser);
+      toast.success("유저 업데이트가 성공적으로 처리됐습니다.");
     },
     onError: (err) => {
       if (err instanceof HttpError) {

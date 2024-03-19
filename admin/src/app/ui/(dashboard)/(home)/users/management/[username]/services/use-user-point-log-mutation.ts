@@ -46,17 +46,19 @@ export const useUserPointLogMutation = () => {
     mutationKey: [QueryKeys.USER_POINT_LOG],
     mutationFn: ({ pointId, userId, amount, desc }) =>
       updatePointLog({ pointId, userId, amount, desc }),
-    onSuccess: async (mutatedLogs) => {
-      try {
-        await queryClient.setQueryData(
-          [QueryKeys.USER_POINT_LOG, mutatedLogs.userId, sort, filter, searchTerm, currentPage],
-          mutatedLogs
-        );
-        toast.success("포인트 변경을 성공적으로 마쳤어요.");
-      } catch (err) {
-        console.error(err);
-        toast.error("포인트 변경은 완료했으나 쿼리키에 문제가 있어요.");
-      }
+    onSuccess: (mutatedLogs) => {
+      queryClient.setQueryData(
+        [
+          QueryKeys.USER_POINT_LOG,
+          mutatedLogs.userId,
+          sort,
+          filter,
+          searchTerm,
+          currentPage,
+        ],
+        mutatedLogs
+      );
+      toast.success("포인트 변경을 성공적으로 마쳤어요.");
     },
     onError: (err) => {
       if (err instanceof HttpError) {

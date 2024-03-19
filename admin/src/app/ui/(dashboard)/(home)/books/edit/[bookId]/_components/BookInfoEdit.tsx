@@ -28,20 +28,20 @@ export default function BookInfoEdit() {
   } = useQuery({
     queryKey: [QueryKeys.BOOK, bookId],
     queryFn: () => getSingleBook(bookId),
-    staleTime: daysToMs(7),
-    gcTime: daysToMs(9),
+    staleTime: daysToMs(5),
+    gcTime: daysToMs(7),
     enabled: !!bookId,
   });
 
   useHandleError({ error, isError, fieldName: "도서" });
 
-  if (isLoading) return <BookInfoEditSkeleton />;
-
-  if (!initialData) return null;
-
   const { book, handleChange, handleSubmit, isPending } = useBookForm({
     initialBook: initialData,
+    bookId,
   });
+
+  if (isLoading) return <BookInfoEditSkeleton />;
+  if (!initialData) return null;
 
   return (
     <div className={styles.container}>

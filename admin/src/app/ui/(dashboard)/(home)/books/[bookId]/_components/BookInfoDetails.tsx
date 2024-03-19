@@ -9,9 +9,6 @@ type BookInfoDetailsProps = {
   book: IBook;
 };
 
-// TODO: 상세 정보 업데이트는 검색 창 -> 책 찾기 -> 업데이트 폼 -> 완료 or 실패
-// TODO: 책 정보 카드 flex-wrap, 책 텍스트 flex-wrap, 책 이미지 섹션 ( grid )
-
 export const requiredFields = [
   "title",
   "price",

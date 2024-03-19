@@ -7,13 +7,14 @@ import { toast } from "sonner";
 import { getDifferences } from "../utils/getDifferences";
 
 type UseBookFormProps = {
-  initialBook: IBook;
+  initialBook: IBook | undefined;
+  bookId: string;
 };
 
-export const useBookForm = ({ initialBook }: UseBookFormProps) => {
+export const useBookForm = ({ initialBook, bookId }: UseBookFormProps) => {
   const { book, handleChange } = useFormInputs({ initialBook });
 
-  const { mutateBook, isPending } = useUpdateBook({ bookId: initialBook._id });
+  const { mutateBook, isPending } = useUpdateBook({ bookId });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,7 +24,7 @@ export const useBookForm = ({ initialBook }: UseBookFormProps) => {
       return;
     }
 
-    const mutatedPart = getDifferences(initialBook, book);
+    const mutatedPart = getDifferences(initialBook!, book);
 
     mutateBook(mutatedPart);
   };

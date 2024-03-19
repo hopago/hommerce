@@ -3,7 +3,7 @@ import { QueryKeys, getQueryClient } from "@/app/lib/getQueryClient";
 import { useRouter } from "next/navigation";
 
 import { getUsernameByPath } from "../utils/getUsernameByPath";
-import { QueryFilters, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 import { IUser } from "../../../../types/user";
 
@@ -34,21 +34,13 @@ export const useUserUpdateMutation = () => {
           ...(email !== undefined && { email }),
         },
       }),
-    onSuccess: async (updatedUser) => {
+    onSuccess: (updatedUser) => {
       const mutatedUser = [updatedUser];
 
-      try {
-        await queryClient.setQueryData(
-          [QueryKeys.USER, pathUsername],
-          mutatedUser
-        );
-        toast.success("유저 업데이트가 성공적으로 처리됐습니다.");
+      queryClient.setQueryData([QueryKeys.USER, pathUsername], mutatedUser);
+      toast.success("유저 업데이트가 성공적으로 처리됐습니다.");
 
-        router.push(`/users/management/${updatedUser.username}`);
-      } catch (err) {
-        console.log(err);
-        toast.error("유저 데이터 변형 중 오류가 발생했어요.");
-      }
+      router.push(`/users/management/${updatedUser.username}`);
     },
     onError: (err) => {
       if (err instanceof HttpError) {

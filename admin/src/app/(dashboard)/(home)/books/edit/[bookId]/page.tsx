@@ -30,8 +30,8 @@ export default async function BookEditPage({ params }: BookEditPageProps) {
   await queryClient.prefetchQuery({
     queryKey: [QueryKeys.BOOK_DETAIL, bookId],
     queryFn: () => getBookDetails(bookId),
-    staleTime: daysToMs(7),
-    gcTime: daysToMs(9),
+    staleTime: daysToMs(5),
+    gcTime: daysToMs(7),
   });
 
   const dehydratedState = dehydrate(queryClient);

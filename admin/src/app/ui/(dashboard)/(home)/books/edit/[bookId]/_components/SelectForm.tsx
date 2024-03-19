@@ -11,7 +11,7 @@ import { SELECT_CLASS } from "../../../../constants/classNames";
 
 type SelectFormProps = {
   type: "상위 분야" | "책 카테고리" | "판매 방식" | "가격 단위";
-  value: BookParentCategory | BookSubCategory | SellType | UnitType;
+  value: BookParentCategory[] | BookSubCategory | SellType | UnitType;
   bookId: string;
 };
 
@@ -78,7 +78,7 @@ export default function SelectForm({ type, value, bookId }: SelectFormProps) {
             items={parentCategory}
             onClickItem={mutateBookParentCategory}
             isPending={isParentCategoryPending}
-            value={value as BookParentCategory}
+            value={value as BookParentCategory[]}
           />
         </div>
       );

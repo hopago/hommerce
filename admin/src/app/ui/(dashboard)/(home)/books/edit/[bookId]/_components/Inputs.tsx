@@ -69,7 +69,6 @@ export default function Inputs({ book, handleChange }: InputsProps) {
           onChange={handleChange}
           value={book.comment!}
           placeholder="코멘트 수정하기"
-          required={true}
         />
       </div>
       <div className={styles.inputWrap}>
@@ -91,7 +90,6 @@ export default function Inputs({ book, handleChange }: InputsProps) {
           onChange={handleChange}
           value={book.discount!}
           placeholder="할인율 수정하기, 예시: 17, 25..."
-          required={true}
         />
       </div>
       <div className={cn(styles.inputWrap, styles.lastInputWrap)}>
@@ -102,7 +100,6 @@ export default function Inputs({ book, handleChange }: InputsProps) {
           onChange={handleChange}
           value={book.eBookPrice!}
           placeholder="전자책 가격 수정하기"
-          required={true}
           disabled={!hasEbook}
         />
       </div>

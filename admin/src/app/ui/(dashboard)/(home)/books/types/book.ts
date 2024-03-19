@@ -38,7 +38,7 @@ interface IBook {
   images?: string[];
   _id: string;
   representImg: string;
-  parentCategory: BookParentCategory;
+  parentCategory: BookParentCategory[];
   category: BookSubCategory;
   title: string;
   author: string;
