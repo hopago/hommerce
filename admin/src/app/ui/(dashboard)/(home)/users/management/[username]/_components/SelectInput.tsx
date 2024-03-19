@@ -5,10 +5,10 @@ import { BUTTON_CLASS } from "../../../../constants/classNames";
 import styles from "./update-user-form.module.css";
 
 type SelectInputProps = {
-  items: UserGrade[] | UserStatus[];
+  items: UserGrade[] | UserStatus[] | BookParentCategory[] | SellType;
   onClickItem: any;
   isPending: boolean;
-  value: UserGrade | UserStatus;
+  value: UserGrade | UserStatus | BookParentCategory | SellWay;
 };
 
 const SelectInput = ({

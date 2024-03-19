@@ -17,13 +17,15 @@ type SelectItemProps = {
     | FilterOption
     | SortOption
     | PointFilterOption
-    | BookFilterOption;
+    | BookFilterOption
+    | BookSubCategory;
   selectList:
     | LogTabList[]
     | FilterOptions
     | SortOption[]
     | PointFilterOption[]
-    | BookFilterOption[];
+    | BookFilterOption[]
+    | BookSubCategoryList;
   handleItemClick: (param: any) => void;
   className?: string;
 };

@@ -25,13 +25,15 @@ type SelectListProps = {
     | FilterOptions
     | SortOption[]
     | PointFilterOption[]
-    | BookFilterOption[];
+    | BookFilterOption[]
+    | BookSubCategoryList;
   currSelect:
     | LogTabList
     | FilterOption
     | SortOption
     | PointFilterOption
-    | BookFilterOption;
+    | BookFilterOption
+    | BookSubCategory
   handleItemClick: (param: any) => void;
   show: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;

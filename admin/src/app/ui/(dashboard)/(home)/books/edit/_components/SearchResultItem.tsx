@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import styles from "./book-search-input.module.css";
 
-import { MdAdd } from "react-icons/md";
+import { IoNavigate } from "react-icons/io5";
 
 import { useRouter } from "next/navigation";
 
@@ -30,7 +30,7 @@ export default function SearchResultItem({ book }: SearchResultItemProps) {
         <span>{book.title}</span>
         <span>{book.author}</span>
       </div>
-      <MdAdd size={16} />
+      <IoNavigate size={16} />
     </li>
   );
 }

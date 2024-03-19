@@ -10,9 +10,21 @@ import { useEffect } from "react";
 
 import { getUsernameByPath } from "../utils/getUsernameByPath";
 
+import { useRouter } from "next/navigation";
+
 export default function TabList() {
-  const { usernames, onMutate, setActiveUser } = useManageUsers();
-  if (!usernames) return null;
+  const { usernames, onMutate, setActiveUser, resetState } = useManageUsers();
+
+  const router = useRouter();
+
+  if (!usernames) {
+    alert("남은 관리 유저가 없습니다. 유저 페이지로 이동합니다.");
+
+    resetState();
+    router.push("/users");
+
+    return null;
+  }
 
   const currPathname = getUsernameByPath();
 

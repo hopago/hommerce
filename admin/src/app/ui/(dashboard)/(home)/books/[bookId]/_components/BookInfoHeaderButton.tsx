@@ -10,7 +10,7 @@ export default function BookInfoHeaderButton() {
   const { bookId } = useParams();
   const router = useRouter();
 
-  const onClick = () => router.push(`/books/${bookId}/edit`);
+  const onClick = () => router.push(`/books/edit/${bookId}`);
 
   return (
     <div className={styles.headerButton}>
