@@ -17,4 +17,5 @@ export const SELECT_CLASS = {
   POST_LOGS_SELECT: "postLogs",
   FILTER_REVIEW_SELECT: "filterReview",
   REVIEW_SORT_SELECT: "reviewSort",
+  BOOK_EDIT: "bookEdit",
 };

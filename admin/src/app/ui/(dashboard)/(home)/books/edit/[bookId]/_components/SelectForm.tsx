@@ -1,9 +1,13 @@
+import styles from "./book-info-edit.module.css";
+
 import SelectList from "../../../../_components/SelectList";
 import SelectInput from "../../../../users/management/[username]/_components/SelectInput";
 
 import { useSelectCategory } from "../hooks/use-select-category";
 import { useParentCategoryMutation } from "../services/use-parent-category-mutation";
 import { useSellTypeMutation } from "../services/use-sell-type-mutation";
+import Label from "../../../../_components/Label";
+import { SELECT_CLASS } from "../../../../constants/classNames";
 
 type SelectFormProps = {
   type: "상위 분야" | "책 카테고리" | "판매 방식" | "가격 단위";
@@ -40,14 +44,18 @@ export default function SelectForm({ type, value, bookId }: SelectFormProps) {
       });
 
     return (
-      <SelectList
-        currSelect={category}
-        handleItemClick={handleCategory}
-        selectList={bookCategory}
-        show={show}
-        setShow={setShow}
-        handleShow={toggleShow}
-      />
+      <div className={styles.selectList}>
+        <Label text={type} />
+        <SelectList
+          currSelect={category}
+          handleItemClick={handleCategory}
+          selectList={bookCategory}
+          show={show}
+          setShow={setShow}
+          handleShow={toggleShow}
+          className={SELECT_CLASS.BOOK_EDIT}
+        />
+      </div>
     );
   }
 
@@ -64,21 +72,27 @@ export default function SelectForm({ type, value, bookId }: SelectFormProps) {
   switch (type) {
     case "상위 분야":
       return (
-        <SelectInput
-          items={parentCategory}
-          onClickItem={mutateBookParentCategory}
-          isPending={isParentCategoryPending}
-          value={value as BookParentCategory}
-        />
+        <div className={styles.selectInput}>
+          <Label text={type} />
+          <SelectInput
+            items={parentCategory}
+            onClickItem={mutateBookParentCategory}
+            isPending={isParentCategoryPending}
+            value={value as BookParentCategory}
+          />
+        </div>
       );
     case "판매 방식":
       return (
-        <SelectInput
-          items={sellType}
-          onClickItem={mutateBookSellType}
-          isPending={isSellTypePending}
-          value={value as SellWay}
-        />
+        <div className={styles.selectInput}>
+          <Label text={type} />
+          <SelectInput
+            items={sellType}
+            onClickItem={mutateBookSellType}
+            isPending={isSellTypePending}
+            value={value as SellWay}
+          />
+        </div>
       );
   }
 }

@@ -15,6 +15,7 @@ import { useBookForm } from "../hooks/use-book-form";
 import Button from "../../../../_components/Button";
 import Inputs from "./Inputs";
 import SelectForm from "./SelectForm";
+import Image from "next/image";
 
 export default function BookInfoEdit() {
   const { bookId }: { bookId: string } = useParams();
@@ -32,9 +33,9 @@ export default function BookInfoEdit() {
     enabled: !!bookId,
   });
 
-  if (isLoading) return <BookInfoEditSkeleton />;
-
   useHandleError({ error, isError, fieldName: "도서" });
+
+  if (isLoading) return <BookInfoEditSkeleton />;
 
   if (!initialData) return null;
 
@@ -45,29 +46,36 @@ export default function BookInfoEdit() {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
-        <div className={styles.imgWrap}>{/* 이미지 */}</div>
+        <div className={styles.imgWrap}>
+          <Image
+            src={initialData.representImg}
+            width={280}
+            height={400}
+            alt={initialData.title}
+          />
+        </div>
         <div className={styles.textWrap}>
-          <div className={styles.formContainer}>
-            <form className={styles.form} onSubmit={handleSubmit}>
-              <Inputs book={book} handleChange={handleChange} />
-              <SelectForm
-                type="상위 분야"
-                value={initialData.parentCategory!}
-                bookId={bookId}
-              />
-              <SelectForm
-                type="책 카테고리"
-                value={initialData.category!}
-                bookId={bookId}
-              />
-              <SelectForm
-                type="판매 방식"
-                value={initialData.sellType!}
-                bookId={bookId}
-              />
+          <form className={styles.form} onSubmit={handleSubmit}>
+            <Inputs book={book} handleChange={handleChange} />
+            <SelectForm
+              type="상위 분야"
+              value={initialData.parentCategory!}
+              bookId={bookId}
+            />
+            <SelectForm
+              type="책 카테고리"
+              value={initialData.category!}
+              bookId={bookId}
+            />
+            <SelectForm
+              type="판매 방식"
+              value={initialData.sellType!}
+              bookId={bookId}
+            />
+            <div className={styles.buttonWrap}>
               <Button type="submit" text="수정하기" disabled={isPending} />
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -79,9 +87,7 @@ const BookInfoEditSkeleton = () => (
     <div className={styles.wrapper}>
       <div className={styles.imgWrap}></div>
       <div className={styles.textWrap}>
-        <div className={styles.formContainer}>
-          <div className={styles.form}></div>
-        </div>
+        <div className={styles.form}></div>
       </div>
     </div>
   </div>

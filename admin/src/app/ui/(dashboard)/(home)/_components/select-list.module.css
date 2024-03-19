@@ -14,6 +14,10 @@
     margin-right: 0.5rem;
 }
 
+.select.select.bookEdit {
+    width: 180px;
+}
+
 .selectWrap {
     width: 100%;
     height: 100%;
@@ -64,6 +68,20 @@
 .selectList.filterReview {
     width: 180px;
     top: 34px;
+}
+
+.selectList.bookEdit {
+    width: 180px;
+    max-height: 210px;
+    overflow: auto;
+}
+
+.selectList.bookEdit::-webkit-scrollbar {
+    display: none;
+}
+
+.selectList.bookEdit {
+    scrollbar-width: none;
 }
 
 .selectItem {

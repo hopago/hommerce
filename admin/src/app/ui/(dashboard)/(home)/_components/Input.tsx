@@ -14,6 +14,7 @@ type InputProps = {
   name?: string;
   className?: "prepare" | string;
   required?: boolean;
+  disabled?: boolean;
 };
 
 export default function Input({
@@ -24,6 +25,7 @@ export default function Input({
   name,
   className,
   required,
+  disabled,
 }: InputProps) {
   return (
     <input
@@ -41,6 +43,7 @@ export default function Input({
       required={required}
       spellCheck={false}
       autoComplete="off"
+      disabled={disabled}
     />
   );
 }

@@ -40,7 +40,8 @@ const SelectItem = forwardRef<HTMLUListElement, SelectItemProps>(
           className === SELECT_CLASS.POST_LOGS_SELECT && styles.postLogs,
           className === SELECT_CLASS.FILTER_REVIEW_SELECT &&
             styles.filterReview,
-          className === SELECT_CLASS.REVIEW_SORT_SELECT && styles.reviewSort
+          className === SELECT_CLASS.REVIEW_SORT_SELECT && styles.reviewSort,
+          className === SELECT_CLASS.BOOK_EDIT && styles.bookEdit
         )}
       >
         {selectList.map((list, i) => {

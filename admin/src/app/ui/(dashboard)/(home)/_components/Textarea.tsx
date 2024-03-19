@@ -12,6 +12,7 @@ type TextareaProps = {
   className?: "prepare" | string;
   required?: boolean;
   error?: boolean;
+  name?: string;
 };
 
 export default function Textarea({
@@ -21,10 +22,12 @@ export default function Textarea({
   className,
   required,
   error,
+  name,
 }: TextareaProps) {
   return (
     <textarea
       value={value}
+      name={name}
       placeholder={placeholder}
       className={cn(
         styles.textarea,
