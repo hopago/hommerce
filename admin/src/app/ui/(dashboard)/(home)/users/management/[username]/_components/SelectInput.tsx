@@ -4,6 +4,8 @@ import { BUTTON_CLASS } from "../../../../constants/classNames";
 
 import styles from "./update-user-form.module.css";
 
+type TItem = UserGrade | UserStatus | BookParentCategory | SellWay;
+
 type SelectInputProps = {
   items: UserGrade[] | UserStatus[] | BookParentCategory[] | SellType;
   onClickItem: any;
@@ -17,13 +19,16 @@ const SelectInput = ({
   isPending,
   value,
 }: SelectInputProps) => {
+  const isActive = (item: TItem) =>
+    Array.isArray(value) ? value.includes(item) : value === item;
+
   return (
     <div className={styles.select}>
       <ol className={styles.selectList}>
         {items.map((item) => (
           <li
             key={item}
-            className={cn(styles.selectItem, value === item && styles.active)}
+            className={cn(styles.selectItem, isActive(item) && styles.active)}
           >
             <button
               type="button"

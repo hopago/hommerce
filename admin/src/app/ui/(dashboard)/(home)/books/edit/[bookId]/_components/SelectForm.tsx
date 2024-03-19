@@ -2,10 +2,13 @@ import SelectList from "../../../../_components/SelectList";
 import SelectInput from "../../../../users/management/[username]/_components/SelectInput";
 
 import { useSelectCategory } from "../hooks/use-select-category";
+import { useParentCategoryMutation } from "../services/use-parent-category-mutation";
+import { useSellTypeMutation } from "../services/use-sell-type-mutation";
 
 type SelectFormProps = {
   type: "상위 분야" | "책 카테고리" | "판매 방식" | "가격 단위";
   value: BookParentCategory | BookSubCategory | SellType | UnitType;
+  bookId: string;
 };
 
 const parentCategory: BookParentCategory[] = ["국내도서", "외국도서", "eBook"];
@@ -26,13 +29,14 @@ const bookCategory: BookSubCategory[] = [
   "현대지성",
 ];
 
-const sellType: SellType = ["eBook", "sam", "종이책"];
+const sellType: SellType = ["종이책", "eBook", "sam"];
 
-export default function SelectForm({ type, value }: SelectFormProps) {
+export default function SelectForm({ type, value, bookId }: SelectFormProps) {
   if (type === "책 카테고리") {
     const { show, setShow, category, handleCategory, toggleShow } =
       useSelectCategory({
         initialCategory: value as BookSubCategory,
+        bookId,
       });
 
     return (
@@ -47,13 +51,23 @@ export default function SelectForm({ type, value }: SelectFormProps) {
     );
   }
 
+  const { mutateBookParentCategory, isPending: isParentCategoryPending } =
+    useParentCategoryMutation({
+      bookId,
+    });
+
+  const { mutateBookSellType, isPending: isSellTypePending } =
+    useSellTypeMutation({
+      bookId,
+    });
+
   switch (type) {
     case "상위 분야":
       return (
         <SelectInput
           items={parentCategory}
-          onClickItem={() => {}}
-          isPending={false}
+          onClickItem={mutateBookParentCategory}
+          isPending={isParentCategoryPending}
           value={value as BookParentCategory}
         />
       );
@@ -61,8 +75,8 @@ export default function SelectForm({ type, value }: SelectFormProps) {
       return (
         <SelectInput
           items={sellType}
-          onClickItem={() => {}}
-          isPending={false}
+          onClickItem={mutateBookSellType}
+          isPending={isSellTypePending}
           value={value as SellWay}
         />
       );
