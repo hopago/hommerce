@@ -1,4 +1,6 @@
-import * as l from "lodash";
+import _ from "lodash";
+
+type BookKeys = keyof IBook;
 
 export function getDifferences(
   initialBook: IBook,
@@ -6,8 +8,12 @@ export function getDifferences(
 ): Partial<IBook> {
   const differences: Partial<IBook> = {};
 
-  Object.keys(initialBook).forEach((key) => {
-    if (book.hasOwnProperty(key) && !l.isEqual(initialBook[key], book[key])) {
+  const allKeys = Array.from(
+    new Set([...Object.keys(initialBook), ...Object.keys(book)])
+  ) as BookKeys[];
+
+  allKeys.forEach((key) => {
+    if (JSON.stringify(initialBook[key]) !== JSON.stringify(book[key])) {
       differences[key] = book[key];
     }
   });

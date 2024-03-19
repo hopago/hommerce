@@ -5,6 +5,7 @@ type UseFormInputsParams = {
 };
 
 export const useFormInputs = ({ initialBook }: UseFormInputsParams) => {
+  const [initState, setInitState] = useState<IBook | null>(null);
   const [book, setBook] = useState<Partial<IBook>>({
     title: initialBook?.title,
     author: initialBook?.author,
@@ -16,8 +17,6 @@ export const useFormInputs = ({ initialBook }: UseFormInputsParams) => {
     discount: initialBook?.discount,
     eBookPrice: initialBook?.eBookPrice,
   });
-
-  const memoBook = useMemo(() => book, [book]);
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -34,11 +33,13 @@ export const useFormInputs = ({ initialBook }: UseFormInputsParams) => {
   useEffect(() => {
     if (initialBook) {
       setBook(initialBook);
+      setInitState(initialBook);
     }
   }, [initialBook]);
 
   return {
-    book: memoBook,
+    book,
     handleChange,
+    initState,
   };
 };

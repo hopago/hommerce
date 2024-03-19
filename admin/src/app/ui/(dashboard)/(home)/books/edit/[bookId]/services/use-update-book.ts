@@ -33,10 +33,10 @@ export const useUpdateBook = ({ bookId }: UseUpdateBookProps) => {
     },
     onError: (err) => {
       if (err instanceof HttpError) {
-        const { status, message } = err;
+        const { status } = err;
 
         if (status === 400) {
-          toast.error("책 ID가 필요합니다.");
+          toast.error("부적절한 필드가 포함 됐습니다.");
         }
 
         if (status === 404) {

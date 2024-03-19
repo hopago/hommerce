@@ -1,4 +1,4 @@
-import * as l from "lodash";
+import _ from "lodash";
 
 import { useUpdateBook } from "../services/use-update-book";
 
@@ -11,22 +11,53 @@ type UseBookFormProps = {
   bookId: string;
 };
 
+const validFields = [
+  "title",
+  "desc",
+  "representImg",
+  "parentCategory",
+  "category",
+  "author",
+  "price",
+  "unit",
+  "publisher",
+  "comment",
+  "ebookPrice",
+  "discount",
+  "images",
+  "sellWay",
+];
+
 export const useBookForm = ({ initialBook, bookId }: UseBookFormProps) => {
-  const { book, handleChange } = useFormInputs({ initialBook });
+  const { book, handleChange, initState } = useFormInputs({ initialBook });
 
   const { mutateBook, isPending } = useUpdateBook({ bookId });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (l.isEqual(initialBook, book)) {
+    if (_.isEqual(initState, book)) {
       toast.message("수정할 사항이 없어요.");
       return;
     }
 
-    const mutatedPart = getDifferences(initialBook!, book);
+    if (initState) {
+      const mutatedPart = getDifferences(initState, book);
 
-    mutateBook(mutatedPart);
+      const props = Object.keys(mutatedPart).reduce(
+        (acc: Partial<IBook>, key) => {
+          if (validFields.includes(key)) {
+            acc[key] = mutatedPart[key];
+          }
+          return acc;
+        },
+        {}
+      );
+
+      mutateBook(props);
+    } else {
+      toast.message("초기값 설정에 실패했습니다.");
+    }
   };
 
   return {
