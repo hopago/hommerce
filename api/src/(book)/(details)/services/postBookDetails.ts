@@ -17,19 +17,33 @@ export const handlePostBookDetails = async (
 
   isFieldsFullFilled(requiredFields, req);
 
-  const { bookId } = req.params;
-  if (!bookId) throw new HttpException(400, "Book Id required.");
-
   try {
-    const newDetails = new BookDetails({
-      bookId,
-      ...req.body,
-      // TODO: awards: string[] 처리
-    });
+    const { bookId } = req.params;
+    if (!bookId) throw new HttpException(400, "Book Id required.");
 
-    const savedDetails = await newDetails.save();
+    try {
+      const isDuplicated = await BookDetails.findOne({
+        bookId,
+      });
+      if (isDuplicated)
+        throw new HttpException(409, "Book Details already exist.");
+    } catch (err) {
+      next(err);
+    }
 
-    return savedDetails;
+    try {
+      const newDetails = new BookDetails({
+        bookId,
+        ...req.body,
+        // TODO: awards: string[] 처리
+      });
+
+      const savedDetails = await newDetails.save();
+
+      return savedDetails;
+    } catch (err) {
+      next(err);
+    }
   } catch (err) {
     next(err);
   }

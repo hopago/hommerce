@@ -14,7 +14,7 @@ export interface IBook extends Document {
   comment?: string;
   desc: string;
   publisher: string;
-  sellType?: SellType;
+  sellType: SellType;
   views: number;
   createdAt: Date;
   updatedAt: Date;
