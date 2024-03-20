@@ -1,0 +1,87 @@
+.bookDetailsEdit {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--bg);
+    border-radius: 0.5rem;
+}
+
+.header {
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--divider);
+    margin-bottom: 1rem;
+}
+
+.headerWrap {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.headerWrap h3,
+.textareaContainer h3 {
+    font-size: 20px;
+    line-height: 30px;
+    letter-spacing: -0.01em;
+}
+
+.textareaContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.field {
+    width: 100%;
+    padding: 1rem;
+    background-color: #24324D;
+    border-radius: 0.5rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form label {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--textSoft);
+}
+
+.form textarea {
+    resize: none;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    font-style: inherit;
+    font-family: inherit;
+    width: 100%;
+    padding: 0.5rem;
+    background-color: var(--bgSoft);
+    color: var(--text);
+    border-radius: 0.5rem;
+    border: none;
+    outline: none;
+    min-height: 180px;
+}
+
+.form textarea::placeholder {
+    font-size: inherit;
+    font-family: inherit;
+}
+
+.buttonWrap {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.buttonWrap button {
+    width: 5rem;
+    align-items: center;
+    justify-content: center;
+}
