@@ -19,12 +19,14 @@ import { BookInfoEditSkeleton } from "./BookInfoEdit";
 import BookDetailsEditHeader from "./BookDetailsEditHeader";
 import BookDetailsField from "./BookDetailsField";
 
-export type BookDetailsField = keyof IDetails;
+export type TextareaFields = Omit<IDetails, "bookId">;
+
+export type TextareaKeys = keyof TextareaFields;
 
 export default function BookDetailEdit() {
   const { bookId }: { bookId: string } = useParams();
 
-  const fields: BookDetailsField[] = [
+  const fields: TextareaKeys[] = [
     "awards",
     "intro",
     "contentsList",
@@ -62,9 +64,7 @@ export default function BookDetailEdit() {
       <BookDetailsEditHeader isExist={isExist!} />
       <div className={styles.textareaContainer}>
         <h3>데이터 입력란</h3>
-        {fields.map((field) => (
-          <BookDetailsField key={field} field={field} details={details} />
-        ))}
+        <BookDetailsField keys={fields} details={details} isExist={isExist!} />
       </div>
     </div>
   );
