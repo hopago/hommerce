@@ -31,6 +31,8 @@ export const useMutateImage = ({
   };
 
   const processUpload = async (formData: FormData) => {
+    if (!formData) return;
+
     try {
       const images = await uploadFiles(formData);
 
@@ -51,6 +53,8 @@ export const useMutateImage = ({
     setIsUploadSuccess(false);
 
     const formData = new FormData(e?.currentTarget ?? formRef.current);
+
+    if (!formData) return;
 
     await processUpload(formData);
   };

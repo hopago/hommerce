@@ -2,8 +2,6 @@ import CardHeaderIcon from "../constants/card-header-icon";
 
 import { translateFieldTitleToKor } from "../utils/translateFieldValueToKor";
 
-import BookInfoDetailsImages from "./BookInfoDetailsImages";
-
 import styles from "./book-info.module.css";
 
 type BookInfoDetailsCard = {
@@ -53,20 +51,11 @@ export default function BookInfoDetailsCard({
   title,
   value,
 }: BookInfoDetailsCard) {
-  if (title === "images") {
-    return <BookInfoDetailsImages title={title} images={value as string[]} />;
-  }
-
   return (
-    <div className={styles.detailsCardContainer}>
-      <h3>부가 정보</h3>
-      <div className={styles.detailsCardWrap}>
-        <div className={styles.card}>
-          <div className={styles.cardWrap}>
-            <CardHeader title={title as OptionalTitle} />
-            <CardContent value={value} />
-          </div>
-        </div>
+    <div className={styles.card}>
+      <div className={styles.cardWrap}>
+        <CardHeader title={title as OptionalTitle} />
+        <CardContent value={value} />
       </div>
     </div>
   );

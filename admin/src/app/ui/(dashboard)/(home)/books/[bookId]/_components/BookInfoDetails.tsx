@@ -4,6 +4,7 @@ import styles from "./book-info.module.css";
 
 import BookInfoDetailsText from "./BookInfoDetailsText";
 import BookInfoDetailsCard from "./BookInfoDetailsCard";
+import BookInfoDetailsImages from "./BookInfoDetailsImages";
 
 type BookInfoDetailsProps = {
   book: IBook;
@@ -33,11 +34,42 @@ export default function BookInfoDetails({ book }: BookInfoDetailsProps) {
 
     if (requiredFields.includes(key) && valueExists) {
       return <BookInfoDetailsText key={key} title={key} value={book[key]} />;
-    } else if (optionalFields.includes(key) && valueExists) {
-      return <BookInfoDetailsCard key={key} title={key} value={book[key]} />;
     }
-
     return null;
+  };
+
+  const renderOptionalDetails = () => {
+    const filteredKeys = optionalFields.filter(
+      (key) => book[key] !== undefined && book[key] !== null && book[key] !== ""
+    );
+
+    const cardDetails: JSX.Element[] = [];
+    const otherDetails: JSX.Element[] = [];
+
+    filteredKeys.forEach((key, i) => {
+      if (key === "images") {
+        otherDetails.push(
+          <BookInfoDetailsImages
+            key={`${key}-${i}`}
+            title={key}
+            images={book[key] as string[]}
+          />
+        );
+      } else {
+        cardDetails.push(
+          <BookInfoDetailsCard key={key} title={key} value={book[key]} />
+        );
+      }
+    });
+
+    return (
+      <>
+        {cardDetails.length > 0 && (
+          <div className={styles.cardDetailsContainer}>{cardDetails}</div>
+        )}
+        {otherDetails}
+      </>
+    );
   };
 
   return (
@@ -54,6 +86,7 @@ export default function BookInfoDetails({ book }: BookInfoDetailsProps) {
         <div className={styles.bookDesc}>
           <div className={styles.bookDescFlexWrap}>
             {Object.keys(book).map((key) => renderBookDetails(key))}
+            {renderOptionalDetails()}
           </div>
         </div>
       </div>

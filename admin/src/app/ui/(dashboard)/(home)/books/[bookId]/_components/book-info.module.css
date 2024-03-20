@@ -68,6 +68,12 @@
     border-radius: 0.5rem;
 }
 
+.optionalDetailsContainer {
+    width: 100%;
+    padding: 1rem;
+    background-color: #151C2C;
+}
+
 .infoTextContainer {
     display: flex;
     flex-direction: column;
@@ -95,15 +101,26 @@
     border-radius: 0.5rem;
 }
 
-.detailsCardWrap {
+.detailsCardContainer p {
+    font-size: 14px;
+    color: var(--textSoft);
+    letter-spacing: -0.01em;
+    line-height: 16px;
+}
+
+.cardDetailsContainer {
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+    padding: 1.5rem 1rem;
+    background-color: #191D27;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1.5rem;
+    gap: 1.5rem;
+    border-radius: 0.5rem;
 }
 
 .card {
-    width: 23%;
+    width: 100%;
 }
 
 .cardWrap {
@@ -270,4 +287,49 @@
     letter-spacing: -0.01em;
     text-wrap: balance;
     white-space: pre-wrap;
+}
+
+.contextContainer {
+    width: max-content;
+    height: max-content;
+    z-index: 999;
+}
+
+.contextContainer button {
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 0.5rem;
+    background-color: var(--error);
+    color: var(--text);
+    transition: all .15s ease;
+}
+
+.contextContainer button span {
+    font-weight: bold;
+    letter-spacing: -0.01em;
+    line-height: 18px;
+}
+
+.contextContainer button:hover {
+    background-color: #FF507A;
+}
+
+.loadingIcon {
+    animation: spin 1s infinite linear;
+    margin-bottom: 0.25rem;
+}
+
+@keyframes spin {
+    from {
+        transform: scale(1) rotate(0deg);
+    }
+
+    to {
+        transform: scale(1) rotate(360deg);
+    }
 }

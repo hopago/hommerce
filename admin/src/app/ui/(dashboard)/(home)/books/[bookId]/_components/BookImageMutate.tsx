@@ -10,8 +10,10 @@ import styles from "./book-info.module.css";
 import { FaCamera } from "react-icons/fa";
 
 import { useMutateImage } from "../hooks/use-mutate-image";
+import { useContextMenu } from "../hooks/use-context-menu";
 
 import Spinner from "@/app/ui/_components/Spinner";
+import DeleteImageMenu from "./DeleteImageMenu";
 
 type BookImageMutateProps = {
   image: string;
@@ -21,6 +23,7 @@ export default function BookImageMutate({ image }: BookImageMutateProps) {
   const { bookId }: { bookId: string } = useParams();
 
   const formRef = useRef<HTMLFormElement>(null);
+  const contextMenuRef = useRef<HTMLDivElement>(null);
 
   const { handleFileChange, handleSubmit, isPending } = useMutateImage({
     bookId,
@@ -28,8 +31,17 @@ export default function BookImageMutate({ image }: BookImageMutateProps) {
     formRef,
   });
 
+  const { show, setShow, onContextMenu, position } = useContextMenu({
+    ref: contextMenuRef,
+  });
+
   return (
-    <form className={styles.imgList} onSubmit={handleSubmit} ref={formRef}>
+    <form
+      className={styles.imgList}
+      onSubmit={handleSubmit}
+      ref={formRef}
+      onContextMenu={onContextMenu}
+    >
       <Image
         src={image}
         alt="book-image"
@@ -37,7 +49,11 @@ export default function BookImageMutate({ image }: BookImageMutateProps) {
         height={340}
         className="disabled-click"
       />
-      <label htmlFor="update-book-image" className={styles.imgMutate}>
+      <label
+        htmlFor="update-book-image"
+        className={styles.imgMutate}
+        style={show ? { display: "none" } : { display: "flex" }}
+      >
         {isPending ? (
           <Spinner text="이미지를 변경 하는 중 이에요." />
         ) : (
@@ -56,6 +72,15 @@ export default function BookImageMutate({ image }: BookImageMutateProps) {
           </>
         )}
       </label>
+      {show && (
+        <DeleteImageMenu
+          ref={contextMenuRef}
+          x={position.x}
+          y={position.y}
+          setShow={setShow}
+          imageUrl={image}
+        />
+      )}
     </form>
   );
 }

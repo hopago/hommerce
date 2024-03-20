@@ -6,6 +6,11 @@ type UpdateBookImageParams = {
   imageUrl: string;
 };
 
+type DeletedImageParams = {
+  bookId: string;
+  deletedImageUrl: string;
+};
+
 export const updateBookImage = async ({
   bookId,
   updatedImageUrl,
@@ -17,6 +22,19 @@ export const updateBookImage = async ({
     body: {
       imageUrl,
       updatedImageUrl,
+    },
+  });
+};
+
+export const deleteBookImage = async ({
+  bookId,
+  deletedImageUrl,
+}: DeletedImageParams) => {
+  return reactQueryFetcher<IBook>({
+    method: "DELETE",
+    path: `/book/${bookId}/i`,
+    body: {
+      deletedImageUrl,
     },
   });
 };

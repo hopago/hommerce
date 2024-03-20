@@ -20,7 +20,18 @@ export const usePostImage = ({
   const [isUploadSuccess, setIsUploadSuccess] = useState(false);
   const [isPending, setIsPending] = useState(false);
 
+  const displayError = (err: unknown) => {
+    console.log("calc");
+    const errorMessage =
+      err instanceof UploadThingError
+        ? `이미지를 게시 하던 중 에러가 발생했어요.\n${err.code}: ${err.message}`
+        : "이미지를 게시 하던 중 에러가 발생했어요.";
+    toast.error(errorMessage);
+  };
+
   const processUpload = async (formData: FormData) => {
+    if (!formData) return;
+
     try {
       const images = await uploadFiles(formData);
 
@@ -30,12 +41,7 @@ export const usePostImage = ({
       }
     } catch (err) {
       setIsUploadSuccess(false);
-
-      const errorMessage =
-        err instanceof UploadThingError
-          ? `이미지를 업로드 하던 중 에러가 발생했어요.\n${err.code}: ${err.message}`
-          : "이미지를 업로드 하던 중 에러가 발생했어요.";
-      toast.error(errorMessage);
+      displayError(err);
     }
   };
 

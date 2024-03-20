@@ -17,9 +17,12 @@ export default function BookInfoDetailsImages({
   return (
     <div className={styles.detailsCardContainer}>
       <h3>{translateFieldTitleToKor(title)}</h3>
+      <p>이미지 삭제는 마우스 좌클릭을 통해 가능합니다</p>
       <div className={styles.imagesContainer}>
         {images.length
-          ? images.map((image) => <BookImageMutate key={image} image={image} />)
+          ? images.map((image, i) => (
+              <BookImageMutate key={`${image}-${i}`} image={image} />
+            ))
           : null}
         <BookImageUpload />
       </div>

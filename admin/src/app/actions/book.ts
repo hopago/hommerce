@@ -7,12 +7,20 @@ import {
   updateBook as mutateFn,
 } from "../ui/(dashboard)/(home)/books/[bookId]/services/use-mutate-book";
 
-import { updateBookImage as mutateBookImageFn } from "../ui/(dashboard)/(home)/books/[bookId]/services/use-mutate-image";
+import {
+  deleteBookImage as mutateDeleteBookImageFn,
+  updateBookImage as mutateUpdateBookImageFn,
+} from "../ui/(dashboard)/(home)/books/[bookId]/services/use-mutate-image";
 
 type UpdateBookImageParams = {
   bookId: string;
   updatedImageUrl: string | undefined;
   imageUrl: string;
+};
+
+type DeletedImageParams = {
+  bookId: string;
+  deletedImageUrl: string;
 };
 
 export async function updateBook({ bookId, images }: UpdateBookParams) {
@@ -35,7 +43,7 @@ export async function updateBookImage({
   try {
     if (!updatedImageUrl) return;
 
-    const updatedBook = await mutateBookImageFn({
+    const updatedBook = await mutateUpdateBookImageFn({
       bookId,
       updatedImageUrl,
       imageUrl,
@@ -44,6 +52,26 @@ export async function updateBookImage({
     revalidatePath(`/book/${bookId}`);
 
     return updatedBook;
+  } catch (err) {
+    throw err;
+  }
+}
+
+export async function deleteBookImage({
+  bookId,
+  deletedImageUrl,
+}: DeletedImageParams) {
+  try {
+    if (!deletedImageUrl) return;
+
+    const imgUrl = await mutateDeleteBookImageFn({
+      bookId,
+      deletedImageUrl,
+    });
+
+    revalidatePath(`/book/${bookId}`);
+
+    return imgUrl;
   } catch (err) {
     throw err;
   }
