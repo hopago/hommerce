@@ -34,7 +34,7 @@ export const fetchBookBySearchTerm = ({
   let filterQueryString: string | null = null;
   if (filter && translateQueryValueToEn(filter)) {
     filterQueryString = translateQueryValueToEn(filter);
-    path += `?${filterQueryString}`;
+    path += `?${filterQueryString}=${filterQueryString}`;
 
     if (searchTerm && searchTerm.trim() !== "") {
       const keywordQueryString = createQueryString({ keyword: searchTerm });

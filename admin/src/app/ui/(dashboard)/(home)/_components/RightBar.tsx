@@ -26,7 +26,7 @@ export default function RightBar() {
             API 문서로 이동
           </a>
           <p className={styles.subtitle}>
-            데이터 변형은 홈 - 상품 - API 에서 가능합니다.
+            API 테스트는 각 페이지 하단에 실행 버튼을 눌러주세요.
           </p>
           <RightbarButton />
         </div>

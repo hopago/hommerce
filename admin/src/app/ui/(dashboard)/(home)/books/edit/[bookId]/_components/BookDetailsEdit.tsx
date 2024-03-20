@@ -52,6 +52,8 @@ export default function BookDetailEdit() {
         setIsExist(false);
         toast.message("도서 상세 정보가 없습니다, POST 메소드가 제공됩니다.");
       }
+    } else {
+      setIsExist(true);
     }
   }, [data]);
 

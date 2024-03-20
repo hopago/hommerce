@@ -4,7 +4,7 @@ import PaginateControl from "../../../../_components/PaginateControl";
 import { NoContent } from "./NoContentTable";
 
 import { useQuery } from "@tanstack/react-query";
-import { QueryKeys } from "@/app/lib/getQueryClient";
+import { QueryKeys, getQueryClient } from "@/app/lib/getQueryClient";
 import { daysToMs } from "../../../../utils/daysToMs";
 import { fetchUserReviews } from "../services/fetchUserReviews";
 
@@ -14,29 +14,26 @@ import { creatorFilterReviews } from "@/app/store/use-filter";
 
 import { DataTableSkeleton } from "../../../../books/_components/BooksSearchResults";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function ReviewLogs({ userId }: { userId: string }) {
-  const { filter, searchTerm, sort, enabled } = creatorFilterReviews();
+  const { filter, searchTerm, sort, enabled, setEnabled } =
+    creatorFilterReviews();
   const { currentPage } = useCreatorPagination();
+
+  const queryClient = getQueryClient();
 
   const {
     data,
     error,
     isError,
     isLoading,
+    isSuccess,
     refetch,
     isRefetching,
     isRefetchError,
   } = useQuery<ReviewData>({
-    queryKey: [
-      QueryKeys.USER_REVIEW,
-      userId,
-      sort,
-      filter,
-      searchTerm,
-      currentPage,
-    ],
+    queryKey: [QueryKeys.USER_REVIEW, currentPage],
     queryFn: () =>
       fetchUserReviews({
         pageNum: currentPage,
@@ -50,15 +47,22 @@ export default function ReviewLogs({ userId }: { userId: string }) {
     enabled,
   });
 
-  useHandleError({ error, isError, fieldName: "리뷰" });
-
-  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    if (enabled) {
+      queryClient.invalidateQueries({
+        queryKey: [QueryKeys.BOOK, currentPage],
+      });
+      refetch();
+    }
+  }, [enabled, searchTerm, sort]);
 
   useEffect(() => {
-    setIsClient(true);
-  }, []);
+    if (isSuccess) {
+      setEnabled(false);
+    }
+  }, [isSuccess]);
 
-  if (!isClient) return null;
+  useHandleError({ error, isError, fieldName: "리뷰" });
 
   if (isLoading) return <DataTableSkeleton />;
 

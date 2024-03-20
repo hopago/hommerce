@@ -30,7 +30,7 @@ const SortReview = ({
 
   return (
     <div className={styles.reviewControlPanel}>
-      <h1 className={styles.title}>{dataLength.toLocaleString()}개의 리뷰</h1>
+      <h1 className={styles.title}>{dataLength.toLocaleString()}개의 도서</h1>
       <SelectList
         currSelect={sort}
         handleItemClick={handleSort}

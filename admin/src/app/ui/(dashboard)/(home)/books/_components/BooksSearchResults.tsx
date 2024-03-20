@@ -10,7 +10,7 @@ import { creatorFilterBooks } from "@/app/store/use-filter";
 import { useCreatorPagination } from "@/app/store/use-pagination";
 import { useScrollRef } from "../../hooks/use-scroll-ref";
 
-import { QueryKeys } from "@/app/lib/getQueryClient";
+import { QueryKeys, getQueryClient } from "@/app/lib/getQueryClient";
 import { useQuery } from "@tanstack/react-query";
 import { fetchBookBySearchTerm } from "../services/fetchBookBySearchTerm";
 import { daysToMs } from "../../utils/daysToMs";
@@ -21,22 +21,26 @@ import { NoContent } from "../../users/management/[username]/_components/NoConte
 import { Skeleton } from "@nextui-org/react";
 import { cn } from "@/app/ui/lib/utils";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function BooksSearchResults() {
-  const { sort, filter, searchTerm, enabled } = creatorFilterBooks();
+  const { sort, filter, searchTerm, enabled, setEnabled } =
+    creatorFilterBooks();
   const { currentPage } = useCreatorPagination();
+
+  const queryClient = getQueryClient();
 
   const {
     data,
     error,
     isLoading,
+    isSuccess,
     isError,
     refetch,
     isRefetching,
     isRefetchError,
   } = useQuery<BookData>({
-    queryKey: [QueryKeys.BOOK, sort, filter, searchTerm, currentPage],
+    queryKey: [QueryKeys.BOOK, currentPage],
     queryFn: () =>
       fetchBookBySearchTerm({
         pageNum: currentPage,
@@ -49,17 +53,24 @@ export default function BooksSearchResults() {
     enabled,
   });
 
+  useEffect(() => {
+    if (enabled) {
+      queryClient.invalidateQueries({
+        queryKey: [QueryKeys.BOOK, currentPage],
+      });
+      refetch();
+    }
+  }, [enabled, searchTerm, sort]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      setEnabled(false);
+    }
+  }, [isSuccess]);
+
   useHandleError({ error, isError, fieldName: "리뷰" });
 
   const { scrollRef } = useScrollRef({ currentPage });
-
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  if (!isClient) return null;
 
   if (isLoading) return <DataTableSkeleton />;
 

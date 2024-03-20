@@ -21,6 +21,7 @@ export const creatorFilter = <T>(initialFilter: T) =>
     filter: initialFilter,
     searchTerm: "",
     enabled: true,
+    shouldRefetch: true,
     setSort: (sort: "최신순" | "오래된순") =>
       set({
         enabled: false,
@@ -37,6 +38,11 @@ export const creatorFilter = <T>(initialFilter: T) =>
         searchTerm,
       }),
     setEnabled: (enabled: boolean) => {
+      set({
+        enabled,
+      });
+    },
+    setShouldRefetch: (enabled: boolean) => {
       set({
         enabled,
       });

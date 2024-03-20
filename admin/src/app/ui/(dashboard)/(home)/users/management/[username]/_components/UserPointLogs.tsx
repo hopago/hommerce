@@ -12,39 +12,36 @@ import { creatorFilterPoints } from "@/app/store/use-filter";
 import { useCreatorPagination } from "@/app/store/use-pagination";
 
 import { useQuery } from "@tanstack/react-query";
-import { QueryKeys } from "@/app/lib/getQueryClient";
+import { QueryKeys, getQueryClient } from "@/app/lib/getQueryClient";
 import { daysToMs } from "../../../../utils/daysToMs";
 import { fetchUserPointLog } from "../services/fetchUserPointLog";
 
 import { DataTableSkeleton } from "../../../../books/_components/BooksSearchResults";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 type UserPointLogsProps = {
   userId: string;
 };
 
 export default function UserPointLogs({ userId }: UserPointLogsProps) {
-  const { sort, filter, searchTerm, enabled } = creatorFilterPoints();
+  const { sort, filter, searchTerm, enabled, setEnabled } =
+    creatorFilterPoints();
   const { currentPage } = useCreatorPagination();
+
+  const queryClient = getQueryClient();
 
   const {
     data,
     error,
     isError,
     isLoading,
+    isSuccess,
     refetch,
     isRefetching,
     isRefetchError,
   } = useQuery<PointData>({
-    queryKey: [
-      QueryKeys.USER_POINT_LOG,
-      userId,
-      sort,
-      filter,
-      searchTerm,
-      currentPage,
-    ],
+    queryKey: [QueryKeys.USER_POINT_LOG, currentPage],
     queryFn: () =>
       fetchUserPointLog({
         pageNum: currentPage,
@@ -58,15 +55,22 @@ export default function UserPointLogs({ userId }: UserPointLogsProps) {
     enabled,
   });
 
-  useHandleError({ error, isError, fieldName: "포인트" });
-
-  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    if (enabled) {
+      queryClient.invalidateQueries({
+        queryKey: [QueryKeys.BOOK, currentPage],
+      });
+      refetch();
+    }
+  }, [enabled, searchTerm, sort]);
 
   useEffect(() => {
-    setIsClient(true);
-  }, []);
+    if (isSuccess) {
+      setEnabled(false);
+    }
+  }, [isSuccess]);
 
-  if (!isClient) return null;
+  useHandleError({ error, isError, fieldName: "포인트" });
 
   if (isLoading) return <DataTableSkeleton />;
 

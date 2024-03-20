@@ -36,8 +36,8 @@ export function useFilter<T>(props: UseFilterProps<T>) {
 
   const handleSort = useCallback((sort: "최신순" | "오래된순") => {
     setSort(sort);
-    setShow(false);
     setEnabled(true);
+    setShow(false);
   }, []);
 
   const handleReset = useCallback(() => {
@@ -53,7 +53,6 @@ export function useFilter<T>(props: UseFilterProps<T>) {
     }
 
     setEnabled(true);
-    handleReset();
   };
 
   useEffect(() => {
