@@ -1,4 +1,4 @@
-export type ApiTag = "users" | "books";
+export type ApiTag = "users" | "books" | "authors";
 
 export type ApiMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
@@ -14,7 +14,12 @@ export type ApiOperationIds =
   | "deleteBook"
   | "getBookDetails"
   | "postBookDetails"
-  | "updateBookDetails";
+  | "updateBookDetails"
+  | "getAuthors"
+  | "postAuthor"
+  | "getAuthor"
+  | "updateAuthor"
+  | "deleteAuthor";
 
 export type Endpoint = {
   operationId: ApiOperationIds;

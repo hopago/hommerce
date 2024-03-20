@@ -62,7 +62,8 @@
     background-color: var(--bgSoft);
 }
 
-.setPageButton:disabled {
+.setPageButton:disabled,
+.nextPageButton:disabled {
     cursor: default;
 }
 

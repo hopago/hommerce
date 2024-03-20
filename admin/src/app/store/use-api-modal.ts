@@ -319,6 +319,154 @@ const API_CONSTANTS: Record<ApiOperationIds, ApiInfo> = {
       },
     ],
   },
+  getAuthors: {
+    responses: [
+      {
+        code: 200,
+        desc: "작가 목록 조회 성공",
+      },
+      {
+        code: 500,
+        desc: "서버 오류",
+      },
+    ],
+  },
+  postAuthor: {
+    body: {
+      value: {
+        name: "string",
+        job: "string",
+        intro: "string",
+        representBook: "string",
+        img: "string",
+      },
+      required: true,
+    },
+    responses: [
+      {
+        code: 201,
+        desc: "작가 추가 성공",
+      },
+      {
+        code: 400,
+        desc: "잘못된 요청",
+      },
+      {
+        code: 500,
+        desc: "서버 오류",
+      },
+    ],
+  },
+  getAuthor: {
+    params: {
+      value: {
+        name: "authorId",
+        type: "string",
+        desc: "특정 작가 조회",
+      },
+      required: true,
+    },
+    responses: [
+      {
+        code: 200,
+        desc: "작가 조회 성공",
+      },
+      {
+        code: 400,
+        desc: "잘못된 요청",
+      },
+      {
+        code: 500,
+        desc: "서버 오류",
+      },
+    ],
+  },
+  updateAuthor: {
+    params: {
+      value: {
+        name: "authorId",
+        type: "string",
+        desc: "수정하려는 작가의 ID",
+      },
+      required: true,
+    },
+    body: {
+      value: {
+        name: "string",
+        job: "string",
+        intro: "string",
+        books: [
+          {
+            images: ["string"],
+            representImg: "string",
+            parentCategory: "string",
+            category: "string",
+            title: "string",
+            author: "string",
+            discount: "string",
+            price: 0,
+            eBookPrice: 0,
+            unit: "string",
+            comment: "string",
+            desc: "string",
+            publisher: "string",
+            sellType: "string",
+            createdAt: "2024-03-20T14:01:52.090Z",
+            updatedAt: "2024-03-20T14:01:52.090Z",
+          },
+        ],
+        representBook: "string",
+        img: "string",
+      },
+      required: true,
+    },
+    responses: [
+      {
+        code: 201,
+        desc: "작가 정보 수정 성공",
+      },
+      {
+        code: 400,
+        desc: "잘못된 요청",
+      },
+      {
+        code: 404,
+        desc: "작가를 찾을 수 없음",
+      },
+      {
+        code: 500,
+        desc: "서버 오류",
+      },
+    ],
+  },
+  deleteAuthor: {
+    params: {
+      value: {
+        name: "authorId",
+        type: "string",
+        desc: "삭제하려는 작가의 ID",
+      },
+      required: true,
+    },
+    responses: [
+      {
+        code: 204,
+        desc: "작가 정보 삭제 성공",
+      },
+      {
+        code: 400,
+        desc: "잘못된 요청",
+      },
+      {
+        code: 404,
+        desc: "작가를 찾을 수 없음",
+      },
+      {
+        code: 500,
+        desc: "서버 오류",
+      },
+    ],
+  },
 };
 
 interface CreatorApiModal {

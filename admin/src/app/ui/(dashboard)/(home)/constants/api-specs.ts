@@ -78,6 +78,39 @@ const usersApiSpecs: Endpoints = [
   },
 ];
 
+const authorsApiSpecs: Endpoints = [
+  {
+    operationId: "getAuthors",
+    path: "/author",
+    method: "GET",
+    desc: "작가 목록 조회",
+  },
+  {
+    operationId: "postAuthor",
+    path: "/author",
+    method: "POST",
+    desc: "새로운 작가 추가",
+  },
+  {
+    operationId: "getAuthor",
+    path: "/author",
+    method: "GET",
+    desc: "특정 작가 조회",
+  },
+  {
+    operationId: "updateAuthor",
+    path: "/author",
+    method: "PATCH",
+    desc: "특정 작가 정보 수정",
+  },
+  {
+    operationId: "deleteAuthor",
+    path: "/author",
+    method: "DELETE",
+    desc: "특정 작가 삭제",
+  },
+];
+
 export const apiSpecs: ApiSpecs = [
   {
     tag: "users",
@@ -86,5 +119,9 @@ export const apiSpecs: ApiSpecs = [
   {
     tag: "books",
     endpoints: booksApiSpecs,
+  },
+  {
+    tag: "authors",
+    endpoints: authorsApiSpecs,
   },
 ];
