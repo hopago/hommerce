@@ -17,6 +17,9 @@ import Inputs from "./Inputs";
 import SelectForm from "./SelectForm";
 import Image from "next/image";
 
+import { Skeleton } from "@nextui-org/react";
+import { cn } from "@/app/ui/lib/utils";
+
 export default function BookInfoEdit() {
   const { bookId }: { bookId: string } = useParams();
 
@@ -28,8 +31,8 @@ export default function BookInfoEdit() {
   } = useQuery({
     queryKey: [QueryKeys.BOOK, bookId],
     queryFn: () => getSingleBook(bookId),
-    staleTime: daysToMs(5),
-    gcTime: daysToMs(7),
+    staleTime: daysToMs(7),
+    gcTime: daysToMs(9),
     enabled: !!bookId,
   });
 
@@ -82,12 +85,53 @@ export default function BookInfoEdit() {
   );
 }
 
-const BookInfoEditSkeleton = () => (
+export const BookInfoEditSkeleton = () => (
   <div className={styles.container}>
     <div className={styles.wrapper}>
-      <div className={styles.imgWrap}></div>
+      <div className={styles.imgWrap}>
+        <Skeleton className={cn("skeleton", styles.imgSkeleton)} />
+      </div>
       <div className={styles.textWrap}>
-        <div className={styles.form}></div>
+        <div className={styles.form}>
+          <div className={styles.inputWrap}>
+            <Skeleton className={cn("skeleton", styles.labelSkeleton)} />
+            <Skeleton className={cn("skeleton", styles.inputSkeleton)} />
+          </div>
+          <div className={styles.inputWrap}>
+            <Skeleton className={cn("skeleton", styles.labelSkeleton)} />
+            <Skeleton className={cn("skeleton", styles.inputSkeleton)} />
+          </div>
+          <div className={styles.inputWrap}>
+            <Skeleton className={cn("skeleton", styles.labelSkeleton)} />
+            <Skeleton className={cn("skeleton", styles.inputSkeleton)} />
+          </div>
+          <div className={styles.inputWrap}>
+            <Skeleton className={cn("skeleton", styles.labelSkeleton)} />
+            <Skeleton className={cn("skeleton", styles.inputSkeleton)} />
+          </div>
+          <div className={styles.inputWrap}>
+            <Skeleton className={cn("skeleton", styles.labelSkeleton)} />
+            <Skeleton className={cn("skeleton", styles.inputSkeleton)} />
+          </div>
+          <div className={styles.inputWrap}>
+            <Skeleton className={cn("skeleton", styles.labelSkeleton)} />
+            <Skeleton className={cn("skeleton", styles.inputSkeleton)} />
+          </div>
+          <div className={styles.inputWrap}>
+            <Skeleton className={cn("skeleton", styles.labelSkeleton)} />
+            <Skeleton className={cn("skeleton", styles.inputSkeleton)} />
+          </div>
+          <div className={styles.selectInput}>
+            <Skeleton className={cn("skeleton", styles.labelSkeleton)} />
+            <div className={styles.selectList}>
+              <Skeleton className={cn("skeleton", styles.labelSkeleton)} />
+              <Skeleton className={cn("skeleton", styles.buttonSkeleton)} />
+            </div>
+            <div className={styles.buttonWrap}>
+              <Skeleton className={cn("skeleton", styles.buttonSkeleton)} />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

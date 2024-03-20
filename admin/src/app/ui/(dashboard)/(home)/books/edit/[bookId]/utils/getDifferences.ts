@@ -1,5 +1,3 @@
-import _ from "lodash";
-
 type BookKeys = keyof IBook;
 
 export function getDifferences(

@@ -4,6 +4,8 @@ import { BUTTON_CLASS } from "../../../../constants/classNames";
 
 import styles from "./update-user-form.module.css";
 
+import { Skeleton } from "@nextui-org/react";
+
 type TItem = UserGrade | UserStatus | BookParentCategory | SellWay;
 
 type SelectInputProps = {

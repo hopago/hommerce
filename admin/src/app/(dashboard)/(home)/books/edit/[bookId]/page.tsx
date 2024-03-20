@@ -7,7 +7,7 @@ import { getBookDetails } from "@/app/services/getBookDetails";
 import styles from "@/app/ui/(dashboard)/(home)/books/edit/[bookId]/edit-book.module.css";
 
 import BookInfoEdit from "@/app/ui/(dashboard)/(home)/books/edit/[bookId]/_components/BookInfoEdit";
-import BookDetailEdit from "@/app/ui/(dashboard)/(home)/books/edit/[bookId]/_components/BookDetailEdit";
+import BookDetailEdit from "@/app/ui/(dashboard)/(home)/books/edit/[bookId]/_components/BookDetailsEdit";
 import BookEditHeader from "@/app/ui/(dashboard)/(home)/books/edit/[bookId]/_components/BookEditHeader";
 
 type BookEditPageProps = {
@@ -30,8 +30,8 @@ export default async function BookEditPage({ params }: BookEditPageProps) {
   await queryClient.prefetchQuery({
     queryKey: [QueryKeys.BOOK_DETAIL, bookId],
     queryFn: () => getBookDetails(bookId),
-    staleTime: daysToMs(5),
-    gcTime: daysToMs(7),
+    staleTime: daysToMs(7),
+    gcTime: daysToMs(9),
   });
 
   const dehydratedState = dehydrate(queryClient);

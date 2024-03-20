@@ -1,5 +1,3 @@
-import _ from "lodash";
-
 import { useUpdateBook } from "../services/use-update-book";
 
 import { useFormInputs } from "./use-form-inputs";
@@ -35,11 +33,6 @@ export const useBookForm = ({ initialBook, bookId }: UseBookFormProps) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (_.isEqual(initState, book)) {
-      toast.message("수정할 사항이 없어요.");
-      return;
-    }
 
     if (initState) {
       const mutatedPart = getDifferences(initState, book);

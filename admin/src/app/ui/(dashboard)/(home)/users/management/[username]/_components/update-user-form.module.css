@@ -94,3 +94,8 @@
 .active {
     background-color: #008000;
 }
+
+.buttonSkeleton {
+    width: 3rem;
+    height: 1rem;
+}
