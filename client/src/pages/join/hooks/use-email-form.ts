@@ -64,14 +64,6 @@ export const useEmailForm = () => {
     await completeEmailVerification(emailVerificationCode);
   };
 
-  const handleRegisterMongoDB = async () => {
-    try {
-      // TODO: MongoDB 저장
-    } catch (err) {
-      // TODO: 에러 메시지 + clerk-sign-up undo
-    }
-  };
-
   return {
     startEmailVerification,
     handleCompleteEmailVerification,
@@ -85,6 +77,5 @@ export const useEmailForm = () => {
     errMsg,
     emailVerificationCode,
     onChangeEmailVerificationCode,
-    handleRegisterMongoDB,
   };
 };

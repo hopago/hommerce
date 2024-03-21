@@ -7,8 +7,6 @@ type PersistIdProps = {
 };
 
 export default function PersistID({ onClick, isPersist }: PersistIdProps) {
-  console.log(isPersist);
-
   return (
     <div className="login-id-persist">
       <div className={cn("left", isPersist && "active")}>

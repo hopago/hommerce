@@ -1,75 +1,122 @@
-import { useEffect } from "react";
-
-import { useLocation } from "react-router-dom";
-
-import { useSearchForm } from "../hooks/use-search-form";
-
 import FixedSearchBar from "../_components/FixedSearchBar";
 import SearchHeading from "./_components/SearchHeading";
 import SearchAD from "./_components/SearchAD";
 import SearchFilter from "./_components/SearchFilter";
 import SearchContents from "./_components/SearchContents";
 import FixedSeenBooks from "../../_components/FixedSeenBooks";
+import { Footer } from "../_components";
+import GlobalLoadingLayout from "../../_components/GlobalLoadingLayout";
+
+import { getKeyword } from "./utils/get-keyword";
+import { useModalDisplayState } from "./hooks/use-modal-state";
+import { useSearchForm } from "../hooks/use-search-form";
 
 import { useRecoilValue } from "recoil";
-import { seenModalState } from "../../recoil/seen-modal";
-import { Footer } from "../_components";
+import { searchFilterState } from "../../recoil/search/search-filter";
+
+import { useQuery } from "@tanstack/react-query";
+import { QueryKeys } from "../../lib/react-query/query-key";
+import { QueryFns } from "../../lib/react-query/queryFn";
+import { daysToMs } from "../../lib/react-query/utils";
+import { useHandleError } from "../hooks/use-handle-error";
+import { ERROR_DETAILS } from "../../api/constants/errorDetails";
+
+import { useState } from "react";
+
+import noResults from "../../assets/img_no-results.png";
 
 export default function SearchIndex() {
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const keyword = queryParams.get("keyword");
+  const keyword = getKeyword();
 
-  const show = useRecoilValue(seenModalState);
-
-  const temporaryDocsLength = 104903;
-
-  const { onSubmit, onChange, searchTerm, setSearchTerm } = useSearchForm();
+  useModalDisplayState();
 
   if (!keyword) return null;
 
-  useEffect(() => {
-    setSearchTerm(keyword);
-  }, [keyword]);
+  const { onSubmit, onChange, searchTerm } = useSearchForm();
+  const filter = useRecoilValue<SearchType>(searchFilterState);
+  const [initialSearchTerm] = useState(searchTerm);
 
-  useEffect(() => {
-    if (show) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+  const { data, isLoading, isSuccess, isError, error } = useQuery({
+    queryKey: [QueryKeys.BOOKS_DOCS_LENGTH, keyword],
+    queryFn: () => QueryFns.GET_BOOK_SEARCH_RESULTS_LENGTH({ filter, keyword }),
+    staleTime: daysToMs(5),
+    gcTime: daysToMs(7),
+    enabled: !!keyword,
+  });
 
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [show]);
+  useHandleError({
+    error,
+    isError,
+    errorDetails: ERROR_DETAILS.BOOKS_DOCS_LENGTH,
+  });
 
-  return (
-    <div id="search-page">
-      <FixedSearchBar
-        onChange={onChange}
-        onSubmit={onSubmit}
-        searchTerm={searchTerm}
-      />
-      <header>
-        <SearchHeading
+  if (isLoading) return <GlobalLoadingLayout />;
+
+  if (isError) {
+    return (
+      <div id="search-page">
+        <FixedSearchBar
+          onChange={onChange}
+          onSubmit={onSubmit}
           searchTerm={searchTerm}
-          docsLength={temporaryDocsLength}
         />
-      </header>
-      <main>
-        <section className="search-ad">
-          <SearchAD />
-        </section>
-        <section className="search-contents">
-          <SearchFilter />
-          <aside>
-            <SearchContents docsLength={temporaryDocsLength} />
-          </aside>
-        </section>
-      </main>
-      <Footer />
-      <FixedSeenBooks />
-    </div>
-  );
+        <header>
+          <SearchHeading
+            searchTerm={initialSearchTerm}
+            docsLength={data ?? 0}
+          />
+        </header>
+        <main>
+          <section className="search-ad">
+            <SearchAD />
+          </section>
+          <section className="search-contents">
+            <SearchFilter />
+            <aside>
+              <div className="search-contents__container">
+                <div className="no-content-wrap">
+                  <img
+                    src={noResults}
+                    alt="no-results"
+                    className="no-content-img"
+                  />
+                  <p className="no-content-text">검색 결과가 없습니다.</p>
+                </div>
+              </div>
+            </aside>
+          </section>
+        </main>
+        <Footer />
+        <FixedSeenBooks />
+      </div>
+    );
+  }
+
+  if (isSuccess) {
+    return (
+      <div id="search-page">
+        <FixedSearchBar
+          onChange={onChange}
+          onSubmit={onSubmit}
+          searchTerm={searchTerm}
+        />
+        <header>
+          <SearchHeading searchTerm={initialSearchTerm} docsLength={data} />
+        </header>
+        <main>
+          <section className="search-ad">
+            <SearchAD />
+          </section>
+          <section className="search-contents">
+            <SearchFilter />
+            <aside>
+              <SearchContents docsLength={data} />
+            </aside>
+          </section>
+        </main>
+        <Footer />
+        <FixedSeenBooks />
+      </div>
+    );
+  }
 }

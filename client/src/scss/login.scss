@@ -197,6 +197,25 @@
                     margin-bottom: 1.5rem;
                 }
             }
+
+            .login-err-message {
+                margin-top: 0.5rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                color: $font-gray;
+
+                svg {
+                    border: none;
+                }
+
+                span {
+                    font-size: 14px;
+                    letter-spacing: -0.01em;
+                    line-height: 20px;
+                    border: none;
+                }
+            }
         }
     }
 }

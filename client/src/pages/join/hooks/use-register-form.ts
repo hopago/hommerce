@@ -41,7 +41,6 @@ export const useRegisterForm = () => {
     onChangeEmailVerificationCode,
     handleCompleteEmailVerification,
     startEmailVerification,
-    handleRegisterMongoDB,
     isError: isVerifyError,
     isSuccess: isVerifySuccess,
     errMsg: verifyErrMsg,
@@ -101,20 +100,15 @@ export const useRegisterForm = () => {
 
     if (!validMatch) return;
 
-    console.log(user.username);
-    console.log(user.password);
-
     setIsLoading(true);
     try {
-      const { status } = await client.signUp.create({
+      await client.signUp.create({
         username: user.username,
         firstName: user.firstName,
         lastName: user.lastName,
         password: user.password,
         emailAddress,
       });
-
-      console.log(status);
 
       setIsSignup(true);
     } catch (err: unknown) {
@@ -127,7 +121,7 @@ export const useRegisterForm = () => {
 
   const handleVerify = async () => {
     await handleCompleteEmailVerification();
-    await handleRegisterMongoDB();
+
     navigate("/join/success");
   };
 

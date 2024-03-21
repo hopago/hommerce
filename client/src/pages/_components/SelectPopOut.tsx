@@ -1,5 +1,5 @@
 import { useSetRecoilState } from "recoil";
-import { searchFilterState } from "../../recoil/search-filter";
+import { searchFilterState } from "../../recoil/search/search-filter";
 
 import { cn } from "../../lib/utils";
 
@@ -14,24 +14,24 @@ type SelectPopOutProps = {
 
 const SelectPopOut = forwardRef<HTMLDivElement, SelectPopOutProps>(
   ({ setShow, className, animationName }: SelectPopOutProps, ref) => {
-    const setSelect = useSetRecoilState<SearchFilter>(searchFilterState);
+    const setSelect = useSetRecoilState<SearchType>(searchFilterState);
 
-    const selectList: SearchCategory = [
+    const selectList = [
       {
         text: "통합검색",
         onClick: () => handleSelectItemClick("통합검색"),
       },
       {
         text: "제목",
-        onClick: () => handleSelectItemClick("상품명"),
+        onClick: () => handleSelectItemClick("제목"),
       },
       {
         text: "저자",
-        onClick: () => handleSelectItemClick("저자/역자"),
+        onClick: () => handleSelectItemClick("저자"),
       },
     ];
 
-    const handleSelectItemClick = (select: SearchFilter) => {
+    const handleSelectItemClick = (select: SearchType) => {
       setSelect(select);
       setShow(false);
     };

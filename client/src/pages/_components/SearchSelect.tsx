@@ -1,41 +1,25 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 
 import { MdKeyboardArrowDown } from "react-icons/md";
+
 import SelectPopOut from "./SelectPopOut";
 
-import { searchState } from "../../recoil/search";
 import { useRecoilValue } from "recoil";
+import { searchFilterState } from "../../recoil/search/search-filter";
+
+import { useSelectMenu } from "./hooks/use-select-menu";
 
 export default function SearchSelect({ className }: { className?: string }) {
-  const select = useRecoilValue<SearchType>(searchState);
+  const select = useRecoilValue<SearchType>(searchFilterState);
 
   const selectRef = useRef<HTMLDivElement>(null);
   const selectListRef = useRef<HTMLDivElement>(null);
 
-  const [show, setShow] = useState(false);
-
-  const handleClick = () => {
-    setShow((prev) => !prev);
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (!selectRef.current || !selectListRef.current) return;
-
-      if (
-        !selectRef.current.contains(e.target as Node) &&
-        !selectListRef.current.contains(e.target as Node)
-      ) {
-        setShow(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [select, show]);
+  const { handleClick, show, setShow } = useSelectMenu({
+    select,
+    selectRef,
+    selectListRef,
+  });
 
   return (
     <>

@@ -19,7 +19,7 @@ export default function ReviewsDetails() {
 
   /* temporary data */
   const temporaryReviews: TReviews = [...reviews, ...reviews2];
-  const pageTotal = 23; // TODO: getPageTotal(reviewsLength);
+  const pageTotal = 23;
 
   /* paginate-scroll-behavior */
   const [firstRender, setFirstRender] = useState(true);

@@ -4,5 +4,3 @@ type SearchSelect = {
   text: SearchType;
   onClick: () => void;
 };
-
-type SearchCategory = SearchSelect[];

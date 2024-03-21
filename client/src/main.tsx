@@ -10,13 +10,13 @@ import "./scss/index.scss";
 
 import { ClerkProvider } from "@clerk/clerk-react";
 
+import { Toaster } from "sonner";
+
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 if (!PUBLISHABLE_KEY) {
   throw new Error("Missing AUTH-KEY...");
 }
-
-// TODO: 토스트 창 상태 변경
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -24,6 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <RecoilRoot>
         <Router>
           <App />
+          <Toaster richColors />
         </Router>
       </RecoilRoot>
     </ClerkProvider>

@@ -6,9 +6,21 @@ import Register from "./_components/Register";
 import ShortcutFooter from "../../_components/ShortcutFooter";
 
 import { usePersistId } from "./hooks/use-persist-id";
+import { useAuth } from "@clerk/clerk-react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginIndex() {
+  const navigate = useNavigate();
+
   const { isPersist, onClick } = usePersistId();
+  const { isSignedIn } = useAuth();
+
+  useEffect(() => {
+    if (isSignedIn) {
+      navigate("/");
+    }
+  }, [isSignedIn]);
 
   return (
     <div id="login-page">

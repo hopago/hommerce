@@ -79,6 +79,31 @@ h1 {
     color: inherit;
 }
 
+// component
+.global-loading {
+    background-color: #efeff8;
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// ico
+.spinner-icon {
+    animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+    from {
+        transform: scale(1) rotate(0deg);
+    }
+
+    to {
+        transform: scale(1) rotate(360deg);
+    }
+}
+
 // badge
 .best-flag-badge {
     display: flex;
@@ -138,7 +163,7 @@ h1 {
     }
 
     &:hover {
-        background-color: rgba(0,0,0,0.06);
+        background-color: rgba(0, 0, 0, 0.06);
     }
 }
 

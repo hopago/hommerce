@@ -365,7 +365,7 @@
     .all-categories {
         z-index: 99999;
         position: absolute;
-        left: 15rem;
+        left: 360px;
         top: 100%;
         width: 1198px;
         height: max-content;
@@ -531,6 +531,10 @@
     height: max-content;
     max-width: 130px;
     border-radius: 0.5rem;
+
+    &.home {
+        background-color: white;
+    }
 
     &.fixed {
         top: 3.9rem;

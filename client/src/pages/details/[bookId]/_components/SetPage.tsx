@@ -5,6 +5,7 @@ type SetPageProps = {
   total: number;
   currPage: number;
 };
+
 export default function SetPage({ onSetPage, total, currPage }: SetPageProps) {
   let endPage = Math.min(currPage + 3, total);
   let startPage = Math.max(endPage - 6, 1);
