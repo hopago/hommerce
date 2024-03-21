@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 import star from "../../../assets/ico_fill-score.png";
 
 import { getFullDate } from "../../../utils/create-formatted-date";
@@ -11,6 +9,12 @@ import BookItemButtons from "./BookItemButtons";
 import { Link } from "react-router-dom";
 
 import { UIType } from "../hooks/use-select-ui";
+import { useQuery } from "@tanstack/react-query";
+import { QueryKeys } from "../../../lib/react-query/query-key";
+import { QueryFns } from "../../../lib/react-query/queryFn";
+import { daysToMs } from "../../../lib/react-query/utils";
+import { ServerError } from "../../../fetcher/error";
+import { ReviewTotalData } from "../../../types/api/review-total";
 
 type BookItemProps = {
   book: IBook;
@@ -18,24 +22,35 @@ type BookItemProps = {
 };
 
 export default function BookItem({ book, display }: BookItemProps) {
-  useEffect(() => {
-    // TODO: findReviewTotalByBookId
-  }, [book.id]);
+  const { data, isSuccess, error } = useQuery({
+    queryKey: [QueryKeys.REVIEW_TOTAL, book._id],
+    queryFn: () => QueryFns.GET_REVIEW_TOTAL_BY_BOOK_ID({ bookId: book._id }),
+    staleTime: daysToMs(1),
+    gcTime: daysToMs(3),
+    enabled: !!book._id,
+  });
+
+  const isReviewNotWritten =
+    error instanceof ServerError &&
+    error.status === 404 &&
+    error.message === "Review total not found.";
 
   return (
     <li>
       <SelectBook book={book} />
       <div className="book-info">
-        <Link to={`/details/${book.id}`} className="link">
+        <Link to={`/details/${book._id}`} className="link">
           <div className="img-wrap">
             <img src={book.representImg} alt={book.title} />
           </div>
         </Link>
         <div className="book-info__text">
-          {book.parentCategory ? book.parentCategory.map(category => (
-            <ParentCategoryBadge text={category} />
-          )) : null}
-          <Link to={`/details/${book.id}`} className="link">
+          {book.parentCategory
+            ? book.parentCategory.map((category) => (
+                <ParentCategoryBadge text={category} />
+              ))
+            : null}
+          <Link to={`/details/${book._id}`} className="link">
             <p className="title">{book.title}</p>
           </Link>
           <div className="book-info__text__horizontal">
@@ -56,12 +71,45 @@ export default function BookItem({ book, display }: BookItemProps) {
             <div className="img-wrap">
               <img src={star} alt="review-icon" />
             </div>
-            <span className="review-score">0.0</span>
-            <span className="review-length">(0)</span>
+            <ReviewInfo
+              isSuccess={isSuccess}
+              data={data!}
+              isReviewNotWritten={isReviewNotWritten}
+            />
           </div>
         </div>
       </div>
-      <BookItemButtons bookId={book.id} display={display} />
+      <BookItemButtons bookId={book._id} display={display} />
     </li>
   );
+}
+
+function ReviewInfo({
+  isSuccess,
+  data,
+  isReviewNotWritten,
+}: {
+  isSuccess: boolean;
+  data: ReviewTotalData;
+  isReviewNotWritten: boolean;
+}) {
+  if (isSuccess) {
+    return (
+      <>
+        <span className="review-score">{data.total.totalRating}</span>
+        <span className="review-length">({data.reviewsLength})</span>
+      </>
+    );
+  }
+
+  if (isReviewNotWritten) {
+    return (
+      <>
+        <span className="review-score">{"0.0"}</span>
+        <span className="review-length">(0)</span>
+      </>
+    );
+  }
+
+  return null;
 }

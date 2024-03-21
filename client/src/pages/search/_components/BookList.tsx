@@ -85,8 +85,8 @@ export default function BookList({ display }: BookListProps) {
     return (
       <div className="search-contents__container__book-list" ref={scrollRef}>
         <ul className={cn("", display === "flex" ? "flex" : "grid")}>
-          {data.books.map((book, i) => (
-            <BookItem key={`${book.id}-${i}`} book={book} display={display} />
+          {data.books.map((book) => (
+            <BookItem key={`${book._id}`} book={book} display={display} />
           ))}
         </ul>
       </div>

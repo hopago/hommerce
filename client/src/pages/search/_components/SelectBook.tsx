@@ -17,7 +17,9 @@ export default function SelectBook({ book }: SelectBookProps) {
   const [isSelected, setIsSelected] = useState(false);
 
   const handleSelectBook = () => {
-    const filteredSelectedBook = selectedBooks.filter((b) => b.id !== book.id);
+    const filteredSelectedBook = selectedBooks.filter(
+      (b) => b._id !== book._id
+    );
 
     isSelected
       ? setSelectedBooks(filteredSelectedBook)
@@ -25,10 +27,10 @@ export default function SelectBook({ book }: SelectBookProps) {
   };
 
   useEffect(() => {
-    const checkExist = selectedBooks.some((b) => b.id === book.id);
+    const checkExist = selectedBooks.some((b) => b._id === book._id);
 
     setIsSelected(checkExist);
-  }, [selectedBooks.length, book.id]);
+  }, [selectedBooks.length, book._id]);
 
   return (
     <button

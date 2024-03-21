@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
 type UseSelectRefProps = {
-  selectRef: React.RefObject<HTMLDivElement>;
-  selectListRef: React.RefObject<HTMLDivElement>;
-  select: SearchType;
+  selectRef: React.RefObject<HTMLDivElement | HTMLButtonElement>;
+  selectListRef: React.RefObject<HTMLDivElement | HTMLButtonElement>;
+  select: SearchType | SearchSort;
 };
 
 export const useSelectMenu = ({

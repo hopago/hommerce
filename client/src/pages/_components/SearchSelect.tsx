@@ -7,7 +7,7 @@ import SelectPopOut from "./SelectPopOut";
 import { useRecoilValue } from "recoil";
 import { searchFilterState } from "../../recoil/search/search-filter";
 
-import { useSelectMenu } from "./hooks/use-select-menu";
+import { useSelectMenu } from "../hooks/use-select-menu";
 
 export default function SearchSelect({ className }: { className?: string }) {
   const select = useRecoilValue<SearchType>(searchFilterState);

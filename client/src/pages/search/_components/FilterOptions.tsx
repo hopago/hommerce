@@ -1,5 +1,6 @@
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { searchPageFilterState } from "../../../recoil/search/search-page-filter";
+import { searchPageEnabled } from "../../../recoil/api/search-page-enabled";
 
 import { cn } from "../../../lib/utils";
 
@@ -12,9 +13,11 @@ export default function FilterOptions() {
   ];
 
   const [filter, setFilter] = useRecoilState(searchPageFilterState);
+  const setEnabled = useSetRecoilState(searchPageEnabled);
 
   const onClick = (option: SearchFilter) => {
     setFilter(option);
+    setEnabled(true);
   };
 
   return (

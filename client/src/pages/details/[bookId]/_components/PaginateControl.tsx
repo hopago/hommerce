@@ -1,12 +1,14 @@
 import { useRecoilState } from "recoil";
-
 import { currentPageState } from "../../../../recoil/review-paginate";
+
+import { PAGE_SIZE } from "../../../constants/page";
 
 import PrevPage from "./PrevPage";
 import SetPage from "./SetPage";
 import MoveToLastPage from "./MoveToLastPage";
 import NextPage from "./NextPage";
 import MoveToFirstPage from "./MoveToFirstPage";
+
 import { useEffect } from "react";
 
 type PaginateControlProps = {
@@ -46,7 +48,7 @@ export default function PaginateControl({ pageTotal }: PaginateControlProps) {
   return (
     <div className="reviews-pagination">
       <PrevPage onPrevPage={handlePrevPage} disabled={prevPageDisabled} />
-      {currentPage > 8 && (
+      {currentPage > PAGE_SIZE && (
         <MoveToFirstPage handleMoveToFirstPage={handleMoveToFirstPage} />
       )}
       <SetPage
@@ -54,7 +56,7 @@ export default function PaginateControl({ pageTotal }: PaginateControlProps) {
         total={pageTotal}
         onSetPage={handleSetPage}
       />
-      {pageTotal - 8 > currentPage && (
+      {pageTotal - PAGE_SIZE > currentPage && (
         <MoveToLastPage
           pageTotal={pageTotal}
           handleMoveToLastPage={handleMoveToLastPage}

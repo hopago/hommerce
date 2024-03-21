@@ -6,7 +6,7 @@ import ReuseButton from "../../../_components/ReuseButton";
 import { UIType } from "../hooks/use-select-ui";
 
 type BookItemButtonsProps = {
-  bookId: number;
+  bookId: string;
   display: UIType;
 };
 
@@ -27,7 +27,6 @@ export default function BookItemButtons({
       <FavorButton favorLength={temporaryFavorLength} />
       {display === "flex" && (
         <>
-          {" "}
           <ReuseButton
             text="장바구니"
             size="md"

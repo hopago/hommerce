@@ -5,7 +5,7 @@ import FixedSearchBar from "./FixedSearchBar";
 
 import { useParams } from "react-router-dom";
 
-import { useCustomMediaQuery } from "./hooks/use-media-query";
+import { useCustomMediaQuery } from "../hooks/use-media-query";
 
 export default function SearchSection() {
   const { bookId } = useParams<{ bookId: string }>();
