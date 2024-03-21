@@ -5,5 +5,7 @@ export const getKeyword = () => {
   const queryParams = new URLSearchParams(location.search);
   const keyword = queryParams.get("keyword");
 
-  return keyword;
+  if (keyword) {
+    return keyword;
+  }
 };

@@ -3,7 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import SelectItems from "../../../_components/SelectItems";
 
 import { useRecoilState } from "recoil";
-import { searchSortState } from "../../../recoil/search-sort";
+import { searchSortState } from "../../../recoil/search/search-page-sort";
+
 import { MdArrowDropDown } from "react-icons/md";
 
 export default function SortButton() {

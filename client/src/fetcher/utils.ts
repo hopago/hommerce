@@ -10,6 +10,17 @@ export const translateQueryValueToEn = (filter: SearchType) => {
   return filterMap[filter] || null;
 };
 
+export const translateFilterValueToEn = (filter: SearchFilter) => {
+  const filterMap = {
+    통합검색: null,
+    상품명: "title",
+    "저자/역자": "author",
+    출판사: "publisher",
+  };
+
+  return filterMap[filter] || null;
+};
+
 export const createQueryString = (params: Record<string, string>) => {
   const queryParams = new URLSearchParams();
   for (const key in params) {

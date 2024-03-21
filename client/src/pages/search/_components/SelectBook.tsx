@@ -8,7 +8,7 @@ import { MdCheck } from "react-icons/md";
 import { cn } from "../../../lib/utils";
 
 type SelectBookProps = {
-  book: TBook;
+  book: IBook;
 };
 
 export default function SelectBook({ book }: SelectBookProps) {

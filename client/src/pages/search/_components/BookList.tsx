@@ -1,37 +1,95 @@
-import { useEffect } from "react";
-
-import { cn } from "../../../lib/utils";
-
 import { UIType } from "../hooks/use-select-ui";
 
-import { useRecoilValue } from "recoil";
-import { books as temporaryBooks } from "../../../recoil/books";
-import { searchFilterState } from "../../../recoil/search-filter";
-import { searchSortState } from "../../../recoil/search-sort";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { searchPageFilterState } from "../../../recoil/search/search-page-filter";
+import { searchSortState } from "../../../recoil/search/search-page-sort";
 import { currentPageState } from "../../../recoil/review-paginate";
+import { searchPageEnabled } from "../../../recoil/api/search-page-enabled";
+
+import { getKeyword } from "../utils/get-keyword";
+import { cn } from "../../../lib/utils";
 
 import BookItem from "./BookItem";
+import Spinner from "../../../_components/Spinner";
+
+import { useQuery } from "@tanstack/react-query";
+import { QueryKeys } from "../../../lib/react-query/query-key";
+import { fetchBookBySearchTerm } from "../../_components/services/fetchBookBySearchTerm";
+import { daysToMs } from "../../../lib/react-query/utils";
+import { useEffect } from "react";
+import { getQueryClient } from "../../../lib/react-query/getQueryClient";
+import { useScrollRef } from "../../hooks/use-scroll-ref";
+import { useHandleError } from "../../hooks/use-handle-error";
+import { ERROR_DETAILS } from "../../../api/constants/errorDetails";
 
 type BookListProps = {
   display: UIType;
 };
 
 export default function BookList({ display }: BookListProps) {
-  const filter = useRecoilValue(searchFilterState);
+  const queryClient = getQueryClient();
+
+  const filter = useRecoilValue(searchPageFilterState);
+  const keyword = getKeyword();
   const sort = useRecoilValue(searchSortState);
   const currPage = useRecoilValue(currentPageState);
+  const [shouldRefetch, setShouldRefetch] = useRecoilState(searchPageEnabled);
+
+  const { data, error, isSuccess, isLoading, isError, refetch } =
+    useQuery<BookData>({
+      queryKey: [QueryKeys.BOOK_SEARCH, currPage],
+      queryFn: () =>
+        fetchBookBySearchTerm({
+          pageNum: currPage,
+          filter,
+          searchTerm: keyword,
+          sort,
+        }),
+      staleTime: daysToMs(1),
+      gcTime: daysToMs(3),
+      enabled: shouldRefetch,
+    });
 
   useEffect(() => {
-    // TODO: getBooksBySearchTerm
-  }, [filter, sort, currPage]);
+    if (shouldRefetch) {
+      queryClient.invalidateQueries({
+        queryKey: [QueryKeys.BOOK_SEARCH, currPage],
+      });
+      refetch();
+    }
+  }, [shouldRefetch, currPage]);
 
-  return (
-    <div className="search-contents__container__book-list">
-      <ul className={cn("", display === "flex" ? "flex" : "grid")}>
-        {temporaryBooks.map((book, i) => (
-          <BookItem key={`${book.id}-${i}`} book={book} display={display} />
-        ))}
-      </ul>
-    </div>
-  );
+  useEffect(() => {
+    if (isSuccess) {
+      setShouldRefetch(false);
+    }
+  }, [isSuccess]);
+
+  useHandleError({
+    error,
+    isError,
+    errorDetails: ERROR_DETAILS.BOOKS_SEARCH_RESULTS,
+  });
+
+  const { scrollRef } = useScrollRef({ currentPage: currPage });
+
+  if (isLoading) {
+    return (
+      <div className="search-contents__container__book-list">
+        <Spinner text="데이터를 불러오는 중 입니다" />
+      </div>
+    );
+  }
+
+  if (isSuccess) {
+    return (
+      <div className="search-contents__container__book-list" ref={scrollRef}>
+        <ul className={cn("", display === "flex" ? "flex" : "grid")}>
+          {data.books.map((book, i) => (
+            <BookItem key={`${book.id}-${i}`} book={book} display={display} />
+          ))}
+        </ul>
+      </div>
+    );
+  }
 }

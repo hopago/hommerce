@@ -1,6 +1,5 @@
 import { useRecoilState } from "recoil";
-
-import { searchFilterState } from "../../../recoil/search-filter";
+import { searchPageFilterState } from "../../../recoil/search/search-page-filter";
 
 import { cn } from "../../../lib/utils";
 
@@ -12,7 +11,7 @@ export default function FilterOptions() {
     "출판사",
   ];
 
-  const [filter, setFilter] = useRecoilState(searchFilterState);
+  const [filter, setFilter] = useRecoilState(searchPageFilterState);
 
   const onClick = (option: SearchFilter) => {
     setFilter(option);

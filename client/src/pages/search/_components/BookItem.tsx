@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import { UIType } from "../hooks/use-select-ui";
 
 type BookItemProps = {
-  book: TBook;
+  book: IBook;
   display: UIType;
 };
 
@@ -32,9 +32,9 @@ export default function BookItem({ book, display }: BookItemProps) {
           </div>
         </Link>
         <div className="book-info__text">
-          {book.parentCategory ? (
-            <ParentCategoryBadge text={book.parentCategory} />
-          ) : null}
+          {book.parentCategory ? book.parentCategory.map(category => (
+            <ParentCategoryBadge text={category} />
+          )) : null}
           <Link to={`/details/${book.id}`} className="link">
             <p className="title">{book.title}</p>
           </Link>

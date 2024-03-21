@@ -1,6 +1,6 @@
 import { useRecoilValue } from "recoil";
-import { searchFilterState } from "../../../recoil/search-filter";
-import { searchSortState } from "../../../recoil/search-sort";
+import { searchFilterState } from "../../../recoil/search/search-filter";
+import { searchSortState } from "../../../recoil/search/search-page-sort";
 
 import { ProdMDBadge } from "../../../_components/ProdBadge";
 

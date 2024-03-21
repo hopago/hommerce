@@ -3,8 +3,8 @@ import PaginateControl from "../../details/[bookId]/_components/PaginateControl"
 import { getPageTotal } from "../../details/[bookId]/hooks/getPageTotal";
 
 import { useSelectUI } from "../hooks/use-select-ui";
-import BookList from "./BookList";
 
+import BookList from "./BookList";
 import FilterInfo from "./FilterInfo";
 import SortBox from "./SortBox";
 

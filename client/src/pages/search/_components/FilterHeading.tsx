@@ -1,5 +1,5 @@
 import { useSetRecoilState } from "recoil";
-import { searchFilterState } from "../../../recoil/search-filter";
+import { searchFilterState } from "../../../recoil/search/search-filter";
 
 import reset from "../../../assets/ico_reset.png";
 
