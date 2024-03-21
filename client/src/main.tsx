@@ -24,7 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <RecoilRoot>
         <Router>
           <App />
-          <Toaster richColors />
+          <Toaster richColors expand={true} />
         </Router>
       </RecoilRoot>
     </ClerkProvider>

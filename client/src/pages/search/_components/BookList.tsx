@@ -1,10 +1,10 @@
 import { UIType } from "../hooks/use-select-ui";
 
 import { useRecoilState, useRecoilValue } from "recoil";
-import { searchPageFilterState } from "../../../recoil/search/search-page-filter";
 import { searchSortState } from "../../../recoil/search/search-page-sort";
 import { currentPageState } from "../../../recoil/review-paginate";
 import { searchPageEnabled } from "../../../recoil/api/search-page-enabled";
+import { searchFilterState } from "../../../recoil/search/search-filter";
 
 import { getKeyword } from "../utils/get-keyword";
 import { cn } from "../../../lib/utils";
@@ -14,13 +14,13 @@ import Spinner from "../../../_components/Spinner";
 
 import { useQuery } from "@tanstack/react-query";
 import { QueryKeys } from "../../../lib/react-query/query-key";
-import { fetchBookBySearchTerm } from "../../_components/services/fetchBookBySearchTerm";
 import { daysToMs } from "../../../lib/react-query/utils";
 import { useEffect } from "react";
 import { getQueryClient } from "../../../lib/react-query/getQueryClient";
 import { useScrollRef } from "../../hooks/use-scroll-ref";
 import { useHandleError } from "../../hooks/use-handle-error";
 import { ERROR_DETAILS } from "../../../api/constants/errorDetails";
+import { QueryFns } from "../../../lib/react-query/queryFn";
 
 type BookListProps = {
   display: UIType;
@@ -29,7 +29,7 @@ type BookListProps = {
 export default function BookList({ display }: BookListProps) {
   const queryClient = getQueryClient();
 
-  const filter = useRecoilValue(searchPageFilterState);
+  const filter = useRecoilValue(searchFilterState);
   const keyword = getKeyword();
   const sort = useRecoilValue(searchSortState);
   const currPage = useRecoilValue(currentPageState);
@@ -39,11 +39,11 @@ export default function BookList({ display }: BookListProps) {
     useQuery<BookData>({
       queryKey: [QueryKeys.BOOK_SEARCH, currPage],
       queryFn: () =>
-        fetchBookBySearchTerm({
-          pageNum: currPage,
+        QueryFns.GET_BOOK_SEARCH_RESULTS({
           filter,
           searchTerm: keyword,
           sort,
+          pageNum: currPage,
         }),
       staleTime: daysToMs(1),
       gcTime: daysToMs(3),

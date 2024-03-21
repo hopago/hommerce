@@ -2,11 +2,11 @@ import { restFetcher } from "../../../fetcher/restFetcher";
 
 import {
   createQueryString,
-  translateFilterValueToEn,
+  translateQueryValueToEn,
 } from "../../../fetcher/utils";
 
 type FetchBookBySearchTermParams = {
-  filter?: SearchFilter;
+  filter?: SearchType;
   searchTerm?: string;
   pageNum?: number;
   sort?: SearchSort;
@@ -23,9 +23,9 @@ export const fetchBookBySearchTerm = async ({
   const queryParams: Record<string, string> = {};
 
   if (filter) {
-    const filterEn = translateFilterValueToEn(filter);
+    const filterEn = translateQueryValueToEn(filter);
     if (filterEn) {
-      queryParams.filter = filterEn;
+      queryParams.filterEn = filter;
     }
   }
 

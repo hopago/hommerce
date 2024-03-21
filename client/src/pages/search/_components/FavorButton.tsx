@@ -2,9 +2,11 @@ import heart from "../../../assets/ico_heart.png";
 import heartActive from "../../../assets/ico_heart_active.png";
 
 import { useMutation } from "@tanstack/react-query";
-import { patchFavorItem } from "../services/patchFavorItem";
 import { getQueryClient } from "../../../lib/react-query/getQueryClient";
 import { QueryKeys } from "../../../lib/react-query/query-key";
+import { MutateFns } from "../../../lib/react-query/mutateFn";
+import { useHandleError } from "../../hooks/use-handle-error";
+import { ERROR_DETAILS } from "../../../api/constants/errorDetails";
 
 type FavorButtonProps = {
   favorLength?: number;
@@ -27,9 +29,9 @@ export default function FavorButton({
 }: FavorButtonProps) {
   const queryClient = getQueryClient();
 
-  const { mutate } = useMutation({
+  const { mutate, error, isError } = useMutation({
     mutationFn: () =>
-      patchFavorItem({
+      MutateFns.PATCH_FAVOR_ITEM({
         userId,
         book: {
           bookId,
@@ -50,6 +52,12 @@ export default function FavorButton({
     },
   });
 
+  useHandleError({
+    error,
+    isError,
+    errorDetails: ERROR_DETAILS.PATCH_FAVOR_ITEM,
+  });
+
   const onClick = () => mutate();
 
   return (
@@ -57,7 +65,7 @@ export default function FavorButton({
       <div className="img-wrap">
         <img src={isSubscribed ? heartActive : heart} alt="heart-icon" />
       </div>
-      {favorLength && <span>{favorLength}</span>}
+      <span>{favorLength ?? 0}</span>
     </button>
   );
 }
