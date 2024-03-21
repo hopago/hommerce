@@ -11,9 +11,9 @@ import AllCategories from "../@modal/AllCategories";
 import Logo from "./Logo";
 
 type FixedSearchBarProps = {
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  searchTerm: string;
+  onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  searchTerm?: string;
 };
 
 export default function FixedSearchBar({

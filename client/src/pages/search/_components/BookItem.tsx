@@ -56,7 +56,7 @@ export default function BookItem({ book, display }: BookItemProps) {
           <div className="book-info__text__horizontal">
             <p className="author">{book.author}</p>
             <span>·</span>
-            <p className="createdAt">{getFullDate(new Date())}</p>
+            <p className="createdAt">{getFullDate(book.createdAt)}</p>
           </div>
           <div className="book-info__text__price">
             {book.discount ? (
@@ -79,7 +79,13 @@ export default function BookItem({ book, display }: BookItemProps) {
           </div>
         </div>
       </div>
-      <BookItemButtons bookId={book._id} display={display} />
+      <BookItemButtons
+        bookId={book._id}
+        title={book.title}
+        author={book.author}
+        img={book.representImg}
+        display={display}
+      />
     </li>
   );
 }

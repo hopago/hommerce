@@ -1,6 +1,6 @@
 type SearchInputProps = {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  searchTerm: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  searchTerm?: string;
 };
 
 export default function SearchInput({

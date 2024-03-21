@@ -25,6 +25,10 @@ import { useState } from "react";
 
 import noResults from "../../assets/img_no-results.png";
 
+type LoadingProps = {
+  initialSearchTerm: string;
+};
+
 export default function SearchIndex() {
   const keyword = getKeyword();
 
@@ -52,45 +56,8 @@ export default function SearchIndex() {
 
   if (isLoading) return <GlobalLoadingLayout />;
 
-  if (isError) {
-    return (
-      <div id="search-page">
-        <FixedSearchBar
-          onChange={onChange}
-          onSubmit={onSubmit}
-          searchTerm={searchTerm}
-        />
-        <header>
-          <SearchHeading
-            searchTerm={initialSearchTerm}
-            docsLength={data ?? 0}
-          />
-        </header>
-        <main>
-          <section className="search-ad">
-            <SearchAD />
-          </section>
-          <section className="search-contents">
-            <SearchFilter />
-            <aside>
-              <div className="search-contents__container">
-                <div className="no-content-wrap">
-                  <img
-                    src={noResults}
-                    alt="no-results"
-                    className="no-content-img"
-                  />
-                  <p className="no-content-text">검색 결과가 없습니다.</p>
-                </div>
-              </div>
-            </aside>
-          </section>
-        </main>
-        <Footer />
-        <FixedSeenBooks />
-      </div>
-    );
-  }
+  if (isError)
+    return <LoadingComponent initialSearchTerm={initialSearchTerm} />;
 
   if (isSuccess) {
     return (
@@ -119,4 +86,37 @@ export default function SearchIndex() {
       </div>
     );
   }
+}
+
+function LoadingComponent({ initialSearchTerm }: LoadingProps) {
+  return (
+    <div id="search-page">
+      <FixedSearchBar />
+      <header>
+        <SearchHeading searchTerm={initialSearchTerm} docsLength={0} />
+      </header>
+      <main>
+        <section className="search-ad">
+          <SearchAD />
+        </section>
+        <section className="search-contents">
+          <SearchFilter />
+          <aside>
+            <div className="search-contents__container">
+              <div className="no-content-wrap">
+                <img
+                  src={noResults}
+                  alt="no-results"
+                  className="no-content-img"
+                />
+                <p className="no-content-text">검색 결과가 없습니다.</p>
+              </div>
+            </div>
+          </aside>
+        </section>
+      </main>
+      <Footer />
+      <FixedSeenBooks />
+    </div>
+  );
 }
