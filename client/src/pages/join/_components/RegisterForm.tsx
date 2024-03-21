@@ -10,7 +10,6 @@ import UserName from "./UserName";
 import VerifyEmail from "../@modal/VerifyEmail";
 
 export default function RegisterForm() {
-  // clerk signup -> clerk verification
   const {
     user,
     handleRegister,

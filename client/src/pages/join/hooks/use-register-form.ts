@@ -1,9 +1,11 @@
-import { useClerk } from "@clerk/clerk-react";
+import { useClerk, useUser } from "@clerk/clerk-react";
 
 import { FormEvent, useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import { useEmailForm } from "./use-email-form";
+import { restFetcher } from "../../../fetcher/restFetcher";
+import { toast } from "sonner";
 
 // 최소 8자리, 대소문자, 숫자, 특수문자 포함
 const validatePassword = (password: string) => {
@@ -120,9 +122,25 @@ export const useRegisterForm = () => {
   };
 
   const handleVerify = async () => {
-    await handleCompleteEmailVerification();
+    try {
+      await handleCompleteEmailVerification();
 
-    navigate("/join/success");
+      navigate("/join/success");
+    } catch (err) {
+      const { user } = useUser();
+      if (user) {
+        try {
+          await restFetcher({
+            path: `/user/${user.id}`,
+            method: "DELETE",
+          });
+        } catch (err) {
+          toast.error("서버 오류입니다. 잠시 후 다시 시도해주세요.");
+        } finally {
+          navigate("/join/failure");
+        }
+      }
+    }
   };
 
   return {

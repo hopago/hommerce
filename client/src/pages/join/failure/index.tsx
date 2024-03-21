@@ -1,17 +1,23 @@
-import { MdCheck } from "react-icons/md";
+import { MdError } from "react-icons/md";
 
 import { useNavigate } from "react-router-dom";
 
-import verified from "../../../assets/img_verified.png";
+import error from "../../../assets/img_internal-error.png";
 
 import ReuseButton from "../../../_components/ReuseButton";
 import Logo from "../../_components/Logo";
 import ShortcutFooter from "../../../_components/ShortcutFooter";
 
-export default function SigninSuccessIndex() {
+import { cn } from "../../../lib/utils";
+
+export default function SignoutFailureIndex() {
   const navigate = useNavigate();
 
-  const onClick = () => {
+  const navigateToSingIn = () => {
+    navigate("/join");
+  };
+
+  const navigateToHome = () => {
     navigate("/");
   };
 
@@ -24,23 +30,30 @@ export default function SigninSuccessIndex() {
         <section>
           <div className="process-complete">
             <span>회원가입</span>
-            <div className="icon-wrap">
-              <MdCheck />
+            <div className="icon-wrap" style={{ backgroundColor: "#F92027" }}>
+              <MdError />
             </div>
           </div>
           <div className="navigate">
             <div className="left">
               <div className="img-wrap">
-                <img src={verified} alt="join-success-img" />
+                <img src={error} alt="join-failure-img" />
               </div>
             </div>
-            <div className="right">
-              <span>회원 가입에 성공했습니다.</span>
+            <div className={cn("right", "failure")}>
+              <span>회원 가입에 실패했습니다.</span>
+              <p>일시적 서버 오류이니 잠시 후 다시 시도해주세요.</p>
               <ReuseButton
                 text="홈으로 이동"
                 style="default"
                 size="md"
-                onClick={onClick}
+                onClick={navigateToHome}
+              />
+              <ReuseButton
+                text="다시 시도"
+                style="default"
+                size="md"
+                onClick={navigateToSingIn}
               />
             </div>
           </div>
