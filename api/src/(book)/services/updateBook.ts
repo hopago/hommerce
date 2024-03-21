@@ -46,8 +46,10 @@ export const handleUpdateBook = async (req: Request, next: NextFunction) => {
 
       const updateQuery: UpdateQuery<any> = {};
 
-      if (images) {
+      if (images && Array.isArray(images) && images.length) {
         updateQuery["$push"] = { images: { $each: images } };
+      } else if (images && !Array.isArray(images)) {
+        throw new HttpException(400, "Invalid images type.");
       }
 
       if (sellWay) {

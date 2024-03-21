@@ -1,7 +1,8 @@
 import { NextFunction } from "express";
-import Review from "../models/review";
+import Review, { IReview } from "../models/review";
 import User from "../../(user)/model/user";
 import { HttpException } from "../../middleware/error/utils";
+import { FilterQuery } from "mongoose";
 
 type FilterType = "_id" | "bookTitle" | "desc";
 
@@ -25,7 +26,7 @@ export const handleGetReviewByUserId = async (
   }: HandleGetReviewByUserIdParams,
   next: NextFunction
 ) => {
-  let query = { userId };
+  let query: FilterQuery<IReview> = { userId };
   const isExist = await User.findOne({
     id: userId,
   });

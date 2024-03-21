@@ -2,6 +2,7 @@ import express from "express";
 import {
   deleteReview,
   deleteReviewById,
+  getDocsLength,
   getReviewByUserId,
   getReviews,
   postReview,
@@ -11,6 +12,8 @@ import {
 const router = express.Router();
 
 router.route("/").delete(deleteReviewById);
+
+router.route("/book/docs").get(getDocsLength);
 
 router.route("/book/:bookId").get(getReviews);
 

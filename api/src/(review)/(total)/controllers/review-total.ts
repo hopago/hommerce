@@ -5,6 +5,7 @@ import { handlePostTotal } from "../services/postTotal";
 import { handleUpdateTotal } from "../services/updateTotal";
 import { handleDeleteTotal } from "../services/deleteTotal";
 import { isFieldsFullFilled } from "../../../utils/isFieldsFullFilled";
+import { handleGetDocsLength } from "../../services/getDocsLength";
 
 export const getTotal = async (
   req: Request,
@@ -18,7 +19,11 @@ export const getTotal = async (
 
     const total = await handleGetTotal({ bookId }, next);
 
-    return res.status(200).json(total);
+    const reviewsLength = await handleGetDocsLength({ bookId }, next);
+
+    if (total && typeof reviewsLength === "number") {
+      return res.status(200).json({ total, reviewsLength });
+    }
   } catch (err) {
     next(err);
   }

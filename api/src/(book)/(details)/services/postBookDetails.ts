@@ -35,7 +35,6 @@ export const handlePostBookDetails = async (
       const newDetails = new BookDetails({
         bookId,
         ...req.body,
-        // TODO: awards: string[] 처리
       });
 
       const savedDetails = await newDetails.save();

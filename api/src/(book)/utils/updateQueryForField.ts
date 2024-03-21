@@ -1,6 +1,6 @@
 import { UpdateQuery } from "mongoose";
-import { IBook } from "../models/book";
 import { HttpException } from "../../middleware/error/utils";
+import { IBook } from "../models/book";
 
 export function updateQueryForField(
   bookToUpdate: IBook,
@@ -10,6 +10,10 @@ export function updateQueryForField(
   conditionLength: number
 ) {
   if (bookToUpdate[field]) {
+    if (!Array.isArray(bookToUpdate[field])) {
+      throw new HttpException(400, `${field} must be an array.`);
+    }
+
     const action: "$pull" | "$push" = bookToUpdate[field].includes(value)
       ? "$pull"
       : "$push";
@@ -18,16 +22,23 @@ export function updateQueryForField(
       throw new HttpException(400, "Field need at least one item.");
     }
 
-    const operation = action === "$push" ? { $each: [value] } : value;
+    let operation;
+    if (Array.isArray(bookToUpdate[field])) {
+      operation = action === "$push" ? { $each: [value] } : value;
+    } else {
+      operation = value;
+    }
 
     updateQuery[action] = updateQuery[action] || {};
-    if (bookToUpdate[field].length >= conditionLength) {
+    if (
+      Array.isArray(bookToUpdate[field]) &&
+      bookToUpdate[field].length >= conditionLength
+    ) {
       updateQuery[action]![field] = operation;
     } else {
-      if (action === "$push") {
+      if (action === "$push" && Array.isArray(bookToUpdate[field])) {
         updateQuery[action]![field] = { $each: [value] };
       } else {
-        // $pull 작업이지만, conditionLength 보다 배열 길이가 작은 경우는 이미 처리됨
         updateQuery[action]![field] = value;
       }
     }

@@ -3,7 +3,7 @@ import { Schema, model, Document } from "mongoose";
 export interface IBook extends Document {
   images?: string[];
   representImg: string;
-  parentCategory: BookParentCategory;
+  parentCategory: BookParentCategoryList;
   category: BookSubCategory;
   title: string;
   author: string;
@@ -35,7 +35,7 @@ const bookSchema = new Schema(
       require: true,
     },
     parentCategory: {
-      type: String,
+      type: [String],
       require: true,
     },
     category: {

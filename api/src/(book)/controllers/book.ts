@@ -9,6 +9,7 @@ import { IBook } from "../models/book";
 import { handleGetBooksBySearchTerm } from "../services/getBooksBySearchTerm";
 import { DBResponse } from "../../types/response";
 import { handleUpdateImage } from "../services/updateImage";
+import { handleDeleteImage } from "../services/handleDeleteImage";
 
 type FilterType = "통합검색" | "제목" | "저자";
 
@@ -37,7 +38,7 @@ export const getBooks = async (
   try {
     const books: PaginatedResponse | undefined =
       await handleGetBooksBySearchTerm(
-        { keyword, filter, sort, pageNum },
+        { keyword: decodeURIComponent(keyword), filter, sort, pageNum },
         next
       );
 
@@ -88,6 +89,30 @@ export const updateImage = async (
   } catch (err) {}
 };
 
+export const deleteImage = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { bookId } = req.params;
+    const { deletedImageUrl } = req.body;
+
+    if (!bookId || !deletedImageUrl)
+      throw new HttpException(400, "Book id or image url required.");
+
+    try {
+      await handleDeleteImage({ bookId, deletedImageUrl }, next);
+    } catch (err) {
+      next(err);
+    }
+
+    return res.status(204).json(deletedImageUrl);
+  } catch (err) {
+    next(err);
+  }
+};
+
 export const getBook = async (
   req: Request,
   res: Response,
@@ -110,7 +135,9 @@ export const updateBook = async (
   try {
     const updatedBook = await handleUpdateBook(req, next);
 
-    return res.status(201).json(updatedBook);
+    if (updatedBook) {
+      return res.status(201).json(updatedBook);
+    }
   } catch (err) {
     next(err);
   }

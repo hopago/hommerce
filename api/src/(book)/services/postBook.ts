@@ -1,5 +1,5 @@
 import { NextFunction, Request } from "express";
-import Book from "../models/book";
+import Book, { IBook } from "../models/book";
 import { isFieldsFullFilled } from "../../utils/isFieldsFullFilled";
 
 export const handlePostBook = async (req: Request, next: NextFunction) => {
@@ -17,8 +17,21 @@ export const handlePostBook = async (req: Request, next: NextFunction) => {
 
   isFieldsFullFilled(requiredFields, req);
 
-  const newBook = new Book({
+  const {
+    parentCategory,
+  }: { parentCategory: BookParentCategory | BookParentCategoryList } = req.body;
+
+  let newParentCategory: BookParentCategory | BookParentCategoryList;
+
+  if (typeof parentCategory === "string") {
+    newParentCategory = [parentCategory];
+  } else {
+    newParentCategory = parentCategory;
+  }
+
+  const newBook: IBook = new Book<IBook>({
     ...req.body,
+    parentCategory: newParentCategory,
   });
   const savedBook = await newBook.save();
 

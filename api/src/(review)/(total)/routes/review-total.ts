@@ -12,7 +12,7 @@ router
   .route("/:bookId")
   .get(getTotal)
   .post(postTotal)
-  .patch(updateTotal) // TODO: Update Review -> exec()
-  .delete(deleteTotal); // TODO: Delete Book & Delete review -> exec()
+  .patch(updateTotal)
+  .delete(deleteTotal);
 
 export default router;
