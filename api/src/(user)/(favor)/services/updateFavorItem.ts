@@ -2,6 +2,7 @@ import { NextFunction, Request } from "express";
 import Favor from "../models/favor";
 import { isFieldsFullFilled } from "../../../utils/isFieldsFullFilled";
 import { HttpException } from "../../../middleware/error/utils";
+import { handlePostFavorList } from "./postFavorList";
 
 export const handleUpdateFavorItem = async (
   req: Request,
@@ -11,24 +12,26 @@ export const handleUpdateFavorItem = async (
 
   try {
     isFieldsFullFilled(validFields, req);
+    const updatedBook = { ...req.body };
+    const favorList = await Favor.findOne({ userId: req.params.userId });
 
-    const updatedFavorList = await Favor.findOneAndUpdate(
-      {
-        userId: req.params.userId,
-      },
-      {
-        $push: {
-          books: req.body,
-        },
-      },
-      {
-        new: true,
-      }
+    if (!favorList) {
+      return await handlePostFavorList(req, next);
+    }
+
+    const bookExists = favorList.books.some(
+      (book) => book.bookId === updatedBook.bookId
     );
 
-    if (!updatedFavorList) {
-      throw new HttpException(404, "No user found with this userId");
-    }
+    const updateOperation = bookExists
+      ? { $pull: { books: { bookId: req.body.bookId } } }
+      : { $push: { books: updatedBook } };
+
+    const updatedFavorList = await Favor.findOneAndUpdate(
+      { userId: req.params.userId },
+      updateOperation,
+      { new: true }
+    );
 
     return updatedFavorList;
   } catch (err) {
