@@ -1,0 +1,1 @@
+type LanguageType = "kor" | "glb";

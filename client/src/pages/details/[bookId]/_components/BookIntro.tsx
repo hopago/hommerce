@@ -7,8 +7,6 @@ type BookIntroProps = {
 };
 
 export default function BookIntro({ intro, awards }: BookIntroProps) {
-  // TODO: bookId - referrer, details --> awards, intro
-
   const { parentCategory, category: subCategory } =
     useRecoilValue(gnbCategoryState);
 

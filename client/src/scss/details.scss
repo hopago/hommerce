@@ -13,6 +13,10 @@
     margin: 0 auto;
     margin-bottom: 3rem;
 
+    &.loading {
+        margin-top: 3rem;
+    }
+
     .text-wrap {
         margin-top: 2.1rem;
         text-align: center;
@@ -23,6 +27,18 @@
         letter-spacing: -0.01em;
     }
 
+    &__comment {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0.5rem 0;
+
+        p {
+            color: $font-gray;
+            font-weight: 400;
+        }
+    }
+    
     &__sell-type {
         padding-top: 1.5rem;
         width: 100%;
@@ -590,6 +606,7 @@
                         font-size: 14px;
                         color: #595959;
                         line-height: 22px;
+                        white-space: pre-wrap;
 
                         &.category {
                             display: flex;
@@ -598,11 +615,6 @@
                             .divider {
                                 margin: 0.25rem;
                             }
-                        }
-
-                        &.awards {
-
-                            p {}
                         }
 
                         &.info {

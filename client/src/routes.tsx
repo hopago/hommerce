@@ -70,7 +70,7 @@ export const pages = [
   { route: "/search" },
   { route: "/:lang" },
   { route: "/details/:bookId" },
-  { route: "/category/:lang" },
+  { route: "/category/:lang/:category" },
   { route: "/login" },
   { route: "/signin" },
   { route: "/join/success" },

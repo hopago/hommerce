@@ -6,7 +6,7 @@ import SingleBookSellType from "./SingleBookSellType";
 import SingleBookComment from "./SingleBookComment";
 
 type SingleBookProps = {
-  book: TBook;
+  book: IBook;
   currSellType: SellWay;
   setCurrSellType: React.Dispatch<React.SetStateAction<SellWay>>;
 };
@@ -26,7 +26,7 @@ const SingleBook = ({
   return (
     <div className="details-single-book">
       <SingleBookHeading title={book.title} />
-      {book.comment && <SingleBookComment />}
+      {book.comment && <SingleBookComment comment={book.comment} />}
       {book.sellType && (
         <SingleBookSellType
           currSellType={currSellType}

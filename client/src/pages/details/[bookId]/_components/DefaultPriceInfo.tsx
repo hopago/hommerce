@@ -33,17 +33,12 @@ export default function DefaultPriceInfo({
       </ul>
       <div className="details-single-book__horizontal__price__prod-info">
         <div className="details-single-book__horizontal__price__prod-info__price-container">
-          {discount && <span className="discount">{discount}%</span>}
-          {discountedPrice && (
-            <span className="discounted-price">
-              {Number(discountedPrice).toLocaleString()}
-              <span className="unit">{unit}</span>
-            </span>
-          )}
-          <span className="price">
-            {Number(price).toLocaleString()}
-            {unit}
-          </span>
+          <DisplayDiscount
+            discount={discount}
+            discountedPrice={discountedPrice}
+            unit={unit}
+            price={price}
+          />
         </div>
         <ProdInfoGuide
           guideTitle="적립/혜택"
@@ -61,5 +56,42 @@ export default function DefaultPriceInfo({
         />
       </div>
     </div>
+  );
+}
+
+function DisplayDiscount({
+  discount,
+  discountedPrice,
+  unit,
+  price,
+}: {
+  discount: number | undefined;
+  discountedPrice: number | undefined;
+  unit: string;
+  price: number;
+}) {
+  return (
+    <>
+      {discount ? (
+        <>
+          <span className="discount">{discount}%</span>
+          {discountedPrice && (
+            <span className="discounted-price">
+              {Number(discountedPrice).toLocaleString()}
+              <span className="unit">{unit}</span>
+            </span>
+          )}
+          <span className="price">
+            {Number(price).toLocaleString()}
+            <span className="unit">{unit}</span>
+          </span>
+        </>
+      ) : (
+        <span className="discounted-price">
+          {Number(price).toLocaleString()}
+          <span className="unit">{unit}</span>
+        </span>
+      )}
+    </>
   );
 }

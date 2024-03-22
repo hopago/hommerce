@@ -1,7 +1,7 @@
 import BestFlagBadge from "../../../_components/utils/BestFlagBadge";
 
 type ThisCategoryBestItemProps = {
-  book: TBookOptional;
+  book: IBook;
   i: number;
 };
 

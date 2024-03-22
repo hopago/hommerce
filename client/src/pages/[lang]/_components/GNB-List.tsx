@@ -20,12 +20,14 @@ type GNBListProps = {
   list: BookParentCategoryList | BookSubCategoryList;
   type: "parent" | "sub";
   category: BookParentCategory | BookSubCategory | undefined;
+  parentCategory?: BookParentCategory;
 };
 
 export default function GNBList({
   list,
   type,
   category: propsCategory,
+  parentCategory,
 }: GNBListProps) {
   const olRef = useRef<HTMLOListElement>(null);
 
@@ -88,7 +90,12 @@ export default function GNBList({
       {show ? (
         <ol ref={olRef}>
           {list.map((category) => (
-            <GNBCategory key={category} category={category} />
+            <GNBCategory
+              key={category}
+              type={type}
+              category={category}
+              parentCategory={parentCategory}
+            />
           ))}
         </ol>
       ) : null}

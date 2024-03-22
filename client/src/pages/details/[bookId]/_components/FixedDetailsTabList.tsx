@@ -9,7 +9,7 @@ import { DetailsIndexIds } from "..";
 import { useNavigate } from "react-router-dom";
 
 type FixedDetailsTabListProps = {
-  isInView: DetailsIndexIds | null;
+  isInView?: DetailsIndexIds | null;
 };
 
 type TabAction = (id: DetailsIndexIds) => void | (() => void);

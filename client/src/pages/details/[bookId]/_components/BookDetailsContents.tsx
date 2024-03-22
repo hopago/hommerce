@@ -5,7 +5,13 @@ import DetailsInfo from "./DetailsInfo";
 
 export type DetailsContentType = "책소개" | "목차" | "책 속으로" | "서평";
 
-export default function BookDetailsContents() {
+type BookDetailsContentsProps = {
+  details: IDetails;
+};
+
+export default function BookDetailsContents({
+  details,
+}: BookDetailsContentsProps) {
   const detailsContents: DetailsContentType[] = [
     "책소개",
     "목차",
@@ -22,7 +28,7 @@ export default function BookDetailsContents() {
         content={content}
         setContent={setContent}
       />
-      <DetailsInfo content={content} />
+      <DetailsInfo content={content} details={details} />
     </div>
   );
 }

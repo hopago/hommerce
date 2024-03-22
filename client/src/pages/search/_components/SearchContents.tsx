@@ -1,6 +1,6 @@
 import PaginateControl from "../../details/[bookId]/_components/PaginateControl";
 
-import { getPageTotal } from "../../details/[bookId]/hooks/getPageTotal";
+import { getPageTotal } from "../../details/[bookId]/utils/getPageTotal";
 
 import { useSelectUI } from "../hooks/use-select-ui";
 

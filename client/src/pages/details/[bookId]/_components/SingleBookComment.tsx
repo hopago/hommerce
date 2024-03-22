@@ -1,6 +1,11 @@
+type SingleBookCommentProps = {
+  comment: string;
+};
 
-export default function SingleBookComment() {
+export default function SingleBookComment({ comment }: SingleBookCommentProps) {
   return (
-    <div>SingleBookComment</div>
-  )
+    <div className="details-single-book__comment">
+      <p>{comment}</p>
+    </div>
+  );
 }

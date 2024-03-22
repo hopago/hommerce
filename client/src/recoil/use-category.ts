@@ -1,8 +1,8 @@
 import { DefaultValue, atom, selector } from "recoil";
 
 type CategoryType = {
-  parentCategory: BookParentCategory | null;
-  category: BookSubCategory | null;
+  parentCategory: BookParentCategory[] | null | undefined;
+  category: BookSubCategory | null | undefined;
 };
 
 export const gnbCategoryState = atom<CategoryType>({

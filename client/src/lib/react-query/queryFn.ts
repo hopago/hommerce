@@ -1,4 +1,7 @@
 import { fetchBookBySearchTerm } from "../../pages/_components/services/fetchBookBySearchTerm";
+import { findRecommendBookByCategory } from "../../pages/details/[bookId]/services/findRecommendBookByCategory";
+import { getBook } from "../../pages/details/[bookId]/services/getBook";
+import { getBookDetails } from "../../pages/details/[bookId]/services/getBookDetails";
 import { getIsSubscribed } from "../../pages/search/services/getIsSubscribed";
 import { getResultsTotal } from "../../pages/search/services/getResultsTotal";
 import { getReviewTotalByBookId } from "../../pages/search/services/getReviewTotalByBookId";
@@ -28,6 +31,10 @@ type GetFavorSubscriptionIsSubscribedProps = {
 };
 
 export const QueryFns = {
+  FIND_RECOMMEND_BOOK_BY_CATEGORY: (category: BookSubCategory) =>
+    findRecommendBookByCategory(category),
+  GET_BOOK: (bookId: string) => getBook(bookId),
+  GET_BOOK_DETAILS: (bookId: string) => getBookDetails(bookId),
   GET_BOOK_SEARCH_RESULTS: ({
     filter,
     searchTerm,

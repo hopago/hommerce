@@ -30,7 +30,12 @@ export default function GNB() {
             list={bookParentCategory}
           />
           <img src={divider} alt="" />
-          <GNBList type="sub" category={subCategory!} list={bookSubCategory} />
+          <GNBList
+            type="sub"
+            category={subCategory!}
+            list={bookSubCategory}
+            parentCategory={parentCategory!}
+          />
         </div>
       </div>
     </div>
